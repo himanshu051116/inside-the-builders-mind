@@ -1,4 +1,4 @@
-# Inside the Builder's Mind — V10
+# Inside the Builder's Mind — V11
 
 Three specialization-aware portfolio experiences for Himanshu Shukla (B.Tech Mathematics & Computing, MITS Gwalior): **Full-Stack Studio**, **Systems Console**, and **ML Research Lab**. Built with browser-native JavaScript, HTML and CSS, with an interactive Evidence Workbench.
 
@@ -15,6 +15,12 @@ npm run preview
 ```
 
 The production build is in `dist/`. Deploy the root source repository on Vercel using **build command `npm run build`** and **output directory `dist`**. AWS Amplify configuration is in `amplify.yml`; use the same source repository and do not treat Vercel as AWS challenge submission hosting.
+
+## V11 additions
+
+The **Evidence Desk** is the main source-backed project tour: four tabs let a recruiter inspect the engineering question, architecture decision, directly linked files and constraints for each flagship project. It follows the selected résumé track. Long-form case notes are opt-in, rather than a wall of text. Use **Ctrl+K / Cmd+K** to search projects, switch modes, jump to a section or open the correct public résumé. The Command Palette is local-only.
+
+See `V11_RELEASE_NOTES.md` for the implementation and test details.
 
 ## Genuine evidence versus demonstration
 
@@ -35,14 +41,15 @@ Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact form
 - `career-modes.js` — three specialization modes, project ordering, header metadata, Studio/Systems navigation
 - `v8-interactions.js` — sole owner of toy ML ranking renderer, plus simulated chat/playback and fictional ingestion trace
 - `v10-experience.js` — project grid switch, case-study ordering and source-image fallback
+- `v11-experience.js` — evidence tabs, track-linked proof routes, keyboard search, expanded notes, and source-image fallback
 - `workbench-*` — local deterministic review exercise and audit export
 - `portfolio.css` — consolidated production stylesheet (replaces seven V9 stylesheets)
 - `public/social-*.png` and `public/share/*/index.html` — individual social-preview share routes
-- `tests/` — 46 automated source and logic checks
+- `tests/` — 52 automated source and logic checks
 - `public/sitemap.xml`, `robots.txt`, JSON-LD, and canonical metadata for discovery
 
 ## Live deployment limitations
 
-V10 was tested locally, not pushed to GitHub or deployed to Vercel/AWS. The current production Vercel URL may still serve V9. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
+V11 was tested locally, not pushed to GitHub or deployed to Vercel/AWS. The current production Vercel URL still serves the earlier V9 release unless independently updated. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
 
 After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.

@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://inside-the-builders-mind.vercel.app/sitemap.xml

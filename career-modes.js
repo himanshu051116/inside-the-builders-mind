@@ -15,11 +15,6 @@ const TERMINAL = {
   status: ['$ status', 'Portfolio demo: local-only, read-only', 'NewsSources: in development', 'Sentinel: locally tested prototype', 'Production monitoring: not connected.'],
   clear: ['Console reset. Try `help` or `trace`.']
 }
-const RANKED_EXAMPLES = {
-  optical: {name:'Optical imagery',color:'#a2d8ff',matches:[['OPT-07','closest conceptual match',92],['SAR-12','cross-modal match',69],['MSI-03','weaker match',47]],detail:'Visible-spectrum scenes can be compared to other sensor modalities through a shared embedding representation.'},
-  sar: {name:'SAR imagery',color:'#b8a1ff',matches:[['SAR-12','closest conceptual match',90],['MSI-03','cross-modal match',65],['OPT-07','weaker match',52]],detail:'Radar imagery describes structure differently from optical data. The prototype investigates cross-modal retrieval.'},
-  multispectral: {name:'Multispectral imagery',color:'#9bf2cb',matches:[['MSI-03','closest conceptual match',89],['OPT-07','cross-modal match',72],['SAR-12','weaker match',45]],detail:'Multispectral measurements contain information beyond conventional RGB; embedding search can explore related scenes.'}
-}
 export function setupCareerModes(){
   const buttons = Array.from(document.querySelectorAll('[data-switch-role]'))
   const views = Array.from(document.querySelectorAll('[data-role-view]'))
@@ -53,7 +48,12 @@ export function setupCareerModes(){
     modeFilter?.click()
     gallery.scrollTo({left:0,behavior:'instant'})
     document.querySelectorAll('[data-skill-track]').forEach(el=>el.hidden=el.dataset.skillTrack!==value)
-    document.title=`Himanshu Shukla | ${MODE_NAMES[value]}`
+    document.title=`Himanshu Shukla | ${MODE_NAMES[value]} — Projects & Engineering Evidence`
+    document.documentElement.style.colorScheme=value==='fullstack'?'light':'dark'
+    const meta=document.querySelector('meta[name="description"]')
+    const roleDescriptions={fullstack:'Himanshu Shukla — React, TypeScript, Firebase. Real-time products, verified source and case studies.',software:'Himanshu Shukla — Python, FastAPI, PostgreSQL. Source-backed data pipeline and backend engineering case studies.',ml:'Himanshu Shukla — PyTorch, FAISS, cross-modal satellite retrieval. Research code, evaluation methods and honest limitations.'}
+    meta?.setAttribute('content',roleDescriptions[value])
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content',roleDescriptions[value])
     if(writeUrl){
       const url=new URL(window.location.href);url.searchParams.set('view',value)
       // Some sandboxed/inline previews have no writable URL origin. Live HTTPS hosts do.
@@ -95,29 +95,7 @@ export function setupCareerModes(){
   document.getElementById('consoleForm').addEventListener('submit',ev=>{ev.preventDefault();writeConsole(consoleInput.value);consoleInput.value=''})
   writeConsole('help')
 
-  // Values are illustrative relative-position pixels; never exposed as real scores.
-  const ranks=document.getElementById('researchRankings')
-  const researchButtons=[...document.querySelectorAll('[data-research-query]')]
-  const renderResearch=query=>{
-    const example=RANKED_EXAMPLES[query]
-    if(!example)return
-    researchButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.researchQuery===query)))
-    document.getElementById('researchQueryLabel').textContent=example.name
-    document.getElementById('researchObservation').textContent=example.detail
-    document.getElementById('researchVisual').dataset.sensor=query
-    ranks.replaceChildren(...example.matches.map(([id,explanation,width],index)=>{
-      const row=document.createElement('div');row.className='researchMatch'
-      const head=document.createElement('div');head.className='matchHead'
-      const name=document.createElement('strong');name.textContent=`0${index+1} / ${id}`
-      const caption=document.createElement('span');caption.textContent=explanation
-      head.append(name,caption)
-      const track=document.createElement('div');track.className='matchTrack'
-      const fill=document.createElement('i');fill.style.width=`${width}%`
-      track.append(fill);row.append(head,track);return row
-    }))
-    document.getElementById('researchStatus').textContent=`${example.name} example selected; illustrative rankings updated.`
-  }
-  researchButtons.forEach(button=>button.addEventListener('click',()=>renderResearch(button.dataset.researchQuery)))
-  renderResearch('optical')
+  // Sensor selection is owned by v8-interactions.js, the single ranking renderer.
+  // Keep this module focused on mode selection, project order, Studio and Console.
   return { selectRole, mode:()=>mode }
 }

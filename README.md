@@ -1,51 +1,48 @@
-# Inside the Builder’s Mind — V9 | Three Interactive Engineering Experiences
+# Inside the Builder's Mind — V10
 
-An original portfolio for the AWS Student Builder Challenge 2026. This is **one static website with three shareable interfaces**, tailored to the three supplied résumé specializations.
-
-## Explore the interfaces
-
-- `?view=fullstack` — Full-Stack Studio: illustrative OHS-inspired product preview with a **working local chat input** and **controllable simulated playback**. Not connected to OHS or any real participant.
-- `?view=software` — Systems Console: restricted terminal plus clickable **NewsSources-inspired article ingestion trace**. Inspect discovery, normalization, duplicate handling, and provenance using fictional records. No shell, API, crawler, database or live ingestion is run.
-- `?view=ml` — ML Research Lab: an interactive nearest-neighbor demonstration. Visitors choose optical/SAR/multispectral **synthetic 3D embeddings** and adjust structure-versus-spectrum weighting to compute cosine similarity over five synthetic records. This is **not EarthBridge inference, accuracy, validation data, or real satellite imagery**.
-
-All modes preserve six engineering project cards, stage-of-development labels, expandable case studies, the skills section, About, and the separately interactive **Evidence Workbench** with contradiction safeguards and exportable fictional report.
-
-## Visual identity / V9
-
-Three independently styled interface environments share a single original portfolio identity. Original SVG terrain artworks, a custom collaborative-space scene, and an interactive source-provenance map are bundled locally. Their illustrative nature is clearly disclosed. The new V9 visual layer is `scene-v9.css` plus `scene-v9.js`; it does not need additional dependencies or credentials. For details, see `V9_RELEASE_NOTES.md`.
-
-## Three resume downloads
-
-The `public/resumes/` directory includes three one-page PDFs derived from the user-supplied Full-Stack, Software Developer, and ML résumés. **The telephone number was redacted, and the resulting PDFs were checked for remaining phone text.** Email and public GitHub/LinkedIn links remain. Review them personally before publication, including privacy, links and accuracy.
+Three specialization-aware portfolio experiences for Himanshu Shukla (B.Tech Mathematics & Computing, MITS Gwalior): **Full-Stack Studio**, **Systems Console**, and **ML Research Lab**. Built with browser-native JavaScript, HTML and CSS, with an interactive Evidence Workbench.
 
 ## Run
 
-Requires Node.js. No `npm install` is needed.
+Requires Node.js 22+ for the scripts. No npm runtime dependencies.
 
 ```bash
-npm run dev
 npm test
+npm run audit:local
+npm run dev
 npm run build
 npm run preview
-npm run audit:local
 ```
 
-The manual static hosting ZIP contains the **contents** of `dist/`, with `index.html` at the archive root. For a Git-based AWS Amplify build, use `amplify.yml`, whose build command is `npm run build` and artifact directory is `dist`.
+The production build is in `dist/`. Deploy the root source repository on Vercel using **build command `npm run build`** and **output directory `dist`**. AWS Amplify configuration is in `amplify.yml`; use the same source repository and do not treat Vercel as AWS challenge submission hosting.
 
-## Testing
+## Genuine evidence versus demonstration
 
-- `node --test tests/*.test.mjs` exercises the workbench, mode prioritization, toy vector math and the V9 visual asset contracts (36 tests).
-- `V9_VISUAL_QA.json` records Chromium **inline-assembly** checks at 320, 390, 768 and 1440 pixels (all three interfaces). Because sandbox browser navigation to localhost is blocked, these are not equivalent to testing the live AWS-hosted site.
-- No outbound project URLs or public hosting were tested as part of this build.
+- The Mulyankan project card and case study reference **genuine published screenshots** in `himanshu051116/Algonauts-Mulyankan/docs/assets/screenshots/`. Those images are optional external requests to public GitHub; a source link is shown when the browser cannot load the remote image. No project screenshots have been invented.
+- The OHS proof panel links to the **deployed product**, public UI and chat source code. The simulated room/playback interaction is **local only** and is not a live Firebase/WebRTC session.
+- The NewsSources case file links to published architecture and a PostgreSQL integration test. The interactive trace uses fictional sample input; it is not a live crawler or a production log.
+- EarthBridge proof links point to its metric-evaluation and 128-pair overfit-gate scripts. The displayed nearest-neighbor rankings are calculated from **toy synthetic vectors**, not trained EarthBridge inference. A previously reported internal accuracy percentage is intentionally not featured without a verified metric protocol.
+- IrisTrack, Coal Governance and Mulyankan Spatial Lab appear in the secondary project archive, explicitly labeled by stage. Coal Governance and Spatial Lab have no public-demo link in this release.
 
-## Before submitting
+## Résumés
 
-1. Create a **new public GitHub repository** for the portfolio. Set `profile.portfolioRepo` in `content.js` to its actual URL. Do not reuse a previously published portfolio.
-2. Review the three public PDFs and confirm which contact data you wish to publish.
-3. Verify each external project/demonstration link and consider adding genuine, permission-cleared app screenshots. Current project diagrams are original conceptual art—not real screenshots.
-4. Deploy to AWS **Amplify Hosting** (GitHub-linked builds preferred), verify on an unauthenticated browser, test `?view=...` URLs and all interactions, and maintain uptime through judging.
-5. Capture AWS console and live site evidence and **publish** the entry under the hackathon’s Your project tab.
+Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact formatting corrected, the telephone number omitted and claims aligned to the portfolio. Preserve a phone-inclusive private version only for channels you personally approve.
 
-### Honest scope
+## Architecture
 
-This is a functioning browser portfolio, not a deployment to AWS or a production AI/real-time collaboration/news system. Synthetic data are used throughout the educational demos. EarthBridge's reported 90% retrieval accuracy comes from an **internal evaluation reported in the supplied résumé**, not an independently verified benchmark.
+- `site.js` — portfolio content, views and case-study markup
+- `content.js` — person, primary projects and transparent archive
+- `career-modes.js` — three specialization modes, project ordering, header metadata, Studio/Systems navigation
+- `v8-interactions.js` — sole owner of toy ML ranking renderer, plus simulated chat/playback and fictional ingestion trace
+- `v10-experience.js` — project grid switch, case-study ordering and source-image fallback
+- `workbench-*` — local deterministic review exercise and audit export
+- `portfolio.css` — consolidated production stylesheet (replaces seven V9 stylesheets)
+- `public/social-*.png` and `public/share/*/index.html` — individual social-preview share routes
+- `tests/` — 46 automated source and logic checks
+- `public/sitemap.xml`, `robots.txt`, JSON-LD, and canonical metadata for discovery
+
+## Live deployment limitations
+
+V10 was tested locally, not pushed to GitHub or deployed to Vercel/AWS. The current production Vercel URL may still serve V9. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
+
+After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.

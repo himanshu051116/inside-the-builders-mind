@@ -2,8 +2,8 @@
  * Portfolio content grounded in three supplied resumes (Full-Stack,
  * Software Engineering, and ML Engineering) and verified public GitHub links.
  * Do not add fabricated outcomes or claim that prototypes are production services.
- * Public-contact policy: email and public profile links included; telephone and
- * full personal resume PDFs deliberately excluded from this public website.
+ * Public-contact policy: email and public profile links included;
+ * role-specific public resume PDFs exclude telephone numbers.
  */
 export const profile = {
   name: 'Himanshu Shukla',
@@ -19,14 +19,14 @@ export const profile = {
 
   linkedin: 'https://www.linkedin.com/in/himanshu-shukla-88175637a',
   email: 'himanshusubh1510@gmail.com',
-  resumeUrl: '', // Do not publicly distribute the supplied PDFs (they contain a phone number). Add an approved public PDF here if desired.
+  resumeUrl: '', // Role-specific public PDFs are linked in the three career views.
   aboutHeading: 'I work where mathematics, software and practical problems meet.',
   about: 'I study B.Tech Mathematics & Computing at Madhav Institute of Technology & Science, Gwalior (expected graduation: 2028). I have built reviewer workflows, retrieval pipelines, collaboration apps and monitoring prototypes. I also co-founded SchoolBuddies to make hands-on technology learning more accessible to school students.',
   philosophy: 'Prototype with purpose. Measure what matters. Keep decisions inspectable.',
   education: 'B.Tech, Mathematics & Computing · MITS Gwalior · 2028',
   achievements: [
     {tag: 'FIELD DEMO / 2026', title: 'CMPDI Headquarters', text: 'Invited to demonstrate Mulyankan in Ranchi on 11 July 2026.'},
-    {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: '90% retrieval accuracy reported in an internal evaluation; tested with retrieval metrics and integrity checks.'},
+    {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: 'Cross-modal retrieval prototype with documented evaluation scripts, leakage-aware splitting, and a reproducibility checklist; no unaudited benchmark number displayed.'},
     {tag: 'COMMUNITY', title: 'SchoolBuddies', text: 'Co-founder of a student-led school technology outreach initiative.'},
     {tag: 'LEADERSHIP', title: 'Beyond the IDE', text: 'Class Representative, NPTEL Coordinator and first place at the Neeti Summit English Debate.'}
   ]
@@ -43,15 +43,17 @@ export const projects = [
     stack:['React','TypeScript','Supabase'],
     links:[{label:'Source & case study',url:'https://github.com/himanshu051116/Algonauts-Mulyankan'},{label:'Browser preview',url:'https://mulyankan-seven.vercel.app/'},{label:'Watch prototype walkthrough',url:'https://www.youtube.com/watch?v=sQjZfEwkTu4'}],
     accent:'lime', shape:'orbit', filters:['ai','software'],
+    evidenceImage:'https://raw.githubusercontent.com/himanshu051116/Algonauts-Mulyankan/main/docs/assets/screenshots/scrutiny-dashboard.png',
+    evidenceImageCaption:'Actual Mulyankan scrutiny dashboard · repository screenshot',
     caseStudy:{problem:'How can a reviewer justify a criterion-level evaluation without trusting an opaque total?',approach:'Document intake, rubric-level evidence references, insufficient-evidence flags and human reviewer controls.',verification:'Demonstrated prototype at CMPDI headquarters, Ranchi, on 11 July 2026. Public code and a recorded walkthrough are linked.',caveat:'The browser preview is not a guarantee that the full backend and evaluation workflow are running.'}
   },
   {
     number:'02', category:'ML / REMOTE SENSING', title:'EarthBridge',
     status:'Research prototype',
-    description:'Cross-modal satellite-image retrieval with contrastive embeddings and FAISS search for optical, SAR and multispectral imagery. Reported 90% accuracy in an internal evaluation.',
+    description:'Cross-modal satellite-image retrieval with contrastive embeddings and FAISS search for optical, SAR and multispectral imagery. The repository documents F1@5/F1@10, latency checks, and model-validation gates; no independently verified benchmark is claimed here.',
     stack:['PyTorch','FAISS','FastAPI'],
     links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'}], accent:'violet', shape:'grid', filters:['ai'],
-    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'Internal evaluation reported 90% accuracy; leakage-aware splits, F1@5/F1@10 checks and a 128-pair overfitting check were documented in the supplied résumé.',caveat:'Research prototype. Internal results are not presented as an external benchmark; the linked repository does not establish a public hosted ML demo.'}
+    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'The published code includes metric checks, data-manifest validation, evaluation scripts and a 128-pair overfit-gate script. Inspect the implementation and reproduce results using the documented dataset.',caveat:'Research prototype. Internal results are not presented as an external benchmark; the linked repository does not establish a public hosted ML demo.'}
   },
   {
     number:'03', category:'FULL-STACK / REAL-TIME', title:'Our Hidden Universe',
@@ -84,7 +86,7 @@ export const projects = [
     status:'Co-founder · Live website',
     description:'Student-led technology outreach connecting schools with practical workshops in AI literacy, computational thinking and web development, supported by an interactive enquiry site.',
     stack:['React','JavaScript','Education'],
-    links:[{label:'Project website',url:'https://schoolbuddiesindia.vercel.app/'}],
+    links:[{label:'Public source',url:'https://github.com/himanshu051116/SCHOOLBUDDIES'},{label:'Project website · verify availability',url:'https://schoolbuddiesindia.vercel.app/'}],
     accent:'lime',shape:'waves', filters:['community','software'],
     caseStudy:{problem:'How can school students experience hands-on technology rather than only hear about it?',approach:'Student-led workshop planning, AI and programming activities, school outreach and a responsive website with enquiry flow.',verification:'Co-founded the initiative and developed the web experience according to the supplied résumé.',caveat:'Outreach initiative; workshop outcomes and reach are not quantified here without supporting records.'}
   }
@@ -94,4 +96,26 @@ export const skillGroups = [
   {title:'Frontend & products', number:'01', skills:['React','TypeScript','JavaScript','Next.js','Tailwind CSS','Responsive UI','Vite']},
   {title:'AI & mathematical tools', number:'02', skills:['Python','PyTorch','scikit-learn','NumPy','Pandas','FAISS','Contrastive learning']},
   {title:'Systems & infrastructure', number:'03', skills:['FastAPI','REST APIs','PostgreSQL','Supabase','Firebase','Docker','pytest','Git / GitHub']}
+]
+
+
+// Resume-aligned secondary work. Explicit stage labels avoid promoting prototypes as live products.
+export const projectArchive = [
+  {
+    title:'IrisTrack', focus:'Machine learning / Computer vision', status:'Experimental source · real-webcam accuracy not independently validated',
+    summary:'Opt-in local face/iris tracking with blink detection, head-pose quality checks, calibration and self-tests. The public README explicitly notes that physical webcam accuracy and installer release gates remain incomplete.',
+    stack:['JavaScript','MediaPipe','Electron'], lens:['ml','software'],
+    link:'https://github.com/himanshu051116/IrisTrack', linkLabel:'Read source and validation limits'
+  },
+  {
+    title:'Coal Governance', focus:'Software / GIS workflows', status:'Development prototype · repository not publicly verified',
+    summary:'Prototype inspection and compliance dashboards described in the supplied Software and Full-Stack résumés, including GIS-linked records, corrective actions and migration-aware database work.',
+    stack:['Next.js','PostgreSQL','MapLibre'], lens:['software','fullstack'],
+    link:'',linkLabel:''
+  },
+  {
+    title:'Mulyankan Spatial Lab', focus:'Interaction design / 3D', status:'Conceptual architecture demonstrator',
+    summary:'An interactive spatial explanation of the document-evaluation pipeline, with navigation and webcam-gesture experiments. The rooms illustrate the architecture; they are not a live document-processing back end.',
+    stack:['Web 3D','Interaction design','Camera gestures'],lens:['fullstack','ml'],link:'',linkLabel:''
+  }
 ]

@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 const root = resolve(import.meta.dirname,'..')
 const markup=readFileSync(resolve(root,'site.js'),'utf8')
-const css=readFileSync(resolve(root,'scene-v9.css'),'utf8')
+const css=readFileSync(resolve(root,'portfolio.css'),'utf8')
 const logic=readFileSync(resolve(root,'scene-v9.js'),'utf8')
 test('three scene-specific graphical experiences are present',()=>{
   for(const marker of ['studioSceneBanner','systemsFlowGraphic','researchTerrain','researchContactSheet'])
@@ -26,7 +26,8 @@ test('ML visual uses bundled explicitly synthetic artwork for all sensors',()=>{
 test('V9 build is included in entrypoint and build manifest',()=>{
   const html=readFileSync(resolve(root,'index.html'),'utf8')
   const build=readFileSync(resolve(root,'scripts/build.mjs'),'utf8')
-  assert.match(html,/scene-v9\.css/)
+  assert.match(html,/portfolio\.css/)
   assert.match(markup,/setupSceneV9\(\)/)
   assert.match(build,/scene-v9\.js/)
+  assert.match(build,/portfolio\.css/)
 })

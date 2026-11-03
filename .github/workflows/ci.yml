@@ -1,0 +1,24 @@
+name: Verify portfolio
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run review-engine tests
+        run: npm test
+      - name: Audit static assets and local content
+        run: npm run audit:local
+      - name: Build deployable site
+        run: npm run build
+      - name: Check expected build artifacts
+        run: test -f dist/index.html && test -f dist/workbench-logic.js && test -f dist/content.js

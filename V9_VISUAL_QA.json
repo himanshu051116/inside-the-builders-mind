@@ -1,0 +1,86 @@
+[
+  {
+    "mode": "fullstack",
+    "width": 1440,
+    "doc_width": 1440,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "software",
+    "width": 1440,
+    "doc_width": 1440,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "ml",
+    "width": 1440,
+    "doc_width": 1440,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "fullstack",
+    "width": 390,
+    "doc_width": 390,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "software",
+    "width": 390,
+    "doc_width": 390,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "ml",
+    "width": 390,
+    "doc_width": 390,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "fullstack",
+    "width": 320,
+    "doc_width": 320,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "software",
+    "width": 320,
+    "doc_width": 320,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "ml",
+    "width": 320,
+    "doc_width": 320,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "fullstack",
+    "width": 768,
+    "doc_width": 768,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "software",
+    "width": 768,
+    "doc_width": 768,
+    "visible": true,
+    "errors": []
+  },
+  {
+    "mode": "ml",
+    "width": 768,
+    "doc_width": 768,
+    "visible": true,
+    "errors": []
+  }
+]

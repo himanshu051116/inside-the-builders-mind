@@ -1,0 +1,116 @@
+/* SIGNAL / 06 — An interactive editorial portfolio.
+ * Motion is a navigation aid. Project content stays human-readable and accessible.
+ */
+:root{--signal:#d6fe85;--signal-ink:#080e13;--signal-line:#dcf4d328}
+body{background:linear-gradient(155deg,#070c13 0%,#101526 47%,#0a1018 100%)}
+.header{background:rgba(8,13,20,.73);border-bottom-color:#dbf8da19}
+.headerInner .brandWord{letter-spacing:.12em}
+.hero{min-height:760px;grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);gap:20px;padding-top:60px;padding-bottom:105px}
+.heroCopy{padding:48px 0 0 0;align-self:center}
+.heroMiniIndex{margin-bottom:36px;color:#b4c2c6}
+.hero h1{font:760 clamp(68px,6.4vw,104px)/.99 'Inter Display','Inter',system-ui,sans-serif;letter-spacing:-.089em;max-width:670px;margin-bottom:25px}
+.hero h1 em{font-family:Georgia,serif;font-size:.97em;line-height:1.07;color:var(--signal);font-style:italic;letter-spacing:-.075em}
+.heroIntro{max-width:405px;font-size:16px;line-height:1.7;color:#c7d4d1;margin-bottom:29px}
+.heroActions{gap:10px}
+.heroBottom{margin-top:45px;color:#b9c9c8}
+.heroVisual{padding:12px 5px 5px 7px;max-width:750px;min-width:0;align-self:center}
+.heroVisual:before{top:5%;right:0;bottom:0;left:5%;transform:rotate(2deg);background:radial-gradient(ellipse at 55% 39%,rgba(201,251,128,.06),transparent 66%),rgba(255,255,255,.015)}
+.heroVisual:after{display:none}
+.visualLabel{margin:0 10px 13px;font-size:10px}.visualLabel span:first-child{color:#edffcc}.visualLabel span:last-child{color:#a7bbb4}
+.visualNote{padding-top:13px;font-size:10px}
+/* The new stage is the hero artwork and the first working interaction. */
+.orbitStage{--pointer-x:50%;--pointer-y:45%;--node-hue:#d4ff85;position:relative;height:572px;isolation:isolate;overflow:hidden;color:#f4f7ed;background:radial-gradient(ellipse at var(--pointer-x) var(--pointer-y),#2b4c3b77 0%,transparent 49%),radial-gradient(ellipse 85% 95% at 53% 43%,#203235 2%,#121b2a 58%,#0c131e 100%);border:1px solid #d1f6d038;border-radius:24px;box-shadow:0 35px 96px #02050dba,inset 0 1px 0 #ffffff25}
+.orbitStage:before{content:"";position:absolute;inset:0;opacity:.38;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 38px,rgba(219,250,204,.07) 39px,transparent 40px),repeating-linear-gradient(90deg,transparent 0 38px,rgba(219,250,204,.07) 39px,transparent 40px);mask-image:radial-gradient(ellipse at center,black,transparent 84%)}
+.orbitStage:after{content:"";position:absolute;left:-90%;top:0;width:90%;height:1px;background:linear-gradient(90deg,transparent,var(--signal),transparent);animation:stageScan 7s linear infinite;opacity:.75}
+.orbitStage[data-active="2"]{--node-hue:#c3adff}.orbitStage[data-active="3"]{--node-hue:#ffb69a}.orbitStage[data-active="4"]{--node-hue:#c3adff}.orbitStage[data-active="5"]{--node-hue:#ffb69a}
+.orbitTop,.orbitBottom{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:15px;z-index:5;padding:17px 22px;background:linear-gradient(90deg,#111e28df,#18222bd6);font:700 9px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;color:#a8bbb6}
+.orbitTop{top:0;border-bottom:1px solid #ffffff1a}.orbitTop span:first-child{color:#dce9d4;display:flex;align-items:center;gap:10px}
+.orbitTop i,.orbitLiveDot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal);animation:liveBlink 2.5s ease-in-out infinite}
+.orbitBottom{bottom:0;border-top:1px solid #ffffff1a;min-height:67px}
+.orbitBottom>span{display:flex;align-items:center;gap:10px}
+.orbitControls{display:flex;align-items:center;gap:13px;font-size:11px;color:#eaf3dc}
+.orbitControls button{width:37px;height:37px;border:1px solid #e4f9d94b;border-radius:50%;color:#eaf3dc;background:#edf8dc0a;cursor:pointer;font-size:18px}
+.orbitControls button:hover{color:#0a1017;background:var(--signal);border-color:var(--signal)}
+.orbitUniverse{position:absolute;inset:48px 0 67px}
+.orbitAmbient{position:absolute;left:9%;top:5%;width:82%;height:92%;border-radius:50%;background:radial-gradient(circle at center,rgba(183,234,117,.12),transparent 55%);filter:blur(18px);pointer-events:none}
+.orbitRails{position:absolute;width:100%;height:100%;inset:0;overflow:visible;pointer-events:none;opacity:.9}
+.orbitRing{stroke:rgba(216,248,207,.19);stroke-width:1;stroke-dasharray:4 9;transform-origin:300px 256px;animation:orbitSpin 95s linear infinite}
+.orbitRingMiddle{stroke:rgba(217,254,167,.38);stroke-dasharray:2 16;animation-direction:reverse;animation-duration:65s}
+.orbitRingInner{stroke:rgba(216,248,207,.15);stroke-dasharray:none;stroke-width:1.1;animation-duration:40s}
+.orbitPath{stroke-width:1.2;stroke:#d5ffaf37}
+.orbitPathA{stroke-dasharray:8 12;animation:signalFlow 10s linear infinite}.orbitPathB{stroke:#d5ffaf22;stroke-dasharray:3 9;animation:signalFlow 18s linear reverse infinite}
+.orbitSweep{transform-origin:300px 256px;animation:orbitSpin 22s linear infinite}
+.orbitCenterPoint{filter:drop-shadow(0 0 15px #c8ff88)}
+.orbitCore{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:260px;height:200px;z-index:2;display:flex;align-items:center;flex-direction:column;justify-content:center;text-align:center;padding:25px 18px 16px;border-radius:42% 42% 36% 36%;background:radial-gradient(ellipse at 50% 32%,#30423d,#142328e8 60%,#101c2ae8);border:1px solid #ccefc847;box-shadow:0 0 0 9px #c9ff8a08,0 0 85px #bff28b17,0 22px 45px #01060c80;backdrop-filter:blur(8px);transition:box-shadow .4s}
+.orbitFocusIndex{font:700 9px/1.5 ui-monospace,monospace;letter-spacing:.11em;color:var(--node-hue);min-height:13px}
+.orbitFocusGlyph{font-size:28px;line-height:1;color:var(--node-hue);margin:7px 0 4px;animation:floatGlyph 4s ease-in-out infinite}
+.orbitCore strong{font-size:clamp(23px,2.35vw,35px);letter-spacing:-.05em;line-height:1.05;max-width:225px;overflow-wrap:break-word}
+.orbitCore p{font-size:11px;line-height:1.5;margin:8px 0 10px;color:#c7d6d0;max-width:200px}
+.orbitCore>a{font:800 9px/1.4 ui-monospace,monospace;letter-spacing:.12em;color:#0b121a;padding:7px 12px;background:var(--node-hue);border-radius:99px;display:flex;align-items:center;gap:8px}
+.orbitCore>a:hover{background:#fff}
+.orbitNode{--n:#dcffb3;position:absolute;z-index:3;display:flex;align-items:center;gap:9px;background:#10202ceb;border:1px solid #b7e7b282;color:#edf6ee;border-radius:999px;padding:7px 11px 7px 7px;cursor:pointer;box-shadow:0 10px 25px #0007;transition:transform .35s,background .3s,border-color .3s,box-shadow .3s;transform:translate(-50%,-50%)}
+.orbitNode:hover,.orbitNode:focus-visible,.orbitNode.isActive{border-color:var(--n);background:#24382eff;box-shadow:0 0 20px #c9ff8a26,0 12px 32px #0008;transform:translate(-50%,-50%) scale(1.075)}
+.orbitNode.isActive{background:#d9ffa9;color:#12201a}
+.orbitNodeHalo{position:absolute;left:0;top:0;bottom:0;right:0;border-radius:999px;box-shadow:0 0 0 0 #ccffad45;animation:haloPulse 3.5s ease-out infinite;pointer-events:none}
+.orbitNodeSymbol{display:grid;place-items:center;flex-shrink:0;width:33px;height:33px;border-radius:50%;background:#c6ff991a;border:1px solid #d8ffb35a;color:var(--n);font-size:16px}
+.orbitNode.isActive .orbitNodeSymbol{background:#0c1a1c;color:var(--signal)}
+.orbitNodeLabel{font-size:11px;font-weight:800;white-space:nowrap;letter-spacing:-.02em}
+.orbitNode1{left:19%;top:23%}.orbitNode2{left:77%;top:16%;--n:#c5b2ff}.orbitNode3{left:82%;top:71%;--n:#ffc0a5}.orbitNode4{left:18%;top:75%;--n:#c5b2ff}.orbitNode5{left:12%;top:47%;--n:#ffc0a5}.orbitNode6{left:67%;top:94%}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}@keyframes signalFlow{to{stroke-dashoffset:-230}}@keyframes haloPulse{65%{box-shadow:0 0 0 11px transparent}100%{box-shadow:0 0 0 0 transparent}}@keyframes liveBlink{50%{opacity:.5}}@keyframes floatGlyph{50%{transform:translateY(-5px)}}@keyframes stageScan{to{left:100%}}
+/* Real project deck: users choose what to inspect, rather than scrolling six essays. */
+.work{padding-top:115px;padding-bottom:115px;overflow:clip}
+.work .sectionHead{margin-bottom:31px}.work .sectionHeadRow>p{max-width:240px}
+.deckBar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0 20px}
+.deckBar>div:first-child{display:flex;align-items:center;gap:20px}
+.deckEye{font:700 10px ui-monospace,monospace;letter-spacing:.12em;color:#b3c5b8}
+.deckBar strong{font:750 24px/1 'Inter',sans-serif;letter-spacing:-.06em;color:var(--signal)}.deckBar strong span{color:#7f9991;font-size:15px}
+.deckControl{display:flex;align-items:center;gap:10px}.deckControl>span{font:700 10px ui-monospace,monospace;letter-spacing:.08em;color:#b8c5c0;margin-right:12px}
+.deckControl button{width:44px;height:44px;display:grid;place-items:center;cursor:pointer;background:#1a2930;border:1px solid #c2fbb255;color:#d7f6c8;border-radius:50%;font-size:20px}
+.deckControl button:not(:disabled):hover{background:var(--signal);color:#11181b}.deckControl button:disabled{opacity:.33;cursor:not-allowed}
+.projectGrid{display:flex!important;grid-template-columns:none!important;gap:18px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;padding:0 0 22px;scrollbar-width:thin;scrollbar-color:#88b968 #1a2527;position:relative;overscroll-behavior-inline:contain;align-items:stretch}
+.projectGrid:focus-visible{outline-offset:9px}
+.projectGrid .projectCard,.projectGrid .projectCard:first-child,.projectGrid .projectCard:nth-child(3){display:flex;flex:0 0 clamp(320px,46vw,580px);width:clamp(320px,46vw,580px);min-width:0;min-height:0;max-width:100%;grid-column:auto;grid-template-columns:none;border-radius:24px;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;transform:none;box-shadow:none}
+.projectGrid .projectCard:hover{transform:none;box-shadow:0 0 0 1px #bcfb8d3a}
+.projectGrid .projectCard[hidden]{display:none!important}
+.projectGrid .projectCard .projectVisual,.projectGrid .projectCard:first-child .projectVisual{height:330px;min-height:0;flex-shrink:0}
+.projectGrid .projectCard .projectArt,.projectGrid .projectCard:first-child .projectArt{height:330px;min-height:0;width:100%;transform:scale(1);transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.projectGrid .projectCard:hover .projectArt{transform:scale(1.045)}
+.projectGrid .projectCard:first-child .projDiagram{transform:none}
+.projectGrid .projectCard .projectContent,.projectGrid .projectCard:first-child .projectContent{padding:27px 30px 29px}
+.projectGrid .projectCard h3,.projectGrid .projectCard:first-child h3{font-size:clamp(28px,3vw,40px);letter-spacing:-.055em;margin:0 0 10px}
+.projectGrid .projectCard .projectDescription,.projectGrid .projectCard:first-child .projectDescription{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.55;font-size:13px;color:#c0c9c8;min-height:0;max-width:480px;margin:0 0 14px}
+.projectGrid .projectCard .projectStatus{max-width:170px}
+.projectGrid .projectCard .projectTags span{font-size:10px}
+.projectGrid .projectCard .caseStudy{margin:15px 0 0;background:#0b151f;overflow:hidden}
+.projectGrid .projectCard .caseStudy summary{min-height:38px;padding:11px 15px;font-size:11px}
+.projectGrid .projectCard .projectLinks{margin:14px 0 0;gap:8px;padding:13px 0 0}
+.projectGrid .projectCard .projectLinks a{font-size:10px;min-height:33px}
+.projectGrid .projectCard .projectBigNumber{opacity:.1}
+.projectNote{max-width:660px;color:#aabbb7;line-height:1.6}
+.projectVisual .tileFlow{animation:artFloat 6s ease-in-out infinite}.projectVisual .monitorBars i{transform-origin:bottom;animation:monitorRise 1.7s ease-in-out infinite alternate}.projectVisual .monitorBars i:nth-child(2n){animation-delay:-1.2s}.projectVisual .monitorBars i:nth-child(3n){animation-delay:-.6s}
+.projectVisual .collabMessages span{animation:messageFlicker 3s ease-in-out infinite}.projectVisual .collabMessages span:nth-child(2){animation-delay:.8s}.projectVisual .collabMessages span:nth-child(3){animation-delay:1.6s}
+.projectVisual .newsJoin{animation:newsFlow 3s ease-in-out infinite}.projectVisual .reviewMock{animation:artFloat 5s ease-in-out infinite}
+@keyframes artFloat{50%{transform:translateY(-6px)}}@keyframes monitorRise{50%{transform:scaleY(.45)}}@keyframes messageFlicker{50%{opacity:.45}}@keyframes newsFlow{50%{opacity:.55}}
+/* Progressive disclosure and less text on first glance. */
+.about{padding-top:115px;padding-bottom:115px}.aboutLead{font-size:clamp(27px,3vw,43px)}.aboutRight{padding-top:20px}
+.aboutMore{border:1px solid #d2f9ac43;background:#b7f78007;border-radius:12px;margin:15px 0 20px;max-width:565px}
+.aboutMore summary{padding:15px 19px;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;font-size:12px;font-weight:700;color:var(--signal);list-style:none}
+.aboutMore summary::-webkit-details-marker{display:none}.aboutMore summary span{font-size:20px}.aboutMore[open] summary span{transform:rotate(90deg)}.aboutMore .aboutBody{font-size:13px;line-height:1.8;padding:0 19px 19px;margin:0}
+.achievementGrid{margin-top:65px;display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;gap:12px}.achievementCard{min-height:170px;flex:1 0 min(250px,75vw);scroll-snap-align:start}.achievementCard h3{font-size:22px}
+.skillGrid .skillCard{min-height:260px}.skillCardHeader{margin-bottom:35px}.skillCard .skillTags{display:flex;flex-wrap:wrap;gap:7px}.skillCard h3{font-size:30px}
+.lab .sectionHead{margin-bottom:20px}.lab .sectionHeadRow>p{max-width:290px;font-size:13px;line-height:1.6}
+.labIntro{gap:15px;align-items:center}.labIntro>p{font-size:13px;max-width:520px;line-height:1.6}
+.wbAfterword{max-width:850px}
+/* Motion only when elements enter view. Do not hide essential content until JS runs. */
+.canReveal{opacity:1;transform:none}
+@media(min-width:851px){.canReveal:not(.isRevealed){opacity:.78;transform:translateY(13px)}.canReveal{transition:opacity .75s ease,transform .75s cubic-bezier(.19,1,.22,1)}.canReveal.isRevealed{opacity:1;transform:none}}
+@media(max-width:1150px){.hero{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px}.hero h1{font-size:clamp(54px,6.3vw,84px)}.orbitStage{height:530px}.orbitNodeLabel{font-size:10px}.orbitNodeSymbol{width:29px;height:29px}.orbitCore{width:225px;height:190px}.orbitFocusIndex{font-size:8px}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;gap:36px;padding-top:65px;padding-bottom:90px}.heroCopy{padding:20px 0 0}.hero h1{font-size:clamp(58px,9vw,88px)}.heroVisual{width:100%;max-width:680px;justify-self:center;margin-top:4px}.orbitStage{height:510px}.projectGrid .projectCard,.projectGrid .projectCard:first-child{flex-basis:min(74vw,530px);width:min(74vw,530px)}.sectionHeadRow>p{max-width:260px}}
+@media(max-width:600px){.hero{padding-top:43px;padding-bottom:75px;gap:17px}.heroMiniIndex{font-size:9px;margin-bottom:30px}.heroEyebrow{margin-bottom:16px}.hero h1{font-size:clamp(51px,12vw,73px);margin-bottom:16px}.heroIntro{font-size:14px;line-height:1.6;margin-bottom:24px}.heroBottom{margin-top:25px}.heroVisual{padding:8px 0 0}.visualLabel{font-size:8px;gap:5px}.visualLabel span:last-child{font-size:8px}.visualNote{font-size:9px}.orbitStage{height:440px;border-radius:17px}.orbitTop{font-size:8px;padding:12px}.orbitTop span:last-child{font-size:7px}.orbitBottom{min-height:50px;padding:7px 12px}.orbitBottom>span{font-size:8px}.orbitControls{gap:8px}.orbitControls button{width:32px;height:32px}.orbitUniverse{inset:36px 0 50px}.orbitCore{top:48%;width:170px;height:145px;padding:12px 12px 10px}.orbitCore strong{font-size:22px;max-width:140px}.orbitFocusIndex{font-size:6px;letter-spacing:.05em}.orbitFocusGlyph{font-size:19px;margin:4px 0}.orbitCore p{font-size:9px;margin:5px 0 8px}.orbitCore>a{font-size:7px;padding:6px 9px}.orbitNode{padding:5px;box-shadow:0 6px 20px #0009}.orbitNodeSymbol{width:30px;height:30px;font-size:13px}.orbitNodeLabel{display:none}.orbitNode1{left:21%;top:22%}.orbitNode2{left:80%;top:19%}.orbitNode3{left:84%;top:69%}.orbitNode4{left:21%;top:76%}.orbitNode5{left:11%;top:47%}.orbitNode6{left:65%;top:93%}.deckBar{margin-top:8px}.deckEye,.deckControl>span{display:none}.deckBar strong{font-size:22px}.deckControl button{width:40px;height:40px}.projectGrid .projectCard,.projectGrid .projectCard:first-child{flex-basis:calc(100% - 10px);width:calc(100% - 10px)}.projectGrid .projectCard .projectVisual,.projectGrid .projectCard .projectArt,.projectGrid .projectCard:first-child .projectVisual,.projectGrid .projectCard:first-child .projectArt{height:242px}.projectGrid .projectCard .projectContent,.projectGrid .projectCard:first-child .projectContent{padding:21px 22px 22px}.projectGrid .projectCard h3,.projectGrid .projectCard:first-child h3{font-size:30px}.projectGrid .projectCard .projectDescription{font-size:12px}.projectGrid .projectCard .projectStatus{font-size:8px}.projectNote{font-size:11px}.about{padding-top:80px;padding-bottom:80px}.aboutRight{padding-top:0}.achievementGrid{margin-top:30px}.achievementCard{min-height:150px}.skillGrid .skillCard{min-height:225px}.skillCardHeader{margin-bottom:25px}.labIntro{flex-direction:column;align-items:start}.lab .sectionHeadRow>p{margin-top:12px}.work{padding-top:80px;padding-bottom:85px}}
+@media(max-width:385px){.orbitStage{height:410px}.orbitCore{width:154px;height:137px}.orbitCore strong{font-size:19px}.orbitNodeSymbol{width:27px;height:27px}.orbitNode1{left:21%}.orbitNode2{left:81%}.orbitNode3{left:85%}.orbitNode4{left:20%}.orbitNode5{left:10%}}
+@media(prefers-reduced-motion:reduce){.orbitRing,.orbitSweep,.orbitPath,.orbitNodeHalo,.orbitFocusGlyph,.orbitLiveDot,.orbitStage:after,.orbitTop i,.projectVisual .tileFlow,.projectVisual .monitorBars i,.projectVisual .collabMessages span,.projectVisual .newsJoin,.projectVisual .reviewMock{animation:none!important}.canReveal:not(.isRevealed){opacity:1!important;transform:none!important}.projectGrid{scroll-behavior:auto}}
+
+.isAtOrbit .floatingLab{opacity:0;visibility:hidden;pointer-events:none}
+/* Explicitly reset the old conceptual-diagram .orbitNode dimensions. */
+.orbitStage .orbitNode{width:max-content;height:auto;min-height:44px;min-width:44px;border-radius:999px}
+@media(max-width:600px){.orbitStage .orbitNode{width:44px;height:44px;min-width:44px;min-height:44px;justify-content:center;padding:4px}}

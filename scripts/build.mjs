@@ -14,10 +14,10 @@ const combinedCss=[
  ...cssModules.map(name=>readFileSync(join(root,'styles',name),'utf8')),
  ...modernLayers.map(name=>readFileSync(join(root,name),'utf8'))
 ].join('\n')
-writeFileSync(join(root,'portfolio.css'),combinedCss)
 if (existsSync(out)) rmSync(out, { recursive:true, force:true })
 mkdirSync(out, { recursive:true })
-for (const name of ['index.html','portfolio.css','experience-v6.js','career-modes.js','v8-interactions.js','scene-v9.js','v10-experience.js','v11-experience.js','evidence-media.js','case-dossiers.js','site.js','content.js','workbench-data.js','workbench-logic.js','workbench-ui.js']) copyFileSync(join(root, name), join(out,name))
+writeFileSync(join(out,'portfolio.css'),combinedCss)
+for (const name of ['index.html','experience-v6.js','career-modes.js','v8-interactions.js','scene-v9.js','v10-experience.js','v11-experience.js','evidence-media.js','case-dossiers.js','site.js','content.js','workbench-data.js','workbench-logic.js','workbench-ui.js']) copyFileSync(join(root, name), join(out,name))
 // Keep readable source CSS in the repository, but ship compressed bytes to browsers.
 const stylesheets=['portfolio.css']
 for (const cssName of stylesheets) {

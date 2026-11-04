@@ -82,10 +82,10 @@
   },
   "mulyankan-overview": {
     "path": "/evidence/mulyankan-overview.webp",
-    "caption": "Mulyankan proposal scrutiny overview",
+    "caption": "Mulyankan proposal scrutiny overview (proposal details redacted)",
     "source": "Screenshot 2026-07-30 223732(2).png",
-    "bytes": 59660,
-    "sha256": "41a27ecc4d41a7a86ffc516a37b5a2bbaf972bf5c0c0fda47d824164bbdbfbfd",
+    "bytes": 54468,
+    "sha256": "884ddb4b2d883761d2a60f56bfe84ecf76c101ede2e5f4a2963e3a0909d4255a",
     "width": 1277,
     "height": 899
   },
@@ -100,10 +100,10 @@
   },
   "mulyankan-history": {
     "path": "/evidence/mulyankan-history.webp",
-    "caption": "Mulyankan submission and review history",
+    "caption": "Mulyankan submission and review history (proposal details redacted)",
     "source": "Screenshot 2026-11-04 045714.png",
-    "bytes": 99954,
-    "sha256": "7f53e2746126dfa86151a8c33de506c48679095b7360db9a31975695582f7cdf",
+    "bytes": 55532,
+    "sha256": "c94ce8206b389cc753d1b6f05dfd7d818cf64bd2c6fa185eaf2c078dda0fcd5b",
     "width": 1663,
     "height": 1051
   },
@@ -142,5 +142,41 @@
     "sha256": "55d8d83e75cc8a5f79ce448a1935e2357dd6e71d73cff72dc082cdbb921afadb",
     "width": 1365,
     "height": 2048
+  },
+  "earthbridge-workbench": {
+    "path": "/evidence/earthbridge-workbench.webp",
+    "caption": "EarthBridge research workbench with empty upload area and a clearly disconnected API. Background imagery is illustrative, not model output.",
+    "source": "Screenshot 2026-11-04 120551.png",
+    "bytes": 96194,
+    "sha256": "9f95eb4c9d5cf551b24dd633d9d9ba34f8e1aa3437e8fa52e023a516e8154149",
+    "width": 1680,
+    "height": 1050
+  },
+  "earthbridge-results-empty": {
+    "path": "/evidence/earthbridge-results-empty.webp",
+    "caption": "Results area and analysis inspector before a query is executed. No actual ranked satellite-image matches appear.",
+    "source": "Screenshot 2026-11-04 120615.png",
+    "bytes": 60034,
+    "sha256": "af6e824b47a386737a36e7120c1c9d52f7f0404011cbc604688d7910ec5059bb",
+    "width": 1393,
+    "height": 1057
+  },
+  "earthbridge-architecture": {
+    "path": "/evidence/earthbridge-architecture.webp",
+    "caption": "Visual summary of Sentinel-1/Sentinel-2 inputs, shared 128-dimensional descriptors and FAISS nearest-neighbor search. Conceptual system design, not a live trace.",
+    "source": "Screenshot 2026-11-04 120633.png",
+    "bytes": 93814,
+    "sha256": "868c11838bf4fd5c11921895faf59ab1f78377e77a543817a81c262a457ffd0e",
+    "width": 1653,
+    "height": 1045
+  },
+  "earthbridge-evaluation": {
+    "path": "/evidence/earthbridge-evaluation.webp",
+    "caption": "EarthBridge evaluation page displaying submission-reported F1, recall, dataset size, embedding dimension and latency; figures are static, not freshly computed in the portfolio.",
+    "source": "Screenshot 2026-11-04 120653.png",
+    "bytes": 92918,
+    "sha256": "ace9f06f39effb3c6a6e3f8ea6481d56764450e2a39bc2cf1d234d3e851f57e5",
+    "width": 1657,
+    "height": 1045
   }
 }

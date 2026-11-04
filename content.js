@@ -26,7 +26,7 @@ export const profile = {
   education: 'B.Tech, Mathematics & Computing · MITS Gwalior · 2028',
   achievements: [
     {tag: 'FIELD DEMO / 2026', title: 'CMPDI Headquarters', text: 'Invited to demonstrate Mulyankan in Ranchi on 11 July 2026.'},
-    {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: 'Cross-modal retrieval prototype with documented evaluation scripts, leakage-aware splitting, and a reproducibility checklist; no unaudited benchmark number displayed.'},
+    {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: 'Cross-modal retrieval prototype with source-linked final submission metrics and validation protocol; reported measurements are not independently reproduced.'},
     {tag: 'COMMUNITY', title: 'SchoolBuddies', text: 'Co-founder of a student-led school technology outreach initiative.'},
     {tag: 'LEADERSHIP', title: 'Beyond the IDE', text: 'Class Representative, NPTEL Coordinator and first place at the Neeti Summit English Debate.'}
   ]
@@ -50,10 +50,11 @@ export const projects = [
   {
     number:'02', category:'ML / REMOTE SENSING', title:'EarthBridge',
     status:'Research prototype',
-    description:'Cross-modal satellite-image retrieval with contrastive embeddings and FAISS search for optical, SAR and multispectral imagery. The repository documents F1@5/F1@10, latency checks, and model-validation gates; no independently verified benchmark is claimed here.',
+    description:'Cross-modal satellite-image retrieval using contrastive embeddings and FAISS across Sentinel-1 SAR and Sentinel-2 multispectral imagery. Submission-reported F1 and recall metrics are now shown with limitations and repository sources, not as an independent benchmark.',
     stack:['PyTorch','FAISS','FastAPI'],
-    links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'}], accent:'violet', shape:'grid', filters:['ai'],
-    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'The published code includes metric checks, data-manifest validation, evaluation scripts and a 128-pair overfit-gate script. Inspect the implementation and reproduce results using the documented dataset.',caveat:'Research prototype. Internal results are not presented as an external benchmark; the linked repository does not establish a public hosted ML demo.'}
+    links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'},{label:'Reported evaluation details',url:'https://github.com/himanshu051116/earthbridge/blob/main/SUBMISSION_README.md'}], accent:'violet', shape:'grid', filters:['ai'],
+    evidenceImage:'/evidence/earthbridge-evaluation.webp', evidenceImageCaption:'Actual EarthBridge evaluation UI · static repo-reported results, not live model inference',
+    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'The repo SUBMISSION_README.md reports cross-modal F1@5 19.53%, F1@10 11.59% and validation recall@1 53.03%, recall@10 70.08%, alongside 3,248 paired test observations and 6,496 gallery vectors. These numbers were not rerun here.',caveat:'Research prototype. Supplied workbench screenshot shows API offline; no live ranked result is shown. Repository-reported metrics have not been independently verified or re-evaluated.'}
   },
   {
     number:'03', category:'FULL-STACK / REAL-TIME', title:'Our Hidden Universe',

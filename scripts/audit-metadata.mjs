@@ -1,0 +1,36 @@
+import { readFileSync, statSync } from 'node:fs'
+import { resolve } from 'node:path'
+import assert from 'node:assert/strict'
+const root=resolve(import.meta.dirname,'..')
+const base='https://inside-the-builders-mind.vercel.app/'
+const read=path=>readFileSync(resolve(root,path),'utf8')
+const html=read('index.html')
+assert.match(html,/<link rel="canonical" href="https:\/\/inside-the-builders-mind\.vercel\.app\/"/)
+assert.match(html,/<meta property="og:image:width" content="1200"/)
+assert.match(html,/<meta property="og:image:height" content="630"/)
+assert.match(html,/<meta name="twitter:image"/)
+assert.match(html,/<script type="application\/ld\+json">/)
+const ld=html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)
+assert(ld,'JSON-LD must exist')
+const schema=JSON.parse(ld[1])
+assert.equal(schema['@type'],'Person')
+assert.equal(schema.url,base)
+const sitemap=read('public/sitemap.xml')
+const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1])
+assert.equal(new Set(urls).size,urls.length)
+assert(urls.includes(base))
+for(const mode of ['fullstack','software','ml']){
+ const doc=read(`public/share/${mode}/index.html`)
+ assert(doc.includes(`https://inside-the-builders-mind.vercel.app/share/${mode}/`))
+ assert(doc.includes(`https://inside-the-builders-mind.vercel.app/social-${mode}.png`))
+ assert(doc.includes(`<meta name="twitter:image"`))
+ assert(doc.includes(`<meta property="og:image:alt"`))
+ assert(urls.includes(`${base}share/${mode}/`))
+ const bytes=readFileSync(resolve(root,`public/social-${mode}.png`))
+ assert.equal(bytes.toString('hex',0,8),'89504e470d0a1a0a')
+ assert.equal(bytes.readUInt32BE(16),1200)
+ assert.equal(bytes.readUInt32BE(20),630)
+}
+assert(read('public/robots.txt').includes(`Sitemap: ${base}sitemap.xml`))
+assert(statSync(resolve(root,'public/evidence/ohs-home.webp')).size>5000)
+console.log('Metadata audit passed: canonical, 3 social preview pages, 1200×630 images, sitemap, robots and Person structured data. External URL accessibility has not been checked.')

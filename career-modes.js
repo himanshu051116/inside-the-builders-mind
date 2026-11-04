@@ -38,6 +38,14 @@ export function setupCareerModes(){
       button.classList.toggle('isSelected',on)
     })
     views.forEach(view=>view.hidden=view.dataset.roleView!==value)
+    // Only the visible role's flagship screenshot deserves eager loading.
+    // Nonselected role screenshots should not compete for bandwidth.
+    document.querySelectorAll('.v14RoleView .v14HeroImage img').forEach(img=>{
+      const isActive=img.closest('[data-role-view]')?.dataset.roleView===value
+      img.loading=isActive?'eager':'lazy'
+      img.fetchPriority=isActive?'high':'low'
+    })
+    document.querySelectorAll('[data-role-lab]').forEach(lab=>lab.hidden=lab.dataset.roleLab!==value)
     modeStatus.textContent=`${MODE_NAMES[value]} selected. ${roleNames[value]}. Explore the featured work below.`
     themeColor?.setAttribute('content',roleColors[value])
     MODE_ORDER[value].forEach((number,index)=>{
@@ -55,9 +63,17 @@ export function setupCareerModes(){
     meta?.setAttribute('content',roleDescriptions[value])
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',roleDescriptions[value])
     if(writeUrl){
-      const url=new URL(window.location.href);url.searchParams.set('view',value)
-      // Some sandboxed/inline previews have no writable URL origin. Live HTTPS hosts do.
-      try { history.replaceState(null,'',url.pathname+url.search+url.hash) } catch { /* preview-only origin restriction */ }
+      const url=new URL(window.location.href)
+      url.searchParams.set('view',value)
+      // A role switch must be a navigable history entry. Clear incompatible
+      // screenshot hashes while retaining ordinary section fragments.
+      if(url.hash.startsWith('#proof/'))url.hash=''
+      const next=url.href
+      const current=location.href
+      if(next!==current){
+        try { history.pushState({ portfolioRole:value },'',next) }
+        catch { /* isolated offline browser harness: writable origin unavailable */ }
+      }
     }
   }
   buttons.forEach(button => button.addEventListener('click',()=>selectRole(button.dataset.switchRole)))

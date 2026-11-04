@@ -1,0 +1,1228 @@
+{
+  "fullstack_390": {
+    "issues": [
+      {
+        "selector": "strong",
+        "text": "A space for two.And everyone close.",
+        "ratio": 1,
+        "foreground": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 113,
+          "y": 10694.8125,
+          "w": 122.734375,
+          "h": 40
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "01",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12132.140625,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "02",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12426.734375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "03",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12754.921875,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.studioSceneLabel",
+        "text": "ROOM / 01",
+        "ratio": 1.23,
+        "foreground": "rgb(232, 229, 250)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 6,
+        "large": false,
+        "rect": {
+          "x": 280.078125,
+          "y": 10738.8125,
+          "w": 37.921875,
+          "h": 7
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a.v14IdentityName",
+        "text": "Himanshu Shukla",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 20,
+        "large": true,
+        "rect": {
+          "x": 15,
+          "y": 82,
+          "w": 161.3125,
+          "h": 24
+        },
+        "approximate": true
+      },
+      {
+        "selector": "h1.v14HeroHeadline",
+        "text": "I engineer collaborative web experiences with React and Firebase.",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 29,
+        "large": true,
+        "rect": {
+          "x": 15,
+          "y": 248.984375,
+          "w": 360,
+          "h": 97.40625
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "React + TypeScript",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 727.234375,
+          "w": 129.671875,
+          "h": 31.75
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "Firebase Auth / Firestore",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 150.671875,
+          "y": 727.234375,
+          "w": 167.484375,
+          "h": 31.75
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "Vercel",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 764.984375,
+          "w": 56.78125,
+          "h": 31.75
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a.v14Secondary",
+        "text": "Download tailored r\u00e9sum\u00e9 \u2193",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 199,
+          "y": 809.734375,
+          "w": 176,
+          "h": 57.1875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.v14Status",
+        "text": "DEPLOYED PRODUCT",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 876.921875,
+          "w": 149.515625,
+          "h": 30.796875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a",
+        "text": "View source \u2197",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 14,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 917.71875,
+          "w": 100.40625,
+          "h": 40
+        },
+        "approximate": true
+      },
+      {
+        "selector": "small",
+        "text": "OUR HIDDEN UNIVERSE",
+        "ratio": 1.58,
+        "foreground": "rgb(215, 200, 231)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 6,
+        "large": false,
+        "rect": {
+          "x": 113,
+          "y": 10677.8125,
+          "w": 122.734375,
+          "h": 7
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.brandDot",
+        "text": ".",
+        "ratio": 1.74,
+        "foreground": "rgb(255, 155, 112)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 152.546875,
+          "y": 17.25,
+          "w": 5.171875,
+          "h": 15
+        },
+        "approximate": false
+      },
+      {
+        "selector": "span",
+        "text": "B.Tech Mathematics & Computing \u00b7 MITS Gwalior \u00b7 2028",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 109,
+          "w": 321.25,
+          "h": 16.1875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "p.v14HeroDescription",
+        "text": "React interfaces, Firebase-backed collaboration, and detailed int",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 15,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 597.984375,
+          "w": 360,
+          "h": 116.25
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "Our Hidden Universe",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 14,
+        "large": false,
+        "rect": {
+          "x": 174.515625,
+          "y": 881.8125,
+          "w": 143.109375,
+          "h": 21
+        },
+        "approximate": true
+      },
+      {
+        "selector": "i",
+        "text": "01\u201403",
+        "ratio": 2.89,
+        "foreground": "rgb(228, 110, 79)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 307.7308654785156,
+          "y": 11038.7744140625,
+          "w": 32.491363525390625,
+          "h": 16.6826171875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "p.miniMuted",
+        "text": "Private digital space \u00b7 illustrative interface",
+        "ratio": 3.03,
+        "foreground": "rgb(119, 144, 153)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 11,
+        "large": false,
+        "rect": {
+          "x": 91,
+          "y": 10622.8125,
+          "w": 247,
+          "h": 15
+        },
+        "approximate": true
+      },
+      {
+        "selector": "p.v14RoleKicker",
+        "text": "FULL-STACK / PRODUCT ENGINEERING",
+        "ratio": 3.18,
+        "foreground": "rgb(177, 58, 32)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 15,
+          "y": 225.1875,
+          "w": 360,
+          "h": 16.796875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "b",
+        "text": "\u25cf Shared room",
+        "ratio": 3.52,
+        "foreground": "rgb(45, 153, 126)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 11,
+        "large": false,
+        "rect": {
+          "x": 246.265625,
+          "y": 10770.3125,
+          "w": 79.734375,
+          "h": 15
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "OHS / SHARED SPACE",
+        "ratio": 3.63,
+        "foreground": "rgb(110, 135, 144)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 108.484375,
+          "y": 10546.8125,
+          "w": 133.578125,
+          "h": 11
+        },
+        "approximate": true
+      },
+      {
+        "selector": "b",
+        "text": "\u25cf LOCAL DEMO",
+        "ratio": 4.03,
+        "foreground": "rgb(22, 139, 115)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 262.03125,
+          "y": 10545.3125,
+          "w": 73.96875,
+          "h": 14
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "RENDERING / INTERACTIVE",
+        "ratio": 4.16,
+        "foreground": "rgb(146, 109, 103)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 6,
+        "large": false,
+        "rect": {
+          "x": 261.74688720703125,
+          "y": 10996.720703125,
+          "w": 50.002410888671875,
+          "h": 33.04296875
+        },
+        "approximate": true
+      }
+    ],
+    "count": 25,
+    "h1": "I engineer collaborative web experiences with React and Firebase.",
+    "errors": []
+  },
+  "fullstack_1440": {
+    "issues": [
+      {
+        "selector": "strong",
+        "text": "A space for two.And everyone close.",
+        "ratio": 1,
+        "foreground": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 17,
+        "large": false,
+        "rect": {
+          "x": 203,
+          "y": 6609.828125,
+          "w": 160.5,
+          "h": 45
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a.headerContact",
+        "text": "SAY HELLO",
+        "ratio": 1.08,
+        "foreground": "rgb(235, 248, 225)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 1256.9375,
+          "y": 18,
+          "w": 131.0625,
+          "h": 45
+        },
+        "approximate": false
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "01",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 263.9375,
+          "y": 7959.203125,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "02",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 714.609375,
+          "y": 7959.203125,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "03",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 1165.265625,
+          "y": 7959.203125,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.studioSceneLabel",
+        "text": "ROOM / 01",
+        "ratio": 1.23,
+        "foreground": "rgb(232, 229, 250)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 8,
+        "large": false,
+        "rect": {
+          "x": 1245.4375,
+          "y": 6667.828125,
+          "w": 50.5625,
+          "h": 9
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a.v14IdentityName",
+        "text": "Himanshu Shukla",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 22,
+        "large": true,
+        "rect": {
+          "x": 90,
+          "y": 103,
+          "w": 177.4375,
+          "h": 26.390625
+        },
+        "approximate": true
+      },
+      {
+        "selector": "h1.v14HeroHeadline",
+        "text": "I engineer collaborative web experiences with React and Firebase.",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 54.72,
+        "large": true,
+        "rect": {
+          "x": 90,
+          "y": 277.078125,
+          "w": 547.09375,
+          "h": 238.5625
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "React + TypeScript",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 90,
+          "y": 666.828125,
+          "w": 142.796875,
+          "h": 37.234375
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "Firebase Auth / Firestore",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 239.796875,
+          "y": 666.828125,
+          "w": 183.765625,
+          "h": 37.234375
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "Vercel",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 430.5625,
+          "y": 666.828125,
+          "w": 63.859375,
+          "h": 37.234375
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a.v14Secondary",
+        "text": "Download tailored r\u00e9sum\u00e9 \u2193",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 351.4375,
+          "y": 726.0625,
+          "w": 217.625,
+          "h": 48
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.v14Status",
+        "text": "DEPLOYED PRODUCT",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 90,
+          "y": 795.65625,
+          "w": 149.515625,
+          "h": 30.796875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a",
+        "text": "View source \u2197",
+        "ratio": 1.29,
+        "foreground": "rgb(30, 41, 51)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 14,
+        "large": false,
+        "rect": {
+          "x": 402.625,
+          "y": 791.0625,
+          "w": 100.40625,
+          "h": 40
+        },
+        "approximate": true
+      },
+      {
+        "selector": "a",
+        "text": "Projects",
+        "ratio": 1.46,
+        "foreground": "rgb(186, 196, 197)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 370.59375,
+          "y": 21,
+          "w": 82.453125,
+          "h": 39
+        },
+        "approximate": false
+      },
+      {
+        "selector": "a",
+        "text": "Case studies",
+        "ratio": 1.46,
+        "foreground": "rgb(186, 196, 197)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 461.046875,
+          "y": 21,
+          "w": 109.078125,
+          "h": 39
+        },
+        "approximate": false
+      },
+      {
+        "selector": "a",
+        "text": "Screenshots",
+        "ratio": 1.46,
+        "foreground": "rgb(186, 196, 197)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 578.125,
+          "y": 21,
+          "w": 106.984375,
+          "h": 39
+        },
+        "approximate": false
+      },
+      {
+        "selector": "a",
+        "text": "Interactive Lab",
+        "ratio": 1.46,
+        "foreground": "rgb(186, 196, 197)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 693.109375,
+          "y": 21,
+          "w": 124.921875,
+          "h": 39
+        },
+        "approximate": false
+      },
+      {
+        "selector": "a",
+        "text": "About",
+        "ratio": 1.46,
+        "foreground": "rgb(186, 196, 197)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 826.03125,
+          "y": 21,
+          "w": 70.421875,
+          "h": 39
+        },
+        "approximate": false
+      },
+      {
+        "selector": "small",
+        "text": "OUR HIDDEN UNIVERSE",
+        "ratio": 1.58,
+        "foreground": "rgb(215, 200, 231)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 7,
+        "large": false,
+        "rect": {
+          "x": 203,
+          "y": 6591.828125,
+          "w": 160.5,
+          "h": 8
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.brandDot",
+        "text": ".",
+        "ratio": 1.74,
+        "foreground": "rgb(255, 155, 112)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 188.546875,
+          "y": 23.25,
+          "w": 5.171875,
+          "h": 15
+        },
+        "approximate": false
+      },
+      {
+        "selector": "span",
+        "text": "B.Tech Mathematics & Computing \u00b7 MITS Gwalior \u00b7 2028",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 1001.984375,
+          "y": 111,
+          "w": 348.015625,
+          "h": 19.234375
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span.v14ModePrompt",
+        "text": "EXPLORE BY ROLE",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 12,
+        "large": false,
+        "rect": {
+          "x": 90,
+          "y": 176.828125,
+          "w": 127.359375,
+          "h": 16.796875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "p.v14HeroDescription",
+        "text": "React interfaces, Firebase-backed collaboration, and detailed int",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 17,
+        "large": false,
+        "rect": {
+          "x": 90,
+          "y": 534.640625,
+          "w": 547.09375,
+          "h": 114.1875
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "Our Hidden Universe",
+        "ratio": 2.76,
+        "foreground": "rgb(77, 92, 100)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 14,
+        "large": false,
+        "rect": {
+          "x": 249.515625,
+          "y": 800.5625,
+          "w": 143.109375,
+          "h": 21
+        },
+        "approximate": true
+      },
+      {
+        "selector": "i",
+        "text": "01\u201403",
+        "ratio": 2.89,
+        "foreground": "rgb(228, 110, 79)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 15,
+        "large": false,
+        "rect": {
+          "x": 1312.18017578125,
+          "y": 6966.43212890625,
+          "w": 48.9107666015625,
+          "h": 24.81103515625
+        },
+        "approximate": true
+      },
+      {
+        "selector": "p.miniMuted",
+        "text": "Private digital space \u00b7 illustrative interface",
+        "ratio": 3.03,
+        "foreground": "rgb(119, 144, 153)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 11,
+        "large": false,
+        "rect": {
+          "x": 172,
+          "y": 6525.828125,
+          "w": 1152,
+          "h": 15
+        },
+        "approximate": true
+      },
+      {
+        "selector": "p.v14RoleKicker",
+        "text": "FULL-STACK / PRODUCT ENGINEERING",
+        "ratio": 3.18,
+        "foreground": "rgb(177, 58, 32)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 13,
+        "large": false,
+        "rect": {
+          "x": 90,
+          "y": 243.234375,
+          "w": 547.09375,
+          "h": 18.84375
+        },
+        "approximate": true
+      },
+      {
+        "selector": "b",
+        "text": "\u25cf Shared room",
+        "ratio": 3.52,
+        "foreground": "rgb(45, 153, 126)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 11,
+        "large": false,
+        "rect": {
+          "x": 1229.265625,
+          "y": 6709.328125,
+          "w": 79.734375,
+          "h": 15
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "OHS / SHARED SPACE",
+        "ratio": 3.63,
+        "foreground": "rgb(110, 135, 144)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 476.8125,
+          "y": 6438.828125,
+          "w": 133.578125,
+          "h": 11
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.sectionFloatingNo",
+        "text": "01 / SELECTED SYSTEMS",
+        "ratio": 3.93,
+        "foreground": "rgb(100, 116, 123)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 1219.5625,
+          "y": 997.0625,
+          "w": 168.4375,
+          "h": 11
+        },
+        "approximate": false
+      },
+      {
+        "selector": "b",
+        "text": "\u25cf LOCAL DEMO",
+        "ratio": 4.03,
+        "foreground": "rgb(22, 139, 115)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 1257.03125,
+          "y": 6437.328125,
+          "w": 73.96875,
+          "h": 14
+        },
+        "approximate": true
+      },
+      {
+        "selector": "span",
+        "text": "RENDERING / INTERACTIVE",
+        "ratio": 4.16,
+        "foreground": "rgb(146, 109, 103)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 7,
+        "large": false,
+        "rect": {
+          "x": 1243.4617919921875,
+          "y": 6940.978515625,
+          "w": 116.4649658203125,
+          "h": 20.10888671875
+        },
+        "approximate": true
+      }
+    ],
+    "count": 33,
+    "h1": "I engineer collaborative web experiences with React and Firebase.",
+    "errors": []
+  },
+  "software_390": {
+    "issues": [
+      {
+        "selector": "div.skillIndex",
+        "text": "01",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12035.609375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "02",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12330.203125,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "03",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12658.390625,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "em",
+        "text": "RSS / sitemap",
+        "ratio": 4.08,
+        "foreground": "rgb(136, 178, 165)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 6,
+        "large": false,
+        "rect": {
+          "x": 48.421875,
+          "y": 10555.28125,
+          "w": 46.96875,
+          "h": 7
+        },
+        "approximate": true
+      }
+    ],
+    "count": 4,
+    "h1": "I engineer collaborative web experiences with React and Firebase.",
+    "errors": []
+  },
+  "software_1440": {
+    "issues": [
+      {
+        "selector": "div.skillIndex",
+        "text": "01",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 263.9375,
+          "y": 7906.3271484375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "02",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 714.609375,
+          "y": 7906.3271484375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "03",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 1165.265625,
+          "y": 7906.3271484375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.sectionFloatingNo",
+        "text": "01 / SELECTED SYSTEMS",
+        "ratio": 3.9,
+        "foreground": "rgb(100, 116, 123)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 1219.5625,
+          "y": 930.125,
+          "w": 168.4375,
+          "h": 11
+        },
+        "approximate": false
+      },
+      {
+        "selector": "em",
+        "text": "RSS / sitemap",
+        "ratio": 4.08,
+        "foreground": "rgb(136, 178, 165)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 8,
+        "large": false,
+        "rect": {
+          "x": 111.6875,
+          "y": 6479.453125,
+          "w": 62.625,
+          "h": 9
+        },
+        "approximate": true
+      }
+    ],
+    "count": 5,
+    "h1": "I engineer collaborative web experiences with React and Firebase.",
+    "errors": []
+  },
+  "ml_390": {
+    "issues": [
+      {
+        "selector": "div.skillIndex",
+        "text": "01",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12594.625,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "02",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 12889.21875,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "03",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 151.28125,
+          "y": 13217.40625,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      }
+    ],
+    "count": 3,
+    "h1": "I engineer collaborative web experiences with React and Firebase.",
+    "errors": []
+  },
+  "ml_1440": {
+    "issues": [
+      {
+        "selector": "div.skillIndex",
+        "text": "01",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 263.9375,
+          "y": 8322.109375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "02",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 714.609375,
+          "y": 8322.109375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.skillIndex",
+        "text": "03",
+        "ratio": 1.09,
+        "foreground": "rgba(233, 250, 220, 0.043)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 220,
+        "large": true,
+        "rect": {
+          "x": 1165.265625,
+          "y": 8322.109375,
+          "w": 244.71875,
+          "h": 253
+        },
+        "approximate": true
+      },
+      {
+        "selector": "div.sectionFloatingNo",
+        "text": "01 / SELECTED SYSTEMS",
+        "ratio": 3.88,
+        "foreground": "rgb(100, 116, 123)",
+        "background": "rgba(0, 0, 0, 0)",
+        "fs": 10,
+        "large": false,
+        "rect": {
+          "x": 1219.5625,
+          "y": 965.96875,
+          "w": 168.4375,
+          "h": 11
+        },
+        "approximate": false
+      }
+    ],
+    "count": 4,
+    "h1": "I engineer collaborative web experiences with React and Firebase.",
+    "errors": []
+  }
+}

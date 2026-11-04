@@ -1,0 +1,54 @@
+{
+  "version": "14.4.0",
+  "source": "V14.3 local source snapshot",
+  "checks": {
+    "node_tests": {
+      "passed": 95,
+      "total": 95
+    },
+    "build": "PASS",
+    "asset_audit": "PASS",
+    "metadata_audit": "PASS",
+    "inline_chromium": {
+      "role_viewports": 15,
+      "all_passed": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1366,
+        1440
+      ],
+      "screenshot_dialog_checks": 2,
+      "history_checks": "Back / Back / Forward passed",
+      "js_errors": 0,
+      "outer_overflow_detected": false,
+      "mobile_shortcut_clipping_detected": false
+    }
+  },
+  "measurements": {
+    "mobile_390_lead_top_px": {
+      "fullstack": 373,
+      "software": 373,
+      "ml": 373
+    },
+    "mobile_320_lead_top_px": {
+      "fullstack": 422,
+      "software": 406,
+      "ml": 439
+    }
+  },
+  "checklist_verified": 46,
+  "checklist_total": 73,
+  "limits": [
+    "Inline Chromium checks use an about:blank page; not a hosted Vercel browser test.",
+    "Real EarthBridge model retrieval imagery is not supplied.",
+    "Public screenshot authorization has not been independently established.",
+    "WCAG, performance field data and actual hosted navigation remain pending."
+  ],
+  "deployment": {
+    "github": "unchanged",
+    "vercel_production": "unchanged",
+    "aws": "untouched"
+  }
+}

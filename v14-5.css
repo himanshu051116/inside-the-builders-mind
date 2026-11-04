@@ -1,0 +1,33 @@
+/* V14.5: measured text-contrast corrections for the persistent header.
+   These selectors intentionally target only foreground text and preserve
+   the visual hierarchy and hover/focus feedback in all three themes. */
+body[data-role="software"] .header .nav > a,
+body[data-role="software"] .header .nav > a:visited { color: #cbd9e3; }
+body[data-role="ml"] .header .nav > a,
+body[data-role="ml"] .header .nav > a:visited { color: #d9d0ee; }
+body[data-role="fullstack"] .header .headerContact { color: #182630 !important; }
+/* Resilient skip-link focus for users navigating without a mouse. */
+.skipLink:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+/* Static media must remain readable when browser motion settings disable transitions. */
+@media (prefers-reduced-motion: reduce) {
+  .v14Hero .v14HeroImage img,
+  .v14Hero .careerModeButton,
+  .header .nav > a { animation: none !important; transition: none !important; }
+}
+
+/* V14.7: the small brand descriptor must be readable on the light theme. */
+body[data-role="fullstack"] .header .brandWord small {
+  color:#4d5960;font-size:10px;line-height:1.35;letter-spacing:.14em;
+}
+/* Progressive discovery keeps the search-dialog keyboard focus obvious. */
+.commandResults :is(a,button):focus-visible {
+  outline:3px solid #b5f0c8;outline-offset:-3px;position:relative;z-index:1;
+}
+
+/* V14.7: decorative loops stop consuming animation frames offscreen.
+   State-changing controls and working timelines are not affected. */
+.ambientPaused :is(.slowRotate,.corePulse,.orbitRing,.orbitSweep,.orbitPath,
+ .orbitNodeHalo,.orbitFocusGlyph,.orbitLiveDot,.orbitTop i,.hudScanLine,
+ .sysFlowLink i,.scenePlanet,.tileFlow,.newsJoin,.monitorBars i,
+ .collabMessages span,.reviewMock) {animation-play-state:paused!important}
+.ambientPaused.orbitStage::after {animation-play-state:paused!important}

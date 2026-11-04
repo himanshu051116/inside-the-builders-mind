@@ -7,7 +7,7 @@ let warnings = 0
 const fail = message => { console.error(`FAIL: ${message}`); process.exitCode = 1 }
 const warn = message => { console.warn(`WARN: ${message}`); warnings++ }
 
-for (const file of ['index.html','portfolio.css','experience-v6.js','v10-experience.js','v11-experience.js','site.js','workbench-ui.js','workbench-data.js','workbench-logic.js','amplify.yml','public/favicon.svg','public/robots.txt']) {
+for (const file of ['index.html','portfolio.css','v14.css','experience-v6.js','v10-experience.js','v11-experience.js','site.js','workbench-ui.js','workbench-data.js','workbench-logic.js','amplify.yml','public/favicon.svg','public/robots.txt']) {
   if (!existsSync(resolve(root,file))) fail(`Missing required asset: ${file}`)
 }
 for (const entry of projects) {

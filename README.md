@@ -1,3 +1,9 @@
+> **Current local checkpoint: V14.8 (49/73 tasks verified).** See `V14_7_RELEASE_NOTES.md` and `V14_PROGRESS.md`. The public Vercel site remains on V13.
+
+# V14.1 development checkpoint (local only)
+
+See [V14.3 release notes](V14_3_RELEASE_NOTES.md) and [73-task progress tracker](V14_PROGRESS.md). The **currently deployed Vercel production site remains V13**.
+
 # Inside the Builder's Mind — V13
 
 Three specialization-aware portfolio experiences for Himanshu Shukla (B.Tech Mathematics & Computing, MITS Gwalior): **Full-Stack Studio**, **Systems Console**, and **ML Research Lab**. Built with browser-native JavaScript, HTML and CSS, with an interactive Evidence Workbench.
@@ -18,7 +24,7 @@ The production build is in `dist/`. Deploy the root source repository on Vercel 
 
 ## Engineering evidence and search (V11 foundation)
 
-The **Evidence Desk** is the main source-backed project tour: four tabs let a recruiter inspect the engineering question, architecture decision, directly linked files and constraints for each flagship project. It follows the selected résumé track. Long-form case notes are opt-in, rather than a wall of text. Use **Ctrl+K / Cmd+K** to search projects, switch modes, jump to a section or open the correct public résumé. The Command Palette is local-only.
+The **case-study records** are the primary source-backed project tour. The optional Evidence Desk: four tabs let a recruiter inspect the engineering question, architecture decision, directly linked files and constraints for each flagship project. It follows the selected résumé track. Long-form case notes are opt-in, rather than a wall of text. Use **Ctrl+K / Cmd+K** to search projects, switch modes, jump to a section or open the correct public résumé. The Command Palette is local-only.
 
 See `V11_RELEASE_NOTES.md` for the implementation and test details.
 
@@ -37,6 +43,7 @@ Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact form
 ## Architecture
 
 - `site.js` — portfolio content, views and case-study markup
+- `case-dossiers.js` — source-grounded engineering decisions, exact test references, trade-offs and limits
 - `content.js` — person, primary projects and transparent archive
 - `career-modes.js` — three specialization modes, project ordering, header metadata, Studio/Systems navigation
 - `v8-interactions.js` — sole owner of toy ML ranking renderer, plus simulated chat/playback and fictional ingestion trace
@@ -45,12 +52,12 @@ Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact form
 - `workbench-*` — local deterministic review exercise and audit export
 - `portfolio.css` — consolidated production stylesheet (replaces seven V9 stylesheets)
 - `public/social-*.png` and `public/share/*/index.html` — individual social-preview share routes
-- `tests/` — 63 automated source and logic checks
+- `tests/` — 76 automated source and logic checks
 - `public/sitemap.xml`, `robots.txt`, JSON-LD, and canonical metadata for discovery
 
 ## Live deployment limitations
 
-V13 is prepared locally and has not been pushed to GitHub or deployed to Vercel or AWS in this release. The current Vercel production project still serves V11, until separately updated. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
+V13 is the currently deployed production baseline. The V14.1 development build has not been pushed or deployed to Vercel or AWS. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
 
 After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.
 
@@ -72,3 +79,13 @@ The gallery provides image-by-image previous/next controls outside the modal, ke
 The Full-Stack and Software leads reserve image dimensions and prioritize loading of their actual screenshot. No fabricated EarthBridge imagery or evaluation numbers are added. The original synthetic ML playground stays separate from the source-backed evidence.
 
 Run `npm test && npm run build && npm run audit:local` before deployment. Local Chromium testing in the restricted sandbox uses an inline-script/browser harness because direct HTTP navigation to localhost is blocked; **it does not prove the published website is working**. See `V13_LOCAL_QA.md`.
+
+
+## V14.5 local release
+
+`V14_4_RELEASE_NOTES.md` documents the mobile evidence-first layout, unclipped jump shortcuts, role history, full-screen image viewer, corrected ML research methodology, and validation. This source is not deployed on GitHub or Vercel.
+
+
+## V14.5 CSS maintenance checkpoint
+
+The editable source is organized in `styles/*.css` and `v14*.css` correction modules; `npm run build` compiles these in a stable order into **one minified** `dist/portfolio.css` file. The build is dependency-free. `CSS_REMOVAL_AUDIT.json` documents 347 pruned rules that appeared unreferenced in the current JavaScript/HTML source. `V14_5_RELEASE_NOTES.md` records size and QA evidence; production and external audits are still pending.

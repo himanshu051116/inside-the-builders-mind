@@ -1,0 +1,29 @@
+{
+  "release": "14.7.0",
+  "scope": "local browser checks, not hosted production",
+  "automatedTests": 111,
+  "responsiveViews": 15,
+  "semanticSmoke": 12,
+  "paletteWidths": [
+    390,
+    1440
+  ],
+  "paletteSearchKeyboard": "pass",
+  "motionPauseOffscreen": "pass",
+  "motionResumeOnscreen": "pass",
+  "nativeReducedMotion": "pass",
+  "build": "pass",
+  "assetAuditReminders": 0,
+  "metadataAudit": "pass",
+  "blocked": [
+    "V14-016",
+    "V14-018",
+    "V14-023",
+    "V14-032\u2013038",
+    "V14-055\u2013059",
+    "V14-060",
+    "V14-071\u2013073"
+  ],
+  "completedLocally": 49,
+  "remaining": 24
+}

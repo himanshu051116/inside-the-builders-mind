@@ -1,0 +1,78 @@
+/* V14.4 correction release — prioritize real evidence and predictable navigation.
+   This layer is intentionally small; the full legacy CSS refactor remains open. */
+.v14Hero .v144Intro{min-width:0}
+/* Long research-methodology panels must not push the main research CTA below the fold. */
+@media(min-width:1021px){.v14Hero .v14RoleView[data-role-view="ml"]{align-items:start}}
+.v14Hero .v144Details{min-width:0}
+.v14Hero .v14HeroFrame button.v14HeroImage{
+ appearance:none;border:0;margin:0;padding:0;width:100%;height:auto;cursor:zoom-in;
+ font:inherit;text-align:left;line-height:normal;background:#121c25;position:relative;
+}
+.v14HeroImage .v144ZoomCue{position:absolute;right:12px;bottom:12px;padding:9px 12px;
+ border-radius:9px;background:#08141de8;color:#fff;font:700 13px/1.3 var(--v14-font);
+ border:1px solid #c6e4ee99;box-shadow:0 4px 20px #0008}
+.v14HeroFrame figcaption .v144CaseFromImage{display:inline-flex;align-items:center;align-self:start;
+ padding:8px 0;min-height:40px;font:750 13px/1.35 var(--v14-font);color:var(--v14-ink);
+ text-underline-offset:3px;text-decoration:underline}
+.v14HeroImage:focus-visible{outline:3px solid var(--v14-highlight);outline-offset:-5px}
+.v144ResearchStages{display:grid;gap:9px;list-style:none;padding:0;margin:0}
+.v144ResearchStages li{display:grid;gap:5px;min-width:0;border-left:3px solid var(--v14-highlight);
+ background:color-mix(in srgb,var(--v14-outline) 16%,transparent);border-radius:2px 9px 9px 2px;padding:13px 16px}
+.v144ResearchStages li>span{font:760 11px/1.4 var(--v14-font);color:var(--v14-highlight);letter-spacing:.08em}
+.v144ResearchStages strong{font:750 17px/1.3 var(--v14-head);color:var(--v14-ink)}
+.v144ResearchStages small{font:500 13px/1.5 var(--v14-font);color:var(--v14-muted)}
+.v144EditorialNote{margin:10px auto 22px;color:#b7ccc0;font-size:14px;line-height:1.6;letter-spacing:0}
+.v144EditorialNote strong{color:#e7fbec}
+.v144EditorialNote a{color:#bde8cb;font-weight:700;text-decoration:underline;text-underline-offset:3px;
+ display:inline-flex;align-items:center;min-height:40px}
+.v14Hero .v142QuickJumps{margin:0 0 12px}
+/* Remove mixed-mode backgrounds while switching; color transitions may remain. */
+.v14Hero .careerModeButton{transition:background-color .1s ease,color .1s ease,border-color .1s ease!important}
+@media(max-width:760px){
+ .v14Hero .v14IdentityTop{flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 10px;padding:12px 0 8px}
+ .v14Hero .v14IdentityName{font-size:20px;flex:0 0 auto}
+ .v14Hero .v14IdentityTop>span{font-size:12px;line-height:1.35;flex:1 1 auto}
+ .v14Hero .careerChooser.v14ModeBar{padding:10px 0 0}
+ .v14Hero .careerView.v14RoleView{display:flex;flex-direction:column;align-items:stretch;
+  gap:0;padding:14px 0 12px}
+ .v14Hero .careerCopy.v14RoleCopy{display:contents}
+ .v14Hero .careerCopy .candidateIdentity{display:none}
+ .v14Hero .v144Intro{order:0}
+ .v14Hero .v14HeroHeadline{font-size:clamp(29px,7.1vw,40px)!important;line-height:1.12;
+  letter-spacing:-.05em;max-width:none;margin:0 0 13px;text-wrap:pretty}
+ .v14Hero .v14RoleKicker{margin:2px 0 7px;font-size:12px;line-height:1.4}
+ .v14Hero .v14HeroFrame,.v14Hero .v14SourceFrame{order:1;margin:0 0 18px;max-width:100%}
+ .v14Hero .v144Details{order:2}
+ .v14Hero .v14HeroDescription{font-size:15px;line-height:1.55;margin:0 0 13px}
+ .v14Hero .v14HeroFrame figcaption{font-size:13px;padding:10px 12px}
+ .v14Hero .v14HeroImage img{width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain}
+ .v14Hero .v14TechRow{gap:6px;margin-bottom:13px}
+ .v14Hero .v14TechRow span{font-size:12px;padding:6px 9px}
+ .v14Hero .v14PrimaryActions{margin-bottom:10px;gap:8px}
+ .v14Hero .v14PrimaryActions a{min-height:44px}
+ /* No clipped scroll strips. Four equally discoverable, full-text links. */
+ .v14Hero .v142QuickJumps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  overflow:visible;max-width:100%;gap:8px;scroll-snap-type:none;padding:4px 0 16px}
+ .v14Hero .v142QuickJumps a{min-width:0;width:100%;white-space:normal;min-height:42px;
+  padding:9px 10px;line-height:1.3;text-align:center;scroll-snap-align:none}
+ .v14SourceBody{gap:15px;padding:14px}
+ .v14SourceTop{padding:11px 12px;font-size:12px;flex-wrap:wrap}
+ .v144ResearchStages{gap:6px}
+ .v144ResearchStages li{padding:10px 11px}
+ .v144ResearchStages strong{font-size:15px}
+ .v144ResearchStages small{font-size:12px}
+ .v144EditorialNote{margin:4px auto 12px;font-size:13px}
+}
+@media(max-width:480px){
+ .v14Hero .v14IdentityTop{flex-direction:column;align-items:flex-start;gap:3px}
+ .v14Hero .careerModeButton{padding:8px 7px!important}
+ .v14Hero .careerModeButton strong{font-size:12px!important}
+ .v14Hero .v14PrimaryActions{flex-direction:row;flex-wrap:wrap}
+ .v14Hero .v14PrimaryActions a{flex:1 1 140px;width:auto;padding:12px 9px;font-size:12px}
+ .v14Hero .v14HeroFrame figcaption span:first-child{font-size:12px}
+ .v144EditorialNote a{min-height:32px}
+}
+@media(prefers-reduced-motion:reduce){
+ .v14Hero .careerModeButton,.v14Hero .v14HeroImage img,
+ .v14Hero .v14PrimaryActions a{animation:none!important;transition:none!important;transform:none!important}
+}

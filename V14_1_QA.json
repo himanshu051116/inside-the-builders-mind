@@ -1,0 +1,29 @@
+{
+  "version": "14.1.0",
+  "baseline": "V14 local development",
+  "tests": 76,
+  "test_status": "passed",
+  "build": "passed",
+  "audit": "passed",
+  "reminders": 0,
+  "responsive_mode_viewport_checks": 15,
+  "dossier_visual_checks": [
+    1440,
+    390
+  ],
+  "fallback_case_checks": 4,
+  "hosted_browser_tested": false,
+  "production_changed": false,
+  "earthbridge_results_present": false,
+  "schoolbuddies_domain_owner_verified": true,
+  "schoolbuddies_public_http_checked": false,
+  "issues_open": [
+    "EarthBridge experimental visual evidence",
+    "public screenshot permission review",
+    "hosted e2e",
+    "external URL verification",
+    "CSS technical debt",
+    "formal accessibility",
+    "field CWV"
+  ]
+}

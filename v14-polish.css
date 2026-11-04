@@ -1,0 +1,37 @@
+/* V14.3: measured, targeted accessibility fixes from local Chromium audit.
+   This file intentionally comes AFTER all legacy component styles. */
+:root { --v143-focus-ring:#bbeed3; --v143-control-min:44px; }
+body[data-role="fullstack"] .v14RoleKicker { color:#b13a20; }
+.v14Hero .careerModeButton { min-height:var(--v143-control-min); }
+.v14Hero .careerModeButton strong { font-size:13px; }
+.v14ProofFooter,.v14HeroFrame figcaption {font-size:14px;line-height:1.5}
+.v14HeroFrame figcaption span:first-child,
+.v14SourceBody>div:first-child small,.v14MethodStats small,
+.v14SourceTop,.v14SourceBoundary { font-size:13px; }
+.projectStatus { font-size:13px!important; line-height:1.35; letter-spacing:.01em; }
+.projectDescription,.archiveCard p,.caseFile .caseFacts p,.captureInspect p {font-size:16px;line-height:1.6}
+.captureInspect small,.captureFrameMeta>span b {font-size:13px}
+.captureMetaActions a,.captureMetaActions button {min-height:var(--v143-control-min);font-size:13px}
+.archiveHeading>a,.projectLinks a,.verifiedImage a,
+.resumeLink,.wbAfterword a,.v14SourceBody>a { display:inline-flex;align-items:center;min-height:40px;padding-block:9px;line-height:1.45; }
+#researchWeight[type="range"] {min-height:var(--v143-control-min);touch-action:pan-x;cursor:pointer}
+/* Visible focus is intentional, including controls nested in details and dialogs. */
+:where(a,button,summary,input,select,textarea):focus-visible {
+  outline:3px solid var(--v143-focus-ring);outline-offset:3px;
+}
+body[data-role="fullstack"] :where(a,button,summary,input,select,textarea):focus-visible {outline-color:#9a3925}
+:where(.archiveFilter,.projectFilter,.galleryViewToggle,.v14CaseQuickNav a,.v14PrimaryActions a):focus-visible {
+  outline-width:3px;outline-offset:3px;
+}
+/* Prevent a subtle touch-target regression when the mobile gallery layout stacks. */
+@media(max-width:760px){
+  .captureMetaActions a,.captureMetaActions button,.archiveFilters button {min-height:var(--v143-control-min)}
+  .v14Hero .careerModeButton {min-height:var(--v143-control-min)}
+  .projectStatus {font-size:13px!important;}
+  .v14SourceBody>div:first-child small {font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){
+ :where(.captureMetaActions a,.captureMetaActions button,.v14PrimaryActions a,.v14HeroImage img) {transition:none!important;animation:none!important;transform:none!important}
+}
+/* Inline text links previously had 19–21px click rectangles. */
+.v14ProofFooter a,.wbBottom a {display:inline-flex;align-items:center;min-height:40px;padding-block:9px;line-height:1.5}

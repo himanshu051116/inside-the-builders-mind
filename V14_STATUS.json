@@ -1,0 +1,294 @@
+{
+  "V14-001": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-002": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-003": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-004": {
+    "status": "verified_local",
+    "note": "Three mode heroes now display author-supplied authentic application screenshots; ML uses EarthBridge static evaluation UI (repository-reported results), expressly not a live model execution."
+  },
+  "V14-005": {
+    "status": "verified_local",
+    "note": "V14.4 regression fix: both CTA buttons and role descriptions appear in a compact desktop layout; primary CTAs verified fully visible at 1366x768 and 1440x900 in all three roles, including the tall ML methodology panel."
+  },
+  "V14-006": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-007": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-008": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-009": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-010": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-011": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-012": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-013": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-014": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-015": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-016": {
+    "status": "blocked",
+    "note": "Four EarthBridge UI screenshots supplied, but no executed query with actual ranked retrieved satellite-image candidates, ground truth and modality labels. Still pending."
+  },
+  "V14-017": {
+    "status": "verified_local",
+    "note": "Metrics as published in EarthBridge SUBMISSION_README.md and docs/PROJECT_STATUS.md: F1@5 19.53%, F1@10 11.59%, Recall@1 53.03%, Recall@10 70.08%, latency \u22480.146 ms; data protocol and independent-verification caveat included."
+  },
+  "V14-018": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-019": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-020": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-021": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-022": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-023": {
+    "status": "blocked",
+    "note": "Vercel owner metadata shows schoolbuddiesindia.vercel.app and schoolbuddies-six.vercel.app as aliases on one READY project; publicly hosted routing and historic poster QR/canonical convention still require acceptance."
+  },
+  "V14-024": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-025": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-026": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-027": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-028": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-029": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-030": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-031": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-032": {
+    "status": "blocked",
+    "note": "User has not requested a V14 Vercel preview deployment."
+  },
+  "V14-033": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-034": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-035": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-036": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-037": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-038": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-039": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-040": {
+    "status": "verified_local",
+    "note": "V14.1: canonical source-backed dossier, relevant direct evidence links, inspectable tests, correct presentation and local browser verification."
+  },
+  "V14-041": {
+    "status": "verified_local",
+    "note": "V14.2: accessible all-project grid remains the default; secondary archive now filters Full-Stack, Software, and ML, with aria-pressed and live counts; mouse/keyboard verified."
+  },
+  "V14-042": {
+    "status": "verified_local",
+    "note": "V14.2: featured project cards consistently show supported stage descriptions and retain original authored full status in title metadata; archive stages remain explicitly qualified."
+  },
+  "V14-043": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-044": {
+    "status": "verified_local",
+    "note": "V14.4 corrected a previously missed defect: the four 390px mobile shortcut links no longer clip. They appear in a two-column grid after the early evidence panel and all fit at 320/390px. Browser geometry checks pass in three roles."
+  },
+  "V14-045": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-046": {
+    "status": "in_progress",
+    "note": "V14.5: Removed 347 apparently unreferenced CSS rules (~25.2KB) from source modules, retained JSON review ledger, and consolidated all four V14 override layers into a single production stylesheet. Remaining source overrides and dead selector edge cases need a broader interactive coverage audit before declaring CSS architecture fully cleaned."
+  },
+  "V14-047": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-048": {
+    "status": "in_progress",
+    "note": "V14.2: new archive controls, mobile jump links, and shared :focus-visible styles standardized. Full legacy-component state review remains open."
+  },
+  "V14-049": {
+    "status": "verified_local",
+    "note": "V14.2: reviewed 15 role/viewport combinations, desktop and mobile screenshots, archive filters and mobile navigation after modular CSS reassembly; no overflow or browser exceptions."
+  },
+  "V14-050": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-051": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-052": {
+    "status": "verified_local",
+    "note": "V14.4: EarthBridge now leads with source-linked data-contract, leakage-aware splitting and ranked-evaluation stages; metric labels explicitly identify methods, not benchmark results. The toy simulation remains in the optional Interactive Lab. Verified in browser at 320, 390, 768, 1366, 1440; actual retrieval outputs still blocked."
+  },
+  "V14-053": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-054": {
+    "status": "verified_local",
+    "note": "V14.3: increased high-impact project statuses from 8px mobile to 13px, evidence inspector microcopy to 13px, project/descriptive text to 16px; verified computed styles in 3 roles at 390/1440 px."
+  },
+  "V14-055": {
+    "status": "in_progress",
+    "note": "V14.5: Fixed and measured dark-header navigation contrast against the opaque dark header (Software ~13.68:1; ML ~13.34:1). A conservative scan of other text was inconclusive over image/gradient backgrounds; no full WCAG AA claim. V14.7: corrected light Full-Stack header small brand subtitle to dark #4d5960 at 10px; sampled contrast issues on gradient backgrounds still need manual validation."
+  },
+  "V14-056": {
+    "status": "verified_local",
+    "note": "V14.8: complete local control-size/reflow sampling across 3 modes at 320, 390, 640, 1366, 1440 CSS pixels; zero controls under 24 CSS px or clipped viewport controls in sampled browser views. Keyboard skip to main and Windows forced-colors visible selected/focus states also checked. Native 400% browser zoom, screen-reader tests and hosted audit remain open."
+  },
+  "V14-057": {
+    "status": "verified_local",
+    "note": "V14.3 keyboard acceptance retained. V14.4 adds tests for screenshot viewer open/Escape/focus return and actual browser Back/Forward role navigation in isolated Chromium. Formal hosted checks still open."
+  },
+  "V14-058": {
+    "status": "in_progress",
+    "note": "V14.5: Local DOM checks at four viewport widths and three roles found no unnamed visible controls after associated <label> text, duplicate IDs, missing visible image alt attributes, missing ARIA ID references, or absent main/header landmarks. Independent axe and assistive-technology validation are still pending. V14.7: accessible command-palette live result count, filtered result keyboard Arrow Up/Down/Home/End, Escape + trigger focus restoration; browser verified at 390px and 1440px. Full axe/assistive-tech audit remains pending."
+  },
+  "V14-059": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-060": {
+    "status": "blocked",
+    "note": "Cannot measure production V14 performance until preview hosting."
+  },
+  "V14-061": {
+    "status": "verified_local",
+    "note": "V14.4 dynamic preload chooses OHS or NewsSources based on initial ?view; no fabricated EarthBridge image preloaded. Active hero image becomes eager/high priority, inactive role images remain lazy/low priority. Other offscreen images are deferred."
+  },
+  "V14-062": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-063": {
+    "status": "verified_local",
+    "note": "V14.3: local static metadata audit verifies canonical URL, structured data, sitemap/robots, 1200x630 OG images and role-specific share cards. External crawler previews not independently verified."
+  },
+  "V14-064": {
+    "status": "verified_local",
+    "note": "V14.5: Removed 347 source CSS rules with no referenced classes (candidate audit retained), consolidated 4 production CSS requests into 1, and conservatively minified the release. CSS 212,050\u2192178,829 B (\u221215.7%); aggregate gzip 51,642\u219239,762 B (\u221223.0%). 6 V14.4-vs-pruned pixel comparisons passed before intentional nav-color changes; 15 final role/viewport browser checks passed. This is a CSS delivery measurement, not a claimed Core Web Vitals speedup."
+  },
+  "V14-065": {
+    "status": "verified_local",
+    "note": "V14.7: Added IntersectionObserver-driven animation pause for nonessential decorative loops when their sections are offscreen. Verified in Chromium: initial below-fold card paused, resumed on scroll into view, paused after leaving view; reduced-motion users bypass observer and already receive CSS suppression. Interactive timelines and state untouched."
+  },
+  "V14-066": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-067": {
+    "status": "verified_local",
+    "note": ""
+  },
+  "V14-068": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-069": {
+    "status": "verified_local",
+    "note": "V14.7: 111/111 automated Node tests passed after production build, asset audit 0 reminders, metadata audit passed, evidence-image manifest hashes retained; 15 browser role/viewport checks and 12 semantic spot checks passed. Local only."
+  },
+  "V14-070": {
+    "status": "verified_local",
+    "note": "V14.7: refreshed 1440px and 390px previews of all three roles and JSON browser QA for 15 views. No external hosted runtime inspected."
+  },
+  "V14-071": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-072": {
+    "status": "pending",
+    "note": ""
+  },
+  "V14-073": {
+    "status": "pending",
+    "note": ""
+  }
+}

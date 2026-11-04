@@ -1,0 +1,44 @@
+/* V19 · Bring genuine recorded evidence into the recruiter-facing milestone card. */
+#home .v19ProofHasVideo .v17ProofBody{padding:clamp(17px,2.3vw,30px);}
+#home .v19ProofHasVideo .v17ProofProject{margin-bottom:7px;}
+#home .v19ProofHasVideo .v17Proof h2,#home .v19ProofHasVideo h2{font-size:clamp(29px,2.5vw,39px);line-height:1.08;margin:0 0 8px;}
+#home .v19ProofHasVideo .v17ProofBody>p{margin:0 0 14px;line-height:1.5;}
+#home .v19MilestoneVideo{margin:0 0 13px;min-width:0;}
+#home .v19MilestoneOpen{position:relative;display:block;overflow:hidden;isolation:isolate;width:100%;height:clamp(170px,16vw,247px);margin:0;padding:0;border:1px solid #56737b;background:#080e17;border-radius:8px;cursor:pointer;color:white;}
+#home .v19MilestoneOpen img{display:block;height:100%;width:100%;object-fit:contain;object-position:center center;transition:transform .3s ease,filter .3s ease;}
+#home .v19MilestoneOpen:hover img{transform:scale(1.018);filter:brightness(.83);}
+#home .v19MilestoneShade{position:absolute;inset:0;background:linear-gradient(90deg,#00000022,transparent 55%),linear-gradient(180deg,#00000045,transparent 30%,transparent 58%,#0000006b);pointer-events:none;}
+#home .v19MilestonePlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;display:grid;place-items:center;border-radius:50%;background:#f6efe2ed;color:#142f36;font-size:24px;padding-left:4px;box-shadow:0 12px 35px #0009;pointer-events:none;transition:background-color .2s ease,box-shadow .2s ease;}
+#home .v19MilestoneOpen:hover .v19MilestonePlay{background:white;box-shadow:0 0 0 9px #ffffff20,0 12px 35px #0009;}
+#home .v19MilestoneBadge,#home .v19MilestoneDuration{position:absolute;bottom:11px;font:800 10px/1.3 ui-monospace,Consolas,monospace;letter-spacing:.04em;background:#0d1a22d9;color:#fff;border:1px solid #ffffff4a;border-radius:4px;padding:6px 8px;pointer-events:none;}
+#home .v19MilestoneBadge{left:11px;}
+#home .v19MilestoneDuration{right:11px;}
+#home .v19MilestoneFootnote{font:650 11px/1.5 system-ui,sans-serif;color:#b8c9c9;margin:8px 0 0!important;}
+#home .v19ProofHasVideo .v17ProofMeta{padding:12px 0;gap:14px;}
+#home .v19ProofHasVideo .v17ProofLink{padding:11px 0 0;}
+#home .v19MilestoneOpen:focus-visible{outline:3px solid #efbd9a;outline-offset:3px;}
+.v19MilestoneDialog{position:fixed;inset:0;margin:auto;border:1px solid #5c7880;border-radius:13px;background:#10222b;color:#f5f7f4;width:min(1050px,calc(100vw - 34px));max-width:none;max-height:calc(100vh - 28px);padding:0;box-shadow:0 25px 100px #000c;overflow:auto;overscroll-behavior:contain;}
+.v19MilestoneDialog::backdrop{background:#061015d9;backdrop-filter:blur(6px);}
+.v19DialogShell{padding:0;margin:0;}
+.v19DialogHeader{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px clamp(18px,3vw,30px);border-bottom:1px solid #36535d;}
+.v19DialogEyebrow{font:750 10px/1.45 ui-monospace,Consolas,monospace;color:#e8b398;letter-spacing:.075em;}
+.v19DialogHeader h2{font:650 clamp(22px,3.5vw,38px)/1.12 Georgia,serif;color:#fff;margin:4px 0 0;letter-spacing:-.04em;}
+.v19DialogClose{flex:none;display:flex;align-items:center;gap:12px;border:1px solid #59737c;background:transparent;color:#fff;padding:10px 13px;min-height:44px;border-radius:6px;cursor:pointer;font:650 13px/1.3 system-ui,sans-serif;}
+.v19DialogClose span{font-size:25px;line-height:1;}
+.v19DialogPlayer{padding:0;background:#081219;}
+.v19DialogVideo{display:block;width:100%;height:auto;max-height:min(59vh,630px);object-fit:contain;background:#000;border:0;}
+.v19DialogPlayerMeta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px clamp(18px,3vw,30px);font:700 10px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.04em;color:#adc6c9;}
+.v19DialogStatus{color:#efbd9a;}
+.v19DialogDetail{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);column-gap:23px;padding:18px clamp(18px,3vw,30px) 23px;align-items:center;}
+.v19DialogChapters{display:flex;gap:9px;grid-column:1/-1;margin-bottom:14px;}
+.v19Chapter{display:flex;gap:10px;align-items:flex-start;flex:1;text-align:left;min-width:0;border:1px solid #46616a;background:#1a323b;border-radius:6px;cursor:pointer;color:#e7eeec;padding:12px;font:750 12px/1.4 system-ui,sans-serif;}
+.v19Chapter small{display:block;font:500 11px/1.4 system-ui,sans-serif;color:#aec9c9;margin-top:4px;}
+.v19ChapterIndex{font:800 11px/1.4 ui-monospace,monospace;color:#eeae8b;}
+.v19Chapter.isActive{border-color:#f1b68e;background:#26444d;}
+.v19DialogDetail p{font:500 12px/1.6 system-ui,sans-serif;color:#bcd1d0;margin:0;}
+.v19DialogCase{display:flex;justify-content:flex-end;gap:10px;align-items:center;color:#ffcfaf;text-align:right;text-decoration:underline;text-underline-offset:4px;font:750 12px/1.5 system-ui,sans-serif;min-height:44px;}
+.v19DialogClose:focus-visible,.v19Chapter:focus-visible,.v19DialogCase:focus-visible{outline:3px solid #ffb98e;outline-offset:3px;}
+@media(max-width:700px){#home .v19MilestoneOpen{height:clamp(190px,43vw,255px);}#home .v19MilestonePlay{width:56px;height:56px;font-size:21px;}.v19MilestoneDialog{width:calc(100vw - 18px);max-height:calc(100dvh - 14px);}.v19DialogHeader{padding:15px;}.v19DialogVideo{max-height:51vh;}.v19DialogDetail{grid-template-columns:1fr;padding:13px 16px 20px;gap:12px;}.v19DialogChapters{margin:0;}.v19DialogCase{justify-content:flex-start;}.v19DialogPlayerMeta{padding:11px 16px;}.v19Chapter{padding:11px;}}
+@media(max-width:430px){#home .v19MilestoneOpen{height:202px;}.v19DialogChapters{flex-direction:column;}.v19DialogHeader h2{font-size:24px;}.v19MilestoneDialog{max-height:calc(100dvh - 10px);}}
+@media(prefers-reduced-motion:reduce){#home .v19MilestoneOpen img,#home .v19MilestonePlay{transition:none!important;transform:none!important;}#home .v19MilestonePlay{transform:translate(-50%,-50%)!important;}}
+@media(forced-colors:active){#home .v19MilestoneOpen,.v19MilestoneDialog,.v19Chapter,.v19DialogClose{forced-color-adjust:auto;border:1px solid CanvasText;}#home .v19MilestonePlay{background:Highlight;color:HighlightText;}}

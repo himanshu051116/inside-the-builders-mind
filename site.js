@@ -1,5 +1,6 @@
 import { profile, projects, skillGroups, projectArchive } from './content.js'
 import { recruiterIntroMarkup } from './v17-recruiter.js'
+import { setupMilestoneVideo } from './v19-milestone-video.js'
 import { setupEvidenceWorkbench } from './workbench-ui.js'
 import { setupPortfolioExperience } from './experience-v6.js'
 import { setupCareerModes } from './career-modes.js'
@@ -224,6 +225,7 @@ setupV10Experience()
 setupV11Experience()
 setupEvidenceGallery()
 setupScreenwalk()
+setupMilestoneVideo()
 // Pause decorative, perpetual motion when its lab/workspace is offscreen.
 // Real controls, timers, data and interaction state are intentionally untouched.
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {

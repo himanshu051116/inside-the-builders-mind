@@ -59,7 +59,7 @@ test('responsive, motion, contrast and focus styles are present',()=>{
   assert.match(css, /forced-colors:active/)
   assert.match(css, /:focus-visible/)
   assert.match(css, /#work #projectGrid\.isGrid/)
-  assert.ok(existsSync(new URL('scripts/apply_v16.py', root)))
+  assert.ok(existsSync(new URL('dist/portfolio.css', root)))
 })
 
 test('V16 is wired into the real portfolio build and activated after evidence handlers',()=>{

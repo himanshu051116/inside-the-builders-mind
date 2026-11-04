@@ -43,8 +43,8 @@ export const projects = [
     stack:['React','TypeScript','Supabase'],
     links:[{label:'Source & case study',url:'https://github.com/himanshu051116/Algonauts-Mulyankan'},{label:'Browser preview',url:'https://mulyankan-seven.vercel.app/'},{label:'Watch prototype walkthrough',url:'https://www.youtube.com/watch?v=sQjZfEwkTu4'}],
     accent:'lime', shape:'orbit', filters:['ai','software'],
-    evidenceImage:'https://raw.githubusercontent.com/himanshu051116/Algonauts-Mulyankan/main/docs/assets/screenshots/scrutiny-dashboard.png',
-    evidenceImageCaption:'Actual Mulyankan scrutiny dashboard · repository screenshot',
+    evidenceImage:'/evidence/mulyankan-overview.webp',
+    evidenceImageCaption:'Actual Mulyankan scrutiny dashboard · provided project capture',
     caseStudy:{problem:'How can a reviewer justify a criterion-level evaluation without trusting an opaque total?',approach:'Document intake, rubric-level evidence references, insufficient-evidence flags and human reviewer controls.',verification:'Demonstrated prototype at CMPDI headquarters, Ranchi, on 11 July 2026. Public code and a recorded walkthrough are linked.',caveat:'The browser preview is not a guarantee that the full backend and evaluation workflow are running.'}
   },
   {
@@ -62,6 +62,7 @@ export const projects = [
     stack:['React','Firebase','Vercel'],
     links:[{label:'Live website',url:'https://ohs.vercel.app/'},{label:'Source code',url:'https://github.com/himanshu051116/our-hidden-universe'}],
     accent:'orange',shape:'waves', filters:['software'],
+    evidenceImage:'/evidence/ohs-together.webp', evidenceImageCaption:'OHS Watch Together · provided project capture',
     caseStudy:{problem:'How can people share a private digital space with synchronized experiences?',approach:'Firebase-backed private rooms, real-time messaging, media sharing, video calling and Watch Together synchronization.',verification:'Public repository and a Vercel-hosted application are linked; private account features are not independently demonstrated by this portfolio.',caveat:'Live application. Some areas may require valid access and should not be treated as a public demo account.'}
   },
   {
@@ -71,6 +72,7 @@ export const projects = [
     stack:['Python','PostgreSQL','Docker'],
     links:[{label:'GitHub repository',url:'https://github.com/himanshu051116/NewsSources'},{label:'Static showcase · demo data',url:'https://himanshu051116.github.io/NewsSources/'}],
     accent:'violet',shape:'grid', filters:['systems','software'],
+    evidenceImage:'/evidence/news-overview.webp', evidenceImageCaption:'NewsSources command centre · provided project capture',
     caseStudy:{problem:'How can a crawler retain article provenance while avoiding duplicate ingestion?',approach:'RSS and sitemap discovery, URL deduplication, article/PDF ingestion workflows and Alembic-managed PostgreSQL schema changes.',verification:'Repository documents the development work; a separate GitHub Pages showcase illustrates the experience with simulated data.',caveat:'In development. The static showcase is not a live backend or production news ingestion service.'}
   },
   {
@@ -88,6 +90,7 @@ export const projects = [
     stack:['React','JavaScript','Education'],
     links:[{label:'Public source',url:'https://github.com/himanshu051116/SCHOOLBUDDIES'},{label:'Project website · verify availability',url:'https://schoolbuddiesindia.vercel.app/'}],
     accent:'lime',shape:'waves', filters:['community','software'],
+    evidenceImage:'/evidence/schoolbuddies-workshop.webp', evidenceImageCaption:'SchoolBuddies programme poster · provided project material',
     caseStudy:{problem:'How can school students experience hands-on technology rather than only hear about it?',approach:'Student-led workshop planning, AI and programming activities, school outreach and a responsive website with enquiry flow.',verification:'Co-founded the initiative and developed the web experience according to the supplied résumé.',caveat:'Outreach initiative; workshop outcomes and reach are not quantified here without supporting records.'}
   }
 ]

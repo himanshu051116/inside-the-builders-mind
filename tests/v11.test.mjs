@@ -14,7 +14,7 @@ test('four independently selectable source-linked engineering records are repres
 test('all selected repository paths have directly inspectable canonical origins',()=>{
  for(const origin of ['our-hidden-universe','NewsSources','Algonauts-Mulyankan','earthbridge'])assert.ok(site.includes('https://github.com/himanshu051116/'+origin))
  assert.match(site,/POSTGRES INTEGRATION/)
- assert.match(site,/REAL REPOSITORY SCREENSHOT/)
+ assert.match(site,/STATIC PROJECT SCREENSHOT|Mulyankan scrutiny dashboard · captured interface/)
  assert.match(exp,/imageSourceUnavailable/)
 })
 test('mode switch selects relevant evidence and proof-strip content',()=>{

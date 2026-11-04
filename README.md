@@ -53,3 +53,8 @@ Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact form
 V11 was tested locally, not pushed to GitHub or deployed to Vercel/AWS. The current production Vercel URL still serves the earlier V9 release unless independently updated. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
 
 After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.
+
+
+## V12 — Authentic interface evidence
+
+The portfolio now embeds 16 author-provided captures across Our Hidden Universe, NewsSources, Mulyankan and SchoolBuddies. Full-Stack and Software hero panels default to a genuine screenshot, with a separate opt-in local interactive simulation. A keyboard-accessible image gallery links to original project repositories; public OHS invite codes are redacted. EarthBridge is deliberately pending real experiment imagery; no performance metric has been invented. See `public/evidence/manifest.json`.

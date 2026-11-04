@@ -1,0 +1,98 @@
+{
+  "ohs-home": {
+    "path": "/evidence/ohs-home.webp",
+    "caption": "OHS homepage with local sample chat interface; invite code obscured",
+    "source": "Screenshot 2026-11-04 044509.png",
+    "bytes": 65704
+  },
+  "ohs-together": {
+    "path": "/evidence/ohs-together.webp",
+    "caption": "OHS Watch Together room and private call controls",
+    "source": "Screenshot 2026-11-04 044550.png",
+    "bytes": 58918
+  },
+  "news-overview": {
+    "path": "/evidence/news-overview.webp",
+    "caption": "NewsSources command centre and event summary",
+    "source": "Screenshot 2026-11-03 005853(2).png",
+    "bytes": 82732
+  },
+  "news-brief": {
+    "path": "/evidence/news-brief.webp",
+    "caption": "NewsSources daily news briefing",
+    "source": "Screenshot 2026-11-04 045319.png",
+    "bytes": 55600
+  },
+  "news-investigations": {
+    "path": "/evidence/news-investigations.webp",
+    "caption": "NewsSources investigations workspace",
+    "source": "Screenshot 2026-11-04 045359.png",
+    "bytes": 63622
+  },
+  "news-entities": {
+    "path": "/evidence/news-entities.webp",
+    "caption": "NewsSources people and organisations directory",
+    "source": "Screenshot 2026-11-04 045419.png",
+    "bytes": 46682
+  },
+  "news-entity-detail": {
+    "path": "/evidence/news-entity-detail.webp",
+    "caption": "NewsSources entity profile and alias review",
+    "source": "Screenshot 2026-11-04 045439.png",
+    "bytes": 36716
+  },
+  "news-search-quality": {
+    "path": "/evidence/news-search-quality.webp",
+    "caption": "NewsSources search-quality evaluation controls",
+    "source": "Screenshot 2026-11-04 045513.png",
+    "bytes": 63936
+  },
+  "news-claims": {
+    "path": "/evidence/news-claims.webp",
+    "caption": "NewsSources claim evidence status review",
+    "source": "Screenshot 2026-11-04 045542.png",
+    "bytes": 78526
+  },
+  "mulyankan-overview": {
+    "path": "/evidence/mulyankan-overview.webp",
+    "caption": "Mulyankan proposal scrutiny overview",
+    "source": "Screenshot 2026-07-30 223732(2).png",
+    "bytes": 59660
+  },
+  "mulyankan-submission": {
+    "path": "/evidence/mulyankan-submission.webp",
+    "caption": "Mulyankan proposal intake and readiness checklist",
+    "source": "Screenshot 2026-11-04 045658.png",
+    "bytes": 58868
+  },
+  "mulyankan-history": {
+    "path": "/evidence/mulyankan-history.webp",
+    "caption": "Mulyankan submission and review history",
+    "source": "Screenshot 2026-11-04 045714.png",
+    "bytes": 99954
+  },
+  "mulyankan-spatial-city": {
+    "path": "/evidence/mulyankan-spatial-city.webp",
+    "caption": "Mulyankan Spatial Lab source-mapped architecture city",
+    "source": "Screenshot 2026-11-04 050108.png",
+    "bytes": 78162
+  },
+  "mulyankan-spatial-domains": {
+    "path": "/evidence/mulyankan-spatial-domains.webp",
+    "caption": "Mulyankan Spatial Lab architecture domains",
+    "source": "Screenshot 2026-11-04 050131.png",
+    "bytes": 70992
+  },
+  "mulyankan-spatial-inspect": {
+    "path": "/evidence/mulyankan-spatial-inspect.webp",
+    "caption": "Mulyankan Spatial Lab component inspector",
+    "source": "Screenshot 2026-11-04 050638.png",
+    "bytes": 76844
+  },
+  "schoolbuddies-workshop": {
+    "path": "/evidence/schoolbuddies-workshop.webp",
+    "caption": "SchoolBuddies workshop poster supplied by project author",
+    "source": "SCHOOLBUDDIES_Poster_4K_4096x6144(1).png",
+    "bytes": 249546
+  }
+}

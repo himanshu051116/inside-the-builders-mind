@@ -1,4 +1,4 @@
-# Inside the Builder's Mind — V11
+# Inside the Builder's Mind — V13
 
 Three specialization-aware portfolio experiences for Himanshu Shukla (B.Tech Mathematics & Computing, MITS Gwalior): **Full-Stack Studio**, **Systems Console**, and **ML Research Lab**. Built with browser-native JavaScript, HTML and CSS, with an interactive Evidence Workbench.
 
@@ -16,7 +16,7 @@ npm run preview
 
 The production build is in `dist/`. Deploy the root source repository on Vercel using **build command `npm run build`** and **output directory `dist`**. AWS Amplify configuration is in `amplify.yml`; use the same source repository and do not treat Vercel as AWS challenge submission hosting.
 
-## V11 additions
+## Engineering evidence and search (V11 foundation)
 
 The **Evidence Desk** is the main source-backed project tour: four tabs let a recruiter inspect the engineering question, architecture decision, directly linked files and constraints for each flagship project. It follows the selected résumé track. Long-form case notes are opt-in, rather than a wall of text. Use **Ctrl+K / Cmd+K** to search projects, switch modes, jump to a section or open the correct public résumé. The Command Palette is local-only.
 
@@ -45,12 +45,12 @@ Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact form
 - `workbench-*` — local deterministic review exercise and audit export
 - `portfolio.css` — consolidated production stylesheet (replaces seven V9 stylesheets)
 - `public/social-*.png` and `public/share/*/index.html` — individual social-preview share routes
-- `tests/` — 52 automated source and logic checks
+- `tests/` — 63 automated source and logic checks
 - `public/sitemap.xml`, `robots.txt`, JSON-LD, and canonical metadata for discovery
 
 ## Live deployment limitations
 
-V11 was tested locally, not pushed to GitHub or deployed to Vercel/AWS. The current production Vercel URL still serves the earlier V9 release unless independently updated. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
+V13 is prepared locally and has not been pushed to GitHub or deployed to Vercel or AWS in this release. The current Vercel production project still serves V11, until separately updated. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
 
 After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.
 
@@ -58,3 +58,17 @@ After deployment, test all three routes, the public PDFs, source images, share r
 ## V12 — Authentic interface evidence
 
 The portfolio now embeds 16 author-provided captures across Our Hidden Universe, NewsSources, Mulyankan and SchoolBuddies. Full-Stack and Software hero panels default to a genuine screenshot, with a separate opt-in local interactive simulation. A keyboard-accessible image gallery links to original project repositories; public OHS invite codes are redacted. EarthBridge is deliberately pending real experiment imagery; no performance metric has been invented. See `public/evidence/manifest.json`.
+
+
+## V13 — Inspectable screenshot records and deep links
+
+Each of the 16 actual author-supplied screenshots now has two explicit, image-specific annotations:
+
+- **What is visible:** factual properties of the screenshot itself.
+- **Validation boundary:** what cannot be concluded from the screenshot alone.
+
+The gallery provides image-by-image previous/next controls outside the modal, keyboard navigation for thumbnails, a direct full-image link and a copyable site deep link. A shared link such as `?view=software#proof/news/news-claims` opens the chosen screenshot and section. Each WebP is recorded in `public/evidence/manifest.json` with its byte size, dimensions, source filename and a SHA-256 **of the optimized public WebP** (not of the original uploaded image).
+
+The Full-Stack and Software leads reserve image dimensions and prioritize loading of their actual screenshot. No fabricated EarthBridge imagery or evaluation numbers are added. The original synthetic ML playground stays separate from the source-backed evidence.
+
+Run `npm test && npm run build && npm run audit:local` before deployment. Local Chromium testing in the restricted sandbox uses an inline-script/browser harness because direct HTTP navigation to localhost is blocked; **it does not prove the published website is working**. See `V13_LOCAL_QA.md`.

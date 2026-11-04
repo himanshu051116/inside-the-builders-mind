@@ -3,96 +3,144 @@
     "path": "/evidence/ohs-home.webp",
     "caption": "OHS homepage with local sample chat interface; invite code obscured",
     "source": "Screenshot 2026-11-04 044509.png",
-    "bytes": 65704
+    "bytes": 65704,
+    "sha256": "3ab9b9b9e12e200df27aa131b56a7b2bf084f8081f0e63b4dc06a5ac28a2505c",
+    "width": 1606,
+    "height": 1021
   },
   "ohs-together": {
     "path": "/evidence/ohs-together.webp",
     "caption": "OHS Watch Together room and private call controls",
     "source": "Screenshot 2026-11-04 044550.png",
-    "bytes": 58918
+    "bytes": 58918,
+    "sha256": "c49a141fc09838c024242e634c973162d38ad25169ad8bf3a2f5341c75646f9e",
+    "width": 1504,
+    "height": 1033
   },
   "news-overview": {
     "path": "/evidence/news-overview.webp",
     "caption": "NewsSources command centre and event summary",
     "source": "Screenshot 2026-11-03 005853(2).png",
-    "bytes": 82732
+    "bytes": 82732,
+    "sha256": "080dda4c60a66b1b38311797f0224708f72828ffb6280137df7928c8fea77d71",
+    "width": 1642,
+    "height": 1048
   },
   "news-brief": {
     "path": "/evidence/news-brief.webp",
     "caption": "NewsSources daily news briefing",
     "source": "Screenshot 2026-11-04 045319.png",
-    "bytes": 55600
+    "bytes": 55600,
+    "sha256": "af379c707486285956ab3afead4241162aafd0defa6c97b7fbeb3ec034943f24",
+    "width": 1132,
+    "height": 1051
   },
   "news-investigations": {
     "path": "/evidence/news-investigations.webp",
     "caption": "NewsSources investigations workspace",
     "source": "Screenshot 2026-11-04 045359.png",
-    "bytes": 63622
+    "bytes": 63622,
+    "sha256": "37cd52542ded110a4464f4c457f21f8cd6c90c7c3aa1904e8ab73004dbbf71a5",
+    "width": 1633,
+    "height": 1027
   },
   "news-entities": {
     "path": "/evidence/news-entities.webp",
     "caption": "NewsSources people and organisations directory",
     "source": "Screenshot 2026-11-04 045419.png",
-    "bytes": 46682
+    "bytes": 46682,
+    "sha256": "c5eb28fd04afe0e6dcec7b1b2984a02ff747e2ca8bb919a8ea56d91e78edf4dd",
+    "width": 1684,
+    "height": 903
   },
   "news-entity-detail": {
     "path": "/evidence/news-entity-detail.webp",
     "caption": "NewsSources entity profile and alias review",
     "source": "Screenshot 2026-11-04 045439.png",
-    "bytes": 36716
+    "bytes": 36716,
+    "sha256": "58e65f219db46792adf7f9b720867d7a99f56d33a1d140143f46fcf4d278ca34",
+    "width": 1371,
+    "height": 1041
   },
   "news-search-quality": {
     "path": "/evidence/news-search-quality.webp",
     "caption": "NewsSources search-quality evaluation controls",
     "source": "Screenshot 2026-11-04 045513.png",
-    "bytes": 63936
+    "bytes": 63936,
+    "sha256": "94f860d9f6d1bffe630b0a15f383909c5fbd871709285c28188964c12439f709",
+    "width": 1387,
+    "height": 1009
   },
   "news-claims": {
     "path": "/evidence/news-claims.webp",
     "caption": "NewsSources claim evidence status review",
     "source": "Screenshot 2026-11-04 045542.png",
-    "bytes": 78526
+    "bytes": 78526,
+    "sha256": "305b6367c7a76819b3ccfe87235d0b9f8214f376cd626e4c5d01b477667fd2c1",
+    "width": 1300,
+    "height": 988
   },
   "mulyankan-overview": {
     "path": "/evidence/mulyankan-overview.webp",
     "caption": "Mulyankan proposal scrutiny overview",
     "source": "Screenshot 2026-07-30 223732(2).png",
-    "bytes": 59660
+    "bytes": 59660,
+    "sha256": "41a27ecc4d41a7a86ffc516a37b5a2bbaf972bf5c0c0fda47d824164bbdbfbfd",
+    "width": 1277,
+    "height": 899
   },
   "mulyankan-submission": {
     "path": "/evidence/mulyankan-submission.webp",
     "caption": "Mulyankan proposal intake and readiness checklist",
     "source": "Screenshot 2026-11-04 045658.png",
-    "bytes": 58868
+    "bytes": 58868,
+    "sha256": "803f0ecd75e77073578d4aa401b68c54c792106170781dcd9acea57281f955d1",
+    "width": 1687,
+    "height": 1047
   },
   "mulyankan-history": {
     "path": "/evidence/mulyankan-history.webp",
     "caption": "Mulyankan submission and review history",
     "source": "Screenshot 2026-11-04 045714.png",
-    "bytes": 99954
+    "bytes": 99954,
+    "sha256": "7f53e2746126dfa86151a8c33de506c48679095b7360db9a31975695582f7cdf",
+    "width": 1663,
+    "height": 1051
   },
   "mulyankan-spatial-city": {
     "path": "/evidence/mulyankan-spatial-city.webp",
     "caption": "Mulyankan Spatial Lab source-mapped architecture city",
     "source": "Screenshot 2026-11-04 050108.png",
-    "bytes": 78162
+    "bytes": 78162,
+    "sha256": "88a4dc9954fd5b272bd087e9b2410a96281a11d1273476c73314cf8aa475cec1",
+    "width": 1687,
+    "height": 1054
   },
   "mulyankan-spatial-domains": {
     "path": "/evidence/mulyankan-spatial-domains.webp",
     "caption": "Mulyankan Spatial Lab architecture domains",
     "source": "Screenshot 2026-11-04 050131.png",
-    "bytes": 70992
+    "bytes": 70992,
+    "sha256": "092978b5dcf86800ae9c9652590963a012e09775f211b07cdc1ab2bfafb882c2",
+    "width": 1449,
+    "height": 1051
   },
   "mulyankan-spatial-inspect": {
     "path": "/evidence/mulyankan-spatial-inspect.webp",
     "caption": "Mulyankan Spatial Lab component inspector",
     "source": "Screenshot 2026-11-04 050638.png",
-    "bytes": 76844
+    "bytes": 76844,
+    "sha256": "f5a91f52a3cf4eda2c426eaf6a518fa1d47b96df114e2fb5a8c0c5953582ed5e",
+    "width": 1666,
+    "height": 1057
   },
   "schoolbuddies-workshop": {
     "path": "/evidence/schoolbuddies-workshop.webp",
     "caption": "SchoolBuddies workshop poster supplied by project author",
     "source": "SCHOOLBUDDIES_Poster_4K_4096x6144(1).png",
-    "bytes": 249546
+    "bytes": 249546,
+    "sha256": "55d8d83e75cc8a5f79ce448a1935e2357dd6e71d73cff72dc082cdbb921afadb",
+    "width": 1365,
+    "height": 2048
   }
 }

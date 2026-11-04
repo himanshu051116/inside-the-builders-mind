@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
 const root = new URL('../', import.meta.url)
 const read = p => readFileSync(new URL(p, root), 'utf8')
 
@@ -47,4 +48,11 @@ test('V15 styles are compiled after accessibility layers and preserve keyboard/r
   assert.match(css, /:focus-visible/)
   assert.ok(existsSync(new URL('dist/portfolio.css', root)))
   assert.match(read('dist/portfolio.css'), /v15RecordRail/)
+})
+
+test('V15 browser entry module and portfolio data parse before deploy', () => {
+  for(const file of ['site.js','content.js','career-modes.js']){
+    const result=spawnSync(process.execPath,['--check',new URL(file,root).pathname],{encoding:'utf8'})
+    assert.equal(result.status,0,`${file} syntax error: ${result.stderr}`)
+  }
 })

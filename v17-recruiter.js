@@ -46,9 +46,15 @@ export function recruiterIntroMarkup(profile={}) {
           <h1 id="v17Name">${name}<span class="v17Period" aria-hidden="true">.</span></h1>
           <p class="v17Degree">${escapeText(f.education.degree)} <span class="v17Dot" aria-hidden="true">·</span> ${escapeText(f.education.institution)}</p>
           <p class="v17Graduation">${escapeText(f.education.year)} <span aria-hidden="true">/</span> Expected graduation ${escapeText(f.education.graduation)} <span aria-hidden="true">/</span> Gwalior, India</p>
-          <p class="v17LeadStatement">Selected work: Our Hidden Universe (React/Firebase), NewsSources (Python/PostgreSQL), and EarthBridge (PyTorch/FAISS). Each project links to source code and documented limitations.</p>
+          <p class="v17LeadStatement">Explore the code and captured interfaces behind three builds, including what works today and what remains experimental.</p>
           <div class="v17PrimaryLinks"><a class="v17MainCTA" href="#top">Explore my projects <span aria-hidden="true">↗</span></a><details class="v17ResumeSelect"><summary>Download résumé <span aria-hidden="true">↓</span></summary><div class="v17ResumeChoices"><a href="/resumes/Himanshu_Shukla_fullstack_Public.pdf" download>Full-Stack</a><a href="/resumes/Himanshu_Shukla_software_Public.pdf" download>Software Systems</a><a href="/resumes/Himanshu_Shukla_ml_Public.pdf" download>Applied ML</a></div></details></div>
           <nav class="v17Socials" aria-label="Professional profile links"><a href="${git}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${email}">Email ↗</a></nav>
+          <nav class="v19ProjectRail" aria-label="Jump to documented engineering projects">
+            <span class="v19ProjectRailLabel">SELECTED BUILDS / OPEN THE EVIDENCE</span>
+            <a href="#case-ohs"><span class="v19ProjectIndex">01</span><span class="v19ProjectDetails"><strong>Our Hidden Universe</strong><small>Product interface · React / Firebase</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
+            <a href="#case-news"><span class="v19ProjectIndex">02</span><span class="v19ProjectDetails"><strong>NewsSources</strong><small>Data pipeline · Python / PostgreSQL</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
+            <a href="#case-earthbridge"><span class="v19ProjectIndex">03</span><span class="v19ProjectDetails"><strong>EarthBridge</strong><small>Research prototype · PyTorch / FAISS</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
+          </nav>
         </div>
         <aside class="v17Proof" aria-labelledby="v17ProofTitle">
           <div class="v17ProofHeader"><span>SELECTED ENGINEERING MILESTONE</span><span>2026 / 01</span></div>

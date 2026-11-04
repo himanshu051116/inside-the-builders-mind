@@ -1,0 +1,231 @@
+/*
+ * V19.2 — recruiter hero alignment and color harmonization.
+ *
+ * ADDITIVE: loaded after v19-milestone-video.css. Keeps the two real Mulyankan
+ * recordings, their posters, the presenter webcam/audio, and all dialog logic.
+ * This layer intentionally changes no content or behavior.
+ */
+
+/* Apply the same restrained paper/ink/terracotta language across the hero. */
+#home.v17Recruiter {
+  --v17-ink: #192e32;
+  --v17-muted: #53686a;
+  --v17-orange: #b9563d;
+  --v17-paper: #f5f1e9;
+  --v17-rule: #d7cfc3;
+  background: var(--v17-paper);
+}
+#home .v17TopLine { padding-block: 19px 16px; }
+#home .v17Index { color: var(--v17-orange); }
+#home .v17Availability { color: #536a69; }
+#home .v17Availability i { background: #348064; box-shadow: 0 0 0 4px #34806418; }
+#home .v17Overline { color: var(--v17-orange); letter-spacing: .045em; }
+#home .v17Overline span { color: #ab9e8e; }
+
+/* Fix the visible V19 problem: the text must not sit vertically centered
+   alongside the significantly taller video proof card. */
+@media (min-width: 951px) {
+  #home .v17LeadGrid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: clamp(28px, 3.3vw, 52px);
+    align-items: start;
+    padding-block: clamp(27px, 3vw, 43px) 22px;
+  }
+  #home .v17LeadCopy {
+    justify-content: flex-start;
+    align-self: start;
+    padding-top: clamp(12px, 2.3vw, 36px);
+  }
+  /* Original 99px nowrap title overlapped the video card at zoomed widths. */
+  #home h1 {
+    font-size: clamp(45px, 5.15vw, 82px);
+    letter-spacing: -.067em;
+    line-height: 1.02;
+    white-space: nowrap;
+  }
+}
+
+/* A less crowded reading rhythm, with recruiter facts still first. */
+#home h1 { color: #192f32; margin-bottom: 17px; }
+#home .v17Degree {
+  color: #20363a;
+  font-weight: 720;
+  letter-spacing: -.025em;
+  line-height: 1.39;
+  max-width: 730px;
+}
+#home .v17Graduation { color: #5a6b6d; margin-bottom: 17px; }
+#home .v17LeadStatement { color: #465e60; line-height: 1.62; max-width: 61ch; }
+#home .v17PrimaryLinks a,
+#home .v17ResumeSelect summary { border-radius: 7px; }
+#home .v17MainCTA { background: #19353a; border-color: #19353a; color: #fffaf3; }
+#home .v17MainCTA:hover { background: #284e51; }
+#home .v17OutlineCTA,
+#home .v17ResumeSelect summary { background: #fffaf3; border-color: #bfb5a7; }
+#home .v17Socials a { color: #526769; text-decoration-color: #9eb0ae; }
+#home .v17Socials a:hover { color: var(--v17-orange); }
+
+/* The Mulyankan evidence card should feel from the same design system. */
+#home .v17Proof {
+  background: linear-gradient(155deg, #19343b 0%, #172e36 62%, #142930 100%);
+  border-color: #496267;
+  border-radius: 11px;
+  box-shadow: 0 15px 36px #19323820, 0 3px 8px #1932380c;
+}
+#home .v17ProofHeader {
+  background: #ffffff06;
+  border-color: #718d8b42;
+  color: #c5d4cf;
+  padding-block: 16px;
+}
+#home .v19ProofHasVideo .v17ProofBody { padding: clamp(18px, 1.9vw, 25px); }
+#home .v19ProofHasVideo .v17ProofProject { color: #f0b38f; margin-bottom: 6px; }
+#home .v19ProofHasVideo h2 {
+  font-size: clamp(28px, 2.35vw, 36px);
+  letter-spacing: -.046em;
+  line-height: 1.09;
+  margin-bottom: 9px;
+  color: #fff9ef;
+}
+#home .v19ProofHasVideo .v17ProofBody > p {
+  color: #bbcccb;
+  line-height: 1.48;
+  margin-bottom: 12px;
+}
+#home .v19MilestoneVideo { margin-bottom: 11px; }
+/* Keep object-fit:contain from V19 — do not crop the presenter inset. */
+#home .v19MilestoneOpen {
+  height: clamp(170px, 15vw, 220px);
+  border-color: #627f82;
+  border-radius: 7px;
+  background: #09151b;
+}
+#home .v19MilestonePlay {
+  width: 60px;
+  height: 60px;
+  background: #fff6e9ef;
+  color: #143239;
+}
+#home .v19MilestoneBadge,
+#home .v19MilestoneDuration {
+  background: #0f242bde;
+  border-color: #c0d0cc6e;
+}
+#home .v19MilestoneFootnote {
+  color: #c7d4ce;
+  line-height: 1.4;
+  margin-top: 8px !important;
+}
+#home .v19ProofHasVideo .v17ProofMeta {
+  border-color: #77918d70;
+  padding: 10px 0;
+}
+#home .v17ProofMeta span { color: #a3c6bf; }
+#home .v17ProofMeta strong { color: #f1f4ee; }
+#home .v17ProofLink { color: #ffd7b8; }
+#home .v17ProofLink:hover { color: #fff8ed; }
+
+/* The three existing recruiter-summary blocks remain one cohesive surface. */
+#home .v17Essentials {
+  background: #fffcf7;
+  border-color: var(--v17-rule);
+  box-shadow: 0 6px 22px #26312e09;
+}
+#home .v17EssentialHeading { color: #b85239; }
+#home .v17SkillTokens span {
+  background: #f5f1e9;
+  border-color: #dcd2c4;
+  color: #344f51;
+}
+#home .v17GoDeeper { padding-block: 17px 22px; }
+
+/* Stacked tablet layout keeps natural title wrapping and real videos visible. */
+@media (max-width: 950px) {
+  #home .v17LeadGrid { align-items: start; padding-top: 27px; }
+  #home .v17LeadCopy { justify-content: flex-start; padding-top: 0; }
+  #home h1 { white-space: normal; letter-spacing: -.066em; }
+  #home .v19MilestoneOpen { height: clamp(200px, 34vw, 250px); }
+}
+@media (max-width: 630px) {
+  #home .v17TopLine { padding-block: 14px 14px; }
+  #home .v17LeadGrid { padding-top: 23px; }
+  #home h1 { font-size: clamp(39px, 10.9vw, 62px); line-height: 1.04; }
+  #home .v17Degree { font-size: 15px; }
+  #home .v17ProofHeader { padding: 13px 16px; }
+  #home .v19ProofHasVideo .v17ProofBody { padding: 19px 17px; }
+  #home .v19ProofHasVideo h2 { font-size: clamp(27px, 6.9vw, 34px); }
+  #home .v19MilestoneOpen { height: clamp(181px, 49vw, 232px); }
+  #home .v17ProofMeta { grid-template-columns: minmax(0, 1fr) auto; }
+  #home .v17Essentials { box-shadow: none; }
+}
+
+/* Correct contrast in accessibility modes, without affecting media controls. */
+@media (prefers-reduced-motion: reduce) {
+  #home .v17MainCTA { transition: none; }
+}
+@media (forced-colors: active) {
+  #home .v17Proof,
+  #home .v17Essentials { background: Canvas; border-color: CanvasText; }
+  #home .v17MainCTA { background: Highlight; color: HighlightText; }
+}
+
+
+/* Evidence-first project links occupy the formerly unused part of the left rail.
+   Actual case-study anchors already exist on the site; do not invent case pages. */
+#home .v19ProjectRail {
+  display: grid;
+  margin-top: clamp(18px, 2vw, 28px);
+  padding-top: 14px;
+  border-top: 1px solid var(--v17-rule);
+  gap: 0;
+}
+#home .v19ProjectRailLabel {
+  color: #ae543c;
+  font: 800 10px/1.45 ui-monospace, Consolas, monospace;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+#home .v19ProjectRail a {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 18px;
+  align-items: center;
+  column-gap: 10px;
+  padding: 8px 4px;
+  min-height: 48px;
+  color: #253b3f;
+  text-decoration: none;
+  border-bottom: 1px solid #d7cec2;
+  transition: background-color .2s ease, padding-left .2s ease;
+}
+#home .v19ProjectRail a:hover { background: #eae4d9; padding-left: 10px; }
+#home .v19ProjectRail a:last-child { border-bottom: 0; }
+#home .v19ProjectIndex {
+  color: #a94e36;
+  font: 800 10px/1.35 ui-monospace, Consolas, monospace;
+}
+#home .v19ProjectDetails { display: grid; gap: 2px; min-width: 0; }
+#home .v19ProjectDetails strong { font: 760 13px/1.3 system-ui, sans-serif; }
+#home .v19ProjectDetails small {
+  color: #596b6c;
+  font: 550 11px/1.3 system-ui, sans-serif;
+}
+#home .v19ProjectArrow { color: #a94e36; font: 750 16px/1 system-ui, sans-serif; }
+#home .v19ProjectRail a:focus-visible { outline: 3px solid #ae543c; outline-offset: -2px; }
+
+@media (max-width: 950px) {
+  /* Stacked view has no side-column void: let the video follow the profile. */
+  #home .v19ProjectRail { display: none; }
+}
+@media (max-width: 630px) {
+  #home .v19ProjectRail { padding-top: 11px; }
+  #home .v19ProjectRailLabel { font-size: 9px; }
+  #home .v19ProjectDetails strong { font-size: 12px; }
+  #home .v19ProjectDetails small { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #home .v19ProjectRail a { transition: none; }
+}
+@media (forced-colors: active) {
+  #home .v19ProjectRail a { border-color: CanvasText; color: LinkText; }
+  #home .v19ProjectRail a:focus-visible { outline-color: Highlight; }
+}

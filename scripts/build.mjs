@@ -7,7 +7,7 @@ const out = join(root, 'dist')
 // Legacy CSS is now maintained in smaller source-owner files. Compile it in the
 // original cascade order so old components remain behaviorally stable.
 const cssModules = ["01-base.css", "02-workbench.css", "03-atelier.css", "04-experience.css", "05-career.css", "06-interactions.css", "07-scenes.css", "08-case-index.css", "09-evidence-desk.css", "10-screen-gallery.css", "11-image-reader.css"]
-const modernLayers=['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css','v15-editorial.css','v16-screenwalk.css','v17-recruiter.css','v19-milestone-video.css']
+const modernLayers=['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css','v15-editorial.css','v16-screenwalk.css','v17-recruiter.css','v19-milestone-video.css','v19-hero-refinement.css']
 // One production stylesheet: all source modules remain readable and editable.
 // Preserve the exact cascade that V14.4 tested; never ship redundant CSS requests.
 const combinedCss=[

@@ -8,7 +8,7 @@ test('V14.8 fixes initial EarthBridge hero image priority without fabricating a 
  assert.match(html,/Only preload a screenshot when it is the selected role/)
  assert.match(html,/if \(!image\) return/)
  assert.match(read('career-modes.js'),/img.loading=isActive\?'eager':'lazy'/)
- assert.match(read('site.js'),/Static repo-reported metrics; not independently reproduced/)
+ assert.match(read('site.js'),/Repository-reported metrics, not independently reproduced/)
 })
 test('V14.8 skip-to-content can place focus on the main landmark',()=>{
  assert.match(read('site.js'),/<main id="main" tabindex="-1">/)

@@ -34,7 +34,7 @@ test('Case-study entries are source-linked and accessible without gallery naviga
 test('Creative simulations are separated into an explicitly optional laboratory',()=>{
  assert.match(site,/id="interactive-lab"/)
  assert.match(site,/v14LabDisclosure/)
- assert.match(site,/not connected to Firebase, the NewsSources backend or a trained EarthBridge model/)
+ assert.match(site,/Local-only demos; they do not connect to the project backends or a trained model/)
 })
 test('Design tokens, font loading and readable controls are present',()=>{
  assert.match(css,/--v14-space-1/)

@@ -26,7 +26,7 @@ test('V19 stays inside existing milestone card and retains CMPDI/title/case link
   assert.doesNotMatch(src,/v18VideoSection|mulyankan-demo/)
 })
 test('V19 keeps webcam and original audio, not an autoplaying or fake system',()=>{
-  assert.match(src,/Webcam and original audio preserved/)
+  assert.match(src,/Presenter webcam and original audio/)
   assert.match(src,/presenter camera and original audio/)
   assert.match(src,/SOURCE SNAPSHOT · OFFLINE ARCHITECTURE WALKTHROUGH/)
   assert.match(src,/not proof of live OCR or model accuracy/)

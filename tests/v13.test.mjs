@@ -44,7 +44,7 @@ test('Evidence gallery provides a shareable, accessible visual inspection experi
 test('V14.6 keeps real images as lead evidence without fabricating retrieved matches',()=>{
   for(const id of ['ohs-home','news-overview'])assert.match(site,new RegExp(`src="/evidence/${id}\\.webp"`))
   assert.match(site,/fetchpriority="high"/)
-  assert.match(site,/VERSION 14/)
+  assert.match(site,/v17Recruiter|recruiterIntroMarkup/)
   assert.equal(Object.keys(data).filter(id=>id.startsWith('earthbridge-')).length,4)
   assert.match(media,/A genuine query with ranked satellite-image matches is still needed/)
 })

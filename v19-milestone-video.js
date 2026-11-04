@@ -36,7 +36,7 @@ export function setupMilestoneVideo(doc=document){
     <span class="v19MilestoneBadge">RECORDED DEMONSTRATION</span>
     <span class="v19MilestoneDuration">${initialClip.duration}</span>
   </button>
-  <p class="v19MilestoneFootnote">Watch me navigate the 3D Spatial Lab <span aria-hidden="true">·</span> Webcam and original audio preserved</p>`;
+  <p class="v19MilestoneFootnote">Spatial Lab walkthrough <span aria-hidden="true">·</span> Presenter webcam and original audio</p>`;
   card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
 
   const dialog=doc.createElement('dialog');

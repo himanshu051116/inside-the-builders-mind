@@ -17,7 +17,7 @@ test('recruiter identity comes before specialization navigation',()=>{
 test('recruiter-specific proof is concrete and avoids invented employment',()=>{
  assert.equal(recruiterFacts.spotlight.date,'11 July 2026')
  assert.match(html,/CMPDI Headquarters, Ranchi/)
- assert.match(html,/Document evaluation/)
+ assert.match(html,/Document review/)
  assert.match(html,/href="#case-mulyankan"/)
  for(const bad of ['10+ internships','99% accuracy','Production ML model','Google employee']) assert.ok(!html.includes(bad))
 })

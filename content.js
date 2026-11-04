@@ -20,8 +20,8 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/himanshu-shukla-88175637a',
   email: 'himanshusubh1510@gmail.com',
   resumeUrl: '', // Role-specific public PDFs are linked in the three career views.
-  aboutHeading: 'I study Mathematics & Computing and build software that has to be explained, tested and maintained.',
-  about: 'I study B.Tech Mathematics & Computing at Madhav Institute of Technology & Science, Gwalior (expected graduation: 2028). I have built reviewer workflows, retrieval pipelines, collaboration apps and monitoring prototypes. I also co-founded SchoolBuddies to make hands-on technology learning more accessible to school students.',
+  aboutHeading: 'I study Mathematics & Computing at MITS Gwalior and build web applications, data systems, and ML prototypes.',
+  about: 'My work includes Mulyankan document review, NewsSources ingestion, Our Hidden Universe collaboration tools, and EarthBridge retrieval research. I also co-founded SchoolBuddies for hands-on school workshops.',
   philosophy: 'Keep the source traceable, test the failure cases, and document what has not been validated.',
   education: 'B.Tech, Mathematics & Computing · MITS Gwalior · 2028',
   achievements: [

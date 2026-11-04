@@ -8,16 +8,16 @@ const read = p => readFileSync(new URL(p, root), 'utf8')
 test('V15 hero: each role leads with a concrete engineering problem', () => {
   const site = read('site.js')
   for (const phrase of [
-    'Private rooms, shared playback, and messages that stay in sync.',
-    'An article needs a source. Every update needs a trace.',
-    'Search radar and multispectral imagery in one embedding space.'
+    'Private rooms, chat, and shared playback.',
+    'Tracing articles from discovery to storage.',
+    'Retrieving radar and multispectral imagery.'
   ]) assert.ok(site.includes(phrase), phrase)
   assert.doesNotMatch(site, /Built, not just imagined\.|Have a tricky idea\?|I build things\. Then prove them\./)
 })
 
 test('V15 role index links to the genuine four-case system without duplicating controls', () => {
   const site = read('site.js')
-  assert.equal((site.match(/class="v15RecordRail"/g) || []).length, 1)
+  assert.equal((site.match(/class="v15RecordRail"/g) || []).length, 0) // Hero links already live in v19ProjectRail
   assert.match(site, /href="#case-ohs"/)
   assert.match(site, /href="#case-news"/)
   assert.match(site, /href="#case-earthbridge"/)

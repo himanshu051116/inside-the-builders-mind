@@ -229,3 +229,29 @@
   #home .v19ProjectRail a { border-color: CanvasText; color: LinkText; }
   #home .v19ProjectRail a:focus-visible { outline-color: Highlight; }
 }
+
+/* V19.3 · Quiet the homepage without removing source boundaries or interactions. */
+#home .v17LeadStatement{max-width:54ch;margin-bottom:17px}
+#home .v19ProjectRail{margin-top:19px}
+#home .v19ProjectRailLabel{margin-bottom:6px}
+#home .v17EssentialHeading{margin-bottom:11px}
+#home .v17GoDeeper{justify-content:flex-end;padding-block:10px 18px}
+#home .v17ProofHeader{letter-spacing:.045em}
+#top .v17ModeIntro{padding:4px 0 11px}
+#top .v14ModePrompt{display:none}
+#top .v15HeroEdition{display:none}
+#top .careerChooser.v14ModeBar{padding:12px 0 5px}
+#top .careerView.v14RoleView{padding-top:25px;padding-bottom:30px}
+#top .v14HeroDescription{line-height:1.5;margin-bottom:15px}
+#top .v14RoleKicker{margin-bottom:10px}
+#top .v14HeroHeadline{margin-bottom:15px}
+#top .v14HeroFrame figcaption{gap:4px}
+#about.section{padding-block:clamp(65px,6vw,92px)}
+#about .aboutGrid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(26px,5vw,75px)}
+#about .sectionHead{margin-bottom:0}
+#work .deckControl{gap:10px}
+#work .deckBar{margin-bottom:18px}
+#work .projectDescription{line-height:1.52}
+#contact .contactIntro p{max-width:61ch}
+@media(max-width:900px){#about .aboutGrid{grid-template-columns:1fr;gap:20px}}
+@media(max-width:630px){#home .v17GoDeeper{padding-block:7px 16px}#top .careerView.v14RoleView{padding-top:19px}#about.section{padding-block:54px}}

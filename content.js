@@ -9,26 +9,26 @@ export const profile = {
   name: 'Himanshu Shukla',
   initials: 'HS',
   role: 'Mathematics & Computing · MITS Gwalior',
-  headlineA: 'I build things.',
-  headlineB: 'Then prove them.',
-  intro: 'Applied AI × software engineering × interactive systems. Explore the work, play with the ideas, inspect the evidence.',
+  headlineA: 'From problem to implementation.',
+  headlineB: 'With the tests and limits visible.',
+  intro: 'React and Firebase collaboration interfaces, Python/PostgreSQL data pipelines and PyTorch retrieval experiments. See the code and screenshots alongside their known limits.',
   location: 'Gwalior, India',
-  availability: 'Exploring software and AI research opportunities',
+  availability: 'Open to software engineering and ML research internships',
   github: 'https://github.com/himanshu051116',
   portfolioRepo: 'https://github.com/himanshu051116/inside-the-builders-mind',
 
   linkedin: 'https://www.linkedin.com/in/himanshu-shukla-88175637a',
   email: 'himanshusubh1510@gmail.com',
   resumeUrl: '', // Role-specific public PDFs are linked in the three career views.
-  aboutHeading: 'I work where mathematics, software and practical problems meet.',
+  aboutHeading: 'I study Mathematics & Computing and build software that has to be explained, tested and maintained.',
   about: 'I study B.Tech Mathematics & Computing at Madhav Institute of Technology & Science, Gwalior (expected graduation: 2028). I have built reviewer workflows, retrieval pipelines, collaboration apps and monitoring prototypes. I also co-founded SchoolBuddies to make hands-on technology learning more accessible to school students.',
-  philosophy: 'Prototype with purpose. Measure what matters. Keep decisions inspectable.',
+  philosophy: 'Keep the source traceable, test the failure cases, and document what has not been validated.',
   education: 'B.Tech, Mathematics & Computing · MITS Gwalior · 2028',
   achievements: [
     {tag: 'FIELD DEMO / 2026', title: 'CMPDI Headquarters', text: 'Invited to demonstrate Mulyankan in Ranchi on 11 July 2026.'},
     {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: 'Cross-modal retrieval prototype with source-linked final submission metrics and validation protocol; reported measurements are not independently reproduced.'},
     {tag: 'COMMUNITY', title: 'SchoolBuddies', text: 'Co-founder of a student-led school technology outreach initiative.'},
-    {tag: 'LEADERSHIP', title: 'Beyond the IDE', text: 'Class Representative, NPTEL Coordinator and first place at the Neeti Summit English Debate.'}
+    {tag: 'LEADERSHIP', title: 'Student leadership and debate', text: 'Class Representative, NPTEL Coordinator and first place at the Neeti Summit English Debate.'}
   ]
 }
 
@@ -37,7 +37,7 @@ export const profile = {
 // was individually checked; manually confirm external links before submitting.
 export const projects = [
   {
-    number:'01', category:'AI / HUMAN REVIEW', title:'Mulyankan',
+    number:'01', category:'DOCUMENT REVIEW / RUBRICS', title:'Mulyankan',
     status:'Demonstrated prototype',
     description:'Evidence-linked document evaluation: rubric-level review, insufficient-evidence flags, evaluator workflows and human override controls. Presented at CMPDI headquarters in July 2026.',
     stack:['React','TypeScript','Supabase'],
@@ -50,7 +50,7 @@ export const projects = [
   {
     number:'02', category:'ML / REMOTE SENSING', title:'EarthBridge',
     status:'Research prototype',
-    description:'Cross-modal satellite-image retrieval using contrastive embeddings and FAISS across Sentinel-1 SAR and Sentinel-2 multispectral imagery. Submission-reported F1 and recall metrics are now shown with limitations and repository sources, not as an independent benchmark.',
+    description:'Cross-modal satellite retrieval across Sentinel-1 SAR and Sentinel-2 multispectral imagery, using contrastive embeddings and FAISS. Reported evaluation figures are attributed to the source repository; no independent benchmark is claimed.',
     stack:['PyTorch','FAISS','FastAPI'],
     links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'},{label:'Reported evaluation details',url:'https://github.com/himanshu051116/earthbridge/blob/main/SUBMISSION_README.md'}], accent:'violet', shape:'grid', filters:['ai'],
     evidenceImage:'/evidence/earthbridge-evaluation.webp', evidenceImageCaption:'Actual EarthBridge evaluation UI · static repo-reported results, not live model inference',
@@ -59,7 +59,7 @@ export const projects = [
   {
     number:'03', category:'FULL-STACK / REAL-TIME', title:'Our Hidden Universe',
     status:'Deployed application',
-    description:'Private-room collaboration with Firebase authentication, real-time chat, video calls, shared memories and synchronized Watch Together playback.',
+    description:'Private rooms with Firebase authentication, real-time chat, video-call controls, shared memories and Watch Together coordination.',
     stack:['React','Firebase','Vercel'],
     links:[{label:'Live website',url:'https://ohs.vercel.app/'},{label:'Source code',url:'https://github.com/himanshu051116/our-hidden-universe'}],
     accent:'orange',shape:'waves', filters:['software'],
@@ -98,7 +98,7 @@ export const projects = [
 
 export const skillGroups = [
   {title:'Frontend & products', number:'01', skills:['React','TypeScript','JavaScript','Next.js','Tailwind CSS','Responsive UI','Vite']},
-  {title:'AI & mathematical tools', number:'02', skills:['Python','PyTorch','scikit-learn','NumPy','Pandas','FAISS','Contrastive learning']},
+  {title:'ML & numerical computing', number:'02', skills:['Python','PyTorch','scikit-learn','NumPy','Pandas','FAISS','Contrastive learning']},
   {title:'Systems & infrastructure', number:'03', skills:['FastAPI','REST APIs','PostgreSQL','Supabase','Firebase','Docker','pytest','Git / GitHub']}
 ]
 

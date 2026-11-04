@@ -27,7 +27,7 @@ test('V14.2 CSS source-owner modules reconstruct legacy stylesheet exactly',()=>
  const modules=['01-base','02-workbench','03-atelier','04-experience','05-career','06-interactions','07-scenes','08-case-index','09-evidence-desk','10-screen-gallery','11-image-reader']
  assert.equal([modules.map(n=>read(`styles/${n}.css`)),['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css'].map(read)].flat().join('\n'),read('portfolio.css'))
  assert.match(build,/const cssModules =/)
- assert.match(build,/writeFileSync\(join\(root,'portfolio\.css'\),combinedCss\)/)
+ assert.match(build,/writeFileSync\(join\(out,'portfolio\.css'\),combinedCss\)/)
 })
 test('V14.2 control states and focus are visible and responsive',()=>{
  assert.match(css,/\.archiveFilter\[aria-pressed=true\]/)

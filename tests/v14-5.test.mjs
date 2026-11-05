@@ -35,7 +35,8 @@ test('V14.5 source ownership cleanup is documented and source styles stay editab
 test('V14.5 actually shrinks the compiled CSS without removing existing themes',()=>{
  // Compare against the actual ordered source bundle, not the stale tracked legacy CSS.
  const cssModules=['01-base.css','02-workbench.css','03-atelier.css','04-experience.css','05-career.css','06-interactions.css','07-scenes.css','08-case-index.css','09-evidence-desk.css','10-screen-gallery.css','11-image-reader.css']
- const cssLayers=['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css','v15-editorial.css','v16-screenwalk.css','v17-recruiter.css','v19-milestone-video.css','v19-hero-refinement.css','v20-workspace.css']
+ // The modern V20.8 extension layers are real source bytes and must be counted.
+ const cssLayers=['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css','v15-editorial.css','v16-screenwalk.css','v17-recruiter.css','v19-milestone-video.css','v19-hero-refinement.css','v20-workspace.css','v203-experience.css','v203-screenfit.css','v204-evidence.css','v205-annotations.css','v208-pages.css']
  const source=Buffer.from([...cssModules.map(n=>read(`styles/${n}`)),...cssLayers.map(read)].join('\n'))
  const dist=readFileSync(resolve(root,'dist/portfolio.css'))
  assert(dist.length<source.length)

@@ -19,6 +19,8 @@ test('annotations are progressive and keep the unchanged screenshot source',()=>
   const js=read('v205-annotations.js'),css=read('v205-annotations.css')
   for(const s of ['portfolio:v20-render','v20Inspector','data-v20-tab','aria-pressed','ArrowLeft','ArrowRight'])assert.ok(js.includes(s),s)
   assert.match(css,/\.v205ImageFrame>img/)
+  assert.match(css,/left:clamp\(22px,var\(--v205-x\),calc\(100% - 22px\)\)/)
+  assert.match(css,/top:clamp\(22px,var\(--v205-y\),calc\(100% - 22px\)\)/)
   assert.match(css,/object-fit:contain!important/)
   for(const bad of ['fetch(','setInterval(','WebSocket','autoplay','XMLHttpRequest'])assert.ok(!js.includes(bad),bad)
 })

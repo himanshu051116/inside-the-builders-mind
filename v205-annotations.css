@@ -4,7 +4,7 @@
 .v20Workspace .v205ImageFrame>img{display:block!important;width:100%!important;max-width:100%;height:auto!important;max-height:none!important;object-fit:contain!important}
 .v20Workspace .v205Dots{position:absolute;inset:0;pointer-events:none}
 .v20Workspace .v205Dots[hidden]{display:none!important}
-.v20Workspace .v205Hotspot{position:absolute;transform:translate(-50%,-50%);width:42px;height:42px;border:2px solid #fff8ea;border-radius:50%;background:#ac4827eb;color:#fffaf3;box-shadow:0 2px 12px #000a;pointer-events:auto;cursor:pointer;font:800 13px/1 system-ui,sans-serif}
+.v20Workspace .v205Hotspot{position:absolute;left:clamp(22px,var(--v205-x),calc(100% - 22px));top:clamp(22px,var(--v205-y),calc(100% - 22px));transform:translate(-50%,-50%);width:42px;height:42px;border:2px solid #fff8ea;border-radius:50%;background:#ac4827eb;color:#fffaf3;box-shadow:0 2px 12px #000a;pointer-events:auto;cursor:pointer;font:800 13px/1 system-ui,sans-serif}
 .v20Workspace .v205Hotspot.isActive{background:#133b3c;border-color:#fff6e5;box-shadow:0 0 0 4px #fae5b9a0,0 2px 12px #000a}
 .v20Workspace .v205AnnotationPanel{border:1px solid var(--v20-line);border-radius:8px;background:var(--v20-panel);margin:12px 0 16px;padding:13px}
 .v20Workspace .v205Head{display:flex;align-items:center;flex-wrap:wrap;gap:10px}

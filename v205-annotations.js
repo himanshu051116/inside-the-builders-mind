@@ -85,7 +85,7 @@ export function setupV205Annotations(doc=document,win=window){
     record.points.forEach((point,i)=>{
       const b=makeButton("v205Hotspot",String(i+1),"pick");
       b.dataset.v205Pick=String(i);
-      b.style.left=point.x+"%";b.style.top=point.y+"%";
+      b.style.setProperty("--v205-x",point.x+"%");b.style.setProperty("--v205-y",point.y+"%");
       b.setAttribute("aria-label","Inspect screenshot feature "+(i+1)+": "+point.title);
       dots.append(b);
     });

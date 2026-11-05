@@ -11,7 +11,7 @@ test('recruiter identity comes before specialization navigation',()=>{
  assert.match(html,/B\.Tech · Mathematics &amp; Computing/)
  assert.match(html,/Madhav Institute of Technology &amp; Science/)
  assert.match(html,/Expected graduation 2028/)
- assert.match(html,/href="#top"/)
+ assert.match(html,/href="#v20-workspace"/)
 })
 
 test('recruiter-specific proof is concrete and avoids invented employment',()=>{

@@ -137,7 +137,9 @@ export function setupV11Experience(){
    el.addEventListener('click',()=>{
      if(el.dataset.paletteRole){
        const b=document.querySelector(`[data-switch-role="${el.dataset.paletteRole}"]`)
-       b?.click();document.getElementById('top')?.scrollIntoView({behavior:'auto'})
+       const v20=document.querySelector(`[data-v20-role="${el.dataset.paletteRole}"]`)
+       ;(v20||b)?.click()
+       document.getElementById(v20?'v20-workspace':'top')?.scrollIntoView({behavior:'auto'})
      } else if(el.tagName==='A'&&el.hash?.startsWith('#case-')){
        selectCase(el.hash.substring(6))
      }

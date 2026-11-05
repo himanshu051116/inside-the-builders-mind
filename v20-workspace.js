@@ -24,7 +24,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       <a href="#top" id="v20FullShowcase">Full showcase ↗</a>
       <a href="${V20_SETTINGS.fullstack.resume}" id="v20Resume" download>Download matching résumé ↓</a>
     </div>
-    <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
+    <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
     <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="#v20Archive" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
   legacy.insertAdjacentElement("afterend",workspace);
   const archive=doc.createElement("details");archive.className="v20Archive";archive.id="v20Archive";
@@ -84,7 +84,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   }
   function render(){
     const p=get();if(!p)return;
-    inspector.innerHTML=`<div class="v20ProjectIntro"><div><span>${e(p.category)}</span><span class="v20Status">${e(p.status)}</span></div><h3>${e(p.title)}</h3><p>${e(p.description)}</p><div class="v20Tags">${p.stack.map(x=>`<span>${e(x)}</span>`).join("")}</div></div>
+    inspector.innerHTML=`<div class="v20ProjectIntro"><div><span>${e(p.category)}</span><span class="v20Status">${e(p.status)}</span></div><h3>${e(p.title)}</h3><p>${e(p.description)}</p><div class="v20Tags">${p.stack.map(x=>`<button type="button" data-v20-tech="${e(x)}" aria-label="Filter projects using ${e(x)}">${e(x)}</button>`).join("")}</div></div>
     <div class="v20Tabs" role="tablist" aria-label="Project inspection views">${["overview","media","architecture","evidence"].map(t=>`<button type="button" id="v20-${t}" role="tab" data-v20-tab="${t}" tabindex="${t===tab?0:-1}" aria-selected="${t===tab}" aria-controls="v20Panel">${t==="media"?"Screens":t==="architecture"?"Architecture":t==="evidence"?"Evidence":"Overview"}</button>`).join("")}</div>
     <div id="v20Panel" role="tabpanel" tabindex="0" aria-labelledby="v20-${tab}">${tab==="overview"?overview(p):tab==="media"?media(p):tab==="architecture"?architecture(p):evidence(p)}</div>`;
     renderList();
@@ -112,7 +112,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(!ids.includes(next))return;
     id=next;capture=0;stage=0;
     if(search.value&&!relevant().some(p=>p.id===next))search.value="";
-    render();
+    render();updateSearchNotice();
     if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
     announce(`${get().title} selected`);
     if(update)emit("pushState");
@@ -134,9 +134,14 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     doc.getElementById("v20FullShowcase").textContent=`Open ${first().label} full showcase ↗`;
     tab=first().tab;id=ids.includes(first().project)?first().project:entry[0].id;
     capture=0;stage=0;search.value="";
-    if(invokeLegacy)doc.querySelector(`#top [data-switch-role="${role}"]`)?.click();
-    render();announce(`${first().label} workspace selected`);
-    if(update)emit("replaceState");
+    if(invokeLegacy){
+      const prior=doc.documentElement.dataset.v20Syncing;
+      doc.documentElement.dataset.v20Syncing='true';
+      try{doc.querySelector(`#top [data-switch-role="${role}"]`)?.click()}
+      finally{if(prior===undefined)delete doc.documentElement.dataset.v20Syncing;else doc.documentElement.dataset.v20Syncing=prior}
+    }
+    render();updateSearchNotice();announce(`${first().label} workspace selected`);
+    if(update)emit("pushState");
   }
   function openLegacy(hash){
     const targetId=hash.startsWith("#proof/")?"field-proof":hash.replace(/^#/,"");
@@ -152,9 +157,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     return true;
   }
   workspace.addEventListener("click",ev=>{
-    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry]");
+    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech]");
     if(!b)return;
     if(b.dataset.v20Project){chooseProject(b.dataset.v20Project,true,true);return}
+    if(b.dataset.v20Tech){
+      search.value=b.dataset.v20Tech;renderList();updateSearchNotice();search.focus();
+      announce(`Showing projects using ${b.dataset.v20Tech}`);return
+    }
     if(b.dataset.v20Tab){chooseTab(b.dataset.v20Tab);return}
     if(b.dataset.v20Role){chooseRole(b.dataset.v20Role);return}
     if(b.hasAttribute("data-v20-stage")){stage=Number(b.dataset.v20Stage);render();inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
@@ -162,18 +171,38 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(b.hasAttribute("data-v20-video")){const original=doc.querySelector("#home .v19MilestoneOpen");if(original)original.click();else announce("Original video unavailable");return}
     if(b.hasAttribute("data-v20-retry"))loadManifest(true);
   });
-  workspace.querySelector(".v20Tabs")?.addEventListener("keydown",ev=>{});
   workspace.addEventListener("keydown",ev=>{
     const b=ev.target.closest('[role="tab"][data-v20-tab]');if(!b||!["ArrowLeft","ArrowRight","Home","End"].includes(ev.key))return;
     ev.preventDefault();const all=["overview","media","architecture","evidence"];
     const n=ev.key==="Home"?0:ev.key==="End"?3:(all.indexOf(tab)+(ev.key==="ArrowRight"?1:3))%4;chooseTab(all[n]);
   });
-  search.addEventListener("input",renderList);
+  const searchNotice=doc.getElementById('v20SearchNotice');
+  function updateSearchNotice(){
+    const q=search.value.trim(),shown=relevant(),selectedShown=shown.some(p=>p.id===id);
+    searchNotice.hidden=!q||selectedShown||!shown.length;
+    searchNotice.textContent=searchNotice.hidden?'':`${shown.length} matching project${shown.length===1?'':'s'}. Select a result to update the inspector.`;
+  }
+  search.addEventListener('input',()=>{renderList();updateSearchNotice()});
+  search.addEventListener('keydown',ev=>{
+    if(ev.key!=='Enter')return;
+    const match=relevant()[0];if(!match)return;
+    ev.preventDefault();chooseProject(match.id,true,false);
+    updateSearchNotice();inspector.querySelector('[role="tab"][aria-selected="true"]')?.focus();
+  });
   doc.addEventListener("click",ev=>{
+    const quick=ev.target.closest('a[data-v20-open-project]');
+    if(quick&&ids.includes(quick.dataset.v20OpenProject)){
+      ev.preventDefault();
+      chooseProject(quick.dataset.v20OpenProject,true,false);
+      archive.open=false;
+      workspace.scrollIntoView({behavior:'auto',block:'start'});
+      return;
+    }
     const a=ev.target.closest('a[href^="#"]');
     if(!a)return;
     const hash=a.getAttribute("href");if(hash==="#v20Archive"){archive.open=true;return}
     if(hash==="#top"){archive.open=true;return}
+    if(hash==="#v20-workspace"){archive.open=false;return}
     if(openLegacy(hash)&&win.location.hash===hash)win.requestAnimationFrame?.(()=>doc.getElementById(hash.slice(1))?.scrollIntoView({behavior:"auto",block:"start"}));
   },true);
   win.addEventListener("hashchange",()=>openLegacy(win.location.hash));
@@ -183,6 +212,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const pid=u.searchParams.get("project");
     if(ids.includes(pid)){id=pid;tab=["overview","media","architecture","evidence"].includes(u.searchParams.get("panel"))?u.searchParams.get("panel"):first().tab;render()}
     openLegacy(u.hash);
+  });
+  doc.addEventListener('portfolio:legacy-role-request',ev=>{
+    const requested=validRole(ev.detail?.role);
+    if(requested!==role)chooseRole(requested,false,true);
   });
   chooseRole(role,false,false);
   // Preserve selected project/tab on an existing shared link.

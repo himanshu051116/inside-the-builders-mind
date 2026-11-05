@@ -62,6 +62,12 @@ export function setupCareerModes(){
     const roleDescriptions={fullstack:'Himanshu Shukla — React, TypeScript, Firebase. Real-time products, verified source and case studies.',software:'Himanshu Shukla — Python, FastAPI, PostgreSQL. Source-backed data pipeline and backend engineering case studies.',ml:'Himanshu Shukla — PyTorch, FAISS, cross-modal satellite retrieval. Research code, evaluation methods and honest limitations.'}
     meta?.setAttribute('content',roleDescriptions[value])
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',roleDescriptions[value])
+    if(writeUrl&&document.getElementById('v20-workspace')){
+      if(document.documentElement.dataset.v20Syncing!=='true'){
+        document.dispatchEvent(new CustomEvent('portfolio:legacy-role-request',{detail:{role:value}}))
+      }
+      return
+    }
     if(writeUrl){
       const url=new URL(window.location.href)
       url.searchParams.set('view',value)

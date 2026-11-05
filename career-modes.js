@@ -1,3 +1,4 @@
+import { getPortfolioNavigation } from './portfolio-navigation.js'
 // Three portfolio lenses mapped to the three user-supplied resumes.
 // Local-only illustrative interactions; no external endpoints or fabricated measurements.
 export const MODE_ORDER = {
@@ -16,6 +17,7 @@ const TERMINAL = {
   clear: ['Console reset. Try `help` or `trace`.']
 }
 export function setupCareerModes(){
+  const navigation=getPortfolioNavigation(window)
   const buttons = Array.from(document.querySelectorAll('[data-switch-role]'))
   const views = Array.from(document.querySelectorAll('[data-role-view]'))
   const gallery = document.getElementById('projectGrid')
@@ -25,7 +27,7 @@ export function setupCareerModes(){
   const modeFilter = document.querySelector('[data-filter="all"]')
   const roleNames = { fullstack: 'Full-Stack product engineering', software: 'Software engineering & backend systems', ml: 'Applied machine learning research' }
   const roleColors = { fullstack:'#f3f0e7', software:'#090c12', ml:'#141226' }
-  const fromQuery = () => new URL(window.location.href).searchParams.get('view')
+  const fromQuery = () => navigation.current().role
   let mode = 'fullstack'
   function selectRole(value, writeUrl=true){
     if(!Object.hasOwn(MODE_ORDER,value)) return
@@ -63,21 +65,12 @@ export function setupCareerModes(){
     meta?.setAttribute('content',roleDescriptions[value])
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',roleDescriptions[value])
     if(writeUrl){
-      const url=new URL(window.location.href)
-      url.searchParams.set('view',value)
-      // A role switch must be a navigable history entry. Clear incompatible
-      // screenshot hashes while retaining ordinary section fragments.
-      if(url.hash.startsWith('#proof/'))url.hash=''
-      const next=url.href
-      const current=location.href
-      if(next!==current){
-        try { history.pushState({ portfolioRole:value },'',next) }
-        catch { /* isolated offline browser harness: writable origin unavailable */ }
-      }
+      navigation.selectRole(value)
+      if(!navigation.isUrlSynced()) modeStatus.textContent+=' The page link could not be updated in this browser.'
     }
   }
   buttons.forEach(button => button.addEventListener('click',()=>selectRole(button.dataset.switchRole)))
-  window.addEventListener('popstate',()=>selectRole(fromQuery()||'fullstack',false))
+  navigation.subscribe(route=>{if(route.role!==mode)selectRole(route.role,false)})
   if ('IntersectionObserver' in window) {
     const observer=new IntersectionObserver(entries=>{
       document.body.classList.toggle('isAtCareer',entries[0].isIntersecting)

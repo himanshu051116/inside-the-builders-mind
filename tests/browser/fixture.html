@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isolated portfolio navigation fixture — not the live portfolio</title>
+<style>
+  body { margin: 0; padding: 24px; max-width: 800px; font: 16px system-ui, sans-serif; }
+  .row {display:flex; flex-wrap:wrap; gap:8px;}
+  button {font:inherit; padding:10px 12px; border:1px solid #888; border-radius:6px; background:white;}
+  button[aria-selected="true"], button[aria-pressed="true"] {border:2px solid #2a5d89; font-weight:700;}
+  button:focus-visible { outline:3px solid #d37b19; outline-offset:2px; }
+  .panel {border:1px solid #aaa; padding:20px; margin:10px 0;}
+  .long {height:1050px; background:#eee; margin-top:30px;}
+  [hidden] {display:none!important;}
+</style>
+</head>
+<body>
+<h1>Navigation integration fixture</h1>
+<p>Small real-browser test shell, not a copy of the original portfolio's styling or content.</p>
+<div role="group" class="row" aria-label="Engineering specialization">
+<button data-switch-role="fullstack" aria-pressed="true">Full-Stack</button>
+<button data-switch-role="software" aria-pressed="false">Software Systems</button>
+<button data-switch-role="ml" aria-pressed="false">Applied ML</button>
+</div>
+<p id="status" aria-live="polite"></p>
+<nav class="row" role="tablist" aria-label="Engineering case">
+  <button role="tab" data-atlas-tab="ohs" id="tab-ohs" aria-selected="true" aria-controls="panel-ohs">Our Hidden Universe</button>
+  <button role="tab" data-atlas-tab="news" id="tab-news" aria-selected="false" aria-controls="panel-news">NewsSources</button>
+  <button role="tab" data-atlas-tab="mulyankan" id="tab-mulyankan" aria-selected="false" aria-controls="panel-mulyankan">Mulyankan</button>
+  <button role="tab" data-atlas-tab="earthbridge" id="tab-earthbridge" aria-selected="false" aria-controls="panel-earthbridge">EarthBridge</button>
+</nav>
+<section role="tabpanel" id="panel-ohs" aria-labelledby="tab-ohs" class="panel">OHS</section>
+<section role="tabpanel" id="panel-news" aria-labelledby="tab-news" class="panel" hidden>NewsSources</section>
+<section role="tabpanel" id="panel-mulyankan" aria-labelledby="tab-mulyankan" class="panel" hidden>Mulyankan</section>
+<section role="tabpanel" id="panel-earthbridge" aria-labelledby="tab-earthbridge" class="panel" hidden>EarthBridge</section>
+<a href="#case-earthbridge" id="reopenCase">Reopen EarthBridge case</a>
+<div id="caseNotes" hidden><details id="case-earthbridge"><summary>Read the EarthBridge case</summary><p>Original static case note.</p></details></div>
+<div class="long">The body is deliberately scrollable to detect unwanted jumps.</div>
+<script type="module">
+import { getPortfolioNavigation, installCaseLinkRecovery } from '../../portfolio-navigation.js';
+const nav=getPortfolioNavigation(window);
+const focusByMode={fullstack:'ohs',software:'news',ml:'earthbridge'};
+const roles=[...document.querySelectorAll('[data-switch-role]')];
+const cases=[...document.querySelectorAll('[data-atlas-tab]')];
+function render(route){
+  roles.forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.switchRole===route.role)));
+  const selected=route.caseId||focusByMode[route.role];
+  cases.forEach(el=>{
+    const active=el.dataset.atlasTab===selected;
+    el.setAttribute('aria-selected',String(active));el.tabIndex=active?0:-1;
+  });
+  document.querySelectorAll('[role="tabpanel"]').forEach(el=>el.hidden=el.id!==`panel-${selected}`);
+  document.querySelector('#status').textContent=`${route.role} / ${selected} / URL ${nav.isUrlSynced()?'synced':'local-only'}`;
+}
+nav.subscribe(render);render(nav.current());
+roles.forEach(el=>el.addEventListener('click',()=>nav.selectRole(el.dataset.switchRole)));
+cases.forEach((el,i)=>{
+  el.addEventListener('click',()=>nav.selectCase(el.dataset.atlasTab));
+  el.addEventListener('keydown',e=>{
+    if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key)) return;
+    e.preventDefault();
+    const ni=e.key==='Home'?0:e.key==='End'?cases.length-1:(i+(e.key==='ArrowRight'?1:-1)+cases.length)%cases.length;
+    nav.selectCase(cases[ni].dataset.atlasTab);cases[ni].focus();
+  });
+});
+installCaseLinkRecovery(document,virtualWindow,caseId=>{
+  const notes=document.querySelector('#caseNotes');
+  const note=document.getElementById(`case-${caseId}`);
+  if(!note)return;
+  notes.hidden=false;
+  note.open=true;
+});
+window.testNavigation=nav;
+</script>
+</body>
+</html>

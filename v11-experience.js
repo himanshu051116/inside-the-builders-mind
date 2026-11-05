@@ -1,6 +1,8 @@
+import { getPortfolioNavigation, installCaseLinkRecovery } from './portfolio-navigation.js'
 // V11: genuine source-linked evidence exploration, role-specific shortcuts, and
 // privacy-respecting in-page command search. All operations are local DOM state.
 export function setupV11Experience(){
+ const navigation=getPortfolioNavigation(window)
  const tabButtons=[...document.querySelectorAll('[data-atlas-tab]')]
  const panels=[...document.querySelectorAll('[data-atlas-panel]')]
  const atlasStatus=document.getElementById('atlasStatus')
@@ -12,12 +14,13 @@ export function setupV11Experience(){
    if(atlasStatus)atlasStatus.textContent=`${names[value]} engineering evidence selected.`
  }
  tabButtons.forEach((b,i)=>{
-   b.addEventListener('click',()=>selectCase(b.dataset.atlasTab))
+   b.addEventListener('click',()=>navigation.selectCase(b.dataset.atlasTab))
    b.addEventListener('keydown',event=>{
      if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return
      event.preventDefault()
      const next=event.key==='Home'?0:event.key==='End'?tabButtons.length-1:(i+(event.key==='ArrowRight'?1:-1)+tabButtons.length)%tabButtons.length
-     selectCase(tabButtons[next].dataset.atlasTab,{focus:true})
+     navigation.selectCase(tabButtons[next].dataset.atlasTab)
+     tabButtons[next].focus()
    })
  })
  const caseGrid=document.getElementById('caseFilesGrid')
@@ -30,29 +33,27 @@ export function setupV11Experience(){
  })
  // The selected source audit follows the selected résumé track.
  const focusByMode={fullstack:'ohs',software:'news',ml:'earthbridge'}
- function syncRole(){
-   const role=document.body.dataset.role||'fullstack'
-   selectCase(focusByMode[role]||'ohs')
+ function revealCase(caseId){
+   const article=document.getElementById(`case-${caseId}`)
+   if(!article) return
+   if(caseGrid)caseGrid.hidden=false
+   if(caseToggle){caseToggle.setAttribute('aria-expanded','true');caseToggle.innerHTML='Collapse case notes <span aria-hidden="true">↗</span>'}
+   article.querySelector('.caseFileDetails')?.setAttribute('open','')
+   article.scrollIntoView({behavior:'auto',block:'start'})
+ }
+ function syncRoute(route=navigation.current(),source='initial'){
+   const role=route.role
+   selectCase(route.caseId||focusByMode[role]||'ohs')
    for(const el of document.querySelectorAll('[data-proof-route]'))el.hidden=el.dataset.proofRoute!==role
+   // Selecting a tab changes the shareable URL without unexpectedly scrolling.
+   // Direct links, browser Back/Forward and incoming anchors reveal the note.
+   if(route.caseId && !source.startsWith('case')) revealCase(route.caseId)
+   if(atlasStatus && !navigation.isUrlSynced()) atlasStatus.textContent+=' This selection is local; its URL could not be updated.'
  }
- document.querySelectorAll('[data-switch-role]').forEach(b=>b.addEventListener('click',syncRole))
- window.addEventListener('popstate',syncRole)
- syncRole()
- // Handle #case links by revealing the corresponding source record. The related
- // engineering note stays available to expand independently.
- function activateHash(){
-   const found=location.hash.match(/^#case-(ohs|news|earthbridge|mulyankan)$/)
-   if(found){
-     selectCase(found[1])
-     // Reveal the complete matching case rather than scrolling to a collapsed note.
-     if(caseGrid){caseGrid.hidden=false}
-     if(caseToggle){caseToggle.setAttribute('aria-expanded','true');caseToggle.innerHTML='Collapse case notes <span aria-hidden="true">↗</span>'}
-     const article=document.getElementById(`case-${found[1]}`)
-     if(article){article.querySelector('.caseFileDetails')?.setAttribute('open','');article.scrollIntoView({behavior:'auto',block:'start'})}
-   }
- }
- window.addEventListener('hashchange',activateHash)
- activateHash()
+ navigation.subscribe((route,source)=>syncRoute(route,source))
+ syncRoute()
+ // Same-hash anchor clicks otherwise cannot reopen a collapsed case note.
+ installCaseLinkRecovery(document,window,caseId=>{selectCase(caseId);revealCase(caseId)})
  // The screenshot can fail on private, offline, or restricted browser networks.
  // Never substitute a synthetic image for a missing real project image.
  for(const img of document.querySelectorAll('.atlasScreenshot img')){

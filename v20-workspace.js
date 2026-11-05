@@ -1,4 +1,5 @@
-// V20.1 interactive preview. The existing V19.3 nodes are preserved as an expandable archive.
+import {readV207Route,commitV207Route} from './v207-route.js'
+// V20.7 retains the V20.6 rendered surfaces while consolidating URL semantics.
 const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Explore the actual interfaces, then inspect the architecture and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge","sentinel"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Trace real project architecture, source records and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","sentinel","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Review model designs, documented results and the boundaries of each prototype.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","sentinel","our-hidden-universe","schoolbuddies"]}};
 const V20_FLOWS={"mulyankan":[["Document intake","Inspect submitted files, format and extraction readiness."],["Evidence extraction","Link supporting material to rubric criteria."],["Rubric review","Flag insufficient evidence instead of forcing a complete score."],["Human decision","A reviewer retains final authority and an audit trail."]],"earthbridge":[["Paired scenes","Prepare Sentinel-1 and Sentinel-2 paired observations."],["Descriptors","Map modalities to a shared retrieval space."],["FAISS lookup","Compare encoded descriptors; this view performs no inference."],["Evaluation","Inspect reported metrics and holdout-split limitations."]],"our-hidden-universe":[["Access","Firebase authentication controls private room access."],["Room state","Coordinate presence, messages and shared session state."],["Messaging","Inspect the source-backed messaging implementation."],["Watch Together","Review captured playback and call controls; no live sync test here."]],"newssources":[["Discovery","Collect candidates from RSS and sitemaps."],["Normalize","Extract and deduplicate article identities."],["Persistence","Preserve records, versions and provenance in PostgreSQL."],["Analyst review","Inspect captured source, event and claims screens."]],"sentinel":[["Traffic","Inspect local network flow information."],["Signals","Review early anomalies, not certified detection."],["Forward proxy","Inspect locally validated domain blocking."],["Boundaries","No production-grade WAF performance claimed."]],"schoolbuddies":[["School outreach","Coordinate engagement with schools."],["Curriculum","Prepare programming and AI-literacy workshops."],["Learning","Run hands-on technology demonstrations."],["Website","Accept enquiries through the public project site."]]};
 export const setupV20Workspace=function initV20(projects,doc=document,win=window){
@@ -11,10 +12,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const validRole=x=>Object.hasOwn(V20_SETTINGS,x)?x:"fullstack";
   const entry=projects.map(x=>({...x,id:slug(x.title)})).filter(x=>x.title&&x.caseStudy);
   const ids=entry.map(x=>x.id);
-  const query=new URL(win.location.href).searchParams;
-  let role=validRole(query.get("view")||doc.body.dataset.role);
-  let id=ids.includes(query.get("project"))?query.get("project"):V20_SETTINGS[role].project;
-  let tab=["overview","media","architecture","evidence"].includes(query.get("panel"))?query.get("panel"):V20_SETTINGS[role].tab;
+  const initialRoute=readV207Route(win.location.href,ids);
+  let role=initialRoute.role;
+  let id=initialRoute.project;
+  let tab=initialRoute.panel;
   let capture=0,stage=0,manifest=null,manifestPromise=null,manifestError=false;
   const workspace=doc.createElement("section");
   workspace.id="v20-workspace";workspace.className="v20Workspace";workspace.setAttribute("aria-labelledby","v20Title");
@@ -42,7 +43,9 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const get=()=>entry.find(p=>p.id===id)||entry[0];
   const first=()=>V20_SETTINGS[role];
   const emit=(method="replaceState")=>{
-    try{const u=new URL(win.location.href);u.searchParams.set("view",role);u.searchParams.set("project",id);u.searchParams.set("panel",tab);u.hash="v20-workspace";win.history[method]({v20:true},"",u.pathname+u.search+u.hash)}catch{}
+    const result=commitV207Route(win,{role,project:id,panel:tab},{method});
+    if(!result.committed)announce("The selection is active locally, but this browser did not update the shareable URL.");
+    return result;
   };
   const relevant=()=>{
     const q=search.value.trim().toLowerCase(),rank=first().order;
@@ -111,6 +114,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const announce=(msg)=>{let status=doc.getElementById("v20Announce");if(!status){status=doc.createElement("span");status.id="v20Announce";status.className="srOnly";status.setAttribute("role","status");workspace.append(status)}status.textContent=msg};
   function chooseProject(next,update=true,keepFocus=false){
     if(!ids.includes(next))return;
+    if(id===next){
+      if(update)emit("replaceState");
+      if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
+      return;
+    }
     id=next;capture=0;stage=0;
     if(search.value&&!relevant().some(p=>p.id===next))search.value="";
     render();updateSearchNotice();
@@ -126,7 +134,12 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     inspector.querySelector(`[data-v20-tab="${tab}"]`)?.focus();
   }
   function chooseRole(next,invokeLegacy=true,update=true){
-    role=validRole(next);workspace.dataset.role=role;
+    next=validRole(next);
+    if(next===role&&update){
+      emit("replaceState");
+      return;
+    }
+    role=next;workspace.dataset.role=role;
     doc.querySelectorAll("[data-v20-role]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v20Role===role)));
     doc.getElementById("v20Title").textContent=first().title;
     doc.getElementById("v20Subtitle").textContent=first().subtitle;
@@ -208,19 +221,22 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   },true);
   win.addEventListener("hashchange",()=>openLegacy(win.location.hash));
   win.addEventListener("popstate",()=>{
-    const u=new URL(win.location.href),r=validRole(u.searchParams.get("view")||"fullstack");
-    if(r!==role)chooseRole(r,true,false);
-    const pid=u.searchParams.get("project");
-    if(ids.includes(pid)){id=pid;tab=["overview","media","architecture","evidence"].includes(u.searchParams.get("panel"))?u.searchParams.get("panel"):first().tab;render()}
-    openLegacy(u.hash);
+    const next=readV207Route(win.location.href,ids);
+    if(next.role!==role)chooseRole(next.role,true,false);
+    if(next.project!==id||next.panel!==tab){
+      id=next.project;tab=next.panel;capture=0;stage=0;render();
+    }
+    openLegacy(next.hash);
   });
   doc.addEventListener('portfolio:legacy-role-request',ev=>{
     const requested=validRole(ev.detail?.role);
     if(requested!==role)chooseRole(requested,false,true);
   });
   chooseRole(role,false,false);
-  // Preserve selected project/tab on an existing shared link.
-  if(ids.includes(query.get("project"))){id=query.get("project");tab=["overview","media","architecture","evidence"].includes(query.get("panel"))?query.get("panel"):first().tab;render()}
-  if(win.location.hash)openLegacy(win.location.hash);
+  // An incoming shared link may select another project, panel or legacy case anchor.
+  if(initialRoute.project!==id||initialRoute.panel!==tab){
+    id=initialRoute.project;tab=initialRoute.panel;render();
+  }
+  if(initialRoute.hash)openLegacy(initialRoute.hash);
   return {workspace,archive};
 };

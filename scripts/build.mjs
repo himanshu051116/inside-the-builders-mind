@@ -17,7 +17,7 @@ const combinedCss=[
 if (existsSync(out)) rmSync(out, { recursive:true, force:true })
 mkdirSync(out, { recursive:true })
 writeFileSync(join(out,'portfolio.css'),combinedCss)
-for (const name of ['index.html','experience-v6.js','career-modes.js','v8-interactions.js','scene-v9.js','v10-experience.js','v11-experience.js','evidence-media.js','v16-screenwalk.js','v17-recruiter.js','v19-milestone-video.js','v20-workspace.js','v203-experience.js','v204-evidence.js','v205-annotations.js','case-dossiers.js','site.js','content.js','workbench-data.js','workbench-logic.js','workbench-ui.js']) copyFileSync(join(root, name), join(out,name))
+for (const name of ['index.html','experience-v6.js','career-modes.js','v8-interactions.js','scene-v9.js','v10-experience.js','v11-experience.js','evidence-media.js','v16-screenwalk.js','v17-recruiter.js','v19-milestone-video.js','v20-workspace.js','v203-experience.js','v204-evidence.js','v205-annotations.js','v207-route.js','case-dossiers.js','site.js','content.js','workbench-data.js','workbench-logic.js','workbench-ui.js']) copyFileSync(join(root, name), join(out,name))
 // Keep readable source CSS in the repository, but ship compressed bytes to browsers.
 const stylesheets=['portfolio.css']
 for (const cssName of stylesheets) {

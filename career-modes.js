@@ -83,7 +83,10 @@ export function setupCareerModes(){
     }
   }
   buttons.forEach(button => button.addEventListener('click',()=>selectRole(button.dataset.switchRole)))
-  window.addEventListener('popstate',()=>selectRole(fromQuery()||'fullstack',false))
+  // When V20 exists, its controller owns URL changes and delegates visual mode updates.
+  window.addEventListener('popstate',()=>{
+    if(!document.getElementById('v20-workspace'))selectRole(fromQuery()||'fullstack',false)
+  })
   if ('IntersectionObserver' in window) {
     const observer=new IntersectionObserver(entries=>{
       document.body.classList.toggle('isAtCareer',entries[0].isIntersecting)

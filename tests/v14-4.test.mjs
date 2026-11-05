@@ -9,12 +9,14 @@ test('V14.4 real screenshots open an inspectable dialog, case study remains sepa
  assert.match(media,/lightbox\?\.showModal\(\)/);
  assert.match(media,/priorFocus=button/);
 });
-test('V14.4 role switching creates navigable history and preserves existing routes',()=>{
- assert.match(role,/history.pushState/);
- assert.match(role,/popstate/);
- assert.match(role,/if\(next!==current\)/);
- assert.match(role,/url.hash.startsWith\('#proof\/'\)/);
- assert.doesNotMatch(role,/history.replaceState/);
+test('V14.4 role switching delegates history to the navigation controller',()=>{
+ const nav=src('portfolio-navigation.js');
+ assert.match(role,/navigation\.selectRole\(value\)/);
+ assert.match(role,/navigation\.subscribe/);
+ assert.match(nav,/win\.history\[replace \? 'replaceState' : 'pushState'\]/);
+ assert.match(nav,/addEventListener\('popstate'/);
+ assert.match(nav,/url\.hash\.startsWith\('#proof\/'\)/);
+ assert.match(nav,/portfolioNavigation: true/);
 });
 test('V14.4 mobile shows image before long prose and all shortcuts without clipping',()=>{
  assert.match(site,/v144Intro/);assert.match(site,/v144Details/);

@@ -1,0 +1,96 @@
+/*
+ * V20.3 — desktop screen fit at standard 100% browser zoom.
+ * Responsive, short-viewport-only refinements; nothing is removed, hidden,
+ * scaled by transform, reordered, or changed in the original video player.
+ * The tablet and mobile layouts retain their previous typography and flow.
+ */
+@media (min-width: 951px) and (max-height: 900px) {
+  #home .v17TopLine { padding-block: 12px 11px; }
+  #home .v17LeadGrid {
+    align-items: start;
+    gap: clamp(25px, 3vw, 42px);
+    padding-block: clamp(13px, 2vh, 20px) 10px;
+  }
+  #home .v17LeadCopy {
+    justify-content: flex-start;
+    padding-top: clamp(2px, .8vh, 8px);
+  }
+  #home .v17Overline { margin-bottom: 7px; }
+  #home h1 {
+    font-size: clamp(43px, 4.75vw, 72px);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  #home .v17Degree {
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.32;
+    margin-bottom: 5px;
+  }
+  #home .v17Graduation { line-height: 1.45; margin-bottom: 10px; }
+  #home .v17LeadStatement {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  #home .v17PrimaryLinks { margin-bottom: 5px; }
+  #home .v17PrimaryLinks > a,
+  #home .v17ResumeSelect summary {
+    min-height: 44px;
+    padding-block: 10px;
+  }
+  #home .v17Socials a { min-height: 34px; }
+  #home .v19ProjectRail { margin-top: 10px; padding-top: 9px; }
+  #home .v19ProjectRailLabel { margin-bottom: 4px; }
+  #home .v19ProjectRail a { min-height: 44px; padding-block: 6px; }
+
+  #home .v17Proof { min-height: 0; }
+  #home .v17ProofHeader { padding: 12px 19px; }
+  #home .v19ProofHasVideo .v17ProofBody { padding: 15px 20px; }
+  #home .v19ProofHasVideo h2 {
+    font-size: clamp(27px, 2.16vw, 33px);
+    line-height: 1.07;
+    margin-bottom: 6px;
+  }
+  #home .v19ProofHasVideo .v17ProofBody > p {
+    font-size: 12px;
+    line-height: 1.44;
+    margin-bottom: 8px;
+  }
+  /* Keep the real video thumbnail, webcam inset and original aspect ratio. */
+  #home .v19MilestoneOpen { height: clamp(160px, 14vw, 194px); }
+  #home .v19MilestoneVideo { margin-bottom: 6px; }
+  #home .v19MilestoneFootnote {
+    font-size: 10px;
+    line-height: 1.35;
+    margin-top: 5px !important;
+  }
+  #home .v19ProofHasVideo .v17ProofMeta {
+    padding: 7px 0;
+    gap: 12px;
+  }
+  #home .v17ProofMeta div { gap: 3px; }
+  #home .v19ProofHasVideo .v17ProofLink {
+    min-height: 44px;
+    padding-top: 5px;
+  }
+
+  #home .v17Essential { padding: 12px 16px 13px; }
+  #home .v17EssentialHeading { margin-bottom: 7px; }
+  #home .v17FactList { gap: 4px; }
+  #home .v17SkillTokens { gap: 5px; }
+  #home .v17SkillTokens span { padding: 5px 7px; font-size: 10px; }
+  #home .v17GoDeeper { padding-block: 2px 4px; }
+  #home .v17GoDeeper > a { min-height: 38px; }
+}
+
+/* Shorter windows still scroll naturally; preserve readability. */
+@media (min-width: 951px) and (max-height: 740px) {
+  #home .v17LeadGrid { padding-block: 11px 8px; }
+  #home .v19MilestoneOpen { height: clamp(148px, 12vw, 174px); }
+  #home .v17ProofHeader { padding-block: 9px; }
+  #home .v17Essential { padding-block: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #home .v19ProjectRail a { transition: none; }
+}

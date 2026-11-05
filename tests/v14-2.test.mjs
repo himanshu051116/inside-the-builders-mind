@@ -35,11 +35,12 @@ test('V14.2 control states and focus are visible and responsive',()=>{
  assert.match(css,/\.archiveControls\{display:grid;grid-template-columns:repeat\(2/)
  assert.match(css,/\.archiveFilter\{min-height:44px/)
 })
-test('V14.4 hero image priority follows selected role and retains alt text',()=>{
+test('V20 keeps selected-role images lazy while preserving accessible screenshots',()=>{
  assert.match(site,/data-hero-proof-open/)
  assert.match(read('career-modes.js'),/img.loading=isActive\?'eager':'lazy'/)
  assert.match(site,/imgAlt/)
- assert.match(read('index.html'),/URLSearchParams\(location\.search\)/)
+ assert.doesNotMatch(read('index.html'),/Only preload a screenshot when it is the selected role/)
+ assert.match(read('v20-workspace.js'),/if\(tab==="media"&&/)
 })
 test('V14.2 mobile navigation Escape returns focus',()=>{
  assert.match(site,/ev\.key==='Escape'&&nav\.classList\.contains\('navOpen'\)/)

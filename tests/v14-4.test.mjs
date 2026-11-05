@@ -34,6 +34,6 @@ test('V14.4 loads new stylesheet after previous accessibility fixes and uses ada
  assert(!html.includes('href="/v14-4.css"')); 
  assert.match(src('scripts/build.mjs'),/'v14-4.css'/);
  assert.match(src('v11-experience.js'),/commandShortcut/);
- assert.match(html,/URLSearchParams/);
+ assert.doesNotMatch(html,/Only preload a screenshot when it is the selected role/);
  assert.match(role,/img.loading=isActive\?'eager':'lazy'/);
 });

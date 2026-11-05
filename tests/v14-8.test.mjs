@@ -2,11 +2,11 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
 const read=(p)=>readFileSync(new URL('../'+p,import.meta.url),'utf8')
-test('V14.8 fixes initial EarthBridge hero image priority without fabricating a retrieval result',()=>{
+test('V20 defers archived EarthBridge image preload without fabricating retrieval results',()=>{
  const html=read('index.html')
- assert.match(html,/ml:'\/evidence\/earthbridge-evaluation.webp'/)
- assert.match(html,/Only preload a screenshot when it is the selected role/)
- assert.match(html,/if \(!image\) return/)
+ assert.doesNotMatch(html,/Only preload a screenshot when it is the selected role/)
+ assert.match(read('v20-workspace.js'),/earthbridge/)
+ assert.match(read('v20-workspace.js'),/win.fetch\("\/evidence\/manifest.json"\)/)
  assert.match(read('career-modes.js'),/img.loading=isActive\?'eager':'lazy'/)
  assert.match(read('site.js'),/Repository-reported metrics, not independently reproduced/)
 })

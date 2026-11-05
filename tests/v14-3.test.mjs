@@ -40,10 +40,11 @@ test('V14.3 social images are actual 1200x630 PNG bytes',()=>{
   assert.equal(buf.readUInt32BE(20),630)
  }
 })
-test('V14.4 preloads only the actual initially selected role',()=>{
+test('V20 preserves screenshot access without preloading an archived role image',()=>{
  const html=read('index.html')
- assert.match(html,/new URLSearchParams\(location.search\)/)
- assert.match(html,/fullstack:'\/evidence\/ohs-home.webp'/)
- assert.match(html,/software:'\/evidence\/news-overview.webp'/)
- assert.match(html,/if \(!image\) return/)
+ assert.doesNotMatch(html,/Only preload a screenshot when it is the selected role/)
+ assert.match(read('career-modes.js'),/img.loading=isActive\?'eager':'lazy'/)
+ assert.match(read('v20-workspace.js'),/loadManifest\(\)/)
+ assert.match(read('site.js'),/\/evidence\/ohs-home.webp/)
+ assert.match(read('site.js'),/\/evidence\/news-overview.webp/)
 })

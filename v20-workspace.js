@@ -88,6 +88,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     <div class="v20Tabs" role="tablist" aria-label="Project inspection views">${["overview","media","architecture","evidence"].map(t=>`<button type="button" id="v20-${t}" role="tab" data-v20-tab="${t}" tabindex="${t===tab?0:-1}" aria-selected="${t===tab}" aria-controls="v20Panel">${t==="media"?"Screens":t==="architecture"?"Architecture":t==="evidence"?"Evidence":"Overview"}</button>`).join("")}</div>
     <div id="v20Panel" role="tabpanel" tabindex="0" aria-labelledby="v20-${tab}">${tab==="overview"?overview(p):tab==="media"?media(p):tab==="architecture"?architecture(p):evidence(p)}</div>`;
     renderList();
+    doc.dispatchEvent(new win.CustomEvent("portfolio:v20-render",{detail:{projectId:p.id,role,tab}}));
     inspector.querySelectorAll("img").forEach(img=>img.addEventListener("error",()=>{
       if(!img.isConnected)return;
       if(img.closest(".v20Thumbs")){img.hidden=true;return}

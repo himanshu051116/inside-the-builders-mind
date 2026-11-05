@@ -1,0 +1,27 @@
+/* V20.4 Evidence-connected architecture; scoped to existing inspector. */
+.v20Workspace .v20Stages{position:relative;isolation:isolate}
+.v20Workspace .v20Stages>button{position:relative;z-index:1;transition:border-color .16s ease,background-color .16s ease}
+.v20Workspace .v20Stages>button[aria-pressed="true"]{border-color:var(--v20-accent);background:color-mix(in srgb,var(--v20-accent) 13%,var(--v20-panel));box-shadow:inset 0 0 0 1px var(--v20-accent)}
+.v20Workspace .v20Stages>button:focus-visible{outline:3px solid var(--v20-accent);outline-offset:3px}
+.v20Workspace .v204Bridge{margin-top:14px;border:1px solid var(--v20-line);border-radius:8px;overflow:hidden;background:var(--v20-panel)}
+.v20Workspace .v204BridgeHeader{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:11px 15px;border-bottom:1px solid var(--v20-line)}
+.v20Workspace .v204Eyebrow{font:800 10px/1.4 ui-monospace,monospace;letter-spacing:.08em;color:var(--v20-accent)}
+.v20Workspace .v204Context{font:650 11px/1.4 system-ui,sans-serif;color:var(--v20-soft)}
+.v20Workspace .v204BridgeArea{display:grid;grid-template-columns:minmax(145px,.8fr) minmax(0,1.2fr);gap:16px;align-items:start;padding:15px}
+.v20Workspace .v204Visual{min-width:0}
+.v20Workspace .v204CaptureLink{display:block;border:1px solid var(--v20-line);border-radius:6px;overflow:hidden;background:var(--v20-paper)}
+.v20Workspace .v204CaptureLink img{display:block;width:100%;height:auto;max-height:155px;object-fit:contain}
+.v20Workspace .v204Empty{margin:0;min-height:90px;display:flex;align-items:center;padding:14px;border:1px dashed var(--v20-line);border-radius:6px;color:var(--v20-soft);font:550 12px/1.5 system-ui,sans-serif}
+.v20Workspace .v204Detail{min-width:0}
+.v20Workspace .v204Detail h5{margin:0 0 7px;font:750 14px/1.35 system-ui,sans-serif;color:var(--v20-ink)}
+.v20Workspace .v204Detail p{margin:0 0 12px;color:var(--v20-soft);font:450 12px/1.6 system-ui,sans-serif}
+.v20Workspace .v204Actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.v20Workspace .v204Action,.v20Workspace .v204Source{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border-radius:5px;border:1px solid var(--v20-line);background:var(--v20-paper);color:var(--v20-ink);font:700 11px/1.4 system-ui,sans-serif;text-decoration:none;padding:9px 11px;cursor:pointer}
+.v20Workspace .v204Action:hover,.v20Workspace .v204Source:hover{border-color:var(--v20-accent);background:color-mix(in srgb,var(--v20-accent) 9%,var(--v20-panel))}
+.v20Workspace .v204Action:focus-visible,.v20Workspace .v204Source:focus-visible,.v20Workspace .v204CaptureLink:focus-visible{outline:3px solid var(--v20-accent);outline-offset:3px}
+.v20Workspace .v204Boundary{display:block;color:var(--v20-soft);font:550 10px/1.45 system-ui,sans-serif;margin-top:11px}
+.v20Workspace .v204MediaBridge{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;margin:0 0 12px;padding:10px 12px;border:1px solid var(--v20-line);background:var(--v20-panel);border-radius:6px;color:var(--v20-soft);font:550 11px/1.5 system-ui,sans-serif}
+@media(max-width:750px){.v20Workspace .v204BridgeArea{grid-template-columns:1fr}.v20Workspace .v204Visual{max-width:380px}}
+@media(max-width:370px){.v20Workspace .v204BridgeArea{padding:11px}.v20Workspace .v204Actions>*{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){.v20Workspace .v20Stages>button{transition:none!important}}
+@media(forced-colors:active){.v20Workspace .v204Action,.v20Workspace .v204Source,.v20Workspace .v204CaptureLink,.v20Workspace .v204Bridge{border-color:CanvasText}.v20Workspace .v20Stages>button[aria-pressed="true"]{outline:2px solid Highlight}}

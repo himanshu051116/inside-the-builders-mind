@@ -24,3 +24,8 @@
 @media(max-width:620px){.v20Workspace .v205AnnotationPanel{padding:10px}.v20Workspace .v205Hotspot{width:36px;height:36px;font-size:11px}.v20Workspace .v205Head strong{flex:1 1 100%}.v20Workspace .v205Count{margin-left:0}}
 @media(prefers-reduced-motion:reduce){.v20Workspace .v205Hotspot{transition:none!important}}
 @media(forced-colors:active){.v20Workspace .v205Hotspot,.v20Workspace .v205Feature.isActive{forced-color-adjust:auto;border:2px solid Highlight;color:HighlightText}}
+
+/* V20.6 — annotated thumbnail discoverability, unobtrusive visual marker. */
+.v20Workspace .v20Thumbs button.v205AnnotatedThumb{border-color:var(--v20-accent)}
+.v20Workspace .v20Thumbs button.v205AnnotatedThumb::before{content:"+";position:absolute;top:3px;left:4px;z-index:1;min-width:17px;height:17px;display:grid;place-items:center;border-radius:50%;font:800 11px/1 system-ui,sans-serif;color:#fff;background:#93452c;pointer-events:none}
+@media(forced-colors:active){.v20Workspace .v20Thumbs button.v205AnnotatedThumb::before{border:1px solid Highlight;color:HighlightText;background:Highlight}}

@@ -312,6 +312,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(target&&id!==target)chooseProject(target,false,false);
     if(tab!=="evidence")chooseTab("evidence",false,false);
     previewActive=false;renderPreviewBar();
+    doc.dispatchEvent(new win.CustomEvent("portfolio:case-route",{detail:{caseId:match[1]}}));
     // Native anchor navigation already created a browser history entry.
     // Replace that entry's query to match the visible case, retaining its hash.
     emit("replaceState",hash);
@@ -448,10 +449,32 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }
     const a=ev.target.closest('a[href^="#"]');
     if(!a)return;
-    const hash=a.getAttribute("href");if(hash==="#v20Archive"){return}
-    if(hash==="#top"){showArchiveGroup("top");return}
-    if(hash==="#v20-workspace"){return}
-    if(openLegacy(hash)&&win.location.hash===hash)win.requestAnimationFrame?.(()=>doc.getElementById(hash.slice(1))?.scrollIntoView({behavior:"auto",block:"start"}));
+    const hash=a.getAttribute("href");
+    if(hash==="#v20-workspace"||hash==="#v20Archive")return;
+    if(!revealArchive(hash,{scroll:false}))return;
+    // Native anchor scrolling can use the pre-expansion geometry of a <details>
+    // section. Own this explicit navigation so the actual target reaches view.
+    ev.preventDefault();
+    if(previewActive){
+      previewActive=false;
+      const committed=readV207Route(win.location.href,ids);
+      if(committed.role!==role)chooseRole(committed.role,true,false);
+      id=committed.project;tab=committed.panel;
+      capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;
+      alignRouteDetail(win.location.href);render();
+    }
+    const directCase=hash.match(/^#case-(ohs|news|mulyankan|earthbridge)$/);
+    if(directCase){
+      const target=caseSlugToId[directCase[1]];
+      if(target&&id!==target)chooseProject(target,false,false);
+      if(tab!=="evidence")chooseTab("evidence",false,false);
+      doc.dispatchEvent(new win.CustomEvent("portfolio:case-route",{detail:{caseId:directCase[1]}}));
+    }
+    commitSelection("pushState",hash);
+    const targetId=hash.startsWith("#proof/")?"field-proof":hash.slice(1);
+    win.requestAnimationFrame?.(()=>win.requestAnimationFrame?.(()=>{
+      doc.getElementById(targetId)?.scrollIntoView({behavior:"auto",block:"start"});
+    }));
   },true);
   win.addEventListener("hashchange",()=>{
     if(previewActive){

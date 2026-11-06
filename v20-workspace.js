@@ -88,7 +88,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const target=doc.getElementById(targetId);
     if(!target||!body.contains(target))return false;
     const group=target.closest(".v21ArchiveGroup");if(group)group.open=true;
-    if(targetId.startsWith("case-")){
+    if(/^case-(ohs|news|mulyankan|earthbridge)$/.test(targetId)){
       showArchiveGroup("project-notes");
       const grid=doc.getElementById("caseFilesGrid");if(grid)grid.hidden=false;
       const toggle=doc.getElementById("caseNotesToggle");

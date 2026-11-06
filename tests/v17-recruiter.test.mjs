@@ -9,8 +9,9 @@ test('recruiter identity comes before specialization navigation',()=>{
  assert.match(html,/<section class="v17Recruiter" id="home"/)
  assert.match(html,/<h1 id="v17Name">Himanshu Shukla/)
  assert.match(html,/B\.Tech · Mathematics &amp; Computing/)
- assert.match(html,/Madhav Institute of Technology &amp; Science/)
- assert.match(html,/Expected graduation 2028/)
+ assert.match(recruiterFacts.education.institution,/Madhav Institute of Technology & Science/)
+ assert.match(html,/MITS Gwalior/)
+ assert.match(html,/Class of 2028/)
  assert.match(html,/href="#v20-workspace"/)
 })
 

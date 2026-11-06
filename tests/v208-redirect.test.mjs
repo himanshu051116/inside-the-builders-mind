@@ -8,7 +8,7 @@ function run(href,linkPaths=[]){
   const links=linkPaths.map(path=>({href:path,getAttribute(){return this.href},setAttribute(name,value){if(name==='href')this.href=value}}));
   const doc={querySelectorAll(){return links}};
   const win={location:{href,replace(to){redirected=to}}};
-  runInNewContext(code,{window:win,document:doc,URL,setupV216Home(){},setupMilestoneVideo(){videos++;links.push({href:'#case-mulyankan',getAttribute(){return this.href},setAttribute(name,value){if(name==='href')this.href=value}})}});
+  runInNewContext(code,{window:win,document:doc,URL,setupV216Home(){},setupV219Home(){},setupMilestoneVideo(){videos++;links.push({href:'#case-mulyankan',getAttribute(){return this.href},setAttribute(name,value){if(name==='href')this.href=value}})}});
   return {redirected,videos,links};
 }
 test('role+project+panel+old hash survive migration to Work',()=>{

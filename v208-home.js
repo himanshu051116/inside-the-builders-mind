@@ -1,5 +1,6 @@
 import {setupMilestoneVideo} from './v19-milestone-video.js';
 import {setupV216Home} from './v216-home.js';
+import {setupV219Home} from './v219-home.js';
 const u=new URL(window.location.href);
 const routeParams=['view','project','panel'].some(key=>u.searchParams.has(key));
 const legacyHash=/^#(?:v20-workspace$|case-[a-z0-9-]+$|case-files$|field-proof$|proof\/|top$|work$|archive$)/.test(u.hash);
@@ -23,5 +24,6 @@ if(routeParams||legacyHash){
   redirectLinks();
   setupMilestoneVideo(document);
   setupV216Home(document);
+  setupV219Home(document,window);
   redirectLinks();
 }

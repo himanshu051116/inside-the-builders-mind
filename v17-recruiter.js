@@ -39,14 +39,21 @@ export function recruiterIntroMarkup(profile={}) {
   const email=safeHref(profile.email ? 'mailto:'+profile.email : 'mailto:himanshusubh1510@gmail.com');
   return `<section class="v17Recruiter" id="home" aria-labelledby="v17Name">
     <div class="v17Wrap">
-      <div class="v17TopLine"><span class="v17Index">PROFILE</span><span class="v17Availability"><i aria-hidden="true"></i> ${escapeText(f.stage)}</span></div>
+      <div class="v17TopLine"><span class="v17Index">PORTFOLIO · 2026</span><span class="v17Availability"><i aria-hidden="true"></i> ${escapeText(f.stage)}</span></div>
       <div class="v17LeadGrid">
         <div class="v17LeadCopy">
-          <p class="v17Overline">SOFTWARE <span aria-hidden="true">/</span> DATA SYSTEMS <span aria-hidden="true">/</span> MACHINE LEARNING</p>
           <h1 id="v17Name">${name}<span class="v17Period" aria-hidden="true">.</span></h1>
-          <p class="v17Degree">${escapeText(f.education.degree)} <span class="v17Dot" aria-hidden="true">·</span> ${escapeText(f.education.institution)}</p>
-          <p class="v17Graduation">${escapeText(f.education.year)} <span aria-hidden="true">/</span> Expected graduation ${escapeText(f.education.graduation)} <span aria-hidden="true">/</span> Gwalior, India</p>
-          <p class="v17LeadStatement">I build React interfaces, Python data services, and PyTorch retrieval prototypes.</p>
+          <p class="v17Degree">${escapeText(f.education.degree)} <span class="v17Dot" aria-hidden="true">·</span> MITS Gwalior</p>
+          <p class="v17Graduation">Class of ${escapeText(f.education.graduation)} <span aria-hidden="true">·</span> Gwalior</p>
+          <p class="v17LeadStatement">Private-room apps, news pipelines, and satellite-image retrieval tools.</p>
+          <div class="v219FocusWrap" id="focus">
+            <div class="v219FocusTabs" role="tablist" aria-label="Career focus" data-v219-tabs>
+              <button type="button" role="tab" id="v219TabFullstack" data-v219-role="fullstack" aria-selected="true" aria-controls="v219FocusPanel" tabindex="0">Full-Stack</button>
+              <button type="button" role="tab" id="v219TabSoftware" data-v219-role="software" aria-selected="false" aria-controls="v219FocusPanel" tabindex="-1">Software Systems</button>
+              <button type="button" role="tab" id="v219TabMl" data-v219-role="ml" aria-selected="false" aria-controls="v219FocusPanel" tabindex="-1">Applied ML</button>
+            </div>
+            <p id="v219FocusPanel" role="tabpanel" aria-live="polite" aria-atomic="true" aria-labelledby="v219TabFullstack">Private rooms, shared media and React/Firebase interfaces.</p>
+          </div>
           <div class="v17PrimaryLinks"><a class="v17MainCTA" href="#v20-workspace">Explore my projects <span aria-hidden="true">↗</span></a><details class="v17ResumeSelect"><summary>Download résumé <span aria-hidden="true">↓</span></summary><div class="v17ResumeChoices"><a href="/resumes/Himanshu_Shukla_fullstack_Public.pdf" download>Full-Stack</a><a href="/resumes/Himanshu_Shukla_software_Public.pdf" download>Software Systems</a><a href="/resumes/Himanshu_Shukla_ml_Public.pdf" download>Applied ML</a></div></details></div>
           <nav class="v17Socials" aria-label="Professional profile links"><a href="${git}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${email}">Email ↗</a></nav>
           <nav class="v19ProjectRail" aria-label="Jump to documented engineering projects">

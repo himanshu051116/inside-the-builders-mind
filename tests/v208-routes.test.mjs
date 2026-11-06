@@ -22,7 +22,8 @@ test('home retains original recruiter text, three resumes and actual video integ
   for(const part of ['id="home"','v17Proof','LEADERSHIP','AWARDS','/work/','/projects/our-hidden-universe/'])assert.ok(html.includes(part),part);
   for(const role of ['fullstack','software','ml'])assert.ok(html.includes('Himanshu_Shukla_'+role+'_Public.pdf'));
   assert.match(script,/setupMilestoneVideo/);
-  assert.match(html,/v208RoleGrid/);
+  assert.match(html,/v219FocusTabs/);
+  assert.doesNotMatch(html,/Choose a direction/);
   assert.doesNotMatch(html,/id="selected-work"/); // No duplicate of the original hero's project rail.
   for(const asset of ['mulyankan-system-walkthrough-presenter.mp4','mulyankan-docx-workflow-presenter.mp4'])assert.ok(existsSync(new URL('public/video/'+asset,root)));
 });

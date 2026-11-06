@@ -54,7 +54,7 @@ export function buildV208(out,root){
     .replace('Product interface · React / Firebase','Private rooms and shared sessions')
     .replace('Data pipeline · Python / PostgreSQL','Trace articles back to sources')
     .replace('Research prototype · PyTorch / FAISS','Cross-modal satellite retrieval');
-  const home=`${homeHero}<section class="v208Container v208Section" id="focus"><span class="v208Overline">THREE DISTINCT SPECIALIZATIONS</span><h2>Choose a direction.</h2><div class="v208RoleGrid">${roles.map(x=>`<a href="/work/?view=${x.id}&project=${x.first}&panel=${x.panel}#v20-workspace"><strong>${e(x.name)}</strong><span>${e(x.description)}</span><small>Explore ${e(x.name)} work ↗</small></a>`).join('')}</div></section><section class="v208Container v208Section" id="about"><span class="v208Overline">THE APPROACH</span><h2>Design, test, document limits.</h2><p>${e(profile.aboutHeading)}</p><p>${e(profile.philosophy)}</p><a href="/lab/">Try the interactive demonstrations ↗</a></section>`;
+  const home=`${homeHero}<details class="v208Container v219About" id="about"><summary>Methods and background</summary><p>${e(profile.aboutHeading)}</p><p>${e(profile.philosophy)}</p><a href="/lab/">View interactive demonstrations ↗</a></details>`;
   const homeHtml=page('Home',`${profile.name} | Software, Systems & Applied ML`,profile.intro,home,'v208-home.js','https://inside-the-builders-mind.vercel.app/');
   const personSchema=JSON.stringify({'@context':'https://schema.org','@type':'Person',name:profile.name,description:profile.intro,url:'https://inside-the-builders-mind.vercel.app/',sameAs:[profile.github,profile.linkedin]});
   writeAt(out,'',homeHtml.replace('</head>',`<script type="application/ld+json">${personSchema}</script></head>`));

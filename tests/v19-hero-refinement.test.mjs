@@ -11,7 +11,7 @@ test('V19.2 keeps three genuine case-study links in the recruiter hero',()=>{
   for(const anchor of ['#case-ohs','#case-news','#case-earthbridge']) assert.ok(markup.includes(`href="${anchor}"`),anchor);
   assert.match(markup,/v19ProjectRail/);
   assert.match(markup,/Mulyankan/);
-  assert.match(markup,/Expected graduation/);
+  assert.match(markup,/Class of 2028/);
 });
 test('V19.2 layout fixes empty upper space, controls horizontal typography and preserves recorded video',()=>{
   assert.match(css,/\.v17LeadCopy\s*\{[^}]*justify-content:\s*flex-start/s);

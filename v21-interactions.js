@@ -42,8 +42,8 @@ export function setupV21Interactions(doc=document,win=window){
         if(item===anchor)item.setAttribute("data-nav-preview","active");
         else item.removeAttribute("data-nav-preview");
       }
-      // Expand the matching archived section without moving scroll position.
-      doc.dispatchEvent(new win.CustomEvent("portfolio:archive-preview",{detail:{hash:href}}));
+      // Preview is deliberately informational. Only explicit navigation may
+      // expand an archive group or change history.
     }
     nav.addEventListener("pointerover",event=>{
       if(!fineHover()||event.pointerType==="touch")return;

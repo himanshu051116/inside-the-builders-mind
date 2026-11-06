@@ -54,7 +54,7 @@ export function setupV205Annotations(doc=document,win=window){
   const root=doc.getElementById("v20-workspace"),inspector=doc.getElementById("v20Inspector");
   if(!root||!inspector||root.dataset.v205Installed==="true")return false;
   root.dataset.v205Installed="true";
-  let currentCapture="",active=0,show=true;
+  let currentCapture="",active=0,show=false;
   const el=(tag,cls,text)=>{
     const n=doc.createElement(tag);
     if(cls)n.className=cls;
@@ -77,7 +77,7 @@ export function setupV205Annotations(doc=document,win=window){
     const record=V205_ANNOTATIONS[currentCapture];
     if(!panel||!record)return;
     const point=record.points[active]||record.points[0];
-    panel.querySelector(".v205Count").textContent=(active+1)+" / "+record.points.length;
+    panel.querySelector(".v205Count").textContent=panel.open?(active+1)+" / "+record.points.length:record.points.length+" notes";
     panel.querySelector(".v205Title").textContent=point.title;
     panel.querySelector(".v205Explanation").textContent=point.detail;
     const stageAction=panel.querySelector('[data-v205-action="architecture"]');
@@ -113,7 +113,7 @@ export function setupV205Annotations(doc=document,win=window){
     markAnnotatedThumbnails();
     const {figure,img,id,record}=getCurrent();
     if(!figure||!img||!record||figure.querySelector(".v205ImageFrame"))return;
-    if(currentCapture!==id){currentCapture=id;active=0;}
+    if(currentCapture!==id){currentCapture=id;active=0;show=false;}
     const frame=el("div","v205ImageFrame");
     const maxWidth=Math.round(350*record.ratio);
     frame.style.width="min(100%, "+maxWidth+"px)";
@@ -129,12 +129,14 @@ export function setupV205Annotations(doc=document,win=window){
       dots.append(b);
     });
     frame.append(dots);
-    const panel=el("section","v205AnnotationPanel");
+    const panel=el("details","v205AnnotationPanel");
     panel.setAttribute("aria-label","Screenshot annotations");
-    const header=el("div","v205Head");
-    header.append(el("strong","","Explore features in this saved image"),el("span","v205Count"));
+    const header=el("summary","v205Head");
+    header.append(el("strong","","Screenshot notes"),el("span","v205Count"));
+    panel.append(header);
+    const body=el("div","v205AnnotationBody");
     const toggle=makeButton("v205Toggle","","toggle");
-    header.append(toggle);panel.append(header);
+    body.append(toggle);
     const menu=el("div","v205FeatureList");
     menu.setAttribute("role","group");
     menu.setAttribute("aria-label","Select screenshot feature");
@@ -142,14 +144,16 @@ export function setupV205Annotations(doc=document,win=window){
       const b=makeButton("v205Feature",p.title,"pick");
       b.dataset.v205Pick=String(i);menu.append(b);
     });
-    panel.append(menu);
+    body.append(menu);
     const info=el("div","v205Info");info.setAttribute("aria-live","polite");
     info.append(el("h4","v205Title"),el("p","v205Explanation"));
-    panel.append(info);
+    body.append(info);
     const actions=el("div","v205Actions");
     actions.append(makeButton("v205Go","Explore architecture →","architecture"),makeButton("v205Go","Verification & limits →","evidence"));
-    panel.append(actions);
-    panel.append(el("p","v205Disclaimer","The labels describe visible interface elements only. Saved screenshots do not establish real-time functionality, system accuracy, or independent validation."));
+    body.append(actions);
+    body.append(el("p","v205Disclaimer","Notes identify visible UI elements, not verified live functionality."));
+    panel.append(body);
+    panel.addEventListener("toggle",()=>{show=panel.open;renderDetail();});
     figure.insertAdjacentElement("afterend",panel);
     renderDetail();
   }

@@ -1,9 +1,6 @@
 /* V10 evidence-first recruiter UI. Consolidated into portfolio.css at build. */
 :root{--v10-ink:#13221d;--v10-mint:#b7eac6;--v10-muted:#697d75}
-/* Avoid collapsing a 12vh top margin through <body> while JS hydrates.
-   The static source/contact fallback remains readable when JavaScript is off. */
-.noJs{max-width:740px;margin:0 auto;padding:clamp(24px,5vw,48px);min-height:50vh;
-  color:#19393c;background:#f5f1e9;font:18px/1.6 system-ui,sans-serif}
+.noJs{max-width:740px;margin:12vh auto;padding:32px;color:#102b29;font:18px/1.6 system-ui,sans-serif}
 .noJs h1{font-size:clamp(28px,5vw,52px);letter-spacing:-.04em}
 body[data-role=fullstack]{--evidence-bg:#f7f5ec;--evidence-border:#d1caba;--evidence-ink:#2b302a;--evidence-accent:#be694d}
 body[data-role=software]{--evidence-bg:#121923;--evidence-border:#465362;--evidence-ink:#f0f3f0;--evidence-accent:#e3b774}

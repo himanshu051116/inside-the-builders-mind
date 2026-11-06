@@ -18,6 +18,17 @@ test('V20.8 retains recruiter evidence and three distinct résumé downloads',()
   assert.doesNotMatch(hero,/class="v19ProjectRail"/)
 })
 
+test('V20.8 hero presents three curated projects in the unused left column',()=>{
+  assert.match(hero,/class="v208SelectedProjects"/)
+  assert.equal((hero.match(/class="v208SelectedProject"/g)||[]).length,3)
+  for(const id of ['our-hidden-universe','newssources','earthbridge']){
+    assert.match(hero,new RegExp('data-v20-open-project="'+id+'"'))
+  }
+  assert.match(quality,/#home \.v208SelectedProjects/)
+  assert.match(quality,/#home \.v208SelectedProject:focus-visible/)
+  assert.match(quality,/@media\(max-width:630px\)/)
+})
+
 test('V20.8 previews workspace controls on fine-pointer hover without hijacking focus',()=>{
   assert.match(workspace,/\(hover: hover\) and \(pointer: fine\)/)
   assert.match(workspace,/workspace\.addEventListener\("pointerover"/)

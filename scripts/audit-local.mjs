@@ -19,7 +19,8 @@ for (const entry of projects) {
     } catch { fail(`Malformed link in ${entry.title}: ${link.url}`) }
   }
 }
-if (projects.length !== 6) warn(`Expected six featured project cards; found ${projects.length}`)
+if (projects.length !== 5) warn(`Expected five featured project cards; found ${projects.length}`)
+if (projects.some(project=>project.title==='Sentinel')) warn('The removed security project is still present')
 if (!profile.portfolioRepo) warn('Set profile.portfolioRepo once the NEW portfolio source repository is published.')
 if (!profile.github || !profile.linkedin) fail('Missing personal public profile links.')
 if (/password|api[_-]?key|private[_-]?key|secret\s*[:=]/i.test(readFileSync(resolve(root,'content.js'),'utf-8'))) warn('Review content.js for accidental secret-like text.')

@@ -43,13 +43,14 @@ test('Evidence gallery provides a shareable, accessible visual inspection experi
 })
 test('V14.6 keeps real images as lead evidence without fabricating retrieved matches',()=>{
   for(const id of ['ohs-home','news-overview'])assert.match(site,new RegExp(`src="/evidence/${id}\\.webp"`))
-  assert.match(site,/fetchpriority="high"/)
+  assert.match(site,/fetchpriority="low"/)
+  assert.doesNotMatch(site,/fetchpriority="high"/)
   assert.match(site,/v17Recruiter|recruiterIntroMarkup/)
   assert.equal(Object.keys(data).filter(id=>id.startsWith('earthbridge-')).length,4)
   assert.match(media,/A genuine query with ranked satellite-image matches is still needed/)
 })
 test('Explicit hero image height auto prevents portrait-style unused vertical space',()=>{
   assert.match(css,/\.heroRealImage img\{[^}]*width:100%;height:auto;/)
-  assert.match(site,/width="1606" height="1021" fetchpriority="high"/)
-  assert.match(site,/width="1642" height="1048" fetchpriority="high"/)
+  assert.match(site,/width="1606" height="1021" fetchpriority="low"/)
+  assert.match(site,/width="1642" height="1048" fetchpriority="low"/)
 })

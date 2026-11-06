@@ -34,7 +34,7 @@ test('V20.8 previews workspace controls on fine-pointer hover without hijacking 
   assert.match(workspace,/workspace\.addEventListener\("pointerover"/)
   assert.match(workspace,/workspace\.addEventListener\("pointerout"/)
   assert.match(workspace,/chooseTab\(button\.dataset\.v20Tab,false,false\)/)
-  assert.match(workspace,/emit\("replaceState"\)/)
+  assert.match(workspace,/commitSelection\("pushState"\)/)
   assert.match(workspace,/pointerType==="touch"/)
   assert.match(workspace,/requestAnimationFrame/)
   assert.match(workspace,/prefers-reduced-motion: reduce/)

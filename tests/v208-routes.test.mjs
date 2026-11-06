@@ -24,6 +24,9 @@ test('Work renders all case-study links as HTML and offers a separate explorer e
   for(const project of projects)assert.ok(html.includes(`href="/projects/${slug(project.title)}/" aria-labelledby`),project.title);
   assert.match(html,/href="\/work\/\?view=fullstack#v20-workspace"/);
   assert.doesNotMatch(html,/id="v20-workspace"/);
+  assert.match(html,/class="v208GalleryToolbar" hidden/);
+  assert.match(html,/data-v208-gallery-filter="all" aria-pressed="true"/);
+  assert.equal((html.match(/data-v208-project-filters=/g)||[]).length,projects.length);
 });
 test('home retains original recruiter text, three resumes and actual video integration',()=>{
   const html=page(''),script=read('v208-home.js');
@@ -33,6 +36,15 @@ test('home retains original recruiter text, three resumes and actual video integ
   assert.match(html,/v208RoleGrid/);
   assert.doesNotMatch(html,/id="selected-work"/); // No duplicate of the original hero's project rail.
   for(const asset of ['mulyankan-system-walkthrough-presenter.mp4','mulyankan-docx-workflow-presenter.mp4'])assert.ok(existsSync(new URL('public/video/'+asset,root)));
+});
+test('Home uses saved spotlight captures with stable case-study links',()=>{
+  const html=page('');
+  assert.match(html,/id="spotlight-mulyankan-overview">/);
+  for(const id of ['mulyankan-overview','mulyankan-submission','mulyankan-history']){
+    assert.ok(html.includes(`aria-controls="spotlight-${id}"`),id);
+    assert.ok(html.includes(`href="/projects/mulyankan/?capture=${id}#captures"`),id);
+  }
+  assert.match(html,/id="spotlight-mulyankan-history" hidden/);
 });
 test('six canonical project dossiers are generated from the same content records',()=>{
   assert.equal(projects.length,6);

@@ -3,12 +3,19 @@ import {join} from 'node:path';
 import {profile,projects} from '../content.js';
 import {recruiterIntroMarkup} from '../v17-recruiter.js';
 import {V20_FLOWS} from '../v20-workspace.js';
+import {evidenceLink} from '../v211-evidence-model.js';
 const e=x=>String(x??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const safe=x=>/^(https:\/\/[^\s"<>]+|mailto:[^\s"<>]+|\/[a-zA-Z0-9][^\s"<>]*)$/.test(String(x||''))?e(x):'#';
 const slug=x=>String(x).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const imagePrefix={mulyankan:'mulyankan-',earthbridge:'earthbridge-',newssources:'news-','our-hidden-universe':'ohs-',schoolbuddies:'schoolbuddies-'};
 const routes=Object.fromEntries(projects.map(p=>[slug(p.title),p]));
 const roles=[{id:'fullstack',name:'Full-Stack',first:'our-hidden-universe',panel:'media',description:'Product interfaces and real application captures'},{id:'software',name:'Software Systems',first:'newssources',panel:'architecture',description:'Backend systems, provenance and engineering decisions'},{id:'ml',name:'Applied ML',first:'earthbridge',panel:'evidence',description:'Research prototypes, methods and evaluation boundaries'}];
+const galleryFilters=[['all','All'],['software','Software'],['systems','Systems'],['ai','AI & ML']];
+const spotlightScreens=[
+  ['mulyankan-overview','Review queue'],
+  ['mulyankan-submission','Proposal intake'],
+  ['mulyankan-history','Review history']
+];
 const repo='https://github.com/himanshu051116/inside-the-builders-mind';
 const previewBuild=process.env.VERCEL_ENV==='preview'||process.env.PORTFOLIO_NOINDEX==='1';
 const robotPolicy=previewBuild?'noindex,nofollow':'index,follow';
@@ -31,7 +38,7 @@ function projectCard(p){
   const cover=p.evidenceImage
     ? `<img src="${safe(p.evidenceImage)}" loading="lazy" alt="${e(p.evidenceImageCaption)}" width="720" height="460">`
     : '<span class="v208ImageEmpty">Technical record</span>';
-  return `<article class="v208ProjectCard">
+  return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}">
     <a class="v208CardLink" href="${projectLink(id)}" aria-labelledby="card-${id} action-${id}">
       <div class="v208CardCover">${cover}</div>
       <div class="v208CardBody">
@@ -124,10 +131,20 @@ export function buildV208(out,root){
       <div><h1>Selected work</h1><p>Software, data systems, and applied machine learning.</p></div>
       <a class="v208TextAction" href="${explorerLink}">Open interactive explorer ↗</a>
     </div>
+    <div class="v208GalleryToolbar" hidden>
+      <div class="v208GalleryFilters" role="group" aria-label="Filter projects">
+        ${galleryFilters.map(([key,label])=>`<button type="button" data-v208-gallery-filter="${key}" aria-pressed="${key==='all'}">${e(label)}</button>`).join('')}
+      </div>
+      <p class="v208GalleryCount" role="status">${projects.length} projects</p>
+    </div>
     ${projectGrid}
   </section>`;
   writeAt(out,'work',page('WorkPage','Selected Work | Inside the Builder\'s Mind','Six software, data systems and applied machine learning projects with screenshots and case studies.',workMarkup,'v208-work.js','https://inside-the-builders-mind.vercel.app/work/'));
-  const homeHero=recruiterIntroMarkup(profile,{featuredProject:routes.mulyankan})
+  const spotlightAssets=new Map(assetsFor(routes.mulyankan,manifest));
+  const featuredCaptures=spotlightScreens.filter(([id])=>spotlightAssets.has(id)).map(([id,label])=>({
+    ...spotlightAssets.get(id),id,label,href:evidenceLink(projectLink('mulyankan'),id)
+  }));
+  const homeHero=recruiterIntroMarkup(profile,{featuredCaptures})
     .replaceAll('href="#v20-workspace"','href="/work/"')
     .replaceAll('href="#case-ohs"','href="/projects/our-hidden-universe/"')
     .replaceAll('href="#case-news"','href="/projects/newssources/"')

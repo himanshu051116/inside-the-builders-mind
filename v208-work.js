@@ -1,6 +1,31 @@
 // The Work gallery is built as HTML. Load the explorer for explicit entry links
 // and existing share URLs only.
 
+function setupGalleryFilters(gallery){
+  const toolbar=gallery.querySelector('.v208GalleryToolbar');
+  const cards=[...gallery.querySelectorAll('[data-v208-project-filters]')];
+  const count=toolbar.querySelector('.v208GalleryCount');
+  let active=toolbar.querySelector('[aria-pressed="true"]');
+  toolbar.hidden=false;
+
+  toolbar.addEventListener('click',event=>{
+    const button=event.target.closest('[data-v208-gallery-filter]');
+    if(!button||button===active)return;
+    active.setAttribute('aria-pressed','false');
+    button.setAttribute('aria-pressed','true');
+    active=button;
+
+    const filter=button.dataset.v208GalleryFilter;
+    let visible=0;
+    for(const card of cards){
+      const matches=filter==='all'||card.dataset.v208ProjectFilters.split(' ').includes(filter);
+      card.hidden=!matches;
+      if(matches)visible++;
+    }
+    count.textContent=`${visible} project${visible===1?'':'s'}`;
+  });
+}
+
 const locationUrl=new URL(window.location.href);
 const oldHash=locationUrl.hash;
 const hasSelection=['view','project','panel'].some(key=>locationUrl.searchParams.has(key));
@@ -48,4 +73,6 @@ if(oldDest){
     const evidence=document.createElement('a');evidence.href='/evidence/';evidence.textContent='Technical evidence index ↗';
     related.append(projects,evidence);footer.append(related);
   }
+}else{
+  setupGalleryFilters(document.getElementById('work-gallery'));
 }

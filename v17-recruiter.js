@@ -31,19 +31,28 @@ function safeHref(value) {
   return /^(https:\/\/[^\s"<>]+|mailto:[^\s"<>]+)$/.test(url) ? escapeText(url) : '#contact';
 }
 
-export function recruiterIntroMarkup(profile={}, {featuredProject}={}) {
+function spotlightMarkup(captures){
+  if(!captures.length)return '';
+  const choices=captures.length>1?`<div class="v208SpotlightChoices" role="group" aria-label="Saved Mulyankan screens" hidden>
+    ${captures.map(({id,label},i)=>`<button type="button" aria-pressed="${i===0}" aria-controls="spotlight-${escapeText(id)}">${escapeText(label)}</button>`).join('')}
+  </div>`:'';
+  return `<div class="v208SpotlightCapture">
+    ${choices}
+    ${choices?'<p class="v208SpotlightStatus" role="status"></p>':''}
+    ${captures.map(({id,path,caption,width,height,href},i)=>`<figure id="spotlight-${escapeText(id)}"${i?' hidden':''}>
+      <img src="${escapeText(path)}" alt="${escapeText(caption)}" width="${Number(width)||720}" height="${Number(height)||460}" loading="${i?'lazy':'eager'}" decoding="async">
+      <figcaption><span>${escapeText(caption)}</span><a href="${escapeText(href)}">Inspect screen ↗</a></figcaption>
+    </figure>`).join('')}
+  </div>`;
+}
+
+export function recruiterIntroMarkup(profile={}, {featuredCaptures=[]}={}) {
   const f=recruiterFacts;
   const name=escapeText(profile.name || 'Himanshu Shukla');
   const git=safeHref(profile.github || 'https://github.com/himanshu051116');
   const linkedin=safeHref(profile.linkedin || 'https://www.linkedin.com/in/himanshu-shukla-88175637a');
   const email=safeHref(profile.email ? 'mailto:'+profile.email : 'mailto:himanshusubh1510@gmail.com');
-  const featuredImage=featuredProject?.evidenceImage;
-  const capture=/^\/evidence\/[a-z0-9-]+\.webp$/.test(featuredImage||'')
-    ? `<figure class="v208SpotlightCapture">
-        <img src="${escapeText(featuredImage)}" alt="Mulyankan proposal review dashboard with proposal details redacted" width="720" height="460" decoding="async">
-        <figcaption>Saved proposal review screen · redacted</figcaption>
-      </figure>`
-    : '';
+  const featuredProject=featuredCaptures.length>0;
   const statement='<p class="v17LeadStatement">I build React interfaces, Python data services, and PyTorch retrieval prototypes.</p>';
   return `<section class="v17Recruiter" id="home" aria-labelledby="v17Name">
     <div class="v17Wrap">
@@ -70,7 +79,7 @@ export function recruiterIntroMarkup(profile={}, {featuredProject}={}) {
         <aside class="v17Proof" aria-labelledby="v17ProofTitle">
           <div class="v17ProofHeader"><span>${featuredProject?'Featured project':'PROJECT DEMO'}</span><span>${featuredProject?'Demonstrated prototype':'2026'}</span></div>
           <div class="v17ProofBody"><span class="v17ProofProject">${escapeText(f.spotlight.project)}</span><h2 id="v17ProofTitle">${featuredProject?'Evidence-linked proposal review':'Document review<br>with cited evidence.'}</h2><p>${escapeText(f.spotlight.detail)}</p>
-          ${capture}
+          ${spotlightMarkup(featuredCaptures)}
           <div class="v17ProofMeta"><div><span>DEMONSTRATED AT</span><strong>${escapeText(f.spotlight.institution)}</strong></div><div><span>DATE</span><strong>${escapeText(f.spotlight.date)}</strong></div></div>
           <a class="v17ProofLink" href="#case-mulyankan">Mulyankan case study <span aria-hidden="true">↗</span></a></div>
         </aside>

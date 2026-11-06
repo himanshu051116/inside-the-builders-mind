@@ -47,6 +47,47 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   gap: 12px 28px;
   margin-bottom: 24px;
 }
+.v208GalleryToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 16px;
+}
+.v208GalleryToolbar[hidden], .v208ProjectCard[hidden],
+.v208SpotlightChoices[hidden], .v208SpotlightCapture figure[hidden] {
+  display: none;
+}
+.v208GalleryFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.v208GalleryCount {
+  margin: 0;
+  color: var(--v208-muted);
+  font-size: 13px;
+}
+.v208GalleryFilters button, .v208SpotlightChoices button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px 12px;
+  border: 1px solid var(--v208-rule);
+  border-radius: 6px;
+  background: var(--v208-card);
+  color: var(--v208-ink);
+  font: 700 13px/1.3 system-ui, sans-serif;
+  cursor: pointer;
+}
+.v208GalleryFilters button:hover {
+  border-color: #527c70;
+}
+.v208GalleryFilters button[aria-pressed="true"] {
+  border-color: #225e59;
+  background: #225e59;
+  color: #fffdf7;
+}
 .v208WorkHeading h1, .v208PageIntro h1, .v208WorkPage .v20Head h1 {
   font-family: "Space Grotesk", system-ui, sans-serif;
   font-size: clamp(36px, 4.8vw, 62px);
@@ -268,11 +309,45 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 .v208SpotlightCapture {
   margin: 0 0 7px;
 }
+.v208SpotlightCapture figure {
+  margin: 0;
+}
+.v208SpotlightChoices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 8px;
+}
+.v208SpotlightChoices button {
+  padding-inline: 6px;
+  border-color: #789892;
+  background: #233f43;
+  color: #faf7ed;
+}
+.v208SpotlightChoices button:hover {
+  background: #31545a;
+}
+.v208SpotlightChoices button[aria-pressed="true"] {
+  border-color: #ebe6d7;
+  background: #ebe6d7;
+  color: #193b3b;
+}
+.v208SpotlightChoices[aria-busy="true"] button {
+  cursor: progress;
+}
+.v208SpotlightStatus {
+  margin: 0;
+  color: #ffd7b8;
+  font-size: 13px;
+}
+.v208SpotlightStatus:not(:empty) {
+  margin-bottom: 8px;
+}
 .v208SpotlightCapture img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 230px;
+  max-height: 210px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center top;
@@ -280,9 +355,23 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   border-radius: 8px;
 }
 .v208SpotlightCapture figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 12px;
   color: #c9dad4;
   font-size: 12px;
   margin-top: 7px;
+}
+.v208SpotlightCapture figcaption span {
+  flex: 1 1 185px;
+}
+.v208SpotlightCapture figcaption a {
+  color: #ffd7b8;
+  font-weight: 750;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .v208RecordingButton {
   display: inline-flex;
@@ -303,6 +392,31 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 }
 .v208Home #home .v17Proof :focus-visible {
   outline-color: #f4bc99;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .v208Home #home :is(.v17LeadCopy, .v17Proof) {
+    animation: v208Reveal .32s ease-out;
+  }
+  #work-gallery .v208ProjectCard:not([hidden]), .v208SpotlightCapture figure:not([hidden]) {
+    animation: v208Reveal .22s ease-out;
+  }
+  .v208CardCover img, .v208CardAction > span {
+    transition: transform .22s ease-out;
+  }
+  .v208CardAction > span {
+    display: inline-block;
+  }
+  .v208CardLink:is(:hover, :focus-visible) .v208CardCover img {
+    transform: scale(1.025);
+  }
+  .v208CardLink:is(:hover, :focus-visible) .v208CardAction > span {
+    transform: translate(2px, -2px);
+  }
+  @keyframes v208Reveal {
+    from { opacity: .72; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
 @media (max-width: 950px) {

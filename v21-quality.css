@@ -123,6 +123,20 @@
   color:#1e343c;
 }
 .v21Archive .v21ProjectNotes .caseNotesHead{margin-top:0}
+.v21Archive .v21ProjectNotes .caseNotesHead{justify-content:flex-end}
+.v21Archive .v21ProjectNotes .caseNotesHead>div{display:none}
+.v21Archive .v21ProjectNotes .caseNotesHead button{
+  border:1px solid #b9a98f;color:#25434a;background:#f9f5ec;
+  border-radius:8px;min-height:41px;padding:9px 13px;
+}
+.v21Archive .v21ProjectNotes .caseNotesHead button:hover{
+  border-color:#a14f39;color:#a14f39;background:#fffaf2;
+}
+.v21Archive .v21ArchiveContent :is(.sectionHeadRow h2,.caseFilesHeader h2,.archiveHeading h2){
+  font-size:clamp(24px,2.9vw,38px);line-height:1.12;
+}
+.v21Archive .v21ArchiveContent :is(.sectionHead,.caseFilesHeader){margin-bottom:clamp(17px,2vw,27px)}
+
 .v21Archive .v21ArchiveContent #caseFilesGrid{min-width:0}
 .v21Archive .v21ArchiveGroup:has(#top){background:#f9f6ef}
 .v21Archive .v21ArchiveGroup:has(#top)[open]{background:transparent}

@@ -43,11 +43,23 @@ export function setupV23Quality(doc=document,win=window){
       details.append(thumbs);
       const key=projectId();
       details.open=openTrays.get(key)??false;
+      const revealThumbs=()=>{
+        if(!details.isConnected||!details.open)return;
+        // Closed gallery images have data-src only, avoiding eager transfer.
+        for(const img of details.querySelectorAll('img[data-src]')){
+          const path=img.getAttribute('data-src');
+          if(!allowImage(path))continue;
+          img.setAttribute('src',path);
+          img.removeAttribute('data-src');
+        }
+      };
       details.addEventListener('toggle',()=>{
         // A project may rerender while thumbnails change; do not capture an
         // old gallery's state after its DOM has been replaced.
         if(details.isConnected&&key)openTrays.set(key,details.open);
+        revealThumbs();
       });
+      if(details.open)revealThumbs();
     }
   }
   // Existing enhancements run first, then V23 composes their UI.

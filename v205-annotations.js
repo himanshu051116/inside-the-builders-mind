@@ -54,7 +54,7 @@ export function setupV205Annotations(doc=document,win=window){
   const root=doc.getElementById("v20-workspace"),inspector=doc.getElementById("v20Inspector");
   if(!root||!inspector||root.dataset.v205Installed==="true")return false;
   root.dataset.v205Installed="true";
-  let currentCapture="",active=0,show=false;
+  let currentCapture="",active=0,show=false,expandedCapture="";
   const el=(tag,cls,text)=>{
     const n=doc.createElement(tag);
     if(cls)n.className=cls;
@@ -113,7 +113,7 @@ export function setupV205Annotations(doc=document,win=window){
     markAnnotatedThumbnails();
     const {figure,img,id,record}=getCurrent();
     if(!figure||!img||!record||figure.querySelector(".v205ImageFrame"))return;
-    if(currentCapture!==id){currentCapture=id;active=0;show=false;}
+    if(currentCapture!==id){currentCapture=id;active=0;show=false;expandedCapture="";}
     const frame=el("div","v205ImageFrame");
     const maxWidth=Math.round(350*record.ratio);
     frame.style.width="min(100%, "+maxWidth+"px)";
@@ -130,6 +130,7 @@ export function setupV205Annotations(doc=document,win=window){
     });
     frame.append(dots);
     const panel=el("details","v205AnnotationPanel");
+    if(expandedCapture===id){panel.open=true;show=true;}
     panel.setAttribute("aria-label","Screenshot annotations");
     const header=el("summary","v205Head");
     header.append(el("strong","","Screenshot notes"),el("span","v205Count"));
@@ -153,7 +154,7 @@ export function setupV205Annotations(doc=document,win=window){
     body.append(actions);
     body.append(el("p","v205Disclaimer","Notes identify visible UI elements, not verified live functionality."));
     panel.append(body);
-    panel.addEventListener("toggle",()=>{show=panel.open;renderDetail();});
+    panel.addEventListener("toggle",()=>{show=panel.open;expandedCapture=show?id:"";renderDetail();});
     const thumbnails=figure.parentElement?.querySelector(".v20Thumbs");
     (thumbnails||figure).insertAdjacentElement("afterend",panel);
     renderDetail();

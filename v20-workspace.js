@@ -152,7 +152,18 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   };
   function renderList(){
     const shown=relevant();
-    list.innerHTML=shown.map(p=>`<button type="button" data-v20-project="${e(p.id)}" aria-pressed="${p.id===id}" class="${p.id===id?"v20Selected":""}"><span class="v20Num">${e(p.number)}</span><span><strong>${e(p.title)}</strong><small>${e(p.stack.slice(0,2).join(" · "))}</small></span><span aria-hidden="true">↗</span></button>`).join("")||'<p class="v20NoResults">No matches. Try another technology or project name.</p>';
+    // Keep buttons mounted during hover preview: replacing them under the
+    // pointer previously cancelled the subsequent click/commit action.
+    const signature=shown.map(p=>p.id).join("|");
+    if(list.dataset.signature!==signature){
+      list.innerHTML=shown.map(p=>`<button type="button" data-v20-project="${e(p.id)}" aria-pressed="false"><span class="v20Num">${e(p.number)}</span><span><strong>${e(p.title)}</strong><small>${e(p.stack.slice(0,2).join(" · "))}</small></span><span aria-hidden="true">↗</span></button>`).join("")||'<p class="v20NoResults">No matches. Try another technology or project name.</p>';
+      list.dataset.signature=signature;
+    }
+    list.querySelectorAll("[data-v20-project]").forEach(b=>{
+      const chosen=b.dataset.v20Project===id;
+      b.setAttribute("aria-pressed",String(chosen));
+      b.classList.toggle("v20Selected",chosen);
+    });
     doc.getElementById("v20Count").textContent=`${shown.length} / ${entry.length} projects`;
   }
   function links(p){return p.links.filter(x=>safe(x.url)).map(x=>`<a href="${safe(x.url)}" target="_blank" rel="noopener noreferrer">${e(x.label)} ↗</a>`).join("")}
@@ -160,23 +171,40 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const s=safe(p.evidenceImage);
     return s?`<figure class="v20HeroImage"><img loading="lazy" src="${s}" alt="${e(p.evidenceImageCaption||p.title+" screenshot")}"><figcaption>${e(p.evidenceImageCaption||"Project screenshot")}</figcaption></figure>`:`<div class="v20NoPhoto">No verified screenshot is available for ${e(p.title)}.</div>`;
   }
-  function overview(p){return `<div class="v20Split">${image(p)}<div class="v20Fields"><h4>What it solves</h4><p>${e(p.caseStudy.problem)}</p><h4>Implementation</h4><p>${e(p.caseStudy.approach)}</p><div class="v20Links">${links(p)}</div></div></div>`}
+  function detailRecord(p){
+    const key=projectToCase[p.id],record=key?caseDossiers[key]:null;
+    if(!record)return "";
+    return `<details class="v25EngineeringRecord"><summary><strong>Engineering decisions & test evidence</strong><span>Source-backed details ↗</span></summary>
+      <div class="v25RecordBody"><section><h5>Key decision</h5><p>${e(record.decision)}</p></section>
+        <section><h5>Trade-off</h5><p>${e(record.tradeoff)}</p></section>
+        <section><h5>How to verify</h5><p>${e(record.reproducible)}</p></section>
+        <div class="v25RecordLinks">${record.evidence.filter(x=>safe(x[1])).map(([label,url])=>`<a href="${safe(url)}" target="_blank" rel="noopener noreferrer">${e(label)} ↗</a>`).join("")}</div>
+        <a class="v25CaseLink" href="#case-${key}" data-v20-case>Open complete engineering case ↗</a>
+      </div></details>`;
+  }
+  function overview(p){return `<div class="v20Split">${image(p)}<div class="v20Fields"><h4>What it solves</h4><p>${e(p.caseStudy.problem)}</p><h4>Implementation</h4><p>${e(p.caseStudy.approach)}</p><div class="v20Links">${links(p)}</div></div></div>${detailRecord(p)}`}
   function media(p){
-    const prefixes={mulyankan:"mulyankan-",earthbridge:"earthbridge-",newssources:"news-","our-hidden-universe":"ohs-",schoolbuddies:"schoolbuddies-"};
-    const prefix=prefixes[p.id];
-    const shots=manifest&&prefix?Object.entries(manifest).filter(([k,v])=>k.startsWith(prefix)&&v&&/^\/evidence\/[a-z-]+\.webp$/.test(v.path)):[];
-    if(!shots.length&&p.evidenceImage)shots.push([p.id,{path:p.evidenceImage,caption:p.evidenceImageCaption||p.title}]);
+    const shots=getShots(p);
+    const desired=captureTokenByProject.get(p.id);
+    const found=shots.findIndex(([key])=>key===desired);
+    if(found>=0)capture=found;
     capture=Math.min(capture,Math.max(shots.length-1,0));
     const selected=shots[capture];
+    // Upgrade a fallback ID to the real manifest ID when it becomes available.
+    if(selected&&(!desired||found>=0||desired===p.id))captureTokenByProject.set(p.id,selected[0]);
     return `<div class="v20Media">${p.id==="earthbridge"?'<p class="v20Notice">Evaluation figures are repository-reported, not independently verified.</p>':""}
       ${p.id==="mulyankan"?'<button data-v20-video type="button" class="v20VideoButton">▶ Watch original presenter recordings (17s / 20s)</button>':""}
       ${manifestError?'<p class="v20Notice">Gallery unavailable. <button data-v20-retry type="button">Retry</button></p>':""}
-      ${selected?`<figure><img loading="lazy" src="${safe(selected[1].path)}" alt="${e(selected[1].caption)}"><figcaption>${e(selected[1].caption)}</figcaption></figure><div class="v20Thumbs" role="group" aria-label="Select a project capture">${shots.map(([k,s],n)=>`<button type="button" data-v20-capture="${n}" aria-pressed="${n===capture}" title="${e(s.caption)}"><img data-src="${safe(s.path)}" loading="lazy" decoding="async" alt=""><span>${n+1}</span></button>`).join("")}</div>`:"<p>No verified project capture. Open the project source instead.</p>"}</div>`;
+      ${selected?`<figure><img loading="lazy" src="${safe(selected[1].path)}" alt="${e(selected[1].caption)}"><figcaption>${e(selected[1].caption)}</figcaption></figure><div class="v20Thumbs" role="group" aria-label="Select a project capture">${shots.map(([k,s],n)=>`<button type="button" data-v20-capture="${n}" data-v20-capture-id="${e(k)}" aria-pressed="${n===capture}" title="${e(s.caption)}"><img data-src="${safe(s.path)}" loading="lazy" decoding="async" alt=""><span>${n+1}</span></button>`).join("")}</div>`:"<p>No verified project capture. Open the project source instead.</p>"}</div>`;
   }
   function architecture(p){
     const stages=V20_FLOWS[p.id]||[["Implementation",p.caseStudy.approach]];
+    const desiredStage=stageTokenByProject.get(p.id);
+    const foundStage=stages.findIndex(([name])=>slugStep(name)===desiredStage);
+    if(foundStage>=0)stage=foundStage;
     stage=Math.min(stage,stages.length-1);
-    return `<div class="v20Architecture"><p>Inspect design stages. This is an explanatory view, not a live trace.</p><div class="v20Stages" role="group" aria-label="Inspect architecture stages">${stages.map(([name],i)=>`<button type="button" data-v20-stage="${i}" aria-pressed="${i===stage}"><small>0${i+1}</small><strong>${e(name)}</strong></button>`).join("")}</div><div class="v20StageDetail"><small>STAGE ${stage+1}</small><h4>${e(stages[stage][0])}</h4><p>${e(stages[stage][1])}</p></div><div class="v20Links">${links(p)}</div></div>`;
+    if(!desiredStage||foundStage>=0)stageTokenByProject.set(p.id,slugStep(stages[stage][0]));
+    return `<div class="v20Architecture"><p>Inspect design stages. This is an explanatory view, not a live trace.</p><div class="v20Stages" role="group" aria-label="Inspect architecture stages">${stages.map(([name],i)=>`<button type="button" data-v20-stage="${i}" data-v20-stage-id="${e(slugStep(name))}" aria-pressed="${i===stage}"><small>0${i+1}</small><strong>${e(name)}</strong></button>`).join("")}</div><div class="v20StageDetail"><small>STAGE ${stage+1}</small><h4>${e(stages[stage][0])}</h4><p>${e(stages[stage][1])}</p></div><div class="v20Links">${links(p)}</div></div>`;
   }
   function evidence(p){
     const cases={mulyankan:"mulyankan",earthbridge:"earthbridge",newssources:"news","our-hidden-universe":"ohs"};
@@ -189,6 +217,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     <div class="v20Tabs" role="tablist" aria-label="Project inspection views">${["overview","media","architecture","evidence"].map(t=>`<button type="button" id="v20-${t}" role="tab" data-v20-tab="${t}" tabindex="${t===tab?0:-1}" aria-selected="${t===tab}" aria-controls="v20Panel">${t==="media"?"Screens":t==="architecture"?"Architecture":t==="evidence"?"Evidence":"Overview"}</button>`).join("")}</div>
     <div id="v20Panel" role="tabpanel" tabindex="0" aria-labelledby="v20-${tab}">${tab==="overview"?overview(p):tab==="media"?media(p):tab==="architecture"?architecture(p):evidence(p)}</div>`;
     renderList();
+    renderPreviewBar();
     doc.dispatchEvent(new win.CustomEvent("portfolio:v20-render",{detail:{projectId:p.id,role,tab}}));
     inspector.querySelectorAll("img").forEach(img=>img.addEventListener("error",()=>{
       if(!img.isConnected)return;

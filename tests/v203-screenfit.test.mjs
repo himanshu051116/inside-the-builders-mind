@@ -15,8 +15,8 @@ test('screen fit applies only on shorter desktop viewports', () => {
 })
 
 test('the visible hero keeps every core surface', () => {
-  for (const selector of ['.v17TopLine','.v17LeadGrid','.v17LeadCopy','.v19ProjectRail a','.v17ProofHeader','.v19MilestoneOpen','.v17Essential','.v17GoDeeper']) assert.ok(css.includes(selector),selector)
-  for (const token of ['v17Essentials','v19ProjectRail','v17Proof','v17ResumeSelect','/resumes/Himanshu_Shukla_ml_Public.pdf']) assert.ok(recruiter.includes(token),token)
+  for (const selector of ['.v17TopLine','.v17LeadGrid','.v17LeadCopy','.v17ProofHeader','.v19MilestoneOpen','.v17Essential','.v17Socials']) assert.ok(css.includes(selector),selector)
+  for (const token of ['v17Essentials','v208SelectedProjects','v17Proof','v17ResumeSelect','/resumes/Himanshu_Shukla_ml_Public.pdf']) assert.ok(recruiter.includes(token),token)
 })
 
 test('video poster framing, original clips and separate player are unchanged', () => {

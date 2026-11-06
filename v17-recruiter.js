@@ -57,6 +57,12 @@ export function recruiterIntroMarkup(profile={}, {featuredCaptures=[]}={}) {
   const email=safeHref(profile.email ? 'mailto:'+profile.email : 'mailto:himanshusubh1510@gmail.com');
   const featuredProject=featuredCaptures.length>0;
   const statement='<p class="v17LeadStatement">I build React interfaces, Python data services, and PyTorch retrieval prototypes.</p>';
+  const caseLink=`<a class="v17ProofLink" href="#case-mulyankan" aria-label="Mulyankan case study">${featuredProject?'Case study':'Mulyankan case study'} <span aria-hidden="true">↗</span></a>`;
+  const essentials=`<div class="v17Essentials" aria-label="Leadership, recognition and technical skills">
+    <section class="v17Essential"><div class="v17EssentialHeading"><span>LEADERSHIP</span></div><ul class="v17FactList">${f.leadership.map(x=>`<li>${escapeText(x)}</li>`).join('')}</ul></section>
+    <section class="v17Essential"><div class="v17EssentialHeading"><span>AWARDS</span></div><ul class="v17FactList">${f.recognitions.map(x=>`<li>${escapeText(x)}</li>`).join('')}</ul></section>
+    <section class="v17Essential v17EssentialStack"><div class="v17EssentialHeading"><span>TOOLS</span></div><div class="v17SkillTokens" aria-label="Technologies">${f.skills.map(x=>`<span>${escapeText(x)}</span>`).join('')}</div></section>
+  </div>`;
   return `<section class="v17Recruiter" id="home" aria-labelledby="v17Name">
     <div class="v17Wrap">
       ${featuredProject?'':`<div class="v17TopLine"><span class="v17Index">PROFILE</span><span class="v17Availability"><i aria-hidden="true"></i> ${escapeText(f.stage)}</span></div>`}
@@ -79,19 +85,17 @@ export function recruiterIntroMarkup(profile={}, {featuredCaptures=[]}={}) {
             <a href="#case-earthbridge" data-v20-open-project="earthbridge"><span class="v19ProjectIndex">03</span><span class="v19ProjectDetails"><strong>EarthBridge</strong><small>${featuredProject?'Search satellite imagery across sensors':'Research prototype · PyTorch / FAISS'}</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
           </nav>
         </div>
-        <aside class="v17Proof" aria-labelledby="v17ProofTitle">
-          <div class="v17ProofHeader"><span>${featuredProject?'Featured project':'PROJECT DEMO'}</span><span>${featuredProject?'Demonstrated prototype':'2026'}</span></div>
-          <div class="v17ProofBody"><span class="v17ProofProject">${escapeText(f.spotlight.project)}</span><h2 id="v17ProofTitle">${featuredProject?'Evidence-linked proposal review':'Document review<br>with cited evidence.'}</h2><p>${escapeText(f.spotlight.detail)}</p>
+        <aside class="v17Proof" aria-labelledby="v17ProofTitle"${featuredProject?' data-v208-pointer':''}>
+          <div class="v17ProofHeader"><span>${featuredProject?escapeText(f.spotlight.project):'PROJECT DEMO'}</span><span>${featuredProject?'Demonstrated prototype':'2026'}</span></div>
+          <div class="v17ProofBody">${featuredProject?'':`<span class="v17ProofProject">${escapeText(f.spotlight.project)}</span>`}<h2 id="v17ProofTitle">${featuredProject?'Evidence-linked proposal review':'Document review<br>with cited evidence.'}</h2><p>${escapeText(f.spotlight.detail)}</p>
           ${spotlightMarkup(featuredCaptures)}
-          <div class="v17ProofMeta"><div><span>DEMONSTRATED AT</span><strong>${escapeText(f.spotlight.institution)}</strong></div><div><span>DATE</span><strong>${escapeText(f.spotlight.date)}</strong></div></div>
-          <a class="v17ProofLink" href="#case-mulyankan">Mulyankan case study <span aria-hidden="true">↗</span></a></div>
+          ${featuredProject
+            ? `<div class="v17ProofMeta v208ProofMeta">Demonstrated at ${escapeText(f.spotlight.institution)} · ${escapeText(f.spotlight.date)}</div><div class="v208ProofActions">${caseLink}</div>`
+            : `<div class="v17ProofMeta"><div><span>DEMONSTRATED AT</span><strong>${escapeText(f.spotlight.institution)}</strong></div><div><span>DATE</span><strong>${escapeText(f.spotlight.date)}</strong></div></div>${caseLink}`}
+          </div>
         </aside>
       </div>
-      <div class="v17Essentials" aria-label="Leadership, recognition and technical skills">
-        <section class="v17Essential"><div class="v17EssentialHeading"><span>LEADERSHIP</span></div><ul class="v17FactList">${f.leadership.map(x=>`<li>${escapeText(x)}</li>`).join('')}</ul></section>
-        <section class="v17Essential"><div class="v17EssentialHeading"><span>AWARDS</span></div><ul class="v17FactList">${f.recognitions.map(x=>`<li>${escapeText(x)}</li>`).join('')}</ul></section>
-        <section class="v17Essential v17EssentialStack"><div class="v17EssentialHeading"><span>TOOLS</span></div><div class="v17SkillTokens" aria-label="Technologies">${f.skills.map(x=>`<span>${escapeText(x)}</span>`).join('')}</div></section>
-      </div>
+      ${featuredProject?`<details class="v208Background"><summary>Background, leadership &amp; tools</summary>${essentials}</details>`:essentials}
       ${featuredProject?'':`<div class="v17GoDeeper"><a href="#v20-workspace">Browse work by focus <span aria-hidden="true">↓</span></a></div>`}
     </div>
   </section>`;

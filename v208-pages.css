@@ -117,21 +117,6 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   gap: 12px 28px;
   margin-bottom: 24px;
 }
-.v208WorkKicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 8px;
-  color: #37675e;
-  font-size: 13px;
-  font-weight: 750;
-}
-.v208WorkKicker::before {
-  content: "";
-  width: 22px;
-  height: 1px;
-  background: currentColor;
-}
 #work-gallery .v208WorkHeading h1 {
   font-size: clamp(40px, 5.8vw, 78px);
 }
@@ -179,11 +164,6 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-}
-.v208GalleryCount {
-  margin: 0;
-  color: var(--v208-muted);
-  font-size: 13px;
 }
 .v208GalleryFilters button, .v208SpotlightChoices button {
   min-height: 44px;
@@ -272,6 +252,12 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   line-height: 1.5;
   margin: 0 0 4px;
 }
+.v208CardStack {
+  color: var(--v208-muted);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.45;
+}
 .v208Status {
   background: #eef1e9;
   color: var(--v208-ink);
@@ -292,6 +278,7 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   border-color: #355653;
   background: radial-gradient(ellipse at bottom right, #30514a, #152f33 65%);
   color: #f9f6eb;
+  --v208-pointer-glow: #d4f1c53b;
 }
 #work-gallery [data-v208-featured] .v208CardBody {
   padding: clamp(17px, 2vw, 26px);
@@ -302,10 +289,13 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 #work-gallery [data-v208-featured] .v208CardBody p {
   color: #dce7dc;
 }
-#work-gallery [data-v208-featured] :is(.v208Status, .v208TagRow span) {
+#work-gallery [data-v208-featured] .v208Status {
   border-color: #54766c;
   background: #254540;
   color: #f1f4e8;
+}
+#work-gallery [data-v208-featured] .v208CardStack {
+  color: #c9dcd0;
 }
 #work-gallery [data-v208-featured] .v208CardAction {
   color: #d9ecc3;
@@ -519,6 +509,7 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   border-radius: 17px;
   background: radial-gradient(ellipse at top right, #2d524c, #152e34 68%);
   box-shadow: 0 20px 38px #193b3b24;
+  --v208-pointer-glow: #d4f1c53b;
 }
 .v208Home #home .v17Proof h2 {
   font-size: clamp(28px, 2.65vw, 38px);
@@ -628,8 +619,66 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 .v208RecordingButton:hover {
   background: #31545a;
 }
+.v208Home #home .v208ProofMeta {
+  display: block;
+  color: #d6e5d9;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.v208ProofActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin-top: 9px;
+}
+.v208Home #home .v208ProofActions .v19MilestoneVideo {
+  margin: 0;
+}
+.v208Home #home .v208ProofActions .v17ProofLink {
+  min-height: 44px;
+  gap: 6px;
+  padding: 0;
+}
+.v208Home #home .v208Background {
+  padding-bottom: 22px;
+}
+.v208Background summary {
+  width: fit-content;
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid var(--v208-rule);
+  border-radius: 8px;
+  background: var(--v208-card);
+  color: var(--v208-ink);
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.v208Background[open] summary {
+  margin-bottom: 9px;
+}
 .v208Home #home .v17Proof :focus-visible {
   outline-color: #f4bc99;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  [data-v208-pointer] {
+    position: relative;
+  }
+  [data-v208-pointer]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(180px circle at var(--v208-pointer-x, 50%) var(--v208-pointer-y, 50%), var(--v208-pointer-glow, #2c826c26), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+  }
+  [data-v208-pointer].v208PointerActive:hover::after {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -689,9 +738,6 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   .v208WorkHeading, .v208WorkPage .v20Head {
     display: block;
     margin-bottom: 12px;
-  }
-  .v208ExplorerLink {
-    margin-top: 12px;
   }
   .v208CardBody {
     padding: 16px;

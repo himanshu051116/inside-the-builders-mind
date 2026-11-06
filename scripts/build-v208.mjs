@@ -43,13 +43,13 @@ function projectCard(p){
     ? `<img src="${safe(p.evidenceImage)}" loading="lazy" alt="${e(p.evidenceImageCaption)}" width="720" height="460">`
     : '<span class="v208ImageEmpty">Technical record</span>';
   return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}"${id==='mulyankan'?' data-v208-featured':''}>
-    <a class="v208CardLink" href="${projectLink(id)}" aria-labelledby="card-${id} action-${id}">
+    <a class="v208CardLink" href="${projectLink(id)}" aria-labelledby="card-${id} action-${id}" data-v208-pointer>
       <div class="v208CardCover">${cover}</div>
       <div class="v208CardBody">
         <span class="v208Status">${e(p.status)}</span>
         <h2 id="card-${id}">${e(p.title)}</h2>
         <p>${e(p.summary)}</p>
-        <div class="v208TagRow">${p.stack.map(t=>`<span>${e(t)}</span>`).join('')}</div>
+        <span class="v208CardStack">${e(p.stack.join(' · '))}</span>
         <span class="v208CardAction" id="action-${id}">Read case study <span aria-hidden="true">↗</span></span>
       </div>
     </a>
@@ -68,14 +68,14 @@ function specializations(){
       const caseHref=projectLink(role.first);
       const evidenceHref=role.capture?evidenceLink(caseHref,role.capture):caseHref+role.evidenceAnchor;
       const explorerHref=`/work/?view=${role.id}&project=${role.first}&panel=${role.panel}#v20-workspace`;
-      return `<article class="v208TrackPanel" id="track-${role.id}" role="tabpanel" aria-labelledby="track-tab-${role.id}" tabindex="0"${index?' hidden':''}>
+      return `<article class="v208TrackPanel" id="track-${role.id}" role="tabpanel" aria-labelledby="track-tab-${role.id}" tabindex="0" data-v208-pointer${index?' hidden':''}>
         <div class="v208TrackCopy">
           <span class="v208Status">${e(project.status)}</span>
           <h3><a href="${caseHref}">${e(project.title)}</a></h3>
           <p>${e(project.summary)}</p>
           <div class="v208TrackActions">
             <a class="v208Primary" href="${e(evidenceHref)}">${e(role.evidenceLabel)} <span aria-hidden="true">↗</span></a>
-            <a class="v208TextAction" href="${e(explorerHref)}">Explore ${e(role.name)} work <span aria-hidden="true">↗</span></a>
+            <a class="v208TextAction" href="${e(explorerHref)}" aria-label="Open the ${e(role.name)} project explorer">Project explorer <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         ${picture(project)}
@@ -162,17 +162,16 @@ export function buildV208(out,root){
   const workMarkup=`<section class="v208Container v208WorkGallery" id="work-gallery" data-v208-gallery-selection="all">
     <div class="v208WorkHeading">
       <div>
-        <span class="v208WorkKicker">Engineering portfolio</span>
         <h1>Selected work</h1>
         <p>Software, data systems, and applied machine learning.</p>
       </div>
-      <a class="v208ExplorerLink" href="${explorerLink}">Open interactive explorer <span aria-hidden="true">↗</span></a>
     </div>
     <div class="v208GalleryToolbar" hidden>
       <div class="v208GalleryFilters" role="group" aria-label="Filter projects">
         ${galleryFilters.map(([key,label])=>`<button type="button" data-v208-gallery-filter="${key}" aria-pressed="${key==='all'}">${e(label)}</button>`).join('')}
       </div>
-      <p class="v208GalleryCount" role="status">${projects.length} projects</p>
+      <a class="v208ExplorerLink" href="${explorerLink}">Project explorer <span aria-hidden="true">↗</span></a>
+      <p class="v208GalleryCount srOnly" role="status">${projects.length} projects</p>
     </div>
     ${projectGrid}
   </section>`;

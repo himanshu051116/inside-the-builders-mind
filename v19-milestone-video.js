@@ -41,14 +41,16 @@ export function setupMilestoneVideo(doc=document){
   // The player is independent of the optional homepage preview card.
   // Work and dedicated Mulyankan project pages have no reason to render #home.
   if(card && meta){
-    if(card.querySelector('.v208SpotlightCapture')){
-      region.innerHTML=`<button class="v208RecordingButton" type="button" aria-haspopup="dialog" aria-controls="v19MilestoneDialog">
-        <span aria-hidden="true">▶</span> Watch 17-second architecture walkthrough
+    const actions=card.querySelector('.v208ProofActions');
+    if(actions){
+      region.innerHTML=`<button class="v208RecordingButton" type="button" aria-haspopup="dialog" aria-controls="v19MilestoneDialog" aria-label="Watch the 17-second architecture walkthrough">
+        <span aria-hidden="true">▶</span> Watch walkthrough · 17s
       </button>`;
     }
     card.dataset.milestoneVideo='ready';
     card.classList.add('v19ProofHasVideo');
-    card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
+    if(actions)actions.prepend(region);
+    else card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
   }
 
   const dialog=doc.createElement('dialog');

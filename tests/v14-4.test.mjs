@@ -10,11 +10,12 @@ test('V14.4 real screenshots open an inspectable dialog, case study remains sepa
  assert.match(media,/priorFocus=button/);
 });
 test('V14.4 role switching creates navigable history and preserves existing routes',()=>{
- assert.match(role,/history.pushState/);
+ assert.match(role,/pushState/);
+ assert.match(role,/replaceState/);
  assert.match(role,/popstate/);
  assert.match(role,/if\(next!==current\)/);
  assert.match(role,/url.hash.startsWith\('#proof\/'\)/);
- assert.doesNotMatch(role,/history.replaceState/);
+ assert.match(role,/preview\?'replaceState':'pushState'/);
 });
 test('V14.4 mobile shows image before long prose and all shortcuts without clipping',()=>{
  assert.match(site,/v144Intro/);assert.match(site,/v144Details/);

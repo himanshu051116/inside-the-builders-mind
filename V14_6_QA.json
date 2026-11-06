@@ -1,0 +1,56 @@
+{
+  "version": "14.6.0",
+  "base": "14.5.0",
+  "new_media": 4,
+  "total_media": 20,
+  "project_groups": 5,
+  "automated_tests": {
+    "passed": 105,
+    "failed": 0
+  },
+  "build": "passed",
+  "asset_audit": "passed",
+  "browser": {
+    "role_viewport_checks": 15,
+    "gallery_widths": [
+      390,
+      1440
+    ],
+    "gallery_tabs": 5,
+    "gallery_items_earthbridge": 4,
+    "hero_zoom": "passed",
+    "gallery_zoom": "passed",
+    "browser_back_forward": "passed",
+    "no_page_overflow": true,
+    "no_uncaught_js_exceptions": true
+  },
+  "source_metrics": {
+    "cross_modal_f1_at_5_pct": 19.53,
+    "cross_modal_f1_at_10_pct": 11.59,
+    "validation_recall_at_1_pct": 53.03,
+    "validation_recall_at_10_pct": 70.08,
+    "reported_mean_eval_retrieval_latency_ms": 0.146,
+    "test_pairs": 3248,
+    "gallery_vectors": 6496,
+    "descriptor_dimensions": 128,
+    "independently_reproduced": false,
+    "verified_against": [
+      "https://github.com/himanshu051116/earthbridge/blob/main/SUBMISSION_README.md",
+      "https://github.com/himanshu051116/earthbridge/blob/main/docs/PROJECT_STATUS.md"
+    ]
+  },
+  "limitations": [
+    "No actual ranked retrieval output screenshot provided",
+    "Workbench shows API OFFLINE",
+    "Static documented metrics, not live measurements",
+    "No Vercel-hosted/browser QA",
+    "No full WCAG screenreader audit"
+  ],
+  "checklist": {
+    "verified": 48,
+    "open": 25,
+    "v14_004": "verified_local",
+    "v14_016": "blocked"
+  },
+  "external_deployment": "none"
+}

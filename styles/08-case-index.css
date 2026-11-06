@@ -1,0 +1,107 @@
+/* V10 evidence-first recruiter UI. Consolidated into portfolio.css at build. */
+:root{--v10-ink:#13221d;--v10-mint:#b7eac6;--v10-muted:#697d75}
+.noJs{max-width:740px;margin:12vh auto;padding:32px;color:#102b29;font:18px/1.6 system-ui,sans-serif}
+.noJs h1{font-size:clamp(28px,5vw,52px);letter-spacing:-.04em}
+body[data-role=fullstack]{--evidence-bg:#f7f5ec;--evidence-border:#d1caba;--evidence-ink:#2b302a;--evidence-accent:#be694d}
+body[data-role=software]{--evidence-bg:#121923;--evidence-border:#465362;--evidence-ink:#f0f3f0;--evidence-accent:#e3b774}
+body[data-role=ml]{--evidence-bg:#181628;--evidence-border:#554d70;--evidence-ink:#f5f0ff;--evidence-accent:#c9b0fc}
+.candidateIdentity{display:flex;flex-direction:column;gap:3px;border-left:4px solid var(--career-accent,var(--evidence-accent));padding-left:14px;margin-bottom:16px}
+.candidateIdentity strong{font-size:clamp(19px,2vw,26px);font-weight:800;line-height:1.14;letter-spacing:-.035em}
+.candidateIdentity span{font-size:clamp(10px,1vw,12px);letter-spacing:.01em;opacity:.82;line-height:1.45}
+.careerCopy{min-width:0}
+
+
+
+
+
+
+
+
+
+
+.verifiedImage{width:100%;height:100%;display:flex;flex-direction:column;position:relative;min-height:220px;background:radial-gradient(circle at 90% 5%,#dbd3b854,transparent 50%),#18202d;overflow:hidden}
+.verifiedImage img{width:100%;height:100%;min-height:215px;object-fit:contain;background:#1c2430;display:block}
+.evidenceMediaCaption{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;font-size:10px;line-height:1.35;color:white;background:linear-gradient(transparent,#070a16e8 30%);z-index:3}
+.evidenceMediaCaption a{color:#c5f5e0}
+/* mode-aware case file panel: four rich files but concise until expanded */
+.caseFiles{padding-top:75px!important;padding-bottom:80px!important}
+.caseFilesHeader{max-width:850px;margin-bottom:28px}
+.caseFilesHeader h2,.archiveHeading h2{font-size:clamp(30px,4.3vw,62px);line-height:1.05;letter-spacing:-.065em;margin:9px 0 12px;font-weight:820}
+.caseFilesHeader p,.archiveHeading p{font-size:15px;line-height:1.65;max-width:780px;color:#aeb8b4;margin:0}
+.smallCaps{font:760 10px ui-monospace,monospace;letter-spacing:.12em;color:#acdebb}
+.caseFilesGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch}
+.caseFile{min-width:0;border-radius:17px;border:1px solid #ffffff20;padding:clamp(20px,2vw,30px);background:#111a22;color:#e9f0eb;box-shadow:0 22px 58px #0003;transition:border-color .25s,transform .25s}
+.caseFile:hover{border-color:#b6d4c055;transform:translateY(-2px)}
+.caseFile.caseFeatured{background:radial-gradient(circle at 95% 2%,color-mix(in srgb,var(--evidence-accent) 14%,transparent),transparent 53%),#111a22;border-color:var(--evidence-accent)}
+.caseFileTop{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;color:#9eb4a9;font:740 10px ui-monospace,monospace;letter-spacing:.065em}
+.caseFileTop strong{font-size:10px;color:#85d3a0}
+.caseFile h3{font-size:clamp(23px,2.5vw,34px);letter-spacing:-.045em;margin:20px 0 5px;font-weight:800;line-height:1.1}
+.caseFileHeadline{font-size:clamp(16px,1.6vw,19px);line-height:1.45;color:#d8e5dc;margin:0 0 18px;font-weight:540;max-width:480px}
+.caseFlow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:14px 0 18px;padding-bottom:14px;border-bottom:1px solid #ffffff20}
+.caseFlow span{min-width:0;background:#e9f8e908;border:1px solid #e9f8e913;border-radius:8px;min-height:79px;padding:10px 7px;display:flex;flex-direction:column;gap:7px;font-size:10px;line-height:1.38;justify-content:flex-start;color:#dceae3}
+.caseFlow b{font:760 10px ui-monospace,monospace;color:#acdeb8}
+.caseFileDetails{border:1px solid #e5f5e328;border-radius:9px;padding:0 14px;margin:8px 0 16px}
+.caseFileDetails>summary{cursor:pointer;list-style:none;padding:12px 0;font-weight:770;font-size:12px;display:flex;justify-content:space-between;align-items:center;min-height:42px}
+.caseFileDetails>summary::-webkit-details-marker{display:none}
+.caseFileDetails[open]>summary{border-bottom:1px solid #e5f5e328}
+.caseFacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;padding:16px 0}
+.caseFacts h4{font-size:11px;letter-spacing:.055em;text-transform:uppercase;color:#b5edc0;margin:0 0 5px}
+.caseFacts p{font-size:13px;line-height:1.65;color:#e0e8e4;margin:0}
+
+
+
+.caseSourceCapture{position:relative;max-height:240px;border-radius:9px;overflow:hidden;border:1px solid #87988f55;margin-top:15px;background:#343d42}
+.caseSourceCapture img{display:block;width:100%;max-height:240px;object-fit:contain}
+.caseSourceCapture span{font-size:10px;background:#0c151ee8;color:white;position:absolute;bottom:0;padding:7px 10px;left:0;right:0}
+/* archive and stronger project navigation */
+.archive{padding-top:25px!important;padding-bottom:80px!important}
+.archiveHeading{display:flex;gap:16px;align-items:end;justify-content:space-between;margin-bottom:20px}
+.archiveHeading>a{font-size:12px;text-decoration:none;white-space:nowrap;color:#c7decf}
+.archiveGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.archiveCard{min-width:0;padding:23px;border:1px solid #d0dfd137;background:#16211f;border-radius:14px;display:flex;flex-direction:column;align-items:start;gap:9px;color:#ecf5ed}
+.archiveCard.archiveRelevant{border-color:var(--evidence-accent);background:linear-gradient(160deg,color-mix(in srgb,var(--evidence-accent) 9%,#15211e),#15211e)}
+.archiveCard>span:first-child{font:710 10px ui-monospace,monospace;letter-spacing:.08em;color:#b0dfbe;text-transform:uppercase}
+.archiveCard h3{font-size:25px;letter-spacing:-.05em;margin:0}
+.archiveCard small{color:#a2beb0;font-size:11px;line-height:1.4;min-height:30px}
+.archiveCard p{color:#d4e5da;font-size:13px;line-height:1.62;margin:0 0 7px}
+.archiveTags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.archiveTags span{font-size:10px;border:1px solid #b8d9c036;border-radius:30px;padding:4px 8px}
+.archiveCard>a,.archiveNoLink{font-size:12px;font-weight:760;margin-top:12px;color:#bdeac8}
+.archiveNoLink{color:#91a59d}
+.galleryViewToggle{border:1px solid currentColor!important;border-radius:7px!important;padding:9px 12px!important;background:transparent!important;color:inherit!important;font-size:11px!important;font-weight:760!important;white-space:nowrap;min-height:42px}
+#projectGrid.isGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;overflow:visible!important;padding-bottom:8px!important;scroll-snap-type:none!important}
+#projectGrid.isGrid .projectCard{width:auto!important;min-width:0!important;flex:none!important;scroll-snap-align:none!important}
+#projectGrid.isGrid .projectVisual{min-height:215px!important}
+#projectGrid.isGrid .projectDescription{font-size:12px;line-height:1.55}
+#projectGrid.isGrid .projectContent{padding:18px!important}
+#projectGrid.isGrid .projectCard h3{font-size:clamp(20px,2.1vw,27px)!important}
+#projectGrid.isGrid .projectBigNumber{font-size:86px!important}
+/* the old floating nudge distracts from a recruiter journey */
+.floatingLab{display:none!important}
+/* Bigger functional controls and readable microtext on phones */
+:is(.careerModeButton,.projectFilter,.stageSteps button,.researchQueries button,.sysFlowNode,.roleResumeLink,.careerCTA,.careerSecondary,button.galleryViewToggle):focus-visible{outline:3px solid var(--evidence-accent,#a5deac)!important;outline-offset:3px!important}
+@media(max-width:1050px){#projectGrid.isGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.caseFilesGrid{grid-template-columns:1fr}.archiveGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.careerCopy .candidateIdentity{margin-bottom:10px}.archiveHeading{display:block}.archiveHeading>a{display:inline-block;margin-top:16px}}
+@media(max-width:540px){.careerCopy .candidateIdentity strong{font-size:19px}.candidateIdentity span{font-size:10px;line-height:1.35}.caseFiles{padding-top:40px!important;padding-bottom:45px!important}.caseFilesGrid{gap:12px}.caseFile{padding:18px}.caseFlow span{font-size:9px;min-height:72px;padding:7px 5px}.caseFacts{grid-template-columns:1fr}.caseFile h3{font-size:25px}.archiveGrid{grid-template-columns:1fr}.archiveCard{padding:18px}.galleryViewToggle{font-size:10px!important;white-space:normal;line-height:1.2}#projectGrid.isGrid{grid-template-columns:1fr!important}.deckControl{flex-wrap:wrap!important;justify-content:flex-end!important}.verifiedImage img{min-height:220px}}
+@media(max-width:365px){.caseFlow{grid-template-columns:repeat(2,minmax(0,1fr))}.caseFlow span{min-height:54px}}
+@media(prefers-reduced-motion:reduce){.caseFile,.caseFile:hover{transform:none!important;transition:none!important}}
+
+
+/* Recruiter evidence occupies a full-width supporting strip below interactive hero. */
+
+
+
+
+
+@media(max-width:540px){}
+
+
+@media(max-width:540px){}
+
+/* Source-hosting fallback: always preserve verifiable external evidence without fake screenshots. */
+.caseSourceCapture.imageSourceUnavailable,.verifiedImage.imageSourceUnavailable{display:grid;place-content:center;gap:8px;min-height:170px;background:repeating-linear-gradient(135deg,#182b35,#182b35 12px,#1d313a 12px,#1d313a 14px);border:1px solid #6e968b80;padding:18px;text-align:center}
+.caseSourceCapture.imageSourceUnavailable img,.verifiedImage.imageSourceUnavailable img{display:none!important}
+.caseSourceCapture.imageSourceUnavailable span{position:static;background:transparent;font-size:11px;color:#c3e6d5;padding:0}
+.evidenceOfflineFallback{display:block;max-width:430px;margin:0 auto;font-size:13px;line-height:1.5;color:#dcfae7!important;font-weight:750!important;text-decoration:underline!important;text-underline-offset:4px}
+.verifiedImage.imageSourceUnavailable .evidenceMediaCaption{position:static;padding:5px;background:transparent}
+

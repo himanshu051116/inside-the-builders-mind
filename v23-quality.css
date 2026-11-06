@@ -1,0 +1,114 @@
+/* V23 quality layer — unified controls, screenshot-first visual rhythm,
+   and zero decorative media replacements. Source records stay accessible. */
+.v20Workspace{
+  --v23-radius:7px;
+  --v23-motion:160ms;
+}
+.v20Workspace .v20RoleBar{
+  border-color:var(--v20-line);
+  box-shadow:0 1px 0 color-mix(in srgb,var(--v20-ink) 4%,transparent);
+}
+.v20Workspace .v20RoleBar button[aria-pressed="true"]{
+  border-color:var(--v20-ink);font-weight:780;
+}
+.v20Workspace #v20FullShowcase{
+  border-color:transparent;
+  background:transparent;
+  color:var(--v20-soft);
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.v20Workspace #v20FullShowcase:hover{color:var(--v20-accent)}
+.v20Workspace #v20Resume{
+  font-weight:780;border-color:var(--v20-accent);
+  background:color-mix(in srgb,var(--v20-accent) 6%,var(--v20-panel));
+}
+.v20Workspace .v20ProjectList>button{
+  border-radius:var(--v23-radius);
+  transition:background-color var(--v23-motion) ease,border-color var(--v23-motion) ease;
+}
+.v20Workspace .v20ProjectList>button[aria-pressed="true"]{
+  box-shadow:inset 3px 0 var(--v20-accent);
+}
+.v20Workspace .v20ProjectIntro h3{letter-spacing:-.045em;text-wrap:balance}
+.v20Workspace .v20Tabs button{
+  transition:color var(--v23-motion) ease,border-color var(--v23-motion) ease;
+}
+.v20Workspace .v20Tabs button[aria-selected="true"]{
+  border-bottom-width:2px;
+}
+.v20Workspace #v20Panel{
+  min-width:0;
+  animation:v23PanelAppear 180ms ease both;
+}
+@keyframes v23PanelAppear{
+  from{opacity:.55;transform:translateY(3px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.v20Workspace .v20Media figure{border-radius:var(--v23-radius)}
+.v20Workspace .v23FullImage{
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--v20-ink);border:1px solid var(--v20-line);
+  background:var(--v20-panel);border-radius:4px;
+  font:740 10px/1.35 system-ui,sans-serif;
+  min-height:28px;padding:5px 9px;text-decoration:none;
+  white-space:nowrap;
+}
+.v20Workspace .v23FullImage:hover{
+  color:var(--v20-accent);border-color:var(--v20-accent);
+}
+.v20Workspace .v23CaptureTray{
+  margin-top:7px;border:1px solid var(--v20-line);
+  border-radius:var(--v23-radius);
+  background:var(--v20-panel);overflow:hidden;
+}
+.v20Workspace .v23CaptureSummary{
+  min-height:31px;display:flex;align-items:center;gap:7px;
+  padding:6px 10px;cursor:pointer;list-style:none;
+  color:var(--v20-ink);font:680 11px/1.3 system-ui,sans-serif;
+}
+.v20Workspace .v23CaptureSummary::-webkit-details-marker{display:none}
+.v20Workspace .v23CaptureSummary small{
+  font:720 10px/1.3 ui-monospace,monospace;
+  color:var(--v20-soft);
+}
+.v20Workspace .v23CaptureSummary::after{
+  content:"+";margin-left:auto;
+  font:500 18px/1 system-ui,sans-serif;
+  color:var(--v20-accent);
+}
+.v20Workspace .v23CaptureTray[open] .v23CaptureSummary::after{content:"−"}
+.v20Workspace .v23CaptureSummary:hover{
+  background:color-mix(in srgb,var(--v20-accent) 5%,var(--v20-panel));
+}
+.v20Workspace .v23CaptureTray .v20Thumbs{
+  margin:0;padding:8px 10px 10px;
+  border-top:1px solid var(--v20-line);
+}
+.v20Workspace .v20Media .v205AnnotationPanel{margin-top:7px}
+.v20Workspace .v20Media .v203MediaControls{min-width:0}
+.v20Workspace .v20Media .v203MediaButtons{align-items:center;flex-wrap:wrap;justify-content:end}
+.v20Workspace :is(.v23CaptureSummary,.v23FullImage):focus-visible{
+  outline:3px solid var(--v20-accent);outline-offset:2px;
+}
+@media(max-width:850px){
+  .v20Workspace .v20ProjectList{scroll-snap-type:x proximity}
+  .v20Workspace .v20ProjectList>button{scroll-snap-align:start}
+}
+@media(max-width:560px){
+  .v20Workspace .v23FullImage{font-size:10px;padding:4px 7px}
+  .v20Workspace .v203MediaControls{flex-wrap:wrap;gap:8px}
+  .v20Workspace .v203MediaButtons{gap:5px}
+  .v20Workspace .v23CaptureSummary{min-height:36px}
+}
+@media(prefers-reduced-motion:reduce){
+  .v20Workspace #v20Panel{animation:none!important}
+  .v20Workspace .v20ProjectList>button,
+  .v20Workspace .v20Tabs button{transition:none!important}
+}
+@media(forced-colors:active){
+  .v20Workspace :is(.v23FullImage,.v23CaptureTray){border-color:CanvasText}
+  .v20Workspace .v20ProjectList>button[aria-pressed="true"]{
+    outline:2px solid Highlight;outline-offset:-2px;
+  }
+}

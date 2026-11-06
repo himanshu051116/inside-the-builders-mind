@@ -15,19 +15,25 @@ const groups = [
     ['news-claims','Claims & evidence','Unresolved claim states, with missing evidence explicitly surfaced.']
   ]},
   {id:'mulyankan',name:'Mulyankan',kicker:'DEMONSTRATED PROTOTYPE / EVIDENCE-GROUNDED REVIEW',intro:'Real proposal review, submission and architecture-exploration interfaces. The Spatial Lab is an explanatory source snapshot, not a live backend.',repo:'https://github.com/himanshu051116/Algonauts-Mulyankan',items:[
-    ['mulyankan-overview','Scrutiny dashboard','Coal R&D review overview with statuses and activity.'],
+    ['mulyankan-overview','Scrutiny dashboard','Coal R&D review overview with statuses and activity; proposal details redacted.'],
     ['mulyankan-submission','Proposal intake','Governed submission package and readiness checklist.'],
-    ['mulyankan-history','Submission history','Human-review records, filters and proposal history.'],
+    ['mulyankan-history','Submission history','Human-review records, filters and proposal history; proposal details redacted.'],
     ['mulyankan-spatial-city','Spatial Lab · 3D city','Source-mapped 3D system overview; labelled not live.'],
     ['mulyankan-spatial-domains','Spatial Lab · domains','Component discovery and architecture domain navigation.'],
     ['mulyankan-spatial-inspect','Spatial Lab · inspection','Component-level exploration and documentation links.']
+  ]},
+  {id:'earthbridge',name:'EarthBridge',kicker:'RESEARCH PROTOTYPE / REAL CAPTURES + REPOSITORY-REPORTED RESULTS',intro:'Four authentic captures from the EarthBridge research interface. The API is offline in the workbench capture and the visual canvas is illustrative; the evaluation screen displays static metrics documented in the repository. No query-and-ranked-results screenshot was supplied.',repo:'https://github.com/himanshu051116/earthbridge',items:[
+    ['earthbridge-evaluation','Reported evaluation evidence','Static metric values as shown in the research application; matched to EarthBridge SUBMISSION_README.md and docs/PROJECT_STATUS.md, not independently reproduced.'],
+    ['earthbridge-workbench','Research workbench','Upload, sensor routing and illustrated observation canvas. API is explicitly disconnected; this is not a real retrieval result.'],
+    ['earthbridge-architecture','Cross-sensor architecture','Sentinel-1/Sentinel-2 inputs, embedding space and FAISS index in a conceptual architecture view.'],
+    ['earthbridge-results-empty','Empty results inspector','The result area and notes panel before retrieval; no ranked candidates or matching images are displayed.']
   ]},
   {id:'schoolbuddies',name:'SchoolBuddies',kicker:'EDUCATION OUTREACH / VISUAL PROJECT MATERIAL',intro:'Workshop programme poster supplied for this portfolio. It describes a student-led hands-on learning offering; it is not evidence that every proposed school workshop has been delivered.',repo:'https://github.com/himanshu051116/SCHOOLBUDDIES',items:[
     ['schoolbuddies-workshop','Workshop overview','AI, coding, web development and hackathon-thinking workshop poster.']
   ]}
 ]
 const entries=Object.fromEntries(groups.flatMap(g=>g.items.map(item=>[item[0],{url:'/evidence/'+item[0]+'.webp',name:item[1],desc:item[2]}])))
-const screenDimensions={"ohs-home":[1606,1021],"ohs-together":[1504,1033],"news-overview":[1642,1048],"news-brief":[1132,1051],"news-investigations":[1633,1027],"news-entities":[1684,903],"news-entity-detail":[1371,1041],"news-search-quality":[1387,1009],"news-claims":[1300,988],"mulyankan-overview":[1277,899],"mulyankan-submission":[1687,1047],"mulyankan-history":[1663,1051],"mulyankan-spatial-city":[1687,1054],"mulyankan-spatial-domains":[1449,1051],"mulyankan-spatial-inspect":[1666,1057],"schoolbuddies-workshop":[1365,2048]}
+const screenDimensions={"ohs-home":[1606,1021],"ohs-together":[1504,1033],"news-overview":[1642,1048],"news-brief":[1132,1051],"news-investigations":[1633,1027],"news-entities":[1684,903],"news-entity-detail":[1371,1041],"news-search-quality":[1387,1009],"news-claims":[1300,988],"mulyankan-overview":[1277,899],"mulyankan-submission":[1687,1047],"mulyankan-history":[1663,1051],"mulyankan-spatial-city":[1687,1054],"mulyankan-spatial-domains":[1449,1051],"mulyankan-spatial-inspect":[1666,1057],'earthbridge-evaluation':[1657,1045],'earthbridge-workbench':[1680,1050],'earthbridge-architecture':[1653,1045],'earthbridge-results-empty':[1393,1057],"schoolbuddies-workshop":[1365,2048]}
 
 // Evidence notes are grounded in the actual author-supplied screens. They describe
 // visible UI states, not a claim that a hosted service or ML system is operational.
@@ -41,14 +47,19 @@ export const SCREEN_RECORDS = {
  'news-entity-detail': {kind:'Local analyst workspace',shows:'An entity profile with associated record counts, identity fields and alias controls.',boundary:'Mention counts describe stored matches, not independent verification or endorsement.'},
  'news-search-quality': {kind:'Local evaluation controls',shows:'Search evaluation mode and a release-gate panel; semantic coverage is shown as unavailable.',boundary:'This is a configuration/status screen, not a successful measured search benchmark.'},
  'news-claims': {kind:'Local analyst workspace',shows:'Multiple claims classified as having insufficient evidence and zero source lineages.',boundary:'These labels indicate unresolved review, not that a claim has been proven false.'},
- 'mulyankan-overview': {kind:'Evaluation prototype',shows:'Proposal overview, status distribution and an advisory portfolio score for the captured dataset.',boundary:'The score belongs to a prototype view; it is not an institutional funding decision.'},
+ 'mulyankan-overview': {kind:'Evaluation prototype',shows:'Proposal overview, status distribution and an advisory score; project titles have been redacted.',boundary:'The score belongs to a prototype view; it is not an institutional funding decision.'},
  'mulyankan-submission': {kind:'Evaluation prototype',shows:'Governed intake form, mandatory attachments and zero-percent package readiness.',boundary:'A blank form shows the input contract; it is not proof that a proposal was processed.'},
- 'mulyankan-history': {kind:'Evaluation prototype',shows:'Stored submission records with search, sorting and review-status labels.',boundary:'Status labels are not independent certification of underlying evaluations.'},
+ 'mulyankan-history': {kind:'Evaluation prototype',shows:'Stored submission records with search, sorting and review-status labels; identifying titles redacted.',boundary:'Status labels are not independent certification of underlying evaluations.'},
  'mulyankan-spatial-city': {kind:'Explanatory 3D lab',shows:'A navigable architecture city presenting a source-mapped system overview.',boundary:'The screenshot explicitly labels the source snapshot as not live.'},
  'mulyankan-spatial-domains': {kind:'Explanatory 3D lab',shows:'Seven architecture domains and the available exploration controls.',boundary:'Architecture modules illustrate system components; they are not individually verified services.'},
  'mulyankan-spatial-inspect': {kind:'Explanatory 3D lab',shows:'A component inspector with source references and explanatory processing stages.',boundary:'Possible implementation notes are explanations, not observed real-time OCR execution.'},
+ 'earthbridge-evaluation': {kind:'Static, repository-reported research metrics',shows:'The submission-reported cross-modal F1@5 19.53%, F1@10 11.59%, validation Recall@1 53.03%, Recall@10 70.08%, 3,248 paired observations, 6,496 indexed vectors, 128-dimensional embedding and ~0.146 ms evaluation-time mean search latency.',boundary:'These are static figures from the EarthBridge submission documents, not independently reproduced, live inference, or evidence of a successful retrieval in this screenshot. See SUBMISSION_README.md and docs/PROJECT_STATUS.md.'},
+ 'earthbridge-workbench': {kind:'Research application interface / API offline',shows:'Research workbench with Sentinel-2 to Sentinel-1 route selection, an empty input-drop area, synthetic reference canvas and a disconnected API status.',boundary:'API offline, no image uploaded, no ranked match displayed. Synthetic map imagery is explicitly not a model-generated result.'},
+ 'earthbridge-architecture': {kind:'Documented system-design visualization',shows:'Input modalities, learned 128-dimensional descriptor, FAISS retrieval index and ranked-output architecture.',boundary:'Design diagram; this screenshot does not show a loaded model, trained artifacts or successful API request.'},
+ 'earthbridge-results-empty': {kind:'Research application interface / no result',shows:'The empty ranked retrieval region, analysis protocol, inspection controls and local research notes.',boundary:'No retrieval query was performed and no real top-k matches are shown; analysis notes are manual, not independently validated evidence.'},
  'schoolbuddies-workshop': {kind:'Outreach programme material',shows:'The workshop proposal, topic coverage and school-facing activities.',boundary:'This poster is programme material, not measured proof of delivered workshop outcomes.'}
 }
+export const totalCaptures=groups.reduce((sum,group)=>sum+group.items.length,0)
 const escMedia=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;')
 export const capture=(id)=>entries[id]?.url||''
 export function evidenceGalleryMarkup(){
@@ -60,7 +71,7 @@ export function evidenceGalleryMarkup(){
    <div class="captureFrame"><button class="captureExpand" type="button" data-capture-open aria-label="Enlarge current ${escMedia(g.name)} screenshot"><img loading="lazy" decoding="async" width="${screenDimensions[g.items[0][0]][0]}" height="${screenDimensions[g.items[0][0]][1]}" src="${first.url}" alt="${escMedia(first.desc)}" data-capture-main/><span class="captureExpandIcon" aria-hidden="true">↗ Inspect full screenshot</span></button><div class="captureFrameMeta"><span>SCREENSHOT / STATIC CAPTURE <b data-capture-count>01 / ${String(g.items.length).padStart(2,'0')}</b></span><strong data-capture-title>${escMedia(first.name)}</strong><p data-capture-description>${escMedia(first.desc)}</p><div class="captureInspect" aria-live="polite" aria-atomic="true"><div><small>WHAT IS VISIBLE</small><p data-capture-shows>${escMedia(SCREEN_RECORDS[g.items[0][0]].shows)}</p></div><div><small>VALIDATION BOUNDARY</small><p data-capture-boundary>${escMedia(SCREEN_RECORDS[g.items[0][0]].boundary)}</p></div></div><div class="captureMetaActions"><a data-capture-original href="${first.url}" target="_blank" rel="noopener noreferrer">Open full image ↗</a><button type="button" data-capture-copy>Copy image link ↗</button></div><span class="captureCopyStatus" data-capture-status role="status" aria-live="polite"></span></div></div>
    <div class="captureNavigator"><div class="captureNavDetails"><span data-capture-kind>${escMedia(SCREEN_RECORDS[g.items[0][0]].kind)}</span><strong data-capture-progress>01 / ${String(g.items.length).padStart(2,'0')} — ${escMedia(first.name)}</strong></div><div class="captureNavButtons"><button type="button" data-capture-prev-inline aria-label="Previous screenshot in ${escMedia(g.name)}">← Previous</button><button type="button" data-capture-next-inline aria-label="Next screenshot in ${escMedia(g.name)}">Next →</button></div></div><div class="captureThumbnails" role="group" aria-label="Choose a ${escMedia(g.name)} screenshot">${g.items.map((it,j)=>{const item=entries[it[0]];return `<button type="button" data-capture-select="${it[0]}" aria-pressed="${j===0}" class="${j===0?'active':''}" aria-label="Show ${escMedia(item.name)}"><img loading="lazy" decoding="async" width="${screenDimensions[it[0]][0]}" height="${screenDimensions[it[0]][1]}" src="${item.url}" alt=""/><span>${String(j+1).padStart(2,'0')} · ${escMedia(item.name)}</span></button>`}).join('')}</div>
    </section>`}).join('')
- return `<section id="field-proof" class="proofGallery section" aria-labelledby="field-proof-title"><div class="wrap"><div class="proofGalleryTop"><div><span class="proofGalleryKicker">FIELD NOTES / AUTHENTIC INTERFACES</span><h2 id="field-proof-title">See the work.<br><em>Not a render.</em></h2></div><div class="proofGalleryTopMeta"><strong>16</strong><span>PROJECT-AUTHOR SUPPLIED VISUAL RECORDS<br>4 PROJECTS · 1 PENDING RESEARCH SET</span><p>EarthBridge images and experiment results will be added when provided. The ML simulator elsewhere on this site remains clearly labeled as synthetic.</p></div></div><div class="proofGalleryTabs" role="tablist" aria-label="Choose project screenshots">${tabbed}</div><div class="proofGalleryPanels">${panels}</div><div class="proofGalleryNote">SCREENSHOT POLICY <span>Original interface captures, converted to web-friendly format. The OHS invite code is obscured. Images document an interface at capture time; they do not independently verify service availability or model performance.</span></div></div><dialog id="captureLightbox" class="captureLightbox" aria-labelledby="captureLightboxTitle"><div class="captureLightboxHeader"><strong id="captureLightboxTitle">Project screenshot</strong><button type="button" data-capture-close aria-label="Close screenshot viewer">Close ✕</button></div><img alt="" id="captureLightboxImage"/><p id="captureLightboxDescription"></p><div class="captureLightboxControls"><button type="button" data-capture-prev>← Previous</button><span>ESC TO CLOSE · LEFT/RIGHT TO BROWSE</span><button type="button" data-capture-next>Next →</button></div></dialog></section>`
+ return `<section id="field-proof" class="proofGallery section" aria-labelledby="field-proof-title"><div class="wrap"><div class="proofGalleryTop"><div><span class="proofGalleryKicker">FIELD NOTES / AUTHENTIC INTERFACES</span><h2 id="field-proof-title">Captured interfaces.<br><em>With context.</em></h2></div><div class="proofGalleryTopMeta"><strong>${totalCaptures}</strong><span>PROJECT-AUTHOR SUPPLIED VISUAL RECORDS<br>${groups.length} PROJECTS · 1 MISSING RANKED-RETRIEVAL EXAMPLE</span><p>EarthBridge UI and a repository-reported evaluation screen are included. A genuine query with ranked satellite-image matches is still needed; the ML simulator remains synthetic.</p></div></div><div class="proofGalleryTabs" role="tablist" aria-label="Choose project screenshots">${tabbed}</div><div class="proofGalleryPanels">${panels}</div><div class="proofGalleryNote">SCREENSHOT POLICY <span>Original interface captures, converted to web-friendly format. The OHS invite code and Mulyankan proposal details are obscured. EarthBridge shows an offline API and static documented evaluation metrics, not live inference. Captures do not independently verify availability or model performance.</span></div></div><dialog id="captureLightbox" class="captureLightbox" aria-labelledby="captureLightboxTitle"><div class="captureLightboxHeader"><strong id="captureLightboxTitle">Project screenshot</strong><button type="button" data-capture-close aria-label="Close screenshot viewer">Close ✕</button></div><img alt="" id="captureLightboxImage"/><p id="captureLightboxDescription"></p><div class="captureLightboxControls"><button type="button" data-capture-prev>← Previous</button><span>ESC TO CLOSE · LEFT/RIGHT TO BROWSE</span><button type="button" data-capture-next>Next →</button></div></dialog></section>`
 }
 export function setupEvidenceGallery(){
  const heroPanels=[...document.querySelectorAll('[data-product-panel]')]
@@ -133,6 +144,20 @@ export function setupEvidenceGallery(){
  }
  function updateZoom(id){const entry=entries[id];if(!entry)return;lightimg.src=entry.url;lightimg.alt=entry.desc;lightTitle.textContent=entry.name;lightDesc.textContent=entry.desc}
  function openZoom(){const panel=panels.find(p=>p.dataset.evidencePanel===currentGroup);const selected=activeSelection(panel);if(!selected)return;priorFocus=document.activeElement;updateZoom(selected.dataset.captureSelect);lightbox?.showModal()}
+ // Hero screenshots are genuinely inspectable, not misleading case-study links.
+ // Reuse the existing focus-trapping <dialog>, project tabs, captions and
+ // next/previous navigation so there is one screenshot viewer implementation.
+ document.querySelectorAll('[data-hero-proof-open]').forEach(button=>button.addEventListener('click',()=>{
+  const id=button.dataset.heroProofOpen
+  const group=groups.find(g=>g.items.some(item=>item[0]===id))?.id
+  if(!validImage(group,id))return
+  selectTab(group)
+  updateCapture(id,false)
+  currentGroup=group
+  priorFocus=button
+  updateZoom(id)
+  lightbox?.showModal()
+ }))
  tabs.forEach((b,i)=>{
   b.addEventListener('click',()=>selectTab(b.dataset.evidenceTab,false,true))
   b.addEventListener('keydown',ev=>{
@@ -173,7 +198,7 @@ export function setupEvidenceGallery(){
   const deep=readHash()
   if(deep){selectTab(deep.group);updateCapture(deep.id,false);return}
   const role=document.body.dataset.role||'fullstack'
-  selectTab(role==='fullstack'?'ohs':role==='software'?'news':'mulyankan')
+  selectTab(role==='fullstack'?'ohs':role==='software'?'news':'earthbridge')
  }
  // Deep links are stable per screenshot and survive role changes and refreshes.
  function restoreHash(){const deep=readHash();if(!deep)return;selectTab(deep.group);updateCapture(deep.id,false);document.getElementById('field-proof')?.scrollIntoView({behavior:'instant',block:'start'})}
@@ -183,7 +208,7 @@ export function setupEvidenceGallery(){
  }))
  document.querySelectorAll('.projectCard a[href="#field-proof"]').forEach(a=>a.addEventListener('click',()=>{
   const project=a.closest('.projectCard')?.dataset.project
-  const id=({ '01':'mulyankan','03':'ohs','04':'news','06':'schoolbuddies' })[project]
+  const id=({ '01':'mulyankan','02':'earthbridge','03':'ohs','04':'news','06':'schoolbuddies' })[project]
   if(id)selectTab(id)
  }))
  window.addEventListener('popstate',syncMode)

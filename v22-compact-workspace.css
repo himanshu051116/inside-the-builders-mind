@@ -1,0 +1,204 @@
+
+/* V22 — evidence first, compact by default. Keep source details discoverable.
+   A screenshot is primary; guide, annotations and architecture are opt-in. */
+.v20Workspace{
+  padding:clamp(26px,3.2vw,48px) 0 clamp(27px,3vw,45px);
+}
+.v20Workspace .v20Wrap{width:min(1310px,calc(100% - 32px))}
+.v20Workspace .v20Head{margin-bottom:14px}
+.v20Workspace .v20Head .v20Eyebrow{font-size:10px}
+.v20Workspace .v20Head h2{font-size:clamp(28px,3.2vw,42px);line-height:1.09;margin:5px 0 2px}
+.v20Workspace .v20Head p{font-size:12px;line-height:1.45}
+.v20Workspace .v20RoleBar{
+  min-height:46px;padding:5px 7px;gap:4px;border-radius:9px 9px 0 0;
+}
+.v20Workspace .v20RoleBar button,.v20Workspace .v20RoleBar a{
+  font-size:11px;min-height:34px;padding:8px 10px;
+}
+.v20Workspace .v20Explorer{
+  grid-template-columns:minmax(195px,215px) minmax(0,1fr);
+  min-height:0;align-items:stretch;border-radius:0 0 9px 9px;
+}
+.v20Workspace .v20Sidebar{padding:12px 11px}
+.v20Workspace .v20Sidebar label{font-size:10px;margin:0 0 7px}
+.v20Workspace .v20Sidebar input{height:36px;margin-bottom:8px;font-size:12px;padding:8px 10px}
+.v20Workspace .v20ProjectList{gap:3px}
+.v20Workspace .v20ProjectList>button{
+  min-height:49px;padding:7px 8px;gap:7px;
+  grid-template-columns:22px minmax(0,1fr) 13px;
+}
+.v20Workspace .v20ProjectList strong{font-size:12px;line-height:1.27}
+.v20Workspace .v20ProjectList small{font-size:10px;line-height:1.24;margin-top:2px}
+.v20Workspace .v20Count{font-size:10px;margin-top:9px}
+.v20Workspace .v20Inspector{
+  padding:clamp(14px,1.9vw,23px);min-width:0;
+}
+.v20Workspace .v20ProjectIntro{position:relative;min-width:0}
+.v20Workspace .v20ProjectIntro>div:first-child{font-size:9px;gap:10px}
+.v20Workspace .v20Status{font-size:10px;max-width:46%;flex:none}
+.v20Workspace .v20ProjectIntro h3{
+  font-size:clamp(26px,2.85vw,38px);line-height:1.1;margin:6px 0 6px;
+}
+.v20Workspace .v20ProjectIntro>p{
+  font-size:12px;line-height:1.43;max-width:70ch;margin:0 0 8px;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+}
+.v20Workspace .v20Inspector[data-active-tab="media"] .v20ProjectIntro>p{display:none}
+.v20Workspace .v20Tags{
+  gap:5px;margin:0 115px 10px 0;
+}
+.v20Workspace .v20Tags>button{
+  padding:4px 7px;font-size:9px;min-height:22px;
+}
+.v20Workspace .v203TourShortcut{
+  position:absolute;right:0;bottom:10px;
+  display:inline-flex;align-items:center;
+  min-height:24px;padding:4px 6px;
+  cursor:pointer;border:0;border-radius:3px;background:transparent;
+  color:var(--v20-accent);font:700 10px/1.3 system-ui,sans-serif;
+  text-decoration:underline;text-underline-offset:3px;
+}
+.v20Workspace .v203TourShortcut:hover{background:color-mix(in srgb,var(--v20-accent) 8%,var(--v20-panel))}
+.v20Workspace .v20Tabs{gap:2px;margin-bottom:10px}
+.v20Workspace .v20Tabs button{font-size:11px;min-height:36px;padding:8px 11px}
+.v20Workspace .v203Guide{padding:12px;margin:6px 0 12px}
+.v20Workspace .v203Guide .v203Steps{margin:10px 0}
+.v20Workspace .v203MediaControls{
+  padding:5px 9px;min-height:36px;margin:0 0 7px;border-radius:5px;
+}
+.v20Workspace .v203MediaControls strong,
+.v20Workspace .v203MediaControls span{
+  font-size:10px;line-height:1.3;
+}
+.v20Workspace .v203MediaControls strong{font-weight:800}
+.v20Workspace .v203MediaControls>div:first-child{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;
+}
+.v20Workspace .v203MediaButtons button{
+  min-height:28px;min-width:30px;font-size:14px;padding:5px 7px;
+}
+.v20Workspace .v20Media>p.v20Notice{
+  font-size:11px;line-height:1.4;margin-bottom:7px;
+}
+.v20Workspace .v20Media figure{border-radius:6px}
+.v20Workspace .v20Media figure img{max-height:min(37vh,370px);object-fit:contain}
+.v20Workspace .v20Media figure .v205ImageFrame{
+  max-width:100%;max-height:min(37vh,370px);
+}
+.v20Workspace .v20Media figure .v205ImageFrame>img{
+  max-height:min(37vh,370px)!important;width:auto!important;
+  max-width:100%!important;height:auto!important;
+}
+.v20Workspace .v20Media figure figcaption{
+  font-size:10px;line-height:1.35;padding:5px 8px;
+  max-width:100%;overflow-wrap:anywhere;
+}
+.v20Workspace .v20Thumbs{margin-top:7px;padding-bottom:3px;gap:6px}
+.v20Workspace .v20Thumbs button{width:61px;height:44px}
+.v20Workspace .v20VideoButton{min-height:37px;padding:8px 12px;font-size:11px;margin-bottom:8px}
+.v20Workspace .v205AnnotationPanel{
+  padding:0;margin:8px 0 0;border-radius:6px;
+}
+.v20Workspace .v205AnnotationPanel>summary{
+  min-height:35px;padding:7px 10px;display:flex;align-items:center;cursor:pointer;
+  gap:8px;list-style:none;
+}
+.v20Workspace .v205AnnotationPanel>summary::-webkit-details-marker{display:none}
+.v20Workspace .v205AnnotationPanel>summary::after{
+  content:"+";font:500 19px/1 system-ui,sans-serif;color:var(--v20-accent);margin-left:7px;
+}
+.v20Workspace .v205AnnotationPanel[open]>summary::after{content:"−"}
+.v20Workspace .v205AnnotationPanel>summary strong{font-size:11px}
+.v20Workspace .v205AnnotationPanel>summary .v205Count{font-size:10px}
+.v20Workspace .v205AnnotationBody{
+  padding:10px;border-top:1px solid var(--v20-line);display:grid;gap:8px;
+}
+.v20Workspace .v205Toggle{min-height:31px;padding:5px 9px;justify-self:start}
+.v20Workspace .v205FeatureList{padding:0 0 5px}
+.v20Workspace .v205Feature{min-height:33px;padding:6px 8px;font-size:10px}
+.v20Workspace .v205Info{padding:9px}
+.v20Workspace .v205Info h4{font-size:12px}
+.v20Workspace .v205Info p{font-size:11px;line-height:1.5}
+.v20Workspace .v205Actions{margin-top:2px}
+.v20Workspace .v205Go{min-height:33px;font-size:10px;padding:7px 9px}
+.v20Workspace .v205Disclaimer{font-size:10px;margin:0!important}
+.v20Workspace .v20Foot{margin-top:8px;justify-content:flex-end;font-size:11px}
+.v20Workspace .v20Architecture>p{font-size:11px;margin-bottom:6px}
+.v20Workspace .v20Stages{gap:6px;margin:8px 0}
+.v20Workspace .v20Stages button{
+  min-height:65px;padding:9px 10px;
+}
+.v20Workspace .v20Stages button small{margin-bottom:5px}
+.v20Workspace .v20StageDetail{padding:12px}
+.v20Workspace .v20StageDetail h4{font-size:17px;margin:4px 0}
+.v20Workspace .v20StageDetail p{margin-bottom:6px}
+.v20Workspace .v203StageRail{margin:7px 10px}
+.v20Workspace .v203StageActions{margin-top:9px}
+.v20Workspace .v204Bridge{margin-top:9px}
+.v20Workspace .v20Architecture .v203StageRail{display:none}
+.v20Workspace .v204Bridge>summary{
+  list-style:none;min-height:36px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;cursor:pointer;
+  font-size:11px;padding:7px 11px;
+}
+.v20Workspace .v204Bridge>summary::-webkit-details-marker{display:none}
+.v20Workspace .v204Bridge>summary::after{
+  content:"+";font:500 20px/1 system-ui,sans-serif;
+  color:var(--v20-accent);
+}
+.v20Workspace .v204Bridge[open]>summary::after{content:"−"}
+.v20Workspace .v204Bridge>summary:focus-visible{outline:3px solid var(--v20-accent);outline-offset:-3px}
+
+.v20Workspace .v204BridgeHeader{padding:7px 11px}
+.v20Workspace .v204BridgeArea{padding:10px;gap:11px}
+.v20Workspace .v20Evidence>section{padding:12px}
+.v20Workspace .v20Evidence p{margin-bottom:5px;line-height:1.5}
+.v20Workspace .v20Links{margin-top:9px}
+/* Remove the redundant brand subtitle before it forces desktop navigation wider than the viewport. */
+@media(max-width:1160px){
+  .header .brandWord small{display:none}
+}
+@media(min-width:731px) and (max-width:900px){
+  .header .headerInner{gap:16px}
+}
+@media(max-width:850px){
+  .v20Workspace .v20Wrap{width:calc(100% - 20px)}
+  .v20Workspace .v20Explorer{grid-template-columns:minmax(0,1fr)}
+  .v20Workspace .v20Sidebar{border-right:0;border-bottom:1px solid var(--v20-line);padding:10px}
+  .v20Workspace .v20ProjectList{
+    display:flex;gap:5px;overflow-x:auto;scrollbar-width:thin;
+  }
+  .v20Workspace .v20ProjectList>button{
+    width:150px;min-width:150px;min-height:53px;flex:none;grid-template-columns:18px minmax(0,1fr) 12px;
+  }
+  .v20Workspace .v20ProjectIntro h3{font-size:clamp(25px,4.5vw,33px)}
+  .v20Workspace .v20Media figure img{max-height:340px}
+  .v20Workspace .v20Media figure .v205ImageFrame,
+  .v20Workspace .v20Media figure .v205ImageFrame>img{max-height:340px!important}
+}
+@media(max-width:560px){
+  .v20Workspace .v20Wrap{width:calc(100% - 16px)}
+  .v20Workspace .v20Head h2{font-size:29px}
+  .v20Workspace .v20RoleBar{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;padding:6px}
+  .v20Workspace .v20RoleBar button{grid-column:span 2;min-height:36px;padding:7px 4px;font-size:10px}
+  .v20Workspace .v20RoleBar a{grid-column:span 3;min-height:33px;padding:7px 4px;font-size:10px}
+  .v20Workspace .v20Inspector{padding:13px 11px}
+  .v20Workspace .v20ProjectIntro>div:first-child{flex-direction:row;align-items:center}
+  .v20Workspace .v20ProjectIntro h3{font-size:27px}
+  .v20Workspace .v20Tags{margin-right:0;margin-bottom:6px}
+  .v20Workspace .v203TourShortcut{position:static;margin-bottom:6px;padding:4px 0}
+  .v20Workspace .v205Head strong{flex:0 1 auto}
+  .v20Workspace .v205Count{margin-left:auto}
+  .v20Workspace .v20Tabs{gap:0;justify-content:space-between}
+  .v20Workspace .v20Tabs button{font-size:10px;padding:8px 6px}
+  .v20Workspace .v20Media figure img{max-height:275px}
+  .v20Workspace .v20Media figure .v205ImageFrame,
+  .v20Workspace .v20Media figure .v205ImageFrame>img{max-height:275px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .v20Workspace .v203TourShortcut{transition:none!important}
+}
+@media(forced-colors:active){
+  .v20Workspace .v205AnnotationPanel>summary:focus-visible,
+  .v20Workspace .v203TourShortcut:focus-visible{outline-color:Highlight}
+}

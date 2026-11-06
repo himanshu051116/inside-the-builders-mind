@@ -1,0 +1,131 @@
+/* ORIGINAL scene-v9.css */
+/* INSIDE THE BUILDER'S MIND / SCENE 09
+   Original, locally generated, portfolio-specific artwork and responsive UI.
+   All visual data are labelled simulated; no fictitious production screenshots. */
+:root{--scene-smooth:cubic-bezier(.22,1,.36,1)}
+.careerStage{isolation:isolate}
+.careerStage:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(circle at 9% 21%,currentColor .7px,transparent 1px);background-size:32px 32px;opacity:.052;mask-image:linear-gradient(90deg,black,transparent 72%)}
+.careerStage:after{content:"";position:absolute;z-index:0;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--career-accent),transparent);opacity:.44;pointer-events:none}
+.careerInner{position:relative;z-index:1}
+
+.careerModeButton{overflow:hidden;border-radius:12px;min-height:84px;transition:transform .4s var(--scene-smooth),background .3s,box-shadow .3s,border-color .3s;outline-offset:4px}
+.careerModeButton:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 32%,#ffffff13 50%,transparent 68%);transform:translateX(-120%);transition:transform .75s var(--scene-smooth)}
+.careerModeButton:hover:before{transform:translateX(120%)}
+.careerModeButton[aria-pressed=true]:after{content:"";position:absolute;height:3px;left:17px;right:17px;bottom:0;background:var(--career-accent);border-radius:99px;box-shadow:0 0 22px var(--career-accent)}
+
+.careerCopy{isolation:isolate}
+.careerCopy:before{content:"H / S";font:800 clamp(110px,17vw,280px)/.8 ui-monospace,monospace;position:absolute;z-index:-1;left:-6%;top:2%;letter-spacing:-.13em;opacity:.031;pointer-events:none;transform:rotate(-8deg)}
+
+
+
+
+
+
+.careerProof{position:relative;z-index:2;border-top-color:color-mix(in srgb,var(--career-accent) 33%,transparent)!important}
+.careerProof div{position:relative;padding-left:19px}.careerProof div:before{content:"";width:5px;height:5px;position:absolute;left:1px;top:11px;background:var(--career-accent);border-radius:50%;box-shadow:0 0 0 5px color-mix(in srgb,var(--career-accent) 10%,transparent)}
+.careerView{padding-bottom:80px}
+.careerPanel{position:relative;z-index:3;min-width:0}.careerVisualCaption{letter-spacing:.13em;opacity:.84;margin-bottom:16px}
+/* -------- 01 FULL STACK / studio as a lively spatial product -------- */
+body[data-role=fullstack] #top{background:radial-gradient(circle at 79% 46%,#ffc3a566,transparent 36%),radial-gradient(circle at 36% 8%,#fff4db 4%,transparent 48%),linear-gradient(145deg,#f6f1e8,#f4e8dd 62%,#f7ded5);color:#162b37}
+body[data-role=fullstack] .careerModeButton[aria-pressed=true]{background:#fff9f0;box-shadow:0 18px 50px #d8784521, inset 0 0 0 1px #ed805f77}
+
+
+body[data-role=fullstack] .careerCopy:before{color:#cc704d;opacity:.08}
+.fullStage{position:relative;z-index:0;overflow:visible;isolation:isolate;background:linear-gradient(145deg,#182939,#172e40)!important;border:1px solid #24394f!important;box-shadow:0 50px 90px #84574935,0 10px 25px #0b1b2540,0 0 0 8px #ffffff6e!important;transform-style:preserve-3d}
+.fullStage:before{content:"";position:absolute;inset:-24px -23px;z-index:-4;border-radius:38px;background:radial-gradient(ellipse at 50% 58%,#e57f54a3,transparent 63%);filter:blur(35px);pointer-events:none}
+.fullStage:after{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at 79% 12%,#fff7c826,transparent 36%)}
+.studioAura{position:absolute;inset:-42px -20px;z-index:-2;overflow:hidden;pointer-events:none;opacity:.8}
+.auraRing{position:absolute;width:60%;aspect-ratio:1;border-radius:50%;border:1px solid #faac777a;top:3%;right:5%;transform:translate(var(--pointer-x,0px),var(--pointer-y,0px));transition:transform .25s ease-out}
+.auraRing.ringTwo{width:79%;top:-8%;right:-8%;border-color:#fcad7d4a;animation:v9Breath 8s ease-in-out infinite}
+.auraRing.ringThree{width:99%;top:-23%;right:-24%;border-color:#f4af6b3c}
+@keyframes v9Breath{50%{opacity:.5;transform:scale(1.035)}}
+.studioSideLabel{position:absolute;left:-24px;top:25%;writing-mode:vertical-rl;transform:rotate(180deg);font:800 8px/1.5 ui-monospace,monospace;letter-spacing:.17em;color:#ec8d70;z-index:2;pointer-events:none}.studioSideLabel span{color:#fff}
+.fullWindow{position:relative;z-index:1;box-shadow:0 35px 45px #030d1777,0 0 0 1px #ffffff20;background:#eef4f6!important;border:1px solid #ffffff45!important;transform:translate(var(--pointer-x,0px),var(--pointer-y,0px));transition:transform .2s ease-out;overflow:hidden}
+.fullWindowTop{background:#f8fafc!important;border-bottom:1px solid #d5e0e6!important}.fullWindowTop span{color:#6e8790!important;letter-spacing:.14em}.fullWindowTop b{color:#168b73!important}
+.fullWindowBody{min-height:326px!important}
+.fullCanvas{background:linear-gradient(165deg,#fff,#f7fbfd)!important}
+.fullCanvas h3{letter-spacing:-.055em}
+.fullActivity{position:relative;isolation:isolate;box-shadow:0 12px 30px #17375312;border-color:#d7e7eb!important;overflow:hidden}
+.studioSceneBanner{height:116px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:13px;isolation:isolate;background:radial-gradient(circle at 73% 32%,#615d9a 0,#293b66 42%,#0e263d 84%);border:1px solid #87a8c82d}
+.studioSceneBanner:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 16%,#f5deff .6px,transparent 1.3px);background-size:17px 15px;opacity:.65}
+.scenePlanet{position:absolute;border-radius:50%;background:radial-gradient(circle at 29% 27%,#ffddbe,#ea8b83 29%,#a34e83 66%,#382e69 100%);box-shadow:inset -13px -14px 20px #101b4eaa,0 0 50px #e46c8c66;z-index:1}
+.planetOne{width:88px;height:88px;right:22%;top:5px;animation:planetDrift 7s ease-in-out infinite}.planetTwo{width:39px;height:39px;right:12%;top:56px;background:radial-gradient(circle at 35% 25%,#d3f0ff,#6f91c9 50%,#2f527f);animation:planetDrift 6s 1s ease-in-out infinite}
+.sceneOrbit{position:absolute;right:9%;top:15px;width:215px;height:90px;border:1px solid #b8d3f26b;transform:rotate(-23deg);border-radius:50%;z-index:2}
+.bannerTitle{position:absolute;z-index:3;left:15px;top:19px;color:#fff}.bannerTitle small{display:block;font:750 7px ui-monospace,monospace;letter-spacing:.13em;color:#d7c8e7;margin-bottom:11px}.bannerTitle strong{font-weight:760;letter-spacing:-.035em;font-size:17px;line-height:1.16}.studioSceneLabel{position:absolute;z-index:3;right:12px;bottom:10px;color:#e8e5fa;font:750 8px ui-monospace,monospace;letter-spacing:.1em}
+@keyframes planetDrift{50%{transform:translateY(-7px)}}
+.studioWatchArt{height:104px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:13px;background:linear-gradient(145deg,#11364e,#234a6c 65%,#5a4a7d)}.studioWatchArt:before{content:"";inset:0;position:absolute;background:radial-gradient(circle at 30% 20%,#ffffff .7px,transparent 1.2px);background-size:22px 17px;opacity:.75}
+.watchPlanet{position:absolute;right:12%;top:-33px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#f6a38b,#ae657b 50%,#514a87);box-shadow:inset -18px -15px 20px #2f2a70,0 0 35px #ac7cad}.watchBeam{position:absolute;right:8%;top:42px;width:165px;height:45px;border-top:2px solid #ffffff88;border-bottom:2px solid #ffffff44;transform:rotate(-25deg);border-radius:50%}.watchTitle{position:absolute;left:15px;bottom:17px;color:#fff;font:800 12px ui-monospace,monospace;letter-spacing:.08em}.watchTitle small{display:block;margin-top:5px;font-size:8px;color:#c6d6e7}
+.studioFloatingCard{position:absolute;right:-25px;bottom:-36px;z-index:2;pointer-events:none;background:#fff3e3;color:#342f37;border:1px solid #fff;border-radius:14px;box-shadow:0 16px 35px #171b2650;transform:rotate(6deg);padding:12px 15px;width:165px}
+.studioFloatingCard>span{font:800 7px ui-monospace,monospace;letter-spacing:.12em;color:#926d67}.studioFloatingCard strong{display:block;margin:7px 0;font-size:15px;letter-spacing:-.03em}.studioFloatingCard strong i{color:#e46e4f;font-style:normal}.studioFloatingLines{display:flex;gap:3px}.studioFloatingLines b{height:3px;width:28%;border-radius:3px;background:#ef835f}.studioFloatingLines b:nth-child(2){background:#f7b36f}.studioFloatingLines b:nth-child(3){background:#7cacc3}
+/* -------- 02 SYSTEMS / observability surface and clickable flow -------- */
+body[data-role=software] #top{background:radial-gradient(ellipse at 75% 35%,#0a5c5e45,transparent 41%),radial-gradient(ellipse at 25% 75%,#93643522,transparent 45%),#080e15;color:#f6f4eb}
+body[data-role=software] .careerCopy:before{color:#e3b86d;opacity:.06}
+
+body[data-role=software] .careerPanel{filter:drop-shadow(0 35px 65px #0009)}
+.terminalShell{position:relative;overflow:hidden!important;border:1px solid #ffce795e!important;border-radius:18px!important;box-shadow:0 0 0 7px #212a3138,0 25px 80px #0008!important;background:linear-gradient(155deg,#141d24,#09141d)!important}
+.terminalShell:before{content:"";inset:0;position:absolute;z-index:0;background:radial-gradient(circle at 75% 25%,#2c9e8440,transparent 42%);pointer-events:none}
+.terminalShell>*{position:relative;z-index:1}.terminalChrome{background:#1b2930!important;border-bottom-color:#6b8b8266!important;min-height:39px}
+.systemsFlowGraphic{position:relative;padding:14px 19px 11px;border-bottom:1px solid #5b85743d;background:linear-gradient(125deg,#12282a,#10252c 60%,#0a1b25);isolation:isolate;overflow:hidden}
+.systemsFlowGraphic:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 0 49%,#8cd6a50d 50%,transparent 51%);background-size:26px 26px;opacity:.5;z-index:-1}
+.sysFlowTop,.sysFlowBottom{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#9bbdb2;font:700 8px/1.5 ui-monospace,monospace;letter-spacing:.12em}.sysFlowTop i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8aefb1;box-shadow:0 0 12px #8aefb1;vertical-align:middle;margin-right:5px}
+.sysFlowNodes{display:flex;align-items:center;justify-content:space-between;gap:3px;margin:10px 0 12px}
+.sysFlowNode{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:0 1 100px;min-width:0;min-height:89px;padding:8px 4px;border:1px solid #3c675c;border-radius:9px;background:#102b2e;color:#d1eadb;text-align:center;cursor:pointer;transition:background .25s,box-shadow .25s,transform .3s var(--scene-smooth)}.sysFlowNode:hover{transform:translateY(-4px);background:#1a3b3a}.sysFlowNode[aria-pressed=true]{background:#304b3c;border-color:#ffcc79;box-shadow:0 0 0 1px #ffcc7990,0 0 28px #efa65822}.sysFlowNode small{position:absolute;top:5px;left:7px;font:750 7px ui-monospace,monospace;color:#a2c7b6}.sysFlowIcon{font:400 24px/1 "Segoe UI Symbol",sans-serif;color:#ffce82}.sysFlowNode strong{font:750 10px ui-monospace,monospace}.sysFlowNode em{font:600 8px ui-monospace,monospace;font-style:normal;color:#88b2a5}
+.sysFlowLink{height:1px;flex:1 1 12px;min-width:8px;background:linear-gradient(90deg,#66dab3,#ffd17d);position:relative;align-self:center}.sysFlowLink i{width:5px;height:5px;display:block;position:absolute;top:-2px;left:4px;background:#ffcd78;box-shadow:0 0 12px #ffd17f;animation:packetTravel 2.9s linear infinite}@keyframes packetTravel{to{left:calc(100% - 5px)}}
+.sysFlowBottom{border-top:1px solid #507d6944;padding-top:9px;font-size:8px}.sysFlowBottom b{color:#dff9df}.sysFlowBottom span:last-child{color:#ffca7a}
+.terminalMain{min-height:195px!important}.terminalOutput{height:159px!important;font-size:11px!important;line-height:1.7!important}.terminalInner{padding:14px 17px!important}.terminalAside{padding-top:10px!important}.terminalAside strong{margin-bottom:8px!important}
+.pipelineInsight{border-color:#6a987b78!important;background:linear-gradient(145deg,#1b3333,#172a32)!important}.pipelineInsight strong{color:#ffce83!important}
+/* -------- 03 ML / cartographic synthetic visual substrate -------- */
+body[data-role=ml] #top{background:radial-gradient(ellipse at 79% 43%,#5742ac79,transparent 43%),radial-gradient(ellipse at 20% 15%,#244b6944,transparent 55%),#101021;color:#efecff}
+body[data-role=ml] .careerCopy:before{color:#c7bbfa;opacity:.065}
+
+.researchStage{overflow:visible!important;padding:16px!important;background:linear-gradient(165deg,#211f3d,#16172a 60%,#212b42)!important;border:1px solid #c9b7ff65!important;box-shadow:0 0 0 7px #a598e20a,0 45px 95px #08041e96!important}
+.researchStage:before{border-radius:25px;pointer-events:none}.researchVisual{height:198px!important;isolation:isolate;background:#18263b!important;box-shadow:inset 0 0 0 1px #9fa8c94a;margin-bottom:9px!important}
+.researchTerrain{position:absolute;inset:-1px;background-image:url("/visuals/terrain-optical.svg");background-position:center;background-size:cover;transition:filter .4s,opacity .4s,transform .5s var(--scene-smooth);opacity:.95;transform:scale(1.06);filter:contrast(1.15) saturate(.9)}
+.researchVisual[data-sensor=sar] .researchTerrain{background-image:url("/visuals/terrain-sar.svg");filter:grayscale(.25) contrast(1.5)}
+.researchVisual[data-sensor=multispectral] .researchTerrain{background-image:url("/visuals/terrain-multispectral.svg");filter:saturate(1.4) contrast(1.2)}
+.researchVisual:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#070b22a8,transparent 36%,transparent 64%,#070c1e87);pointer-events:none}
+.researchVisual .sensorMesh{opacity:.16;z-index:1;mix-blend-mode:screen;transform:rotate(0) scale(1.2)!important;pointer-events:none}
+.researchVisual .researchLens{z-index:3;width:110px;height:110px;box-shadow:0 0 0 14px #c6b4ff18,0 0 0 32px #c6b4ff10,inset 0 0 35px #c6b4ff3b;border-color:#eee3ffbf;transform:translateX(8px)}
+.researchVisual .researchLens strong{font-size:9px;line-height:1.4;padding:8px;box-shadow:0 8px 20px #0c0d2780}
+.researchHud{position:absolute;inset:9px;z-index:4;pointer-events:none}.hudCorner{position:absolute;width:13px;height:13px;border-color:#edfcffb8;border-style:solid}.hudA{top:0;left:0;border-width:2px 0 0 2px}.hudB{top:0;right:0;border-width:2px 2px 0 0}.hudC{bottom:0;left:0;border-width:0 0 2px 2px}.hudD{bottom:0;right:0;border-width:0 2px 2px 0}.hudNorth,.hudCoordinate,.hudScale{position:absolute;z-index:4;color:#f4f9ff;font:750 8px ui-monospace,monospace;letter-spacing:.1em;text-shadow:0 1px 7px #000}.hudNorth{top:12px;right:13px}.hudCoordinate{bottom:12px;left:11px}.hudScale{bottom:12px;right:12px}.hudScanLine{position:absolute;inset:0;top:30%;height:1px;background:linear-gradient(90deg,transparent,#dbd0ffdb,transparent);box-shadow:0 0 17px #cab7ff;animation:scanTerrain 6s ease-in-out infinite alternate}@keyframes scanTerrain{to{top:79%}}
+.researchContactSheet{border:1px solid #ffffff1a;border-radius:12px;padding:10px 12px;margin:0 0 10px;background:#111628a8}.researchContactTop{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:8px;color:#aeb4d6;font:750 8px ui-monospace,monospace;letter-spacing:.1em}
+.researchResultTiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.researchResultTile{display:flex;flex-direction:column;min-width:0;gap:5px}.tilePicture{display:block;height:55px;border-radius:7px;background-image:url("/visuals/terrain-optical.svg");background-size:320% 280%;background-position:32% 24%;border:1px solid #cdbfff59;overflow:hidden;position:relative;filter:saturate(.85)}.tilePicture:after{content:"+";position:absolute;left:calc(50% - 4px);top:calc(50% - 7px);font:800 14px ui-monospace,monospace;color:#ffffffad}.picTwo{background-position:68% 72%;filter:hue-rotate(95deg) saturate(.5)}.picThree{background-position:15% 82%;filter:hue-rotate(215deg) saturate(1.2)}.researchResultTile small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e5ddff;font:750 8px ui-monospace,monospace;letter-spacing:.03em}.researchStage[data-active-sensor=sar] .tilePicture{background-image:url("/visuals/terrain-sar.svg")}.researchStage[data-active-sensor=multispectral] .tilePicture{background-image:url("/visuals/terrain-multispectral.svg")}
+.researchResult{background:#ffffff0d!important}.researchResult h3{font-weight:760}.researchMatch{margin-bottom:9px!important}
+/* ------- Project reel becomes a collection of technical artifacts -------- */
+#work{isolation:isolate;position:relative}
+#work:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 95% 15%,color-mix(in srgb,var(--signal) 11%,transparent),transparent 36%);opacity:.8;z-index:-1}
+#work .sectionHeadRow h2{letter-spacing:-.08em}
+#work .projectCard{border:1px solid #bfdecb35!important;box-shadow:0 18px 42px #030b156b!important;transition:box-shadow .4s,border-color .4s}
+#work .projectCard:hover{border-color:color-mix(in srgb,var(--signal) 50%,transparent)!important;box-shadow:0 18px 52px #030b1588!important}
+#work .projectVisual{position:relative;overflow:hidden}
+#work .projectVisual:after{content:"";inset:0;position:absolute;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 22px,#ffffff10 23px);opacity:.24;mix-blend-mode:screen}
+#work .projectArt{position:relative;isolation:isolate}
+#work .projectArt:after{content:"";position:absolute;z-index:0;width:330px;height:330px;right:-170px;top:-190px;border:1px solid #ffffff2c;border-radius:50%;box-shadow:0 0 0 27px #ffffff08,0 0 0 67px #ffffff06;pointer-events:none}
+#work .projDiagram{position:relative;z-index:1;filter:drop-shadow(0 14px 22px #0004)}
+#work .projectArt.art-rose:before,#work .projectArt.art-lime:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,#ffdfb028,transparent 55%)}
+#work .projectBigNumber{font-size:clamp(86px,10vw,145px)!important;bottom:-24px!important;right:15px!important;opacity:.17!important}
+#work .projectCard h3{font-weight:760}
+#work .projectCard .projectMeta{letter-spacing:.09em}
+#work .caseStudy{border-radius:10px}
+/* Distinguish actual interaction from decorative elements, keyboard focus stays visible */
+:is(.careerModeButton,.sysFlowNode,.careerCTA,.studioChatForm button,.projectCard a,.stageSteps button,.researchQueries button):focus-visible{outline:3px solid var(--career-accent,#a8df79);outline-offset:4px}
+@media(max-width:1100px){.careerView{gap:24px}.studioFloatingCard{right:-7px;bottom:-39px}.systemsFlowGraphic{padding:12px 11px}.sysFlowNode{min-height:78px}}
+@media(max-width:800px){.careerView{padding-top:52px}.fullStage{max-width:680px}.studioSideLabel{left:-15px}.studioFloatingCard{bottom:-30px}}
+@media(max-width:540px){.careerStage:before{background-size:23px 23px}.careerModeButton{min-height:62px}.careerProof div{padding-left:14px}.careerProof div:before{width:4px;height:4px;top:8px}.fullStage{max-width:100%;box-shadow:0 20px 55px #84574946!important}.studioAura{inset:-15px -4px}.studioSideLabel{display:none}.studioFloatingCard{width:116px;right:-6px;bottom:-39px;padding:7px 9px;transform:rotate(5deg)}.studioFloatingCard>span{font-size:6px}.studioFloatingCard strong{font-size:10px;margin:5px 0}.studioFloatingLines b{height:2px}.studioSceneBanner{height:87px;margin-bottom:9px}.planetOne{width:68px;height:68px;right:23%}.planetTwo{width:27px;height:27px;right:10%;top:48px}.sceneOrbit{width:130px;height:70px;right:12%;top:12px}.bannerTitle{top:11px;left:9px}.bannerTitle strong{font-size:13px}.bannerTitle small{font-size:6px;margin-bottom:7px}.studioSceneLabel{font-size:6px;bottom:6px;right:7px}.studioWatchArt{height:79px}.watchPlanet{width:110px;height:110px}.watchTitle{font-size:9px;left:11px;bottom:12px}.watchTitle small{font-size:7px}.systemsFlowGraphic{padding:12px 8px}.sysFlowTop,.sysFlowBottom{font-size:7px}.sysFlowTop span:last-child{display:none}.sysFlowNode{min-height:74px;min-width:0;border-radius:7px;padding:7px 1px 5px;gap:3px}.sysFlowNode small{font-size:6px;top:3px;left:4px}.sysFlowNode strong{font-size:8px}.sysFlowNode em{font-size:6px}.sysFlowIcon{font-size:21px}.sysFlowLink{min-width:3px;flex-basis:6px}.terminalOutput{font-size:9px!important;height:160px!important}.terminalAside{padding:8px 5px!important}.researchStage{padding:10px!important}.researchVisual{height:177px!important}.researchVisual .researchLens{width:88px;height:88px}.researchHud{inset:6px}.hudNorth,.hudCoordinate,.hudScale{font-size:6px}.researchContactSheet{padding:8px}.researchContactTop{font-size:6px}.tilePicture{height:42px}.researchResultTile small{font-size:7px}#work .projectArt:after{width:200px;height:200px;right:-100px;top:-120px}}
+@media(max-width:365px){.careerModeButton{padding:7px 2px}.researchVisual{height:153px!important}.fullWindowBody{min-height:0!important}.studioSceneBanner{height:75px}.bannerTitle strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.auraRing,.scenePlanet,.sysFlowLink i,.hudScanLine,.careerModeButton:before{animation:none!important;transition:none!important}.fullWindow{transform:none!important}}
+/* Mobile: show the actual interactive work earlier instead of a wall of résumé copy. */
+@media(max-width:540px){
+  .careerView{padding-top:25px!important;padding-bottom:45px!important;gap:14px!important}
+  
+  
+  
+  
+  
+  
+  
+  
+  .careerVisualCaption{margin-bottom:8px!important;font-size:7px!important}
+  .careerProof{padding-top:12px!important;padding-bottom:12px!important}
+}
+

@@ -1,0 +1,155 @@
+/* V17 — stable, recruiter-first identity before the existing V16 career scenes.
+   This neutral candidate sheet deliberately does not change with specialization. */
+:root { --v17-ink:#182b30; --v17-muted:#526367; --v17-orange:#bf5638; --v17-paper:#f4f0e8; --v17-rule:#d1c9bc; --v17-display:Georgia,'Times New Roman',serif; }
+#home.v17Recruiter {
+  background:var(--v17-paper);color:var(--v17-ink);position:relative;isolation:isolate;
+  border-bottom:1px solid #c5bba9;overflow:hidden;
+}
+#home.v17Recruiter::before {
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(#172a3107 1px,transparent 1px),linear-gradient(90deg,#172a3107 1px,transparent 1px);
+  background-size:50px 50px;mask-image:linear-gradient(90deg,#0008,transparent 73%);
+}
+#home .v17Wrap { width:min(1350px,calc(100% - 92px));margin:auto; }
+#home .v17TopLine {padding:24px 0 20px;border-bottom:1px solid var(--v17-rule);display:flex;justify-content:space-between;align-items:center;gap:20px;}
+#home .v17Index {font:750 11px/1.35 ui-monospace,'SFMono-Regular',Consolas,monospace;letter-spacing:.11em;color:var(--v17-orange);}
+#home .v17Availability {display:flex;gap:8px;align-items:center;font:650 12px/1.35 system-ui,sans-serif;color:var(--v17-muted);text-align:right;}
+#home .v17Availability i {display:inline-block;flex:none;width:8px;height:8px;border-radius:50%;background:#428469;box-shadow:0 0 0 4px #42846918;}
+#home .v17LeadGrid {display:grid;grid-template-columns:minmax(0,1.11fr) minmax(350px,.89fr);gap:clamp(25px,5vw,80px);align-items:stretch;padding:clamp(34px,4.4vw,66px) 0 28px;}
+#home .v17LeadCopy {display:flex;flex-direction:column;min-width:0;justify-content:center;}
+#home .v17Overline {font:750 11px/1.6 ui-monospace,'SFMono-Regular',Consolas,monospace;letter-spacing:.065em;color:var(--v17-orange);margin:0 0 13px;}
+#home .v17Overline span {padding:0 6px;color:#b0a496;}
+#home h1 {
+  font:750 clamp(50px,6.4vw,99px)/.98 var(--v17-display);letter-spacing:-.077em;
+  color:var(--v17-ink);margin:0 0 15px;white-space:nowrap;
+}
+#home h1 .v17Period {color:var(--v17-orange);}
+#home .v17Degree {font:750 clamp(16px,1.35vw,20px)/1.45 system-ui,sans-serif;letter-spacing:-.03em;max-width:660px;margin:0 0 7px;}
+#home .v17Degree .v17Dot {color:var(--v17-orange);padding:0 4px;}
+#home .v17Graduation {font:550 12px/1.5 ui-monospace,Consolas,monospace;letter-spacing:-.005em;color:var(--v17-muted);margin:0 0 18px;}
+#home .v17Graduation span {color:#bdaba0;margin:0 6px;}
+#home .v17LeadStatement {font:450 15px/1.68 system-ui,sans-serif;max-width:58ch;color:#42575b;margin:0 0 23px;}
+#home .v17PrimaryLinks {display:flex;flex-wrap:wrap;gap:9px;margin:0 0 12px;}
+#home .v17PrimaryLinks a {
+  display:inline-flex;justify-content:space-between;align-items:center;gap:17px;padding:13px 18px;
+  min-height:48px;border-radius:6px;font:750 13px/1.3 system-ui,sans-serif;
+  text-decoration:none;transition:transform .22s ease,background-color .22s ease,color .22s ease;
+}
+#home .v17PrimaryLinks a:hover {transform:translateY(-2px);}
+#home .v17MainCTA {background:#182d34;color:#fbf8f2;border:1px solid #182d34;}
+#home .v17OutlineCTA {color:#182d34;background:#faf7f1;border:1px solid #aaa699;}
+#home .v17Socials {display:flex;gap:0 22px;flex-wrap:wrap;align-items:center;margin:0;}
+#home .v17Socials a {font:750 12px/1.4 system-ui,sans-serif;color:#56676a;min-height:38px;display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#b6bdb8;}
+#home .v17Socials a:hover {color:var(--v17-orange);}
+#home .v17Proof {background:#172b33;color:#faf7f1;position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;box-shadow:0 22px 44px #1e2b301a;border:1px solid #29414a;min-height:385px;border-radius:9px;overflow:hidden;}
+#home .v17Proof::before {content:'';position:absolute;inset:auto -90px -150px auto;width:380px;height:380px;border:1px solid #b4d3c326;border-radius:50%;z-index:-1;box-shadow:0 0 0 44px #b4d3c30b,0 0 0 95px #b4d3c309;}
+#home .v17ProofHeader {display:flex;justify-content:space-between;gap:12px;padding:20px 25px;border-bottom:1px solid #6680844f;color:#a9c6bd;font:750 10px/1.3 ui-monospace,Consolas,monospace;letter-spacing:.06em;}
+#home .v17ProofBody {padding:clamp(22px,3vw,38px);display:flex;flex-direction:column;flex:1;}
+#home .v17ProofProject {font:800 12px/1.4 ui-monospace,Consolas,monospace;color:#e3af8f;letter-spacing:.08em;margin-bottom:12px;}
+#home .v17Proof h2 {font:650 clamp(30px,3vw,49px)/1.09 var(--v17-display);letter-spacing:-.05em;margin:0 0 14px;color:#f5f4eb;}
+#home .v17ProofBody>p {font:450 13px/1.6 system-ui,sans-serif;color:#aec3c2;max-width:43ch;margin:0 0 20px;}
+#home .v17ProofMeta {display:grid;grid-template-columns:1fr auto;gap:16px;padding:15px 0;border-top:1px solid #718c8b6b;border-bottom:1px solid #718c8b6b;}
+#home .v17ProofMeta div {display:grid;gap:6px;}
+#home .v17ProofMeta span {color:#8db2ad;font:750 10px/1.3 ui-monospace,Consolas,monospace;letter-spacing:.06em;}
+#home .v17ProofMeta strong {font:650 12px/1.4 system-ui,sans-serif;color:#f3f4ed;}
+#home .v17ProofLink {display:inline-flex;justify-content:space-between;align-items:center;gap:12px;align-self:stretch;color:#ffd7bd;font:750 13px/1.35 system-ui,sans-serif;text-decoration:none;padding:18px 0 0;min-height:45px;}
+#home .v17ProofLink:hover {color:#fff;text-decoration:underline;text-underline-offset:4px;}
+#home .v17Essentials {display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.05fr) minmax(0,.90fr);border:1px solid var(--v17-rule);background:#fffdfa;gap:0;border-radius:8px;overflow:hidden;}
+#home .v17Essential {padding:20px 22px 23px;min-width:0;border-right:1px solid var(--v17-rule);}
+#home .v17Essential:last-child {border-right:0;}
+#home .v17EssentialHeading {display:flex;justify-content:space-between;gap:12px;font:800 10px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.075em;color:var(--v17-orange);margin-bottom:15px;}
+#home .v17EssentialHeading span:last-child {color:#a5a6a0;}
+#home .v17Essential p {font:550 12px/1.65 system-ui,sans-serif;color:#374c50;margin:0;}
+#home .v17Separator {color:#cf806b;font-weight:800;}
+#home .v17SkillTokens {display:flex;gap:7px;flex-wrap:wrap;align-items:flex-start;}
+#home .v17SkillTokens span {font:700 11px/1.2 ui-monospace,Consolas,monospace;color:#3c5253;padding:7px 9px;border:1px solid #d5d4c7;border-radius:4px;background:#f5f5ee;}
+#home .v17GoDeeper {display:flex;align-items:center;justify-content:space-between;gap:10px;padding:22px 0 24px;}
+#home .v17GoDeeper>span {font:750 10px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.065em;color:#748184;}
+#home .v17GoDeeper>a {font:800 12px/1.4 system-ui,sans-serif;display:inline-flex;gap:10px;align-items:center;text-decoration:none;color:#b45239;min-height:44px;}
+#home .v17GoDeeper>a:hover {text-decoration:underline;text-underline-offset:4px;}
+#home a:focus-visible {outline:3px solid #b45239;outline-offset:4px;}
+#top .v14IdentityTop,#top .v15HeroEdition,#top .candidateIdentity {display:none!important;}
+#top .careerChooser.v14ModeBar {margin-top:0;}
+#top.careerStage.v14Hero {scroll-margin-top:75px;}
+#top .careerInner {padding-top:26px;}
+@media(max-width:1180px) {
+ #home .v17Wrap {width:min(1240px,calc(100% - 62px));}
+ #home .v17LeadGrid {grid-template-columns:minmax(0,1fr) minmax(320px,.85fr);gap:30px;}
+ #home h1 {font-size:clamp(48px,5.8vw,82px);}
+ #home .v17Proof {min-height:375px;}
+ #home .v17ProofBody {padding:25px;}
+ #home .v17Essential {padding:19px 17px;}
+}
+@media(max-width:950px) {
+ #home .v17LeadGrid {grid-template-columns:minmax(0,1fr);gap:24px;padding:32px 0 22px;}
+ #home h1 {font-size:clamp(58px,8vw,85px);}
+ #home .v17LeadStatement {max-width:78ch;}
+ #home .v17Proof {min-height:0;}
+ #home .v17ProofBody {padding:24px;}
+ #home .v17Proof h2 {font-size:37px;}
+ #home .v17Essentials {grid-template-columns:1fr 1fr;}
+ #home .v17Essential:nth-child(2) {border-right:0;}
+ #home .v17Essential:last-child {grid-column:1 / -1;border-top:1px solid var(--v17-rule);}
+}
+@media(max-width:630px) {
+ #home .v17Wrap {width:calc(100% - 34px);}
+ #home .v17TopLine {padding:16px 0 17px;gap:9px;}
+ #home .v17Index {font-size:9px;}
+ #home .v17Availability {font-size:10px;max-width:54%;}
+ #home .v17LeadGrid {padding:28px 0 18px;gap:20px;}
+ #home h1 {font-size:clamp(41px,11vw,64px);white-space:normal;}
+ #home .v17Overline {font-size:9px;line-height:1.5;}
+ #home .v17Degree {font-size:15px;}
+ #home .v17Graduation {font-size:10px;line-height:1.7;}
+ #home .v17LeadStatement {font-size:14px;line-height:1.55;margin-bottom:18px;}
+ #home .v17PrimaryLinks a {min-height:47px;padding:13px 14px;font-size:12px;}
+ #home .v17Proof h2 {font-size:clamp(30px,7.6vw,39px);}
+ #home .v17ProofHeader {padding:15px 17px;font-size:9px;}
+ #home .v17ProofBody {padding:20px;}
+ #home .v17ProofMeta {grid-template-columns:1fr 1fr;}
+ #home .v17ProofMeta strong {font-size:11px;}
+ #home .v17Essentials {grid-template-columns:1fr;}
+ #home .v17Essential,#home .v17Essential:nth-child(2) {grid-column:auto;border-right:0;border-bottom:1px solid var(--v17-rule);padding:16px 17px;}
+ #home .v17Essential:last-child {border:0;}
+ #home .v17EssentialHeading {margin-bottom:8px;}
+ #home .v17GoDeeper {align-items:flex-start;padding:15px 0;}
+ #home .v17GoDeeper>span {font-size:9px;max-width:48%;padding-top:8px;}
+ #home .v17GoDeeper>a {text-align:right;font-size:11px;}
+ #top .careerInner {padding-top:15px;}
+}
+@media(max-width:360px) {
+ #home .v17TopLine {flex-direction:column;align-items:flex-start;}
+ #home .v17Availability {max-width:none;}
+ #home h1 {font-size:40px;}
+ #home .v17PrimaryLinks {display:grid;grid-template-columns:1fr;}
+ #home .v17PrimaryLinks a {width:100%;}
+ #home .v17ProofMeta {grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce) {
+ #home .v17PrimaryLinks a {transition:none!important;transform:none!important;}
+}
+@media(forced-colors:active) {
+ #home.v17Recruiter,#home .v17Proof,#home .v17Essentials {border:1px solid CanvasText;background:Canvas;color:CanvasText;}
+ #home .v17MainCTA {background:Highlight;color:HighlightText;}
+ #home .v17OutlineCTA,#home .v17SkillTokens span {border:1px solid CanvasText;color:CanvasText;background:Canvas;}
+}
+/* Visible handoff from the universal candidate summary to the role-specific screenwalk. */
+#top .v17ModeIntro {display:flex;justify-content:space-between;align-items:center;gap:24px;padding:7px 0 17px;border-bottom:1px solid var(--v15-border,#bcc5c3);}
+#top .v17ModeIntro span {color:var(--v15-accent,#a35640);font:800 11px/1.35 ui-monospace,Consolas,monospace;letter-spacing:.065em;}
+#top .v17ModeIntro p {font:550 12px/1.4 system-ui,sans-serif;color:var(--v15-soft,#56676a);margin:0;text-align:right;}
+@media(max-width:630px){#top .v17ModeIntro {align-items:flex-start;flex-direction:column;gap:4px;padding:8px 0 14px;}#top .v17ModeIntro p {text-align:left;}}
+/* Role-specific résumé selector. */
+#home .v17ResumeSelect {position:relative;display:inline-block;font:750 13px/1.3 system-ui,sans-serif;}
+#home .v17ResumeSelect summary {display:flex;justify-content:space-between;align-items:center;gap:17px;min-height:48px;padding:13px 18px;border-radius:6px;border:1px solid #aaa699;background:#faf7f1;color:#182d34;cursor:pointer;list-style:none;}
+#home .v17ResumeSelect summary::-webkit-details-marker {display:none;}
+#home .v17ResumeSelect[open] summary {border-color:#bf5638;}
+#home .v17ResumeChoices {position:absolute;left:0;top:calc(100% + 6px);min-width:225px;z-index:15;display:grid;padding:7px;background:#fffdf7;border:1px solid #aaa699;border-radius:7px;box-shadow:0 14px 30px #162b3030;}
+#home .v17ResumeChoices a {padding:11px 13px;min-height:43px;display:flex;align-items:center;color:#1c3238;text-decoration:none;border-radius:4px;}
+#home .v17ResumeChoices a:hover {background:#f3eee4;}
+#home .v17ResumeSelect summary:focus-visible,#home .v17ResumeChoices a:focus-visible {outline:3px solid #b45239;outline-offset:3px;}
+@media(max-width:630px){#home .v17ResumeChoices {min-width:220px;}#home .v17ResumeSelect summary {padding:13px 14px;font-size:12px;}}
+/* Compact recruiter-first lists: keep real roles visible without decorative paragraphs. */
+#home .v17FactList {list-style:none;margin:0;padding:0;display:grid;gap:7px;}
+#home .v17FactList li {font:600 12px/1.45 system-ui,sans-serif;color:#344b4e;padding-left:12px;position:relative;}
+#home .v17FactList li:before {content:'';width:4px;height:4px;background:#bb5b41;position:absolute;left:0;top:.6em;border-radius:100%;}
+@media(max-width:630px) {#home .v17FactList {gap:6px;}#home .v17FactList li {font-size:12px;}}

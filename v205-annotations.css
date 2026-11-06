@@ -1,0 +1,31 @@
+/* V20.5 — authentic screenshot feature annotations; no change to original asset bytes. */
+.v20Workspace .v20Media figure:has(.v205ImageFrame){text-align:center}
+.v20Workspace .v205ImageFrame{display:inline-block;position:relative;max-width:100%;vertical-align:top;line-height:0}
+.v20Workspace .v205ImageFrame>img{display:block!important;width:100%!important;max-width:100%;height:auto!important;max-height:none!important;object-fit:contain!important}
+.v20Workspace .v205Dots{position:absolute;inset:0;pointer-events:none}
+.v20Workspace .v205Dots[hidden]{display:none!important}
+.v20Workspace .v205Hotspot{position:absolute;left:clamp(22px,var(--v205-x),calc(100% - 22px));top:clamp(22px,var(--v205-y),calc(100% - 22px));transform:translate(-50%,-50%);width:42px;height:42px;border:2px solid #fff8ea;border-radius:50%;background:#ac4827eb;color:#fffaf3;box-shadow:0 2px 12px #000a;pointer-events:auto;cursor:pointer;font:800 13px/1 system-ui,sans-serif}
+.v20Workspace .v205Hotspot.isActive{background:#133b3c;border-color:#fff6e5;box-shadow:0 0 0 4px #fae5b9a0,0 2px 12px #000a}
+.v20Workspace .v205AnnotationPanel{border:1px solid var(--v20-line);border-radius:8px;background:var(--v20-panel);margin:12px 0 16px;padding:13px}
+.v20Workspace .v205Head{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.v20Workspace .v205Head strong{font:750 13px/1.4 system-ui,sans-serif;color:var(--v20-ink)}
+.v20Workspace .v205Count{margin-left:auto;font:750 11px/1.4 ui-monospace,monospace;color:var(--v20-soft)}
+.v20Workspace .v205Toggle{font:700 11px/1.4 system-ui,sans-serif;min-height:40px;border:1px solid var(--v20-line);padding:7px 11px;border-radius:5px;cursor:pointer;background:var(--v20-paper);color:var(--v20-ink)}
+.v20Workspace .v205FeatureList{display:flex;gap:6px;overflow-x:auto;padding:10px 1px 11px}
+.v20Workspace .v205Feature{flex:none;max-width:210px;white-space:normal;text-align:left;min-height:40px;background:var(--v20-paper);border:1px solid var(--v20-line);border-radius:5px;padding:7px 10px;font:650 11px/1.3 system-ui,sans-serif;color:var(--v20-ink);cursor:pointer}
+.v20Workspace .v205Feature.isActive{border-color:var(--v20-accent);box-shadow:inset 0 0 0 1px var(--v20-accent)}
+.v20Workspace .v205Info{padding:12px;background:var(--v20-paper);border:1px solid var(--v20-line);border-radius:6px}
+.v20Workspace .v205Info h4{font:750 14px/1.4 system-ui,sans-serif;color:var(--v20-ink);margin:0 0 5px}
+.v20Workspace .v205Info p{font:450 12px/1.6 system-ui,sans-serif;color:var(--v20-soft);margin:0}
+.v20Workspace .v205Actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.v20Workspace .v205Go{min-height:42px;font:700 11px/1.4 system-ui,sans-serif;border:1px solid var(--v20-line);border-radius:5px;background:var(--v20-paper);color:var(--v20-ink);padding:9px 12px;cursor:pointer}
+.v20Workspace .v205Disclaimer{margin:11px 0 0!important;color:var(--v20-soft);font:550 10px/1.55 system-ui,sans-serif}
+.v20Workspace :is(.v205Hotspot,.v205Feature,.v205Go,.v205Toggle):focus-visible{outline:3px solid var(--v20-accent);outline-offset:3px}
+@media(max-width:620px){.v20Workspace .v205AnnotationPanel{padding:10px}.v20Workspace .v205Hotspot{width:36px;height:36px;font-size:11px}.v20Workspace .v205Head strong{flex:1 1 100%}.v20Workspace .v205Count{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.v20Workspace .v205Hotspot{transition:none!important}}
+@media(forced-colors:active){.v20Workspace .v205Hotspot,.v20Workspace .v205Feature.isActive{forced-color-adjust:auto;border:2px solid Highlight;color:HighlightText}}
+
+/* V20.6 — annotated thumbnail discoverability, unobtrusive visual marker. */
+.v20Workspace .v20Thumbs button.v205AnnotatedThumb{border-color:var(--v20-accent)}
+.v20Workspace .v20Thumbs button.v205AnnotatedThumb::before{content:"+";position:absolute;top:3px;left:4px;z-index:1;min-width:17px;height:17px;display:grid;place-items:center;border-radius:50%;font:800 11px/1 system-ui,sans-serif;color:#fff;background:#93452c;pointer-events:none}
+@media(forced-colors:active){.v20Workspace .v20Thumbs button.v205AnnotatedThumb::before{border:1px solid Highlight;color:HighlightText;background:Highlight}}

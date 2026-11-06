@@ -1,0 +1,157 @@
+/* V20.9 — recruiter contact, portrait-led without oversized headline.
+   Kept separate from the portfolio's historical style layers. */
+#contact.contact{
+  background:
+    radial-gradient(ellipse 54% 68% at 80% 35%,rgba(179,222,134,.065),transparent 73%),
+    #0b1018;
+  padding:clamp(65px,7vw,110px) 0 26px;
+  border-top:1px solid #b9eb8125;
+}
+#contact .contactEditorial{
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);
+  align-items:center;
+  gap:clamp(28px,5.4vw,90px);
+  padding-bottom:clamp(55px,6vw,83px);
+}
+#contact .contactIntro{
+  min-width:0;
+  max-width:720px;
+  padding:0;
+}
+#contact .contactEyebrow{
+  font:750 11px/1.5 "DM Sans",system-ui,sans-serif;
+  color:#d4f4b6;
+  letter-spacing:.095em;
+  margin-bottom:clamp(21px,3vw,39px);
+  text-wrap:pretty;
+}
+#contact .contactIntro h2{
+  font-family:"Space Grotesk","DM Sans",system-ui,sans-serif;
+  font-size:clamp(42px,4.55vw,74px);
+  font-weight:660;
+  letter-spacing:-.064em;
+  line-height:1.09;
+  margin:0 0 19px;
+  max-width:13.5ch;
+  text-wrap:balance;
+  color:#f0f4ed;
+}
+#contact .contactIntro h2 em{
+  display:inline-block;
+  font-family:Georgia,"Iowan Old Style",serif;
+  font-size:.99em;
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:-.052em;
+  color:#c8fc85;
+}
+#contact .contactIntro>p{
+  color:#b5c5c4;
+  font:450 clamp(14px,1.25vw,17px)/1.65 "DM Sans",system-ui,sans-serif;
+  margin:0 0 27px;
+  max-width:46ch;
+  text-wrap:pretty;
+}
+#contact .contactIntro .btnPrimary{
+  min-height:48px;
+  padding:14px 23px;
+  border-radius:999px;
+}
+#contact .contactIntro .resumeLink{
+  margin-left:15px;
+  font-size:13px;
+  color:#c9ded0;
+}
+#contact .contactPortrait{
+  position:relative;
+  margin:0;
+  width:min(100%,420px);
+  justify-self:end;
+  min-width:0;
+  color:#f1f3ec;
+}
+#contact .contactPortrait::before{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  inset:-10px 13px 49px -12px;
+  border:1px solid #b8dfaf58;
+  border-radius:11px;
+  transform:rotate(-2.3deg);
+}
+#contact .contactPortraitFrame{
+  position:relative;
+  isolation:isolate;
+  background:#e7e4dc;
+  border:1px solid #82979659;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 28px 65px #0006;
+}
+#contact .contactPortraitFrame img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:400/454;
+  object-fit:cover;
+  object-position:50% 38%;
+  transition:transform .55s cubic-bezier(.22,1,.36,1);
+}
+#contact .contactPortrait figcaption{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:5px 16px;
+  padding:14px 0 0;
+  border-bottom:1px solid #b3c49d39;
+  padding-bottom:10px;
+}
+#contact .contactPortrait figcaption strong{
+  font:700 14px/1.35 "DM Sans",system-ui,sans-serif;
+  letter-spacing:-.015em;
+}
+#contact .contactPortrait figcaption span{
+  align-self:center;
+  color:#9cb3ae;
+  font:650 10px/1.45 ui-monospace,Consolas,monospace;
+  letter-spacing:.07em;
+}
+@media(hover:hover) and (pointer:fine){
+  #contact .contactPortrait:hover .contactPortraitFrame img{transform:scale(1.025)}
+}
+@media(max-width:950px){
+  #contact .contactEditorial{
+    grid-template-columns:minmax(0,1fr) minmax(230px,.74fr);
+    gap:clamp(18px,3vw,36px);
+  }
+  #contact .contactIntro h2{font-size:clamp(38px,5.1vw,60px)}
+  #contact .contactPortrait figcaption span{font-size:9px}
+}
+@media(max-width:700px){
+  #contact.contact{padding-top:clamp(55px,9vw,76px)}
+  #contact .contactEditorial{grid-template-columns:1fr;gap:35px;padding-bottom:52px}
+  #contact .contactIntro h2{
+    max-width:14ch;
+    font-size:clamp(38px,9.2vw,59px);
+    line-height:1.1;
+  }
+  #contact .contactIntro>p{font-size:15px;line-height:1.6}
+  #contact .contactPortrait{justify-self:center;width:min(100%,380px)}
+  #contact .contactPortrait figcaption{padding-inline:3px}
+}
+@media(max-width:400px){
+  #contact .contactIntro h2{font-size:clamp(36px,9vw,42px)}
+  #contact .contactEyebrow{font-size:10px;letter-spacing:.075em}
+  #contact .contactIntro .btnPrimary{min-height:46px;padding:12px 17px}
+  #contact .contactIntro .resumeLink{font-size:12px;margin-left:9px}
+  #contact .contactPortrait::before{inset:-7px 9px 47px -6px}
+}
+@media(prefers-reduced-motion:reduce){
+  #contact .contactPortraitFrame img{transition:none!important;transform:none!important}
+}
+@media(forced-colors:active){
+  #contact .contactPortraitFrame{border:1px solid CanvasText}
+  #contact .contactPortrait::before{display:none}
+}

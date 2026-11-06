@@ -1,0 +1,1741 @@
+{
+  "removed_rules": [
+    {
+      "file": "01-base.css",
+      "selector": ".heroCopy",
+      "bytes": 38
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroEyebrow",
+      "bytes": 139
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".eyebrowLine",
+      "bytes": 54
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".eyebrowStar",
+      "bytes": 44
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroIntro",
+      "bytes": 91
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroActions",
+      "bytes": 69
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".btnSecondary",
+      "bytes": 53
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".btnSecondary:hover",
+      "bytes": 60
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroBottom",
+      "bytes": 119
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroBottomSep",
+      "bytes": 87
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scrollCue",
+      "bytes": 155
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scrollCue:hover",
+      "bytes": 31
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".artCrossTwo",
+      "bytes": 36
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".orbitArt",
+      "bytes": 85
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".orbit1",
+      "bytes": 31
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".orbit2",
+      "bytes": 77
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".orbit3",
+      "bytes": 68
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".node1",
+      "bytes": 26
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".node2",
+      "bytes": 29
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".node3",
+      "bytes": 29
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".gridArt",
+      "bytes": 126
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".gridBlock",
+      "bytes": 83
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".gridBlock.g2,.gridBlock.g4,.gridBlock.g9",
+      "bytes": 74
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".gridBlock.g5",
+      "bytes": 74
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".waveArt",
+      "bytes": 115
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".waveArt span",
+      "bytes": 211
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".sampleTag",
+      "bytes": 80
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".projectLinkDisabled",
+      "bytes": 79
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".editorNote",
+      "bytes": 57
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labShell",
+      "bytes": 93
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labTopbar",
+      "bytes": 211
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labTopLeft",
+      "bytes": 53
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labLive",
+      "bytes": 110
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labVersion",
+      "bytes": 43
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labShort",
+      "bytes": 24
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labShort kbd",
+      "bytes": 100
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labLayout",
+      "bytes": 83
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSide",
+      "bytes": 98
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSideTitle",
+      "bytes": 151
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSideTitle span",
+      "bytes": 52
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioList",
+      "bytes": 57
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab",
+      "bytes": 228
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab:hover",
+      "bytes": 38
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab.active",
+      "bytes": 74
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioNumber",
+      "bytes": 100
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioName",
+      "bytes": 69
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioCheck",
+      "bytes": 29
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress",
+      "bytes": 48
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress>span",
+      "bytes": 84
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress strong",
+      "bytes": 123
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress strong small",
+      "bytes": 55
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".progressTrack",
+      "bytes": 61
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".progressTrack>span",
+      "bytes": 87
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress p",
+      "bytes": 76
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labMain",
+      "bytes": 79
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBreadcrumb",
+      "bytes": 122
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".breadcrumbDivider",
+      "bytes": 33
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioContent",
+      "bytes": 88
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioPrompt",
+      "bytes": 35
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".promptLabel",
+      "bytes": 115
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioPrompt h3",
+      "bytes": 165
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioPrompt p",
+      "bytes": 88
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choices",
+      "bytes": 84
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choices legend",
+      "bytes": 99
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choiceLetter",
+      "bytes": 153
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choice.chosen .choiceLetter",
+      "bytes": 83
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choiceMarker",
+      "bytes": 77
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBefore",
+      "bytes": 97
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBefore p",
+      "bytes": 22
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".blinkingCursor",
+      "bytes": 94
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labReveal",
+      "bytes": 101
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealHeading",
+      "bytes": 171
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealIcon",
+      "bytes": 89
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealStatus",
+      "bytes": 76
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent",
+      "bytes": 90
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent>div:first-child",
+      "bytes": 81
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent small",
+      "bytes": 86
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent p",
+      "bytes": 75
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealTakeaway",
+      "bytes": 157
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealTakeaway svg",
+      "bytes": 48
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labFooter",
+      "bytes": 173
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labFooter button",
+      "bytes": 130
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labReset",
+      "bytes": 24
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labNext",
+      "bytes": 23
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labFooter button:hover",
+      "bytes": 35
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBottom",
+      "bytes": 177
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBottom span:first-child",
+      "bytes": 68
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labLayout",
+      "bytes": 53
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labMain",
+      "bytes": 32
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroCopy",
+      "bytes": 26
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroIntro",
+      "bytes": 27
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scrollCue",
+      "bytes": 23
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labLayout",
+      "bytes": 37
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSide",
+      "bytes": 69
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSideTitle",
+      "bytes": 34
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioList",
+      "bytes": 63
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab",
+      "bytes": 96
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab>svg",
+      "bytes": 54
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioName",
+      "bytes": 29
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress",
+      "bytes": 119
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress strong",
+      "bytes": 44
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".progressTrack",
+      "bytes": 32
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labProgress p",
+      "bytes": 41
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labMain",
+      "bytes": 26
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroEyebrow",
+      "bytes": 48
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroIntro",
+      "bytes": 43
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".heroBottom",
+      "bytes": 58
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scrollCue",
+      "bytes": 23
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labTopbar",
+      "bytes": 26
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labVersion,.labShort",
+      "bytes": 35
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSide",
+      "bytes": 27
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labSideTitle",
+      "bytes": 28
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioList",
+      "bytes": 22
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab",
+      "bytes": 46
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioName",
+      "bytes": 29
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioTab>svg",
+      "bytes": 30
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labMain",
+      "bytes": 49
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioPrompt",
+      "bytes": 35
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioPrompt h3",
+      "bytes": 34
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".scenarioPrompt p",
+      "bytes": 33
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choices",
+      "bytes": 17
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".choiceLetter",
+      "bytes": 37
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealHeading",
+      "bytes": 55
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealStatus",
+      "bytes": 28
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent",
+      "bytes": 72
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent>div:first-child",
+      "bytes": 114
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealContent p",
+      "bytes": 45
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".revealTakeaway",
+      "bytes": 37
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBottom",
+      "bytes": 43
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".labBottom span:last-child",
+      "bytes": 40
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones",
+      "bytes": 158
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones>div",
+      "bytes": 103
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones>div+div",
+      "bytes": 50
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones strong",
+      "bytes": 143
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones span",
+      "bytes": 105
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".relatedCase",
+      "bytes": 175
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".relatedCase:hover",
+      "bytes": 31
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones",
+      "bytes": 56
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones>div",
+      "bytes": 110
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones>div+div",
+      "bytes": 63
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones strong",
+      "bytes": 34
+    },
+    {
+      "file": "01-base.css",
+      "selector": ".milestones span",
+      "bytes": 64
+    },
+    {
+      "file": "02-workbench.css",
+      "selector": ".wbIntroBadge",
+      "bytes": 33
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroCopy",
+      "bytes": 37
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroMiniIndex",
+      "bytes": 159
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroMiniIndex span",
+      "bytes": 40
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroEyebrow",
+      "bytes": 98
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".eyebrowLine",
+      "bytes": 60
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".eyebrowStar",
+      "bytes": 48
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroIntro",
+      "bytes": 92
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroActions",
+      "bytes": 22
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".btnSecondary",
+      "bytes": 101
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".btnSecondary:hover",
+      "bytes": 78
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroBottom",
+      "bytes": 78
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".scrollCue",
+      "bytes": 37
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual",
+      "bytes": 88
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual:before",
+      "bytes": 237
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual:after",
+      "bytes": 195
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualLabel,.visualNote",
+      "bytes": 198
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualLabel",
+      "bytes": 33
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualLabel span:last-child",
+      "bytes": 43
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualNote",
+      "bytes": 48
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualNote span",
+      "bytes": 50
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones",
+      "bytes": 227
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones>div",
+      "bytes": 47
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones>div+div",
+      "bytes": 64
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones strong",
+      "bytes": 156
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones>div:nth-child(2) strong",
+      "bytes": 54
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones span",
+      "bytes": 66
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroCopy",
+      "bytes": 40
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroMiniIndex",
+      "bytes": 34
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual",
+      "bytes": 59
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones>div",
+      "bytes": 34
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroMiniIndex",
+      "bytes": 83
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroEyebrow",
+      "bytes": 47
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroIntro",
+      "bytes": 42
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroBottom",
+      "bytes": 59
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual",
+      "bytes": 53
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual:before",
+      "bytes": 45
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual:after",
+      "bytes": 50
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualLabel,.visualNote",
+      "bytes": 75
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualLabel",
+      "bytes": 34
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".scrollCue",
+      "bytes": 23
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones",
+      "bytes": 74
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones>div",
+      "bytes": 34
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones>div:nth-child(3)",
+      "bytes": 91
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones strong",
+      "bytes": 34
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".milestones span",
+      "bytes": 31
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".visualLabel span:last-child",
+      "bytes": 42
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual:after",
+      "bytes": 33
+    },
+    {
+      "file": "03-atelier.css",
+      "selector": ".heroVisual:after",
+      "bytes": 44
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroCopy",
+      "bytes": 47
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroMiniIndex",
+      "bytes": 48
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroIntro",
+      "bytes": 91
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroActions",
+      "bytes": 22
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroBottom",
+      "bytes": 42
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroVisual",
+      "bytes": 83
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroVisual:before",
+      "bytes": 182
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroVisual:after",
+      "bytes": 31
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualLabel",
+      "bytes": 47
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualLabel span:first-child",
+      "bytes": 44
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualLabel span:last-child",
+      "bytes": 43
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualNote",
+      "bytes": 44
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode1",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode2",
+      "bytes": 41
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode3",
+      "bytes": 41
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode4",
+      "bytes": 41
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode5",
+      "bytes": 41
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode6",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroCopy",
+      "bytes": 27
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroVisual",
+      "bytes": 74
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroMiniIndex",
+      "bytes": 48
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroEyebrow",
+      "bytes": 32
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroIntro",
+      "bytes": 61
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroBottom",
+      "bytes": 28
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".heroVisual",
+      "bytes": 28
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualLabel",
+      "bytes": 35
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualLabel span:last-child",
+      "bytes": 43
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".visualNote",
+      "bytes": 26
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode1",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode2",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode3",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode4",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode5",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode6",
+      "bytes": 29
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode1",
+      "bytes": 21
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode2",
+      "bytes": 21
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode3",
+      "bytes": 21
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode4",
+      "bytes": 21
+    },
+    {
+      "file": "04-experience.css",
+      "selector": ".orbitNode5",
+      "bytes": 21
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerChooserTop",
+      "bytes": 196
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerChooserTop span:last-child",
+      "bytes": 45
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeMonogram",
+      "bytes": 171
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerModeButton[aria-pressed=\"true\"] .modeMonogram",
+      "bytes": 151
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy",
+      "bytes": 65
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy strong",
+      "bytes": 54
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy small",
+      "bytes": 63
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modePick",
+      "bytes": 53
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerModeButton[aria-pressed=\"true\"] .modePick",
+      "bytes": 59
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerIndex",
+      "bytes": 171
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerIndex:before",
+      "bytes": 85
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerTitle",
+      "bytes": 183
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerTitle em",
+      "bytes": 144
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerDescription",
+      "bytes": 94
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerPills",
+      "bytes": 65
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerPills span",
+      "bytes": 111
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerLinks",
+      "bytes": 69
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerCTA",
+      "bytes": 274
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerCTA:hover",
+      "bytes": 68
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerSecondary",
+      "bytes": 148
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerSubline",
+      "bytes": 105
+    },
+    {
+      "file": "05-career.css",
+      "selector": "body[data-role=\"fullstack\"] .careerTitle em",
+      "bytes": 58
+    },
+    {
+      "file": "05-career.css",
+      "selector": "body[data-role=\"software\"] .careerTitle",
+      "bytes": 93
+    },
+    {
+      "file": "05-career.css",
+      "selector": "body[data-role=\"software\"] .careerTitle em",
+      "bytes": 57
+    },
+    {
+      "file": "05-career.css",
+      "selector": "body[data-role=\"ml\"] .careerTitle em",
+      "bytes": 51
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeFooterBadge",
+      "bytes": 138
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerTitle",
+      "bytes": 44
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy small",
+      "bytes": 30
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeMonogram",
+      "bytes": 86
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy strong",
+      "bytes": 32
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy small",
+      "bytes": 29
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modePick",
+      "bytes": 23
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerTitle",
+      "bytes": 45
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerDescription",
+      "bytes": 34
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerChooserTop",
+      "bytes": 32
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerChooserTop span:last-child",
+      "bytes": 47
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeMonogram",
+      "bytes": 53
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".modeCopy strong",
+      "bytes": 51
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerTitle",
+      "bytes": 66
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerIndex",
+      "bytes": 46
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerDescription",
+      "bytes": 70
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerPills",
+      "bytes": 32
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerPills span",
+      "bytes": 48
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerCTA",
+      "bytes": 44
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerSecondary",
+      "bytes": 45
+    },
+    {
+      "file": "05-career.css",
+      "selector": ".careerSubline",
+      "bytes": 45
+    },
+    {
+      "file": "06-interactions.css",
+      "selector": ".roleResumeLink",
+      "bytes": 295
+    },
+    {
+      "file": "06-interactions.css",
+      "selector": ".roleResumeLink:hover",
+      "bytes": 116
+    },
+    {
+      "file": "06-interactions.css",
+      "selector": ".roleResumeLink",
+      "bytes": 64
+    },
+    {
+      "file": "06-interactions.css",
+      "selector": ".roleResumeLink",
+      "bytes": 32
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerChooserTop",
+      "bytes": 54
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerIndex",
+      "bytes": 48
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle",
+      "bytes": 120
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle em",
+      "bytes": 135
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle em:after",
+      "bytes": 218
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerDescription",
+      "bytes": 79
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerPills",
+      "bytes": 21
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerPills span",
+      "bytes": 113
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerPills span:hover",
+      "bytes": 118
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerCTA,.careerSecondary",
+      "bytes": 103
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerCTA:hover",
+      "bytes": 123
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": "body[data-role=fullstack] .careerTitle em",
+      "bytes": 56
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": "body[data-role=fullstack] .careerSubline",
+      "bytes": 71
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": "body[data-role=software] .careerTitle em",
+      "bytes": 55
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": "body[data-role=ml] .careerTitle em",
+      "bytes": 49
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle",
+      "bytes": 44
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle",
+      "bytes": 45
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle",
+      "bytes": 47
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerDescription",
+      "bytes": 50
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle em:after",
+      "bytes": 45
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerModeButton .modeCopy strong",
+      "bytes": 49
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle",
+      "bytes": 28
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerIndex",
+      "bytes": 66
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerTitle",
+      "bytes": 68
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerDescription",
+      "bytes": 201
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerPills",
+      "bytes": 36
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerLinks",
+      "bytes": 59
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerCTA,.careerSecondary",
+      "bytes": 81
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".roleResumeLink",
+      "bytes": 90
+    },
+    {
+      "file": "07-scenes.css",
+      "selector": ".careerSubline",
+      "bytes": 38
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView .careerTitle",
+      "bytes": 144
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView .careerDescription",
+      "bytes": 117
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView .careerIndex",
+      "bytes": 61
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence",
+      "bytes": 304
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence .proofTag",
+      "bytes": 95
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence strong",
+      "bytes": 75
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence p",
+      "bytes": 114
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroProofLinks",
+      "bytes": 72
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroProofLinks a",
+      "bytes": 115
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroProofLinks a:hover",
+      "bytes": 53
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".caseExternal",
+      "bytes": 56
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".caseExternal a",
+      "bytes": 135
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".caseExternal a:hover",
+      "bytes": 34
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView .careerTitle",
+      "bytes": 66
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView .careerTitle",
+      "bytes": 94
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerIndex",
+      "bytes": 37
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence",
+      "bytes": 74
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence strong",
+      "bytes": 36
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroEvidence p",
+      "bytes": 126
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroProofLinks a",
+      "bytes": 49
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerDescription",
+      "bytes": 71
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView .roleResumeLink",
+      "bytes": 108
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".heroProofLinks",
+      "bytes": 24
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence",
+      "bytes": 207
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence .proofTag",
+      "bytes": 75
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence strong",
+      "bytes": 75
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence p",
+      "bytes": 111
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence .heroProofLinks",
+      "bytes": 80
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence",
+      "bytes": 83
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence .proofTag,.careerView>.heroEvidence strong",
+      "bytes": 83
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence strong",
+      "bytes": 46
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence p",
+      "bytes": 100
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".careerView>.heroEvidence .heroProofLinks",
+      "bytes": 57
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".shareModeLink",
+      "bytes": 173
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".shareModeLink",
+      "bytes": 48
+    },
+    {
+      "file": "08-case-index.css",
+      "selector": ".roleResumeLink",
+      "bytes": 41
+    },
+    {
+      "file": "10-screen-gallery.css",
+      "selector": ".heroCapture",
+      "bytes": 36
+    }
+  ],
+  "count": 347,
+  "removable_bytes": 25198
+}

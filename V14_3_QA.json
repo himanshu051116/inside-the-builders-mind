@@ -1,0 +1,59 @@
+{
+  "release": "V14.3",
+  "source": "V14.2 local source",
+  "scope": "local only",
+  "tracker": {
+    "verified": 45,
+    "total": 73,
+    "newly_verified": [
+      "V14-054",
+      "V14-057",
+      "V14-063"
+    ],
+    "open": 28
+  },
+  "verification": {
+    "node": 90,
+    "responsive": 15,
+    "feature": 29,
+    "keyboard": 36,
+    "metadata": "passed",
+    "asset_audit": "passed",
+    "build": "passed",
+    "undersized_controls_in_sample": 0
+  },
+  "limits": [
+    "Inline Chromium harness does not prove hosted Vercel behavior",
+    "No independent axe or screen-reader testing",
+    "No verified EarthBridge retrieval outputs",
+    "No independently measured Core Web Vitals",
+    "No independent social-crawler scrape"
+  ],
+  "bundle_bytes": {
+    "portfolio.css": {
+      "raw": 186201,
+      "gzip": 43507
+    },
+    "v14.css": {
+      "raw": 18166,
+      "gzip": 5028
+    },
+    "v14-polish.css": {
+      "raw": 2550,
+      "gzip": 1067
+    },
+    "site.js": {
+      "raw": 69215,
+      "gzip": 21468
+    },
+    "evidence-media.js": {
+      "raw": 21706,
+      "gzip": 7181
+    },
+    "public/evidence/ohs-home.webp": {
+      "raw": 65704,
+      "gzip": 65611
+    }
+  },
+  "external_deployments_modified": false
+}

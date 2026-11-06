@@ -1,0 +1,30 @@
+/* V20.3: non-invasive guided inspection, using existing portfolio design tokens. */
+.v20Workspace .v203Guide{border:1px solid var(--v20-line);background:color-mix(in srgb,var(--v20-accent) 5%,var(--v20-panel));border-radius:9px;padding:15px;margin:4px 0 18px}
+.v20Workspace .v203Compact,.v20Workspace .v203Header,.v20Workspace .v203Footer{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.v20Workspace .v203Compact p,.v20Workspace .v203Header p,.v20Workspace .v203Footer p{font:500 12px/1.55 system-ui,sans-serif;color:var(--v20-soft);margin:4px 0 0}
+.v20Workspace .v203Header h4{font:750 18px/1.25 "Space Grotesk",system-ui,sans-serif;margin:5px 0 4px}
+.v20Workspace .v203Eyebrow{font:750 10px ui-monospace,monospace;letter-spacing:.08em;color:var(--v20-accent)}
+.v20Workspace .v203Action,.v20Workspace .v203Step{font:700 11px/1.4 system-ui,sans-serif;background:var(--v20-panel);color:var(--v20-ink);border:1px solid var(--v20-line);border-radius:5px;cursor:pointer;min-height:40px;padding:10px 12px}
+.v20Workspace .v203Action:hover:not(:disabled),.v20Workspace .v203Step:hover{border-color:var(--v20-accent)}
+.v20Workspace .v203Steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:16px 0}
+.v20Workspace .v203Step{min-height:52px;text-align:left}
+.v20Workspace .v203Step[aria-current="step"]{border-color:var(--v20-accent);box-shadow:inset 0 0 0 1px var(--v20-accent)}
+.v20Workspace .v203Footer{border-top:1px solid var(--v20-line);padding-top:13px}
+.v20Workspace .v203Footer p{margin:0}
+.v20Workspace .v203StageRail{height:10px;display:flex;align-items:center;justify-content:space-around;position:relative;margin:13px 10px 12px}
+.v20Workspace .v203StageRail::before{content:"";position:absolute;height:2px;background:var(--v20-line);left:5%;right:5%;top:50%}
+.v20Workspace .v203StageDot{width:10px;height:10px;border-radius:50%;border:2px solid var(--v20-line);background:var(--v20-panel);z-index:1}
+.v20Workspace .v203StageDot.isActive{background:var(--v20-accent);border-color:var(--v20-accent)}
+.v20Workspace .v203StageActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.v20Workspace .v203MediaControls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:14px;border:1px solid var(--v20-line);border-radius:6px;background:var(--v20-paper)}
+.v20Workspace .v203MediaControls strong,.v20Workspace .v203MediaControls span{display:block;font:650 11px/1.45 system-ui,sans-serif}
+.v20Workspace .v203MediaControls span{color:var(--v20-soft)}
+.v20Workspace .v203MediaButtons{display:flex;gap:6px}
+.v20Workspace .v203MediaButtons button{font-size:17px;min-width:40px}
+.v20Workspace .v203MediaButtons button:disabled{opacity:.45;cursor:default}
+.v20Workspace .v203Boundary,.v20Workspace .v203EvidenceLabel{background:var(--v20-paper);color:var(--v20-soft);font:500 11px/1.6 system-ui,sans-serif;padding:10px 12px;border-left:2px solid var(--v20-accent);margin:13px 0 0}
+.v20Workspace .v203Guide button:focus-visible,.v20Workspace .v203StageActions button:focus-visible,.v20Workspace .v203MediaButtons button:focus-visible{outline:3px solid var(--v20-accent);outline-offset:2px}
+@media(max-width:850px){.v20Workspace .v203Steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.v20Workspace .v203Compact,.v20Workspace .v203Header,.v20Workspace .v203Footer{flex-direction:column;align-items:stretch}.v20Workspace .v203Compact .v203Action,.v20Workspace .v203Footer .v203Action{width:100%}}
+@media(prefers-reduced-motion:no-preference){.v20Workspace .v203Guide,.v20Workspace .v203StageDot{transition:background-color .18s ease,border-color .18s ease}}
+@media(forced-colors:active){.v20Workspace .v203Step[aria-current="step"],.v20Workspace .v203StageDot.isActive{outline:2px solid Highlight}}

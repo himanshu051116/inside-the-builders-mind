@@ -1,0 +1,37 @@
+{
+  "release": "V14.2",
+  "based_on": "V14.1 local source",
+  "status": "local-development-only",
+  "checklist": {
+    "verified": 42,
+    "total": 73,
+    "remaining": 31,
+    "new_verified": [
+      "V14-041",
+      "V14-042",
+      "V14-044",
+      "V14-049",
+      "V14-061"
+    ]
+  },
+  "tests": {
+    "node_passed": 84,
+    "responsive_combinations_passed": 15,
+    "interaction_checks_passed": 29,
+    "build": "passed",
+    "asset_audit": "passed"
+  },
+  "browser_testing": "Inline Chromium; local CSS/JS and image bytes, not public Vercel",
+  "outstanding": [
+    "Real EarthBridge results",
+    "Sensitive-image publishing permission",
+    "Full CSS unused-rule cleanup",
+    "Complete WCAG and screen-reader audit",
+    "Live Vercel preview / Core Web Vitals / hosted downloads"
+  ],
+  "external_changes": {
+    "github": "none",
+    "vercel": "none",
+    "aws": "none"
+  }
+}

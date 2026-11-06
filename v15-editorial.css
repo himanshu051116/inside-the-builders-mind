@@ -1,0 +1,291 @@
+/* V15 editorial pass: code-led presentation; no invented screenshots or performance data.
+   Loaded after V14 accessibility rules, leaving the interactive workbench intact. */
+:root { --v15-max:1320px; --v15-ease:cubic-bezier(.22,1,.36,1); }
+body[data-role="fullstack"] {
+  --v15-ink:#1a282e; --v15-soft:#47565e; --v15-accent:#ae3a23;
+  --v15-paper:#f5f0e7; --v15-panel:#fffcf7; --v15-border:#bdb2a5;
+  --v15-grid:rgba(58,66,63,.075);
+}
+body[data-role="software"] {
+  --v15-ink:#edf3f2; --v15-soft:#b3c7ce; --v15-accent:#f1c782;
+  --v15-paper:#0b151e; --v15-panel:#13222d; --v15-border:#405663;
+  --v15-grid:rgba(192,214,220,.068);
+}
+body[data-role="ml"] {
+  --v15-ink:#f4f3ff; --v15-soft:#d5d0e5; --v15-accent:#c8b8ff;
+  --v15-paper:#151526; --v15-panel:#24243c; --v15-border:#565473;
+  --v15-grid:rgba(203,194,235,.07);
+}
+:where(.header,.careerStage,.work,.caseFiles,.archive,.about,.toolkit){scroll-margin-top:84px;}
+.header {min-height:74px;height:auto;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.headerInner {min-height:74px}
+.header .brandWord {font-weight:800;letter-spacing:.035em;font-size:14px}
+.header .brandWord small {letter-spacing:.06em;font-size:10px;line-height:1.4}
+.header .nav {gap:clamp(14px,2vw,28px)}
+.header .nav>a {font-size:13px;letter-spacing:0}
+.header .headerContact {font-size:12px;letter-spacing:.015em;border-radius:8px;padding:12px 16px;min-height:44px}
+.header .commandTrigger {min-height:42px;border-radius:8px}
+#top.careerStage.v14Hero {
+  background:var(--v15-paper);color:var(--v15-ink);
+  border-bottom:1px solid var(--v15-border);position:relative;overflow:hidden;
+}
+#top.careerStage.v14Hero::before {
+  content:"";inset:0;position:absolute;z-index:0;pointer-events:none;
+  background-image:linear-gradient(90deg,var(--v15-grid) 1px,transparent 1px),
+                   linear-gradient(var(--v15-grid) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 27%,#000 65%,transparent 100%);
+}
+#top.careerStage.v14Hero::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:min(45vw,580px);height:min(45vw,580px);right:-14%;top:-14%;
+  border-radius:100%;border:1px solid var(--v15-border);opacity:.33;
+}
+#top .careerInner {position:relative;z-index:1;max-width:var(--v15-max)}
+#top .v14IdentityTop {
+  padding:19px 0 14px;border-bottom:1px solid var(--v15-border);
+  color:var(--v15-ink);align-items:center;
+}
+#top .v14IdentityName {font-size:clamp(22px,2vw,27px);font-weight:800;letter-spacing:-.048em}
+#top .v14IdentityTop>span {font-size:13px;color:var(--v15-soft);font-weight:550}
+.v15HeroEdition {
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font:700 11px/1.5 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  letter-spacing:.065em;color:var(--v15-soft);padding:19px 0 0;
+}
+.v15HeroEdition strong {color:var(--v15-accent);font-weight:800}
+.v15HeroEdition .v15EditionRule {height:1px;background:var(--v15-border);flex:1;max-width:140px}
+#top .careerChooser.v14ModeBar {padding:20px 0 8px;gap:20px;align-items:center}
+#top .v14ModePrompt {font-size:12px;letter-spacing:.045em;color:var(--v15-soft);font-weight:700}
+#top .careerModes {
+  background:color-mix(in srgb,var(--v15-panel) 87%,transparent);
+  border:1px solid var(--v15-border);border-radius:11px;
+  padding:5px;gap:4px;box-shadow:0 10px 24px #0000000b;
+}
+#top .careerModeButton {
+  border-radius:7px;min-height:46px;padding:11px 20px;
+  color:var(--v15-soft);transition:background-color .18s ease,color .18s ease;
+}
+#top .careerModeButton strong {font-size:13px;letter-spacing:0;font-weight:750}
+#top .careerModeButton[aria-pressed="true"] {
+  background:var(--v15-ink);color:var(--v15-paper);
+  border-color:var(--v15-ink);box-shadow:0 2px 10px #00000013;
+}
+#top .careerView.v14RoleView {
+  grid-template-columns:minmax(0,.91fr) minmax(0,1.09fr);
+  gap:clamp(28px,4.5vw,74px);padding:36px 0 43px;align-items:center;
+}
+#top .careerCopy.v14RoleCopy {min-width:0}
+#top .v14RoleKicker {
+  font:800 12px/1.45 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  letter-spacing:.065em;color:var(--v15-accent);margin-bottom:17px;
+}
+#top .v14HeroHeadline {
+  color:var(--v15-ink);font-weight:750;
+  font-size:clamp(41px,4.1vw,67px)!important;letter-spacing:-.073em;
+  line-height:1.045;margin-bottom:22px;text-wrap:balance;max-width:650px;
+}
+#top .v14HeroDescription {
+  color:var(--v15-soft);font-size:clamp(16px,1.2vw,18px);
+  line-height:1.7;max-width:585px;margin-bottom:22px;
+}
+#top .v14TechRow {gap:8px;margin-bottom:27px}
+#top .v14TechRow span {
+  color:var(--v15-ink);border:1px solid var(--v15-border);
+  background:color-mix(in srgb,var(--v15-panel) 86%,transparent);
+  font:650 12px/1.25 ui-monospace,"SFMono-Regular",Consolas,monospace;
+  padding:9px 11px;border-radius:5px;
+}
+#top .v14PrimaryActions {margin-bottom:22px;gap:10px}
+#top .v14PrimaryActions a {
+  border-radius:7px;min-height:52px;font-size:14px;
+  padding:14px 18px;transition:transform .2s var(--v15-ease),box-shadow .2s;
+}
+#top .v14PrimaryActions a:hover {transform:translateY(-2px)}
+#top .v14PrimaryActions .v14Primary {
+  background:var(--v15-ink);color:var(--v15-paper);
+  box-shadow:0 10px 26px #0000001b;
+}
+#top .v14PrimaryActions .v14Secondary {
+  color:var(--v15-ink);border:1px solid var(--v15-border);background:var(--v15-panel)
+}
+#top .v14ProofFooter {
+  display:flex;flex-wrap:wrap;gap:7px 15px;
+  border-top:1px solid var(--v15-border);padding-top:16px;
+  align-items:center;color:var(--v15-soft);font-size:13px;
+}
+#top .v14ProofFooter .v14Status {color:var(--v15-accent);font-weight:800;letter-spacing:.035em}
+#top .v14ProofFooter a {color:var(--v15-ink);text-decoration:underline;text-underline-offset:4px}
+#top .v14HeroFrame {
+  border-radius:16px;overflow:hidden;
+  background:var(--v15-panel);border:1px solid var(--v15-border);
+  box-shadow:0 24px 75px #00000024,0 3px 12px #00000018;
+}
+#top .v14HeroFrame:before {
+  content:"PROJECT SCREEN / STATIC RECORD";display:block;
+  padding:13px 18px;color:var(--v15-ink);border-bottom:1px solid var(--v15-border);
+  background:var(--v15-panel);font:750 11px/1.4 ui-monospace,monospace;
+  letter-spacing:.065em;
+}
+#top .v14HeroFrame button.v14HeroImage {display:block;max-height:none;overflow:hidden}
+#top .v14HeroImage img {
+  width:100%;height:auto;max-height:460px;
+  display:block;object-fit:contain;object-position:top center;aspect-ratio:auto;
+  transition:transform .4s var(--v15-ease);
+}
+#top .v14HeroImage:hover img {transform:scale(1.012)}
+#top .v14HeroFrame figcaption {
+  display:grid;grid-template-columns:1fr auto;gap:6px 14px;
+  padding:17px 19px;color:var(--v15-soft);line-height:1.55;
+  background:var(--v15-panel);font-size:12px;
+}
+#top .v14HeroFrame figcaption span:first-child {
+  grid-column:1 / -1;color:var(--v15-accent);font-size:11px;letter-spacing:.05em
+}
+#top .v14HeroFrame figcaption a {
+  grid-column:1 / -1;color:var(--v15-ink);font-size:13px;font-weight:750;
+  text-decoration:underline;text-underline-offset:3px;
+}
+#top .v144ZoomCue {border-radius:5px;font-size:13px}
+#top .v142QuickJumps a {color:var(--v15-ink)}
+.v15RecordRail {
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;border-block:1px solid var(--v15-border);
+  background:var(--v15-panel);position:relative;
+}
+.v15RecordRail a {
+  display:flex;min-width:0;min-height:114px;gap:15px;align-items:start;
+  padding:24px clamp(14px,2.3vw,32px);
+  text-decoration:none;color:var(--v15-ink);
+  border-right:1px solid var(--v15-border);
+  transition:background-color .2s;
+}
+.v15RecordRail a:last-child {border-right:0}
+.v15RecordRail a:hover {background:color-mix(in srgb,var(--v15-accent) 8%,var(--v15-panel))}
+.v15RecordRail .v15RecordIndex {
+  flex:none;color:var(--v15-accent);
+  font:800 14px/1.3 ui-monospace,monospace;letter-spacing:-.035em
+}
+.v15RecordRail .v15RecordText {display:grid;gap:7px;min-width:0}
+.v15RecordRail strong {font:800 17px/1.24 var(--v14-head);letter-spacing:-.035em}
+.v15RecordRail small {font-size:12px;color:var(--v15-soft);line-height:1.5}
+.v15RecordRail .v15RecordArrow {margin-left:auto;color:var(--v15-accent);font-size:18px;line-height:1}
+.v144EditorialNote {font-size:14px;line-height:1.65}
+#work .sectionHead h2,.caseFilesHeader h2,.archiveHeading h2 {
+  font-weight:800;letter-spacing:-.06em;line-height:1.08
+}
+#work .sectionHeadRow>p {font-size:15px;line-height:1.6}
+#work .projectFilters {gap:8px}
+#work .projectFilter {border-radius:7px;min-height:45px;font-size:13px}
+#work .projectFilter[aria-pressed="true"] {outline:2px solid var(--signal,#bde887);outline-offset:-2px}
+#work .deckBar {margin-bottom:16px}
+#work .deckEye {letter-spacing:.08em;font-size:11px}
+#work #projectGrid.isGrid {
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:22px!important;
+}
+#work #projectGrid.isGrid .projectCard {
+  display:flex!important;flex-direction:column;
+  border-radius:14px;overflow:hidden;
+  border:1px solid #859f9255;box-shadow:none;
+  transition:border-color .2s,transform .2s var(--v15-ease);
+}
+#work #projectGrid.isGrid .projectCard[hidden] {display:none!important}
+#work #projectGrid.isGrid .projectCard:hover {
+  transform:translateY(-3px);border-color:var(--signal,#b4d3a4);
+  box-shadow:0 10px 35px #00000019;
+}
+#work #projectGrid.isGrid .projectVisual,
+#work #projectGrid.isGrid .projectCard:first-child .projectVisual {
+  min-height:0!important;height:clamp(220px,25vw,340px)!important;
+  flex:none;position:relative;overflow:hidden;
+}
+#work #projectGrid.isGrid .verifiedImage,
+#work #projectGrid.isGrid .verifiedImage img {
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+}
+#work #projectGrid.isGrid .projectArt {
+  height:100%;min-height:0;position:relative
+}
+#work #projectGrid.isGrid .projectBigNumber {font-size:76px!important;opacity:.12}
+#work #projectGrid.isGrid .projectContent {padding:25px 28px 27px!important}
+#work #projectGrid.isGrid .projectCard h3 {
+  font-size:clamp(26px,2.45vw,37px)!important;letter-spacing:-.055em;
+  margin-bottom:10px;
+}
+#work #projectGrid.isGrid .projectDescription {
+  display:block;-webkit-line-clamp:unset;overflow:visible;
+  font-size:15px!important;line-height:1.65;max-width:65ch;min-height:0;margin-bottom:16px;
+}
+#work #projectGrid.isGrid .projectMeta {gap:9px;align-items:center}
+#work #projectGrid.isGrid .projectStatus {font-size:12px!important;max-width:none}
+#work #projectGrid.isGrid .projectTags span {font-size:12px;padding:7px 9px}
+#work #projectGrid.isGrid .projectLinks a {font-size:12px;min-height:44px}
+#work #projectGrid.isGrid .caseStudy summary {font-size:13px;min-height:46px}
+#work #projectGrid.isGrid .projectCard[data-featured="true"] {outline:none}
+.caseFiles .caseFilesHeader p {font-size:16px;line-height:1.65}
+.caseFiles .v14CaseQuickNav a {min-height:64px}
+.caseFiles .caseNotesHead {gap:18px}
+.archive .archiveCard {border-radius:12px}
+#about .aboutGrid .aboutLead {font-size:clamp(22px,2.4vw,33px);line-height:1.36;letter-spacing:-.035em}
+#contact .contactIntro h2 {letter-spacing:-.06em;line-height:1.1}
+#contact .contactIntro p {max-width:680px;font-size:16px;line-height:1.65}
+:where(.v15RecordRail a,#work .projectFilter,#work .projectCard a):focus-visible {
+  outline:3px solid var(--v15-accent);outline-offset:3px;
+}
+@media(max-width:1100px) {
+  #top .careerView.v14RoleView {grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);gap:30px}
+  #top .v14HeroHeadline {font-size:clamp(37px,4.6vw,53px)!important}
+}
+@media(max-width:900px) {
+  #top .careerView.v14RoleView {grid-template-columns:minmax(0,1fr);gap:25px;padding:27px 0}
+  #top .v14HeroHeadline {max-width:720px;font-size:clamp(39px,6vw,56px)!important}
+  #top .v14HeroFrame {max-width:900px}
+  #top .v14HeroImage img {max-height:none}
+  .v15RecordRail a {padding:20px 15px;min-height:110px}
+  .v15RecordRail strong {font-size:15px}
+}
+@media(max-width:760px) {
+  #top .v15HeroEdition {padding-top:14px;font-size:10px;gap:8px}
+  #top .v15HeroEdition .v15EditionRule {display:none}
+  #top .careerChooser.v14ModeBar {flex-wrap:wrap;gap:6px}
+  #top .v14ModePrompt {display:none}
+  #top .careerModes {width:100%;justify-content:space-between}
+  #top .careerModeButton {padding:10px 9px;flex:1;white-space:normal;min-width:0}
+  #top .careerModeButton strong {font-size:12px}
+  #top .careerView.v14RoleView {display:flex;flex-direction:column;align-items:stretch;gap:0;padding:19px 0}
+  #top .careerCopy.v14RoleCopy {display:contents}
+  #top .v144Intro {order:0}
+  #top .v14HeroHeadline {font-size:clamp(35px,8.3vw,46px)!important;line-height:1.085;margin-bottom:16px}
+  #top .v14HeroFrame {order:1;margin-bottom:22px}
+  #top .v144Details {order:2}
+  #top .v14HeroDescription {font-size:15px;line-height:1.6}
+  #top .v14HeroFrame figcaption {grid-template-columns:1fr;padding:14px}
+  .v15RecordRail {grid-template-columns:1fr}
+  .v15RecordRail a {min-height:74px;border-right:0;border-bottom:1px solid var(--v15-border);padding:16px 20px}
+  .v15RecordRail a:last-child {border-bottom:0}
+  .v15RecordRail strong {font-size:16px}
+  #work #projectGrid.isGrid {grid-template-columns:1fr!important;gap:16px!important}
+  #work #projectGrid.isGrid .projectVisual {height:260px!important}
+  #work #projectGrid.isGrid .projectContent {padding:20px!important}
+  #work #projectGrid.isGrid .projectDescription {font-size:15px!important}
+}
+@media(max-width:410px) {
+  #top .v14IdentityTop {flex-wrap:wrap;align-items:baseline;gap:5px}
+  #top .v14IdentityTop>span {flex:1 1 100%;font-size:11px}
+  #top .careerModeButton strong {font-size:11px}
+  #top .v14HeroHeadline {font-size:clamp(31px,8.5vw,38px)!important}
+  #top .v14PrimaryActions {display:grid;grid-template-columns:1fr}
+  #top .v14PrimaryActions a {width:100%}
+  #work #projectGrid.isGrid .projectVisual {height:215px!important}
+}
+@media(prefers-reduced-motion:reduce) {
+  #top .careerModeButton,#top .v14PrimaryActions a,#top .v14HeroImage img,
+  #work #projectGrid.isGrid .projectCard,.v15RecordRail a {animation:none!important;transition:none!important;transform:none!important}
+}
+@media(forced-colors:active) {
+  #top.careerStage.v14Hero::before,#top.careerStage.v14Hero::after {display:none}
+  #top .careerModeButton[aria-pressed="true"],#top .v14PrimaryActions .v14Primary {background:Highlight;color:HighlightText;border:2px solid Highlight}
+  .v15RecordRail,.v15RecordRail a,#work #projectGrid.isGrid .projectCard {border-color:CanvasText}
+  .v15RecordRail a:focus-visible {outline-color:Highlight}
+}

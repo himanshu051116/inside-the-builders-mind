@@ -9,26 +9,26 @@ export const profile = {
   name: 'Himanshu Shukla',
   initials: 'HS',
   role: 'Mathematics & Computing · MITS Gwalior',
-  headlineA: 'I build things.',
-  headlineB: 'Then prove them.',
-  intro: 'Applied AI × software engineering × interactive systems. Explore the work, play with the ideas, inspect the evidence.',
+  headlineA: 'From problem to implementation.',
+  headlineB: 'With the tests and limits visible.',
+  intro: 'React and Firebase collaboration interfaces, Python/PostgreSQL data pipelines and PyTorch retrieval experiments. See the code and screenshots alongside their known limits.',
   location: 'Gwalior, India',
-  availability: 'Exploring software and AI research opportunities',
+  availability: 'Open to software engineering and ML research internships',
   github: 'https://github.com/himanshu051116',
   portfolioRepo: 'https://github.com/himanshu051116/inside-the-builders-mind',
 
   linkedin: 'https://www.linkedin.com/in/himanshu-shukla-88175637a',
   email: 'himanshusubh1510@gmail.com',
   resumeUrl: '', // Role-specific public PDFs are linked in the three career views.
-  aboutHeading: 'I work where mathematics, software and practical problems meet.',
-  about: 'I study B.Tech Mathematics & Computing at Madhav Institute of Technology & Science, Gwalior (expected graduation: 2028). I have built reviewer workflows, retrieval pipelines, collaboration apps and monitoring prototypes. I also co-founded SchoolBuddies to make hands-on technology learning more accessible to school students.',
-  philosophy: 'Prototype with purpose. Measure what matters. Keep decisions inspectable.',
+  aboutHeading: 'I study Mathematics & Computing at MITS Gwalior and build web applications, data systems, and ML prototypes.',
+  about: 'My work includes Mulyankan document review, NewsSources ingestion, Our Hidden Universe collaboration tools, and EarthBridge retrieval research. I also co-founded SchoolBuddies for hands-on school workshops.',
+  philosophy: 'Keep the source traceable, test the failure cases, and document what has not been validated.',
   education: 'B.Tech, Mathematics & Computing · MITS Gwalior · 2028',
   achievements: [
     {tag: 'FIELD DEMO / 2026', title: 'CMPDI Headquarters', text: 'Invited to demonstrate Mulyankan in Ranchi on 11 July 2026.'},
-    {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: 'Cross-modal retrieval prototype with documented evaluation scripts, leakage-aware splitting, and a reproducibility checklist; no unaudited benchmark number displayed.'},
+    {tag: 'RESEARCH PROTOTYPE', title: 'EarthBridge', text: 'Cross-modal retrieval prototype with source-linked final submission metrics and validation protocol; reported measurements are not independently reproduced.'},
     {tag: 'COMMUNITY', title: 'SchoolBuddies', text: 'Co-founder of a student-led school technology outreach initiative.'},
-    {tag: 'LEADERSHIP', title: 'Beyond the IDE', text: 'Class Representative, NPTEL Coordinator and first place at the Neeti Summit English Debate.'}
+    {tag: 'LEADERSHIP', title: 'Student leadership and debate', text: 'Class Representative, NPTEL Coordinator and first place at the Neeti Summit English Debate.'}
   ]
 }
 
@@ -37,7 +37,7 @@ export const profile = {
 // was individually checked; manually confirm external links before submitting.
 export const projects = [
   {
-    number:'01', category:'AI / HUMAN REVIEW', title:'Mulyankan',
+    number:'01', category:'DOCUMENT REVIEW / RUBRICS', title:'Mulyankan',
     status:'Demonstrated prototype',
     description:'Evidence-linked document evaluation: rubric-level review, insufficient-evidence flags, evaluator workflows and human override controls. Presented at CMPDI headquarters in July 2026.',
     stack:['React','TypeScript','Supabase'],
@@ -50,15 +50,16 @@ export const projects = [
   {
     number:'02', category:'ML / REMOTE SENSING', title:'EarthBridge',
     status:'Research prototype',
-    description:'Cross-modal satellite-image retrieval with contrastive embeddings and FAISS search for optical, SAR and multispectral imagery. The repository documents F1@5/F1@10, latency checks, and model-validation gates; no independently verified benchmark is claimed here.',
+    description:'Cross-modal satellite retrieval across Sentinel-1 SAR and Sentinel-2 multispectral imagery, using contrastive embeddings and FAISS. Reported evaluation figures are attributed to the source repository; no independent benchmark is claimed.',
     stack:['PyTorch','FAISS','FastAPI'],
-    links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'}], accent:'violet', shape:'grid', filters:['ai'],
-    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'The published code includes metric checks, data-manifest validation, evaluation scripts and a 128-pair overfit-gate script. Inspect the implementation and reproduce results using the documented dataset.',caveat:'Research prototype. Internal results are not presented as an external benchmark; the linked repository does not establish a public hosted ML demo.'}
+    links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'},{label:'Reported evaluation details',url:'https://github.com/himanshu051116/earthbridge/blob/main/SUBMISSION_README.md'}], accent:'violet', shape:'grid', filters:['ai'],
+    evidenceImage:'/evidence/earthbridge-evaluation.webp', evidenceImageCaption:'Actual EarthBridge evaluation UI · static repo-reported results, not live model inference',
+    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'The repo SUBMISSION_README.md reports cross-modal F1@5 19.53%, F1@10 11.59% and validation recall@1 53.03%, recall@10 70.08%, alongside 3,248 paired test observations and 6,496 gallery vectors. These numbers were not rerun here.',caveat:'Research prototype. Supplied workbench screenshot shows API offline; no live ranked result is shown. Repository-reported metrics have not been independently verified or re-evaluated.'}
   },
   {
     number:'03', category:'FULL-STACK / REAL-TIME', title:'Our Hidden Universe',
     status:'Deployed application',
-    description:'Private-room collaboration with Firebase authentication, real-time chat, video calls, shared memories and synchronized Watch Together playback.',
+    description:'Private rooms with Firebase authentication, real-time chat, video-call controls, shared memories and Watch Together coordination.',
     stack:['React','Firebase','Vercel'],
     links:[{label:'Live website',url:'https://ohs.vercel.app/'},{label:'Source code',url:'https://github.com/himanshu051116/our-hidden-universe'}],
     accent:'orange',shape:'waves', filters:['software'],
@@ -76,15 +77,7 @@ export const projects = [
     caseStudy:{problem:'How can a crawler retain article provenance while avoiding duplicate ingestion?',approach:'RSS and sitemap discovery, URL deduplication, article/PDF ingestion workflows and Alembic-managed PostgreSQL schema changes.',verification:'Repository documents the development work; a separate GitHub Pages showcase illustrates the experience with simulated data.',caveat:'In development. The static showcase is not a live backend or production news ingestion service.'}
   },
   {
-    number:'05', category:'SECURITY / NETWORKS', title:'Sentinel',
-    status:'Locally tested prototype',
-    description:'Network monitoring and filtering prototype with packet/flow views, early anomaly analysis and locally validated forward-proxy domain blocking.',
-    stack:['Python','Scapy','FastAPI'],
-    links:[], accent:'orange',shape:'orbit', filters:['systems'],
-    caseStudy:{problem:'How can suspicious local network activity be made inspectable without overstating detection?',approach:'Python packet/flow inspection, initial anomaly-analysis views and a forward proxy with controlled domain blocking.',verification:'Local HTTP proxy blocking was tested in a development environment.',caveat:'Locally tested prototype, not a certified intrusion-prevention or production WAF service.'}
-  },
-  {
-    number:'06', category:'EDUCATION / OUTREACH', title:'SchoolBuddies',
+    number:'05', category:'EDUCATION / OUTREACH', title:'SchoolBuddies',
     status:'Co-founder · Live website',
     description:'Student-led technology outreach connecting schools with practical workshops in AI literacy, computational thinking and web development, supported by an interactive enquiry site.',
     stack:['React','JavaScript','Education'],
@@ -97,7 +90,7 @@ export const projects = [
 
 export const skillGroups = [
   {title:'Frontend & products', number:'01', skills:['React','TypeScript','JavaScript','Next.js','Tailwind CSS','Responsive UI','Vite']},
-  {title:'AI & mathematical tools', number:'02', skills:['Python','PyTorch','scikit-learn','NumPy','Pandas','FAISS','Contrastive learning']},
+  {title:'ML & numerical computing', number:'02', skills:['Python','PyTorch','scikit-learn','NumPy','Pandas','FAISS','Contrastive learning']},
   {title:'Systems & infrastructure', number:'03', skills:['FastAPI','REST APIs','PostgreSQL','Supabase','Firebase','Docker','pytest','Git / GitHub']}
 ]
 

@@ -1,0 +1,17 @@
+/* V24 clarity + loading stability.
+   Preserve the historical stylesheet reconstruction while avoiding the
+   legacy no-JS fallback's collapsed margin that moved <body> on mobile. */
+.noJs{
+  margin:0 auto;
+  padding:clamp(24px,5vw,48px);
+  min-height:50vh;
+  color:#19393c;
+  background:#f5f1e9;
+}
+
+/* Keep image chrome quiet while offscreen galleries remain collapsed. */
+.v20Workspace .v23CaptureTray:not([open]) .v20Thumbs{display:none}
+.v20Workspace .v23CaptureTray[open] .v20Thumbs{display:flex}
+@media(prefers-reduced-motion:reduce){
+ .v20Workspace .v23CaptureTray > summary{scroll-behavior:auto}
+}

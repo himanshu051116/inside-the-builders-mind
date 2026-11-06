@@ -1,0 +1,47 @@
+/* V25.1 — Reversible hover inspection and connected engineering evidence.
+   The default workspace stays screenshot-first; details appear only on request. */
+.v20Workspace .v251PreviewActions{
+  margin-left:auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.v20Workspace .v251PreviewActions [data-v251-cancel]{
+  color:var(--v20-ink);background:transparent;
+  border:1px solid var(--v20-line);
+}
+.v20Workspace .v251PreviewActions [data-v251-cancel]:hover{
+  border-color:var(--v20-accent);color:var(--v20-accent);
+}
+.v20Workspace .v251RelatedViews{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+  padding:9px 0 4px;border-top:1px solid var(--v20-line);
+}
+.v20Workspace .v251RelatedViews button{
+  cursor:pointer;min-height:32px;padding:7px 10px;border-radius:5px;
+  border:1px solid var(--v20-line);background:var(--v20-panel);
+  font:700 11px/1.35 "DM Sans",system-ui,sans-serif;
+  color:var(--v20-ink);
+  transition:color 150ms ease,border-color 150ms ease,background-color 150ms ease;
+}
+.v20Workspace .v251RelatedViews button:hover{
+  border-color:var(--v20-accent);color:var(--v20-accent);
+  background:color-mix(in srgb,var(--v20-accent) 5%,var(--v20-panel));
+}
+.v20Workspace .v251RelatedViews button:focus-visible,
+.v20Workspace .v251PreviewActions button:focus-visible{
+  outline:3px solid var(--v20-accent);outline-offset:2px;
+}
+@media(max-width:600px){
+  .v20Workspace .v251PreviewActions{margin-left:0;width:100%;justify-content:flex-start}
+  .v20Workspace .v251RelatedViews button{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .v20Workspace .v251RelatedViews button{transition:none!important}
+}
+@media(forced-colors:active){
+  .v20Workspace .v251RelatedViews button{border-color:CanvasText}
+}
+
+/* A guided-tour shortcut was absolutely positioned over the preview's
+   commit button. Hide that unrelated shortcut during uncommitted inspection;
+   it reappears on the normal selected view. */
+.v20Workspace[data-previewing="true"] .v203TourShortcut{display:none!important}
+.v20Workspace[data-previewing="true"] .v25PreviewBar{position:relative;z-index:2}

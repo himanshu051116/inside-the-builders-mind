@@ -1,0 +1,61 @@
+{
+  "version": "14.5.0",
+  "source": "V14.4 local release",
+  "checklist": {
+    "verified_local": 47,
+    "total": 73
+  },
+  "tests": {
+    "node": {
+      "passed": 101,
+      "total": 101
+    },
+    "build": "PASS",
+    "asset_audit": "PASS",
+    "metadata_audit": "PASS",
+    "inline_browser": {
+      "role_viewports": 15,
+      "passed": 15,
+      "widths": [
+        320,
+        390,
+        768,
+        1366,
+        1440
+      ],
+      "semantic_role_viewports": 12,
+      "semantic_passed": 12,
+      "css_pixel_equivalence_pre_contrast_fix": 6,
+      "css_pixel_equivalence_passed": 6
+    }
+  },
+  "css_delivery": {
+    "v14_4": {
+      "requests": 4,
+      "bytes": 212050,
+      "gzip_bytes": 51642
+    },
+    "v14_5": {
+      "requests": 1,
+      "bytes": 178829,
+      "gzip_bytes": 39762
+    },
+    "deleted_dead_selector_rules": 347,
+    "raw_reduction_pct": 15.7,
+    "gzip_reduction_pct": 23.0
+  },
+  "limits": [
+    "Pixel comparison was before intentionally changing dark navigation colors.",
+    "Local Chromium harness, not hosted Vercel browser.",
+    "Gradient/backdrop contrast not fully audited.",
+    "axe, real screen-reader and actual browser-zoom checks pending.",
+    "EarthBridge genuine retrieval results not yet provided.",
+    "Screenshot publication permissions need owner review.",
+    "Core Web Vitals not measured."
+  ],
+  "deployment": {
+    "github": "unchanged",
+    "vercel": "V13 remains production",
+    "aws": "untouched"
+  }
+}

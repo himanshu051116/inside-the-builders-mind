@@ -1,0 +1,32 @@
+{
+  "version": "14.8.0",
+  "scope": "local Chromium and source tests, not hosted production",
+  "automatedTests": 116,
+  "build": "pass",
+  "assetAuditReminders": 0,
+  "metadataAudit": "pass",
+  "responsiveModeViewportChecks": 15,
+  "checkedViewportsCssPx": [
+    320,
+    390,
+    640,
+    1366,
+    1440
+  ],
+  "roles": [
+    "fullstack",
+    "software",
+    "ml"
+  ],
+  "visibleUndersizedControls": 0,
+  "clippedControls": 0,
+  "browserJavascriptErrors": 0,
+  "nativeSkipLinkFocus": "pass",
+  "forcedColors": "checked three roles at 390px",
+  "contrast": "partial; gradient scanner known false positives, full audit remains open",
+  "axe": "unavailable offline; not run",
+  "screenReader": "not run",
+  "production": "not deployed",
+  "completed": 50,
+  "remaining": 23
+}

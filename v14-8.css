@@ -1,0 +1,42 @@
+/* V14.8 – contrast and Windows High Contrast accessibility. */
+/* The pipeline stage caption is meaningful instructional text: keep it readable. */
+body[data-role="software"] .sysFlowNode em { color:#c5d6dc; }
+/* The small section marker is presentation only but should remain perceivable. */
+body[data-role="software"] .sectionFloatingNo,
+body[data-role="ml"] .sectionFloatingNo { color:#a4b3c1; }
+/* Keep a persistent keyboard indication in both theme families. */
+:where(a,button,input,textarea,select,summary,[tabindex]):focus-visible {
+  outline:3px solid var(--v14-ink, currentColor);
+  outline-offset:3px;
+}
+/* Stronger state indication when the user requests increased contrast. */
+@media (prefers-contrast:more) {
+  .careerModeButton[aria-pressed="true"],
+  .projectFilter[aria-pressed="true"],
+  [data-evidence-tab][aria-selected="true"],
+  [data-atlas-tab][aria-selected="true"] {outline:2px solid currentColor;outline-offset:-2px}
+  .v14HeroFrame,.projectCard,.archiveCard {border-width:2px}
+}
+/* In forced-colors mode, gradients and decorative pseudo-elements may vanish.
+   System colors and borders preserve interactive states and input visibility. */
+@media (forced-colors:active) {
+  .careerModeButton,.projectFilter,[data-evidence-tab],[data-atlas-tab],
+  .v14Primary,.v14Secondary,.v14HeroImage, .v142QuickJumps a,
+  .commandDialog button,.commandDialog a,.captureLightbox button,
+  .captureThumbnails button,.captureNavigator button,
+  .archiveFilter,.archiveCard a,
+  .projectCard a,.header a,.footerBottom a {
+    border:1px solid ButtonText; color:ButtonText; background:Canvas;
+  }
+  .careerModeButton[aria-pressed="true"],
+  .projectFilter[aria-pressed="true"],
+  [data-evidence-tab][aria-selected="true"],
+  [data-atlas-tab][aria-selected="true"],
+  .captureThumbnails button[aria-pressed="true"]{
+    border:3px solid Highlight; color:Highlight;
+  }
+  :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{
+    outline:3px solid Highlight!important; outline-offset:3px;
+  }
+  .v14HeroImage img,.verifiedImage img,.captureExpand img {border:1px solid CanvasText}
+}

@@ -1,0 +1,216 @@
+/* V14.0 — recruiter-first editorial shell. Older interactive lab styles remain scoped. */
+:root {
+ --v14-space-1: .5rem; --v14-space-2: 1rem; --v14-space-3: 1.5rem;
+ --v14-radius: 16px; --v14-font: 'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+ --v14-head: 'Space Grotesk',var(--v14-font);
+}
+html {scroll-padding-top: 90px}
+body {font-family:var(--v14-font)}
+body[data-role='fullstack'] {--v14-highlight:#c74b30;--v14-ink:#1e2933;--v14-outline:#d6c7b9;--v14-panel:#fffcf6;--v14-muted:#4d5c64}
+body[data-role='software'] {--v14-highlight:#eab96c;--v14-ink:#f2f6f4;--v14-outline:#354958;--v14-panel:#101d2a;--v14-muted:#bacdd9}
+body[data-role='ml'] {--v14-highlight:#c9adfc;--v14-ink:#f3f0fd;--v14-outline:#5b507b;--v14-panel:#201a39;--v14-muted:#d0c8df}
+#top.careerStage.v14Hero {min-height:0;overflow:visible;isolation:isolate}
+.v14Hero .careerInner {width:min(1260px,calc(100% - 64px))}
+.v14IdentityTop {display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:21px 0 13px;color:var(--v14-ink);border-bottom:1px solid var(--v14-outline)}
+.v14IdentityName {font:800 22px/1.2 var(--v14-head);letter-spacing:-.055em;text-decoration:none}
+.v14IdentityTop>span {font:600 12px/1.5 var(--v14-font);color:var(--v14-muted)}
+.v14Hero .careerChooser.v14ModeBar {display:flex;align-items:center;gap:24px;justify-content:space-between;padding:14px 0 4px;border:0}
+.v14ModePrompt {font:750 10px/1.4 var(--v14-font);letter-spacing:.12em;color:var(--v14-muted)}
+.v14Hero .careerModes {display:flex;width:max-content;max-width:100%;gap:4px;padding:4px;border:1px solid var(--v14-outline);border-radius:12px;background:color-mix(in srgb,var(--v14-panel) 80%,transparent)}
+.v14Hero .careerModeButton {opacity:1;justify-content:center;min-height:42px;height:auto;width:auto;padding:10px 15px;flex-direction:row;gap:0;border-radius:8px;border:1px solid transparent;box-shadow:none;transform:none;line-height:1.2;background:transparent;white-space:nowrap}
+.v14Hero .careerModeButton strong {font:750 12px/1.4 var(--v14-font);letter-spacing:0}
+.v14Hero .careerModeButton[aria-pressed=true] {border:1px solid var(--v14-outline);background:var(--v14-panel);box-shadow:0 3px 12px #00000013}
+.v14Hero .careerModeButton:focus-visible {outline:3px solid var(--v14-highlight);outline-offset:2px}
+.v14Hero .careerView.v14RoleView {display:grid;grid-template-columns:minmax(0,.91fr) minmax(0,1.09fr);gap:clamp(24px,4vw,72px);align-items:center;min-height:0;padding:27px 0 40px;position:relative}
+.v14Hero .careerView.v14RoleView[hidden] {display:none!important}
+.v14RoleCopy .candidateIdentity {position:absolute;left:-100000px;width:1px;height:1px;overflow:hidden}
+.v14Hero .careerCopy:before {display:none}
+.v14RoleKicker {font:750 11px/1.45 var(--v14-font);letter-spacing:.11em;color:var(--v14-highlight);margin:0 0 15px}
+.v14Hero .v14HeroHeadline {font-family:var(--v14-head);font-weight:700;font-size:clamp(37px,3.8vw,61px)!important;letter-spacing:-.065em;line-height:1.09;max-width:610px;margin:0 0 19px;color:var(--v14-ink);text-wrap:balance}
+.v14Hero .v14HeroDescription {font:450 clamp(15px,1.25vw,17px)/1.68 var(--v14-font);color:var(--v14-muted);max-width:550px;margin:0 0 18px}
+.v14TechRow {display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.v14TechRow span {font:650 12px/1.3 var(--v14-font);border:1px solid var(--v14-outline);border-radius:999px;padding:8px 11px;color:var(--v14-ink)}
+.v14PrimaryActions {display:flex;align-items:stretch;flex-wrap:wrap;gap:9px;margin-bottom:17px}
+.v14PrimaryActions a {display:inline-flex;justify-content:center;align-items:center;gap:12px;text-decoration:none;border-radius:10px;min-height:48px;padding:13px 17px;font:750 13px/1.3 var(--v14-font);transition:transform .16s ease,background .16s ease}
+.v14PrimaryActions a:hover {transform:translateY(-2px)}
+.v14Primary {background:var(--v14-highlight);color:#171d23;border:1px solid var(--v14-highlight)}
+body[data-role=fullstack] .v14Primary {color:white}
+.v14Secondary {border:1px solid var(--v14-outline);color:var(--v14-ink);background:var(--v14-panel)}
+.v14ProofFooter {display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:var(--v14-muted);font:620 12px/1.5 var(--v14-font)}
+.v14ProofFooter .v14Status {color:var(--v14-ink);border:1px solid var(--v14-outline);border-radius:6px;font:750 10px/1.4 var(--v14-font);padding:6px 8px;letter-spacing:.045em}
+.v14ProofFooter a {color:var(--v14-ink);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.v14HeroFrame {margin:0;display:flex;flex-direction:column;min-width:0;border:1px solid var(--v14-outline);border-radius:17px;overflow:hidden;background:var(--v14-panel);box-shadow:0 30px 60px #00000020}
+.v14HeroImage {display:block;min-width:0;overflow:hidden;background:#121c25;position:relative;max-height:405px}
+.v14HeroImage:focus-visible {outline:3px solid var(--v14-highlight);outline-offset:-4px}
+.v14HeroImage img {display:block;width:100%;height:auto;object-fit:contain;object-position:top center;max-height:405px;aspect-ratio:1.56/1;transition:transform .2s ease}
+.v14HeroImage:hover img {transform:scale(1.018)}
+.v14HeroFrame figcaption {display:flex;flex-direction:column;gap:5px;padding:13px 17px;color:var(--v14-muted);font:500 12px/1.5 var(--v14-font)}
+.v14HeroFrame figcaption span:first-child {font:750 10px/1.3 var(--v14-font);letter-spacing:.09em;color:var(--v14-ink)}
+.v14SourceFrame {border:1px solid var(--v14-outline);border-radius:16px;overflow:hidden;background:var(--v14-panel);box-shadow:0 25px 60px #0003;min-width:0;color:var(--v14-ink)}
+.v14SourceTop {display:flex;gap:10px;align-items:center;background:#121927;color:#eff8fa;padding:17px 20px;font:750 10px/1.4 ui-monospace,monospace;letter-spacing:.055em}
+.v14SourceTop span:last-child {margin-left:auto;color:#cbb9fd}
+.v14SourceDot {width:9px;height:9px;border-radius:50%;background:#bdffdd}
+.v14SourceBody {padding:25px;display:grid;gap:25px}
+.v14SourceBody>div:first-child small {display:block;color:var(--v14-muted);font-size:11px;margin-bottom:6px}
+.v14SourceBody>div:first-child strong {font:750 clamp(18px,2vw,26px)/1.25 var(--v14-head)}
+.v14MethodStats {display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.v14MethodStats span {display:flex;flex-direction:column;gap:8px;padding:15px;border:1px solid var(--v14-outline);border-radius:9px}
+.v14MethodStats b {font:760 clamp(18px,2vw,25px)/1.2 var(--v14-head)}
+.v14MethodStats small {color:var(--v14-muted);font-size:11px;line-height:1.35}
+.v14Protocol {padding:18px;background:color-mix(in srgb,var(--v14-outline) 21%,transparent);border-radius:9px;font:550 13px/1.65 var(--v14-font)}
+.v14Protocol i {font-style:normal;font-weight:800;color:var(--v14-highlight)}
+.v14SourceBody>a {font-weight:800;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.v14SourceBoundary {border-top:1px solid var(--v14-outline);padding:14px 24px;margin:0;color:var(--v14-muted);font-size:12px;line-height:1.55}
+/* Clearly separated, optional, browser-only interactive demonstrations. */
+.v14InteractiveLab {padding:80px 0 100px;scroll-margin-top:100px}
+.v14LabIntro {max-width:850px;margin-bottom:20px}
+.v14LabIntro h2 {font:750 clamp(27px,3vw,45px)/1.15 var(--v14-head);letter-spacing:-.055em;margin:8px 0 12px}
+.v14LabIntro p {font:450 16px/1.65 var(--v14-font);color:#aebeb6}
+.v14LabDisclosure {border:1px solid #52675c;background:#111e23;border-radius:14px;color:#ebf5ef;overflow:hidden}
+.v14LabDisclosure>summary {list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:62px;padding:17px 23px;font-size:15px;font-weight:750}
+.v14LabDisclosure>summary::-webkit-details-marker {display:none}
+.v14LabDisclosure>summary:hover,.v14LabDisclosure>summary:focus-visible {background:#23342f;outline:0}
+.v14LabPanels {padding:20px}
+.v14LabPanels [data-role-lab][hidden]{display:none!important}
+.v14LabPanels .careerPanel{max-width:100%;width:100%}
+.v14LabPanels .heroRealScene {display:none!important}
+.v14LabPanels .heroSimulationContent {display:block!important}
+.v14LabPanels .heroModeSwitch{display:none}
+.v14LabPanels .careerVisualCaption {color:#e5efe9}
+.v14LabPanels .terminalShell,.v14LabPanels .fullStage {margin:0}
+/* Direct paths into complete technical records instead of duplicate gallery front doors. */
+.v14CaseQuickNav {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:26px 0}
+.v14CaseQuickNav a {display:flex;flex-direction:column;justify-content:space-between;gap:8px;border:1px solid #537460;background:#192725;color:#eef9f3;border-radius:12px;padding:16px;min-height:98px;font:750 15px/1.25 var(--v14-font)}
+.v14CaseQuickNav a>span {font-weight:500;font-size:12px;color:#b1d6c2;line-height:1.5}
+.v14CaseQuickNav a:hover,.v14CaseQuickNav a:focus-visible {border-color:#c7f5d7;background:#253d33}
+.floatingLab{display:none!important}
+/* Consistent minimum readable text on high-impact components. */
+.caseFile .caseFacts p,.atlasStory p,.projectDescription,.captureInspect p {font-size:14px;line-height:1.65}
+.projectStatus,.atlasTab>span,.captureFrameMeta>span,.atlasCaseId{font-size:11px}
+.projectFilters button,.deckControl button,.captureMetaActions button,.captureMetaActions a {min-height:44px}
+/* The gallery is supporting evidence, not the first full case-study gate. */
+#case-files,#field-proof,#archive,#interactive-lab {scroll-margin-top:100px}
+/* Less motion, especially when the user specifically chooses reduced motion. */
+@media(prefers-reduced-motion:reduce){.v14HeroImage img,.v14PrimaryActions a{transition:none!important;transform:none!important}}
+@media(max-width:1020px){
+ .v14Hero .careerInner{width:min(100% - 42px,1260px)}
+ .v14Hero .careerView.v14RoleView{gap:25px;grid-template-columns:minmax(0,.97fr) minmax(0,1.03fr)}
+ .v14Hero .v14HeroHeadline{font-size:clamp(34px,4vw,50px)!important}
+ .v14CaseQuickNav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .v14ModePrompt{display:none}
+}
+@media(max-width:760px){
+ .v14IdentityTop{padding:16px 0 12px;display:flex;align-items:start;flex-direction:column;gap:6px}
+ .v14IdentityTop>span{font-size:11px}
+ .v14Hero .careerChooser.v14ModeBar{padding:13px 0 0;justify-content:start}
+ .v14Hero .careerView.v14RoleView{grid-template-columns:1fr;padding:20px 0 30px;gap:24px}
+ .v14Hero .careerCopy{max-width:100%}
+ .v14Hero .v14HeroHeadline{max-width:700px;font-size:clamp(34px,7vw,55px)!important;line-height:1.12}
+ .v14Hero .v14HeroDescription{font-size:15px;line-height:1.6}
+ .v14HeroImage{max-height:none}
+ .v14HeroImage img{max-height:none;height:auto}
+}
+@media(max-width:480px){
+ .v14Hero .careerInner{width:calc(100% - 30px)}
+ .v14IdentityName{font-size:21px}
+ .v14Hero .careerModeButton{padding:10px 11px;min-height:42px;min-width:0;flex-direction:row}
+ .v14Hero .careerModeButton strong{font-size:11px}
+ .v14Hero .careerModes{width:100%;justify-content:space-between;gap:0}
+ .v14Hero .v14HeroHeadline{font-size:clamp(32px,8.3vw,41px)!important}
+ .v14RoleKicker{font-size:10px}
+ .v14PrimaryActions{flex-direction:column}
+ .v14PrimaryActions a{width:100%;min-height:48px}
+ .v14TechRow span{font-size:11px}
+ .v14HeroFrame figcaption{font-size:11px;padding:11px}
+ .v14CaseQuickNav{grid-template-columns:1fr 1fr;gap:7px}
+ .v14CaseQuickNav a{min-height:95px;font-size:12px;padding:12px}
+ .v14CaseQuickNav a>span{font-size:10px}
+ .v14LabPanels{padding:10px}
+ .v14SourceBody{padding:16px;gap:18px}
+ .v14MethodStats span{padding:10px 8px}
+ .v14MethodStats b{font-size:18px}
+ .v14MethodStats small{font-size:10px}
+}
+
+
+/* V14.1: inline case dossiers, readable without another application layer. */
+.dossier{margin:25px 0 8px;border:1px solid #3b6359;border-radius:16px;overflow:hidden;background:#10201e;color:#eff7f1}
+.dossierTop{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 18px;background:#203a32;color:#e0ffeb;letter-spacing:.045em;font:700 12px/1.55 var(--v14-font)}
+.dossierGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.dossierField{padding:21px 24px;border-bottom:1px solid #36514a;min-width:0}
+.dossierField:nth-child(odd){border-right:1px solid #36514a}
+.dossierField h5,.dossierSources h5{font:750 14px/1.35 var(--v14-font);margin:0 0 10px;color:#bce5d0}
+.dossierField p{margin:0;color:#e4f0ea;font:450 15px/1.68 var(--v14-font)}
+.dossierSources{padding:22px 24px}
+.dossierSources>div{display:flex;flex-wrap:wrap;gap:10px}
+.dossierSources a{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:12px 14px;border-radius:10px;border:1px solid #5d8777;color:#f4fff6;font:700 13px/1.4 var(--v14-font)}
+.dossierSources a:hover,.dossierSources a:focus-visible{outline:2px solid #a0f1cf;outline-offset:1px;background:#274b3d}
+.atlasDrawer{margin:12px 0 26px;border:1px solid #456358;border-radius:13px;background:#122421}
+.atlasDrawer>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:13px 18px;font:700 14px/1.45 var(--v14-font);color:#f3fbf4}
+.atlasDrawer>summary:hover,.atlasDrawer>summary:focus-visible{background:#274238;outline:2px solid #9bdcb4;outline-offset:2px}
+.atlasDrawer:not([open]) .atlas{display:none}
+/* Default to readable secondary text rather than decorative micro-type. */
+.v14ProofFooter .v14Status,.v14HeroFrame figcaption span:first-child,.v14ModePrompt{font-size:12px}
+.projectStatus,.atlasTab>span,.captureFrameMeta>span,.atlasCaseId,.v14SourceTop{font-size:12px}
+.v14CaseQuickNav a{min-height:102px}
+@media(max-width:760px){.dossierGrid{grid-template-columns:1fr}.dossierField:nth-child(odd){border-right:0}.dossierTop{flex-direction:column;align-items:flex-start}.dossierField{padding:17px 20px}.dossierSources{padding:18px 20px}.atlasDrawer>summary{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.dossier *,.atlasDrawer *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+/* When a reviewer opens a detailed engineering record, give the reading text
+   the whole line rather than confining it to a narrow two-card grid cell. */
+.caseFilesGrid .caseFile:has(.caseFileDetails[open]){grid-column:1 / -1}
+.dossierField p,.dossierSources a{overflow-wrap:anywhere}
+
+.evidenceOfflineMessage{margin:14px 0;color:inherit;font-size:14px;line-height:1.6}
+
+/* V14.2 / Project discovery, typography, focus and consistent touch targets. */
+.v142QuickJumps {display:none}
+.archiveControls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:6px 0 20px}
+.archiveControls .archiveFilter{min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 15px;border:1px solid #668b79;background:#192b28;color:#eefaf4;font:700 14px/1.3 var(--v14-font);cursor:pointer}
+.archiveControls .archiveFilter.isActive{background:#b5f0c8;color:#12291e;border-color:#b5f0c8}
+.archiveControls .archiveFilter:hover:not(.isActive){background:#304b3e}
+.archiveControls #archiveCount{color:#d3eadc;font:600 13px/1.5 var(--v14-font);margin-left:auto}
+.archiveCard[hidden]{display:none!important}
+.archiveCard>span:first-child {font-size:12px;line-height:1.45}
+.archiveCard small.archiveStage{font-size:13px;line-height:1.5;min-height:0;color:#c8e7d5}
+.archiveCard p{font-size:15px;line-height:1.65}
+.archiveCard>a,.archiveNoLink{font-size:14px;line-height:1.45}
+.archiveCard>a{min-height:44px;display:inline-flex;align-items:center}
+.projectStatus{font-size:13px;line-height:1.4}
+.projectDescription,.caseFile .caseFacts p,.captureInspect p{font-size:15px;line-height:1.65}
+.v14HeroFrame figcaption{font-size:13px;line-height:1.55}
+.v14RoleKicker,.v14Hero .careerModeButton strong{font-size:13px}
+.v14IdentityTop>span,.v14TechRow span,.v14ProofFooter,.v14SourceBoundary,.v14MethodStats small{font-size:13px;line-height:1.48}
+.v14Hero .careerModeButton,.projectFilter,.archiveFilter,.galleryViewToggle,.deckControl button,#caseNotesToggle,.atlasDrawer>summary{min-height:44px}
+.v14CaseQuickNav a>span{font-size:13px;line-height:1.5}
+/* Visible focus styling across the shared controls, not just the currently active mode. */
+:where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline:3px solid #b5f0c8;outline-offset:3px}
+body[data-role='fullstack'] :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline-color:#b43f23}
+body[data-role='ml'] :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline-color:#c9adfc}
+/* Filter controls keep a perceptible pressed state independent of hover. */
+.archiveFilter[aria-pressed=true],.projectFilter[aria-pressed=true]{font-weight:800}
+@media (max-width:760px){
+ .v142QuickJumps{display:flex;flex-wrap:wrap;gap:7px;padding:10px 0 2px}
+ .v142QuickJumps a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;border:1px solid var(--v14-outline);background:var(--v14-panel);border-radius:9px;color:var(--v14-ink);font:700 13px/1.3 var(--v14-font);text-decoration:none}
+ .v14Hero .careerView.v14RoleView{padding-top:15px}
+ .archiveControls #archiveCount{width:100%;margin:4px 0 0}
+}
+@media (max-width:480px){
+ .v14CaseQuickNav a{font-size:14px;line-height:1.3}
+ .v14CaseQuickNav a>span{font-size:13px}
+ .v14Hero .careerModeButton strong{font-size:12px}
+ .v14Hero .v14HeroDescription{font-size:16px}
+ .archiveControls .archiveFilter{font-size:13px;flex:1 0 auto}
+ .v14HeroFrame figcaption{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.v142QuickJumps *, .archiveControls *, .archiveCard *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* V14.2 visual-review amendments: predictable two-column filters and one-line mobile shortcuts. */
+@media(max-width:760px){
+ .v142QuickJumps{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;max-width:100%;padding-bottom:9px}
+ .v142QuickJumps a{white-space:nowrap;flex:0 0 auto;scroll-snap-align:start}
+}
+@media(max-width:480px){
+ .archiveControls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .archiveControls .archiveFilter{min-width:0;min-height:44px;width:100%;padding:10px 6px}
+ .archiveControls #archiveCount{grid-column:1/-1;margin:2px 0 0;width:100%}
+}

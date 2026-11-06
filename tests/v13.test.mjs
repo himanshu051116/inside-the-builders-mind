@@ -9,7 +9,7 @@ const data=JSON.parse(read('public/evidence/manifest.json'))
 const media=read('evidence-media.js'),css=read('portfolio.css'),site=read('site.js')
 
 test('Every author-supplied capture has accurate file metadata and SHA-256',()=>{
-  assert.equal(Object.keys(data).length,16)
+  assert.equal(Object.keys(data).length,20)
   for(const [id,meta] of Object.entries(data)){
     const file=readFileSync(new URL('public'+meta.path,root))
     assert.equal(file.length,meta.bytes,`${id} filesize`)
@@ -41,15 +41,16 @@ test('Evidence gallery provides a shareable, accessible visual inspection experi
   assert.match(media,/main\.width=screenDimensions\[id\]\[0\]/)
   assert.match(css,/\.captureInspect/)
 })
-test('V13 keeps real images as lead evidence and does not invent EarthBridge results',()=>{
+test('V14.6 keeps real images as lead evidence without fabricating retrieved matches',()=>{
   for(const id of ['ohs-home','news-overview'])assert.match(site,new RegExp(`src="/evidence/${id}\\.webp"`))
-  assert.match(site,/fetchpriority="high"/)
-  assert.match(site,/VERSION 13/)
-  assert.ok(!Object.keys(data).some(id=>id.startsWith('earthbridge-')))
-  assert.match(media,/EarthBridge images and experiment results will be added/)
+  assert.match(site,/fetchpriority="low"/)
+  assert.doesNotMatch(site,/fetchpriority="high"/)
+  assert.match(site,/v17Recruiter|recruiterIntroMarkup/)
+  assert.equal(Object.keys(data).filter(id=>id.startsWith('earthbridge-')).length,4)
+  assert.match(media,/A genuine query with ranked satellite-image matches is still needed/)
 })
 test('Explicit hero image height auto prevents portrait-style unused vertical space',()=>{
   assert.match(css,/\.heroRealImage img\{[^}]*width:100%;height:auto;/)
-  assert.match(site,/width="1606" height="1021" fetchpriority="high"/)
-  assert.match(site,/width="1642" height="1048" fetchpriority="high"/)
+  assert.match(site,/width="1606" height="1021" fetchpriority="low"/)
+  assert.match(site,/width="1642" height="1048" fetchpriority="low"/)
 })

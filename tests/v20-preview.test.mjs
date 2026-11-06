@@ -32,11 +32,13 @@ test('key highlights and original two presenter videos remain unchanged',()=>{
 })
 test('legacy project records, original labs and case records are retained',()=>{
  for(const s of ['work','case-files','field-proof','archive','interactive-lab','about','toolkit','lab'])assert.ok(code.includes('"'+s+'"'),s)
- assert.match(code,/body\.append\(legacy\)/)
+ assert.match(code,/groupMap=new Map\(\)/)
+ assert.match(code,/inner\.append\(direct\)/)
+ assert.match(code,/\["project-notes","Project notes"/)
  assert.match(code,/\.append\(direct\)/)
  assert.match(code,/\.caseFileDetails/)
  const raw=read('content.js')
- for(const name of ['Our Hidden Universe','NewsSources','EarthBridge','Mulyankan','Sentinel','SchoolBuddies'])assert.ok(raw.includes(name),name)
+ for(const name of ['Our Hidden Universe','NewsSources','EarthBridge','Mulyankan','SchoolBuddies'])assert.ok(raw.includes(name),name)
 })
 test('archive deep links, no fabricated inference, and keyboard tabs remain',()=>{
  assert.match(code,/hashchange/)

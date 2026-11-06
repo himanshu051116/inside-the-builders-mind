@@ -154,7 +154,8 @@ export function setupV205Annotations(doc=document,win=window){
     body.append(el("p","v205Disclaimer","Notes identify visible UI elements, not verified live functionality."));
     panel.append(body);
     panel.addEventListener("toggle",()=>{show=panel.open;renderDetail();});
-    figure.insertAdjacentElement("afterend",panel);
+    const thumbnails=figure.parentElement?.querySelector(".v20Thumbs");
+    (thumbnails||figure).insertAdjacentElement("afterend",panel);
     renderDetail();
   }
   root.addEventListener("click",event=>{

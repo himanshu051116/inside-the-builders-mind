@@ -1,0 +1,198 @@
+
+/* V21 — navigation, independent archive disclosures and contact CTA.
+   Scoped styles preserve V20.9 hero, real Mulyankan recordings and portrait. */
+
+/* Accessible nav preview; hover opens a compact panel, never force-scrolls. */
+.header #main-nav.nav{position:relative;overflow:visible}
+.header #main-nav > a[data-nav-preview="active"]{color:#d1ffab}
+.header #main-nav .v21NavPreview{
+  position:absolute;top:calc(100% + 18px);left:50%;z-index:55;
+  width:min(355px,calc(100vw - 40px));padding:19px 22px;
+  transform:translateX(-50%);
+  background:#131d22;color:#f4f8ee;border:1px solid #59746a;
+  border-radius:14px;box-shadow:0 20px 54px #04060877;
+  text-align:left;cursor:default;
+}
+.header #main-nav .v21NavPreview[hidden]{display:none!important}
+.v21NavPreview .v21NavOverline{
+  display:block;margin-bottom:8px;color:#c7f68b;
+  font:750 10px/1.35 "DM Sans",system-ui,sans-serif;letter-spacing:.14em;
+}
+.v21NavPreview strong{display:block;font:700 19px/1.2 "Space Grotesk",system-ui,sans-serif}
+.v21NavPreview p{margin:9px 0 15px;color:#c6d5d1;font:450 13px/1.55 "DM Sans",system-ui,sans-serif}
+.header #main-nav .v21NavAction{
+  display:inline-flex;align-items:center;min-height:36px;
+  color:#d2ffa2;font:700 12px/1.4 "DM Sans",system-ui,sans-serif;
+  text-decoration:underline;text-underline-offset:4px;
+}
+.header #main-nav .v21NavAction:hover{color:#fff}
+
+/* Filter chips: selected vs unselected states stay readable without hover. */
+.projectFilters .projectFilter:not([aria-pressed="true"]),
+.archiveControls .archiveFilter:not([aria-pressed="true"]){
+  opacity:1;color:var(--v14-ink,#3e5357);
+}
+.projectFilters .projectFilter,.archiveControls .archiveFilter{
+  transition:background-color .17s ease,border-color .17s ease,color .17s ease,box-shadow .17s ease;
+}
+.projectFilters .projectFilter[aria-pressed="true"],
+.archiveControls .archiveFilter[aria-pressed="true"]{
+  box-shadow:inset 0 0 0 1px currentColor;
+}
+
+/* The archive heading is ALWAYS visible. Its real sections are independent. */
+.v21Archive{
+  background:#f4f0e8;color:#19353c;
+  border-top:1px solid #d9d4c7;
+  padding:clamp(32px,4.8vw,64px) 0 clamp(46px,5vw,76px);
+  scroll-margin-top:86px;
+}
+.v21Archive .v21ArchiveHeading,
+.v21Archive .v20ArchiveBody{
+  width:min(1220px,calc(100% - 80px));
+  margin-inline:auto;
+}
+.v21Archive .v21ArchiveHeading{padding-bottom:20px}
+.v21Archive .v21ArchiveHeading>span{
+  display:block;color:#ab563c;font:800 10px/1.35 ui-monospace,Consolas,monospace;
+  letter-spacing:.14em;margin-bottom:9px;
+}
+.v21Archive .v21ArchiveHeading h2{
+  color:#20383d;font:730 clamp(27px,3.3vw,44px)/1.14 "Space Grotesk",sans-serif;
+  letter-spacing:-.055em;margin:0 0 7px;text-wrap:balance;
+}
+.v21Archive .v21ArchiveHeading p{
+  color:#536a6a;font:450 13px/1.55 "DM Sans",system-ui,sans-serif;margin:0;
+}
+.v21Archive .v20ArchiveBody{display:grid;gap:9px}
+.v21Archive .v21ArchiveGroup{
+  margin:0;border:1px solid #d8d0c2;background:#fffdf8;
+  border-radius:11px;min-width:0;overflow:clip;
+  box-shadow:0 3px 10px #1a333209;
+}
+.v21Archive .v21ArchiveGroup[open]{border-color:#afae9d;background:#fffefb}
+.v21Archive .v21ArchiveGroup > summary{
+  min-height:68px;padding:13px 19px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  cursor:pointer;list-style:none;
+  transition:background-color .16s ease;
+}
+.v21Archive .v21ArchiveGroup > summary::-webkit-details-marker{display:none}
+.v21Archive .v21ArchiveGroup > summary:hover,
+.v21Archive .v21ArchiveGroup[open] > summary{
+  background:#ece7db;
+}
+.v21Archive .v21ArchiveLabel{display:grid;gap:3px;min-width:0}
+.v21Archive .v21ArchiveLabel strong{
+  font:720 clamp(15px,1.45vw,19px)/1.25 "Space Grotesk",system-ui,sans-serif;
+  color:#1c373d;letter-spacing:-.02em;
+}
+.v21Archive .v21ArchiveLabel small{
+  font:450 12px/1.4 "DM Sans",system-ui,sans-serif;
+  color:#526467;letter-spacing:0;
+}
+.v21Archive .v21ArchiveArrow{
+  display:grid;place-items:center;flex:none;
+  width:31px;height:31px;border:1px solid #d0c3ae;border-radius:50%;
+  color:#a34e38;font:500 22px/1 system-ui,sans-serif;
+  transition:transform .2s ease,background-color .2s ease;
+}
+.v21Archive .v21ArchiveGroup[open] .v21ArchiveArrow{
+  transform:rotate(45deg);background:#f9efde;
+}
+.v21Archive .v21ArchiveGroup > summary:focus-visible{
+  outline:3px solid #ac5037;outline-offset:-4px;border-radius:10px;
+}
+.v21Archive .v21ArchiveContent{border-top:1px solid #ddd7cb;min-width:0}
+.v21Archive .v21ArchiveContent>.section,
+.v21Archive .v21ArchiveContent>section.section{
+  padding-top:clamp(24px,3.5vw,42px);
+  padding-bottom:clamp(30px,4vw,54px);
+  scroll-margin-top:92px;
+}
+.v21Archive .v21ArchiveContent>section.wrap{
+  width:min(1200px,calc(100% - 36px));
+}
+.v21Archive .v21ArchiveContent #top{
+  min-height:auto;
+  width:100%;padding-inline:clamp(15px,2.2vw,30px);
+}
+.v21Archive .v21ArchiveContent>section#about{padding-inline:clamp(16px,2vw,27px)}
+.v21Archive .v21ArchiveContent>.v21ProjectNotes{
+  padding:clamp(20px,2.7vw,32px);scroll-margin-top:92px;
+  color:#1e343c;
+}
+.v21Archive .v21ProjectNotes .caseNotesHead{margin-top:0}
+.v21Archive .v21ArchiveContent #caseFilesGrid{min-width:0}
+.v21Archive .v21ArchiveGroup:has(#top){background:#f9f6ef}
+.v21Archive .v21ArchiveGroup:has(#top)[open]{background:transparent}
+
+/* Upgraded primary contact action, with a true mailto and explicit copy button. */
+#contact .v21ContactActions{
+  display:flex;flex-wrap:wrap;align-items:stretch;gap:11px;
+  margin-top:clamp(19px,2.4vw,32px);margin-bottom:16px;
+}
+#contact .v21EmailLink{
+  display:flex;align-items:center;justify-content:space-between;gap:22px;
+  min-height:70px;min-width:min(270px,100%);padding:13px 15px 13px 19px;
+  background:#c9fc89;color:#142b28;border:1px solid #dfffbd;
+  border-radius:12px;text-decoration:none;box-shadow:0 9px 23px #050b0c2b;
+  transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+#contact .v21EmailLinkText{display:grid;gap:3px}
+#contact .v21EmailLinkText small{
+  font:700 10px/1.2 "DM Sans",sans-serif;letter-spacing:.095em;color:#315137;
+}
+#contact .v21EmailLinkText strong{
+  font:750 22px/1.2 "Space Grotesk",sans-serif;letter-spacing:-.03em;
+}
+#contact .v21EmailArrow{
+  width:41px;height:41px;flex:none;border-radius:50%;
+  display:grid;place-items:center;background:#173c31;color:#daffa9;
+  transition:transform .2s ease;
+}
+#contact .v21CopyEmail{
+  min-width:min(232px,100%);display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;gap:4px;
+  padding:13px 17px;border:1px solid #45605d;border-radius:12px;
+  background:#132029;color:#edf6ee;cursor:pointer;text-align:left;
+  transition:border-color .18s ease,background-color .18s ease;
+}
+#contact .v21CopyTitle{font:750 13px/1.35 "DM Sans",system-ui,sans-serif}
+#contact .v21CopyEmail small{font:450 12px/1.35 "DM Sans",system-ui,sans-serif;color:#b2c7c2;overflow-wrap:anywhere}
+#contact .v21CopyStatus{font:650 11px/1.3 "DM Sans",sans-serif;color:#cbfa95}
+#contact .v21CopyStatus:empty{display:none}
+#contact .v21CopyEmail.v21Copied{border-color:#b5e987}
+@media(hover:hover) and (pointer:fine){
+  #contact .v21EmailLink:hover{background:#ddffab;transform:translateY(-2px);box-shadow:0 12px 27px #040b0e42}
+  #contact .v21EmailLink:hover .v21EmailArrow{transform:translate(2px,-2px)}
+  #contact .v21CopyEmail:hover{background:#1b3036;border-color:#a0bd9f}
+}
+#contact .v21ContactActions :is(a,button):focus-visible{outline:3px solid #c3f68a;outline-offset:3px}
+
+@media(max-width:900px){
+  .header #main-nav .v21NavPreview{display:none!important}
+  .v21Archive .v21ArchiveHeading,.v21Archive .v20ArchiveBody{width:calc(100% - 36px)}
+  .v21Archive .v21ArchiveContent>.section{padding-inline:0}
+}
+@media(max-width:630px){
+  .v21Archive{padding-block:29px 45px}
+  .v21Archive .v21ArchiveHeading,.v21Archive .v20ArchiveBody{width:calc(100% - 24px)}
+  .v21Archive .v21ArchiveHeading h2{font-size:29px}
+  .v21Archive .v21ArchiveGroup > summary{min-height:65px;padding:11px 13px;gap:9px}
+  .v21Archive .v21ArchiveLabel strong{font-size:15px}
+  .v21Archive .v21ArchiveLabel small{font-size:11px}
+  .v21Archive .v21ArchiveContent>section.wrap{width:calc(100% - 20px)}
+  .v21Archive .v21ArchiveContent>.v21ProjectNotes{padding:17px 10px}
+  #contact .v21ContactActions{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+  #contact .v21EmailLink,#contact .v21CopyEmail{min-width:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .v21Archive .v21ArchiveArrow,#contact .v21EmailLink,#contact .v21EmailArrow,#contact .v21CopyEmail,
+  .v21Archive .v21ArchiveGroup > summary{transition:none!important;transform:none!important}
+}
+@media(forced-colors:active){
+  .v21Archive .v21ArchiveGroup{border-color:CanvasText;background:Canvas;color:CanvasText}
+  #contact .v21EmailLink,#contact .v21CopyEmail{background:ButtonFace;color:ButtonText;border-color:ButtonText}
+  .v21Archive .v21ArchiveGroup > summary:focus-visible{outline-color:Highlight}
+}

@@ -7,7 +7,7 @@ export function setupV10Experience(){
   '01':'https://github.com/himanshu051116/Algonauts-Mulyankan/tree/main/docs/assets/screenshots',
   '03':'https://github.com/himanshu051116/our-hidden-universe',
   '04':'https://github.com/himanshu051116/NewsSources',
-  '06':'https://github.com/himanshu051116/SCHOOLBUDDIES',
+  '05':'https://github.com/himanshu051116/SCHOOLBUDDIES',
   'case-mulyankan':'https://github.com/himanshu051116/Algonauts-Mulyankan/tree/main/docs/assets/screenshots',
   'case-ohs':'https://github.com/himanshu051116/our-hidden-universe',
   'case-news':'https://github.com/himanshu051116/NewsSources'

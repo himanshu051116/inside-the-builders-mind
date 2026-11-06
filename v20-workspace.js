@@ -143,7 +143,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const getShots=p=>{
     const prefixes={mulyankan:"mulyankan-",earthbridge:"earthbridge-",newssources:"news-","our-hidden-universe":"ohs-",schoolbuddies:"schoolbuddies-"};
     const prefix=prefixes[p.id];
-    const shots=manifest&&prefix?Object.entries(manifest).filter(([k,v])=>k.startsWith(prefix)&&v&&/^\\/evidence\\/[a-z-]+\\.webp$/.test(v.path)):[];
+    const shots=manifest&&prefix?Object.entries(manifest).filter(([k,v])=>k.startsWith(prefix)&&v&&/^\/evidence\/[a-z-]+\.webp$/.test(v.path)):[];
     if(!shots.length&&p.evidenceImage)shots.push([p.id,{path:p.evidenceImage,caption:p.evidenceImageCaption||p.title}]);
     return shots;
   };

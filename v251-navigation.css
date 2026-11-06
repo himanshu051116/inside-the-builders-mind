@@ -39,3 +39,9 @@
 @media(forced-colors:active){
   .v20Workspace .v251RelatedViews button{border-color:CanvasText}
 }
+
+/* A guided-tour shortcut was absolutely positioned over the preview's
+   commit button. Hide that unrelated shortcut during uncommitted inspection;
+   it reappears on the normal selected view. */
+.v20Workspace[data-previewing="true"] .v203TourShortcut{display:none!important}
+.v20Workspace[data-previewing="true"] .v25PreviewBar{position:relative;z-index:2}

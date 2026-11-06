@@ -38,7 +38,7 @@ test('hover navigation and both filters have desktop previews and tap or keyboar
   assert.match(site,/setupV21Interactions\(\)/)
   assert.match(hover,/\.projectFilter/)
   assert.match(hover,/\.archiveFilter/)
-  assert.match(hover,/portfolio:archive-preview/)
+  assert.doesNotMatch(hover,/portfolio:archive-preview/)\n  assert.match(workspace,/revealArchive/)
   assert.match(hover,/pointerenter/)
   assert.match(hover,/pointerleave/)
   assert.match(hover,/fineHover/)

@@ -43,7 +43,7 @@ test('architecture labels are not injected into the Screens tab',()=>{
  assert.doesNotMatch(evidence,/^    enhanceMedia\(\);/m)
  assert.match(main,/data-v20-tab/)
  assert.match(main,/tab==="architecture"/)
- assert.match(main,/tab==="evidence"/)
+ assert.match(main,/function evidence\(p\)/)
 })
 
 test('workspace is compact without compromising role tabs, PDF downloads, or mobile',()=>{

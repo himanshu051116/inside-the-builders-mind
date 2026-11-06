@@ -27,8 +27,8 @@ test('home retains original recruiter text, three resumes and actual video integ
   assert.doesNotMatch(html,/id="selected-work"/); // No duplicate of the original hero's project rail.
   for(const asset of ['mulyankan-system-walkthrough-presenter.mp4','mulyankan-docx-workflow-presenter.mp4'])assert.ok(existsSync(new URL('public/video/'+asset,root)));
 });
-test('six canonical project dossiers are generated from the same content records',()=>{
-  assert.equal(projects.length,6);
+test('five canonical project dossiers are generated from the same content records',()=>{
+  assert.equal(projects.length,5);
   for(const p of projects){
     const id=slug(p.title),html=page('projects/'+id+'/');
     for(const token of [p.title,p.status,'id="architecture"','id="verification"','id="captures"','data-page']){
@@ -36,7 +36,7 @@ test('six canonical project dossiers are generated from the same content records
       assert.ok(html.includes(token),id+' missing '+token);
     }
     assert.match(html,/v208-project.js/);
-    const role=id==='earthbridge'?'ml':(['newssources','mulyankan','sentinel'].includes(id)?'software':'fullstack');
+    const role=id==='earthbridge'?'ml':(['newssources','mulyankan'].includes(id)?'software':'fullstack');
     assert.ok(html.includes('/work/?view='+role+'&project='+id+'&panel=media'),id+' role route');
     assert.ok(html.includes('https://inside-the-builders-mind.vercel.app/projects/'+id+'/'));
     assert.ok(html.includes(p.caseStudy.caveat.replaceAll('&','&amp;').replaceAll('<','&lt;')));
@@ -60,7 +60,7 @@ test('the separate Lab retains genuine local workbench and explicit toy boundari
 test('sitemap contains unique routes and preserves role-specific share URLs',()=>{
   const xml=read('dist/sitemap.xml');
   const urls=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
-  assert.equal(urls.length,14);
+  assert.equal(urls.length,13);
   assert.equal(new Set(urls).size,urls.length);
   for(const path of ['work/','projects/','evidence/','lab/','projects/mulyankan/','share/ml/'])assert.ok(xml.includes('https://inside-the-builders-mind.vercel.app/'+path));
 });

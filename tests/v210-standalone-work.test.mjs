@@ -27,7 +27,7 @@ test('three role modes, unique project pathways and matching résumé PDFs stay 
     assert.ok(engine.includes('/resumes/Himanshu_Shukla_'+role+'_Public.pdf'),role);
     assert.ok(work.includes("./v20-workspace.js"));
   }
-  for(const id of ['our-hidden-universe','mulyankan','newssources','earthbridge','sentinel','schoolbuddies'])assert.ok(engine.includes(id),id);
+  for(const id of ['our-hidden-universe','mulyankan','newssources','earthbridge','schoolbuddies'])assert.ok(engine.includes(id),id);
   assert.match(engine,/\/projects\/\$\{p\.id\}\/\#verification/);
   assert.match(engine,/\/legacy\/\?view=\$\{role\}#top/);
 });
@@ -59,5 +59,5 @@ test('generated route contains accessible standalone app and still indexes all s
   assert.match(work,/<main id="main"/);
   const home=source('dist/index.html');
   assert.match(home,/src="\/v208-home.js"/);
-  for(const id of ['our-hidden-universe','mulyankan','newssources','earthbridge','sentinel','schoolbuddies'])assert.ok(existsSync(new URL('../dist/projects/'+id+'/index.html',import.meta.url)),id);
+  for(const id of ['our-hidden-universe','mulyankan','newssources','earthbridge','schoolbuddies'])assert.ok(existsSync(new URL('../dist/projects/'+id+'/index.html',import.meta.url)),id);
 });

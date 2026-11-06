@@ -5,9 +5,9 @@ import {getEvidenceTrail,getPoints,readEvidenceSelection,evidenceLink,listProjec
 
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
-test('six canonical project dossiers retain evidence records without fabricated execution claims',()=>{
+test('five canonical project dossiers retain evidence records without fabricated execution claims',()=>{
   const ids=listProjectIds();
-  assert.deepEqual(new Set(ids).size,6);
+  assert.deepEqual(new Set(ids).size,5);
   for(const id of ids){
     const data=getEvidenceTrail(id);
     assert.ok(data,id);
@@ -35,9 +35,7 @@ test('NewsSources and EarthBridge map screenshot annotations to documented stage
 });
 test('unmapped screenshots never acquire invented annotations',()=>{
   assert.equal(getPoints('not-supplied').length,0);
-  const p=getEvidenceTrail('sentinel',null,0);
-  assert.equal(p.feature,null);
-  assert.equal(p.stage,null);
+  assert.equal(getEvidenceTrail('sentinel'),null);
   assert.equal(getEvidenceTrail('nonexistent'),null);
   assert.equal(getEvidenceTrail('mulyankan','<img src=x>',0).feature,null);
 });

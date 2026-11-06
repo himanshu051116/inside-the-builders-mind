@@ -1,5 +1,17 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/projects/sentinel",
+      "destination": "/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/sentinel/",
+      "destination": "/projects/",
+      "permanent": true
+    }
+  ]
 }

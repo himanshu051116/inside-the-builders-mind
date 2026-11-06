@@ -1,18 +1,18 @@
 // Three portfolio lenses mapped to the three user-supplied resumes.
 // Local-only illustrative interactions; no external endpoints or fabricated measurements.
 export const MODE_ORDER = {
-  fullstack: ['03','06','01','04','02','05'],
-  software:  ['04','05','01','03','02','06'],
-  ml:        ['02','01','05','04','03','06']
+  fullstack: ['03','05','01','04','02'],
+  software:  ['04','01','03','02','05'],
+  ml:        ['02','01','04','03','05']
 }
 export const MODE_NAMES = { fullstack:'Full-Stack Studio', software:'Systems Console', ml:'ML Research Lab' }
 
 const TERMINAL = {
   help: ['$ help', 'Available: projects · stack · trace · status · clear', 'Select a shortcut below or type a command.'],
-  projects: ['$ projects', '01 NewsSources   - RSS / sitemap ingestion, deduplication [in development]', '02 Sentinel      - packet / flow monitoring [local prototype]', '03 Mulyankan     - rubric + evidence review [demonstrated prototype]'],
+  projects: ['$ projects', '01 NewsSources   - RSS / sitemap ingestion, deduplication [in development]', '02 Mulyankan     - rubric + evidence review [demonstrated prototype]'],
   stack: ['$ stack', 'Languages     Python · JavaScript · TypeScript · SQL · C++ · Java', 'Infrastructure Docker · PostgreSQL · Alembic · FastAPI', 'Practices      API design · pytest · Git / GitHub'],
   trace: ['$ trace news-ingestion', '[01] DISCOVER  RSS or sitemap yields candidate URLs', '[02] NORMALIZE URLs and detect duplicates', '[03] STORE     PostgreSQL-backed article + provenance metadata', '[04] RETAIN    source reference for review', 'Illustrative flow; not running against a live backend.'],
-  status: ['$ status', 'Portfolio demo: local-only, read-only', 'NewsSources: in development', 'Sentinel: locally tested prototype', 'Production monitoring: not connected.'],
+  status: ['$ status', 'Portfolio demo: local-only, read-only', 'NewsSources: in development', 'No live backend connected.'],
   clear: ['Console reset. Try `help` or `trace`.']
 }
 export function setupCareerModes(){

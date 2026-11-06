@@ -12,10 +12,9 @@ test('V21.4 previews canonical, source-backed project records without inventing 
     ['mulyankan','Mulyankan'],
     ['earthbridge','EarthBridge'],
     ['newssources','NewsSources'],
-    ['sentinel','Sentinel'],
     ['schoolbuddies','SchoolBuddies'],
   ]);
-  assert.equal(projects.length, 6);
+  assert.equal(projects.length, 5);
   for (const [id] of expected) {
     const data = getV214Feature(projects, id);
     assert.ok(data, id);
@@ -29,7 +28,7 @@ test('V21.4 previews canonical, source-backed project records without inventing 
 test('V21.4 keeps true screenshot paths and never substitutes an invented image', () => {
   assert.equal(getV214Feature(projects, 'mulyankan').image, '/evidence/mulyankan-overview.webp');
   assert.equal(getV214Feature(projects, 'our-hidden-universe').image, '/evidence/ohs-together.webp');
-  assert.equal(getV214Feature(projects, 'sentinel').image, null);
+  assert.equal(getV214Feature(projects, 'sentinel'), null);
   assert.equal(getV214Feature([{title:'Demo',evidenceImage:'https://invalid.example/image.png'}], 'demo').image, null);
   assert.equal(getV214Feature(projects, null), null);
   assert.equal(getV214Feature(projects, 'not-a-project'), null);

@@ -20,7 +20,7 @@ test('six project maps retain the four existing architecture stages',()=>{
  }
 })
 test('prototype gaps remain visible; unsupported projects never get fake captures',()=>{
- assert.equal(V204_STAGE_CAPTURES.sentinel.every(x=>x===null),true)
+ assert.equal(Object.hasOwn(V204_STAGE_CAPTURES,'sentinel'),false)
  assert.equal(V204_STAGE_CAPTURES.newssources[1],null)
  assert.equal(V204_STAGE_CAPTURES.newssources[2],null)
 })

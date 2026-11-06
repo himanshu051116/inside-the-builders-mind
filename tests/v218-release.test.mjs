@@ -20,8 +20,8 @@ test('V21.8 browser test is an optional reproducible Playwright smoke test, not 
  assert.equal(pkg.dependencies?.playwright,undefined);
  assert.match(pkg.scripts.verify,/audit:performance/);
 });
-test('V21.8 keeps six dossiers, three roles and both original presenter recordings in build',()=>{
- const assets=['work/index.html','projects/mulyankan/index.html','projects/earthbridge/index.html','projects/newssources/index.html','projects/our-hidden-universe/index.html','projects/sentinel/index.html','projects/schoolbuddies/index.html','video/mulyankan-system-walkthrough-presenter.mp4','video/mulyankan-docx-workflow-presenter.mp4'];
+test('V21.8 keeps five dossiers, three roles and both original presenter recordings in build',()=>{
+ const assets=['work/index.html','projects/mulyankan/index.html','projects/earthbridge/index.html','projects/newssources/index.html','projects/our-hidden-universe/index.html','projects/schoolbuddies/index.html','video/mulyankan-system-walkthrough-presenter.mp4','video/mulyankan-docx-workflow-presenter.mp4'];
  for(const a of assets)assert.ok(existsSync(new URL('../dist/'+a,import.meta.url)),a);
  for(const role of ['fullstack','software','ml'])assert.ok(existsSync(new URL('../dist/resumes/Himanshu_Shukla_'+role+'_Public.pdf',import.meta.url)),role);
 });

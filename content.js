@@ -77,15 +77,7 @@ export const projects = [
     caseStudy:{problem:'How can a crawler retain article provenance while avoiding duplicate ingestion?',approach:'RSS and sitemap discovery, URL deduplication, article/PDF ingestion workflows and Alembic-managed PostgreSQL schema changes.',verification:'Repository documents the development work; a separate GitHub Pages showcase illustrates the experience with simulated data.',caveat:'In development. The static showcase is not a live backend or production news ingestion service.'}
   },
   {
-    number:'05', category:'SECURITY / NETWORKS', title:'Sentinel',
-    status:'Locally tested prototype',
-    description:'Network monitoring and filtering prototype with packet/flow views, early anomaly analysis and locally validated forward-proxy domain blocking.',
-    stack:['Python','Scapy','FastAPI'],
-    links:[], accent:'orange',shape:'orbit', filters:['systems'],
-    caseStudy:{problem:'How can suspicious local network activity be made inspectable without overstating detection?',approach:'Python packet/flow inspection, initial anomaly-analysis views and a forward proxy with controlled domain blocking.',verification:'Local HTTP proxy blocking was tested in a development environment.',caveat:'Locally tested prototype, not a certified intrusion-prevention or production WAF service.'}
-  },
-  {
-    number:'06', category:'EDUCATION / OUTREACH', title:'SchoolBuddies',
+    number:'05', category:'EDUCATION / OUTREACH', title:'SchoolBuddies',
     status:'Co-founder · Live website',
     description:'Student-led technology outreach connecting schools with practical workshops in AI literacy, computational thinking and web development, supported by an interactive enquiry site.',
     stack:['React','JavaScript','Education'],

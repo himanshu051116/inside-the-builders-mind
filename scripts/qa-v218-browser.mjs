@@ -47,8 +47,8 @@ const btn=p.locator('[data-v209-original-video]');await btn.waitFor();
 await btn.click();await p.waitForTimeout(280);
 const d=await p.evaluate(()=>({dialog:document.getElementById('v19MilestoneDialog')?.open,src:document.querySelector('.v19DialogVideo source')?.getAttribute('src'),video:document.querySelector('.v19DialogVideo')?.readyState,network:document.querySelector('.v19DialogVideo')?.networkState}));
 if(!d.dialog||!d.src?.includes('mulyankan-system'))throw Error(JSON.stringify(d));await p.close();return JSON.stringify(d);});
-await test('all six dossiers open and contain evidence trail',async()=>{
-const p=await browser.newPage();const ids=['mulyankan','earthbridge','newssources','our-hidden-universe','sentinel','schoolbuddies'];const out=[];
+await test('all five dossiers open and contain evidence trail',async()=>{
+const p=await browser.newPage();const ids=['mulyankan','earthbridge','newssources','our-hidden-universe','schoolbuddies'];const out=[];
 for(const id of ids){const resp=await p.goto(BASE+'/projects/'+id+'/',{waitUntil:'domcontentloaded'});const v=await p.evaluate(()=>({trail:!!document.getElementById('v211-evidence-trail'),head:document.querySelector('h1')?.textContent?.trim(),errors:document.querySelectorAll('.v208MissingAsset').length}));out.push([id,resp.status(),v.trail]);if(resp.status()!==200||!v.trail)throw Error(JSON.stringify(out));}await p.close();return JSON.stringify(out);});
 await test('static asset range loading',async()=>{
 const p=await browser.newPage();const a=await p.request.get(BASE+'/video/mulyankan-system-walkthrough-presenter.mp4',{headers:{Range:'bytes=0-99'}});if(![200,206].includes(a.status()))throw Error('media GET status '+a.status());await p.close();return 'GET status '+a.status();});

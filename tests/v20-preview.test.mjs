@@ -36,7 +36,7 @@ test('legacy project records, original labs and case records are retained',()=>{
  assert.match(code,/\.append\(direct\)/)
  assert.match(code,/\.caseFileDetails/)
  const raw=read('content.js')
- for(const name of ['Our Hidden Universe','NewsSources','EarthBridge','Mulyankan','Sentinel','SchoolBuddies'])assert.ok(raw.includes(name),name)
+ for(const name of ['Our Hidden Universe','NewsSources','EarthBridge','Mulyankan','SchoolBuddies'])assert.ok(raw.includes(name),name)
 })
 test('archive deep links, no fabricated inference, and keyboard tabs remain',()=>{
  assert.match(code,/hashchange/)

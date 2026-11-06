@@ -4,7 +4,7 @@ import {MODE_ORDER,MODE_NAMES} from '../career-modes.js'
 import {projects} from '../content.js'
 const projectIds=projects.map(project=>project.number)
 for(const [mode,order] of Object.entries(MODE_ORDER)){
-  test(`${mode} prioritizes six unique, existing projects`,()=>{
+  test(`${mode} prioritizes five unique, existing projects`,()=>{
     assert.equal(order.length,projectIds.length)
     assert.deepEqual(new Set(order),new Set(projectIds))
     assert.equal(new Set(order).size,order.length)

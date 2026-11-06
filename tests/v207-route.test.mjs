@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import {readV207Route,commitV207Route,V207_ROLE_DEFAULTS,V207_PANELS} from '../v207-route.js'
 import {readFileSync} from 'node:fs'
 
-const IDS=['our-hidden-universe','newssources','earthbridge','mulyankan','schoolbuddies','sentinel']
+const IDS=['our-hidden-universe','newssources','earthbridge','mulyankan','schoolbuddies']
 function mockWin(raw='https://portfolio.test/?view=fullstack&project=our-hidden-universe&panel=media#v20-workspace',opts={}){
   let href=raw
   const calls=[]

@@ -7,8 +7,8 @@ const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
 const slug=x=>String(x).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const manifest=JSON.parse(read('public/evidence/manifest.json'));
 
-test('all six projects get a grounded, problem/contribution/verification summary',()=>{
-  assert.equal(projects.length,6);
+test('all five projects get a grounded, problem/contribution/verification summary',()=>{
+  assert.equal(projects.length,5);
   assert.deepEqual(Object.keys(V215_CONTRIBUTIONS).sort(),projects.map(p=>slug(p.title)).sort());
   for(const p of projects){
     const html=contributionFirst(p,slug(p.title),manifest);
@@ -28,7 +28,7 @@ test('four flagship contribution briefs cite exact source commits, never estimat
   }
   assert.match(V215_CONTRIBUTIONS.earthbridge.boundary,/REPOSITORY-REPORTED/);
   assert.match(V215_CONTRIBUTIONS.newssources.boundary,/not proof of a live crawler/i);
-  assert.equal(V215_CONTRIBUTIONS.sentinel.links.length,0);
+  assert.equal(Object.hasOwn(V215_CONTRIBUTIONS,'sentinel'),false);
 });
 test('safe rendering refuses synthetic image routes and escapes project copy',()=>{
   const p={title:'Temporary',evidenceImage:'javascript:alert(1)',caseStudy:{problem:'Bad <script>alert(1)</script>',verification:'verify & review'}};

@@ -14,7 +14,7 @@ const critical=['v208-work.js','v20-workspace.js','v214-work-feature.js','v217-m
 const entry=Object.fromEntries(critical.map(name=>[name,gzip(name)]));
 metrics.entryGzip=entry;metrics.criticalJsGzip=Object.values(entry).reduce((a,b)=>a+b,0);
 metrics.largestJsGzip=Math.max(...Object.values(entry));
-const routes=['index.html','work/index.html','lab/index.html','projects/mulyankan/index.html','projects/earthbridge/index.html','projects/newssources/index.html','projects/our-hidden-universe/index.html','projects/sentinel/index.html','projects/schoolbuddies/index.html','evidence/index.html','legacy/index.html'];
+const routes=['index.html','work/index.html','lab/index.html','projects/mulyankan/index.html','projects/earthbridge/index.html','projects/newssources/index.html','projects/our-hidden-universe/index.html','projects/schoolbuddies/index.html','evidence/index.html','legacy/index.html'];
 for(const route of routes)if(!existsSync(resolve(dist,route)))throw new Error('Expected route missing: '+route);
 const immutable=['video/mulyankan-system-walkthrough-presenter.mp4','video/mulyankan-docx-workflow-presenter.mp4',
  'resumes/Himanshu_Shukla_fullstack_Public.pdf','resumes/Himanshu_Shukla_software_Public.pdf','resumes/Himanshu_Shukla_ml_Public.pdf'];

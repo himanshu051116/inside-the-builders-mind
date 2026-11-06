@@ -17,7 +17,7 @@ test('V14.2 archive stages retain the source descriptions rather than inventing 
  assert.match(site,/class="archiveStage"/)
  assert.match(site,/e\(item\.status\)/)
  assert.match(site,/stageForProject/)
- assert.ok(projects.some(p=>p.status.toLowerCase().includes('locally tested')))
+ assert.ok(projects.some(p=>p.status.toLowerCase().includes('prototype')))
 })
 test('V14.2 mobile one-click case-study and other-work shortcuts resolve',()=>{
  for(const anchor of ['case-files','work','archive','contact'])assert.match(site,new RegExp(`v142QuickJumps[^`+'`'+`]*#${anchor}`))

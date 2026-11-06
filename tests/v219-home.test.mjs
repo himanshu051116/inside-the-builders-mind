@@ -30,11 +30,11 @@ test('hover selects content without forced navigation; touch, keyboard and reduc
  assert.match(css,/:focus-visible/);assert.match(css,/forced-colors/);
  assert.match(css,/@media\(max-width:630px\)/);
 });
-test('original video, review image, all dossiers and supporting source routes remain',()=>{
+test('original video, review image, all remaining dossiers and supporting source routes remain',()=>{
  for(const file of ['mulyankan-system-walkthrough-presenter.mp4','mulyankan-docx-workflow-presenter.mp4'])
   assert.ok(existsSync(new URL('../public/video/'+file,import.meta.url)),file);
  assert.ok(existsSync(new URL('../public/evidence/mulyankan-overview.webp',import.meta.url)));
- for(const id of ['mulyankan','earthbridge','newssources','our-hidden-universe','sentinel','schoolbuddies'])
+ for(const id of ['mulyankan','earthbridge','newssources','our-hidden-universe','schoolbuddies'])
   assert.ok(existsSync(new URL('../dist/projects/'+id+'/index.html',import.meta.url)),id);
 });
 

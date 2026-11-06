@@ -42,12 +42,6 @@ export const V215_CONTRIBUTIONS = Object.freeze({
     ],
     boundary: 'Showcase UI behavior and repository implementation references are not proof of a live crawler or database.'
   },
-  sentinel: {
-    provenance: 'Individual source attribution not yet audited',
-    contribution: 'The portfolio describes local network-inspection and forward-proxy experiments. Individual code contributions have not been independently mapped to reviewed commits for this dossier.',
-    links: [],
-    boundary: 'Local proxy validation is not a certified detection benchmark or a production WAF evaluation.'
-  },
   schoolbuddies: {
     provenance: 'Project role reported in portfolio record',
     contribution: 'The public portfolio record identifies a co-founder role in the school technology outreach initiative. Specific individual code commits or measured workshop outcomes have not been independently audited for this dossier.',

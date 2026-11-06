@@ -60,7 +60,7 @@ await check('Reduced motion disables pointer glow and preserves tab usability',a
  if(data.selected!=='ml'||data.glow!=='none'||data.variables)throw Error(JSON.stringify(data));await p.close();return data;
 });
 await check('Feature recordings and six case routes still load',async()=>{
- const p=await browser.newPage();const ids=['mulyankan','earthbridge','newssources','our-hidden-universe','sentinel','schoolbuddies'];
+ const p=await browser.newPage();const ids=['mulyankan','earthbridge','newssources','our-hidden-universe','schoolbuddies'];
  for(const id of ids){const r=await p.goto(base+'/projects/'+id+'/');if(r.status()!==200)throw Error('dossier '+id+' '+r.status())}
  await p.goto(base+'/');await p.locator('.v19MilestoneOpen').click();await p.waitForTimeout(200);
  const state=await p.locator('#v19MilestoneDialog').evaluate(d=>({open:d.open,src:d.querySelector('video source')?.getAttribute('src'),ready:d.querySelector('video')?.readyState}));

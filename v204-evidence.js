@@ -28,7 +28,6 @@ export const V204_STAGE_CAPTURES = Object.freeze({
     null,
     {id:"news-claims",context:"Saved claims/evidence review UI. This is not proof of a running news-ingestion backend."}
   ],
-  sentinel: [null,null,null,null],
   schoolbuddies: [
     {id:"schoolbuddies-workshop",context:"Project-authored workshop poster; not an independently measured outreach outcome."},
     {id:"schoolbuddies-workshop",context:"Workshop poster describes the initiative, not a completed curriculum audit."},

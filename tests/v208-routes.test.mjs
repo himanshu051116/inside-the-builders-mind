@@ -15,11 +15,13 @@ test('real route-specific HTML exists for all five destinations and source legac
   assert.doesNotMatch(page('work/'),/src="\/site.js"/);
   assert.match(page('work/'),/class="v208Page v208WorkPage"/);
   assert.match(page('work/'),/src="\/v208-work.js"/);
+  assert.match(page(''),/href="\/work\/" data-v208-nav="work">Projects<\/a>/);
+  assert.match(page(''),/href="\/lab\/" data-v208-nav="lab">Demos<\/a>/);
   assert.match(page('legacy/'),/src="\/site.js"/);
 });
 test('Work renders all case-study links as HTML and offers a separate explorer entry',()=>{
   const html=page('work/');
-  assert.match(html,/<h1>Selected work<\/h1>/);
+  assert.match(html,/<h1>Projects<\/h1>/);
   assert.equal((html.match(/class="v208ProjectCard"/g)||[]).length,projects.length);
   for(const project of projects)assert.ok(html.includes(`href="/projects/${slug(project.title)}/" aria-labelledby`),project.title);
   assert.match(html,/href="\/work\/\?view=fullstack#v20-workspace"/);
@@ -62,13 +64,16 @@ test('Home uses saved spotlight captures with stable case-study links',()=>{
 });
 test('six canonical project dossiers are generated from the same content records',()=>{
   assert.equal(projects.length,6);
-  for(const p of projects){
+  for(const [index,p] of projects.entries()){
     const id=slug(p.title),html=page('projects/'+id+'/');
     for(const token of [p.title,p.status,'id="architecture"','id="verification"','id="captures"','data-page']){
       if(token==='data-page')continue;
       assert.ok(html.includes(token),id+' missing '+token);
     }
     assert.match(html,/v208-project.js/);
+    assert.match(html,/aria-label="Project navigation">\s*<a href="\/work\/">← All projects<\/a>/);
+    const nextProject=projects[index+1];
+    if(nextProject)assert.ok(html.includes(`class="v208NextProject" href="/projects/${slug(nextProject.title)}/"`),id+' next project');
     const role=id==='earthbridge'?'ml':(['newssources','mulyankan','sentinel'].includes(id)?'software':'fullstack');
     assert.ok(html.includes('/work/?view='+role+'&amp;project='+id+'&amp;panel=media'),id+' role route');
     assert.ok(html.includes('https://inside-the-builders-mind.vercel.app/projects/'+id+'/'));

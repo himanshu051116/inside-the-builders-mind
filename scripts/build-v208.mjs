@@ -24,8 +24,8 @@ const repo='https://github.com/himanshu051116/inside-the-builders-mind';
 const previewBuild=process.env.VERCEL_ENV==='preview'||process.env.PORTFOLIO_NOINDEX==='1';
 const robotPolicy=previewBuild?'noindex,nofollow':'index,follow';
 const replaceRobots=(html,policy)=>html.replace(/<meta name="robots" content="[^"]*"\s*\/?>/,`<meta name="robots" content="${policy}" />`);
-const nav=`<a class="v208Brand" href="/" aria-label="Inside the Builder's Mind home">HS<span aria-hidden="true">.</span> <small>INSIDE THE BUILDER'S MIND</small></a><nav class="v208Nav" aria-label="Main navigation"><a href="/" data-v208-nav="home">Home</a><a href="/work/" data-v208-nav="work">Work</a><a href="/lab/" data-v208-nav="lab">Lab</a><a href="/#contact">Contact</a></nav>`;
-const foot=`<footer id="contact" class="v208Footer"><div class="v208Container v208FooterGrid"><div><h2>Get in touch</h2><p>Open to software engineering, data systems and applied ML internships.</p><a class="v208Primary" href="mailto:${e(profile.email)}">Email me ↗</a></div><div><a href="/projects/">Project directory ↗</a><a href="/evidence/">Technical evidence ↗</a><a href="${repo}" target="_blank" rel="noopener noreferrer">Portfolio source ↗</a><a href="${safe(profile.github)}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${safe(profile.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></footer>`;
+const nav=`<a class="v208Brand" href="/" aria-label="Inside the Builder's Mind home">HS<span aria-hidden="true">.</span> <small>INSIDE THE BUILDER'S MIND</small></a><nav class="v208Nav" aria-label="Main navigation"><a href="/" data-v208-nav="home">Home</a><a href="/work/" data-v208-nav="work">Projects</a><a href="/lab/" data-v208-nav="lab">Demos</a><a href="/#contact">Contact</a></nav>`;
+const foot=`<footer id="contact" class="v208Footer"><div class="v208Container v208FooterGrid"><div><h2>Get in touch</h2><p>Open to software engineering, data systems and applied ML internships.</p><a class="v208Primary" href="mailto:${e(profile.email)}">Email me ↗</a></div><div><a href="/work/">All projects ↗</a><a href="/evidence/">Technical evidence ↗</a><a href="${repo}" target="_blank" rel="noopener noreferrer">Portfolio source ↗</a><a href="${safe(profile.github)}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${safe(profile.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></footer>`;
 const head=(title,description,canonical)=>`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f0e7"><meta name="color-scheme" content="light"><meta name="description" content="${e(description)}"><meta name="robots" content="${robotPolicy}"><meta property="og:type" content="website"><meta property="og:site_name" content="Inside the Builder's Mind"><meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(description)}"><meta property="og:url" content="${e(canonical)}"><link rel="canonical" href="${e(canonical)}"><meta property="og:image" content="https://inside-the-builders-mind.vercel.app/social-fullstack.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://inside-the-builders-mind.vercel.app/social-fullstack.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700" rel="stylesheet"><link rel="stylesheet" href="/portfolio.css"><title>${e(title)}</title></head>`;
 function page(key,title,description,main,script,canonical){
   const current={Home:'home',WorkPage:'work',Lab:'lab'}[key];
@@ -40,7 +40,7 @@ function assetsFor(p,manifest){const prefix=imagePrefix[slug(p.title)];return Ob
 function projectCard(p){
   const id=slug(p.title);
   const cover=p.evidenceImage
-    ? `<img src="${safe(p.evidenceImage)}" loading="lazy" alt="${e(p.evidenceImageCaption)}" width="720" height="460">`
+    ? `<img src="${safe(p.evidenceImage)}" decoding="async" alt="${e(p.evidenceImageCaption)}" width="720" height="460">`
     : '<span class="v208ImageEmpty">Technical record</span>';
   return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}" data-v208-accent="${e(p.accent)}"${id==='mulyankan'?' data-v208-featured':''}>
     <a class="v208CardLink" href="${projectLink(id)}" aria-labelledby="card-${id} action-${id}" data-v208-pointer>
@@ -75,7 +75,7 @@ function specializations(){
           <p>${e(project.summary)}</p>
           <div class="v208TrackActions">
             <a class="v208Primary" href="${e(evidenceHref)}">${e(role.evidenceLabel)} <span aria-hidden="true">↗</span></a>
-            <a class="v208TextAction" href="${e(explorerHref)}" aria-label="Open the ${e(role.name)} project explorer">Project explorer <span aria-hidden="true">↗</span></a>
+            <a class="v208TextAction" href="${e(explorerHref)}" aria-label="Explore more ${e(role.name)} projects">More in this track <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         ${picture(project)}
@@ -88,6 +88,7 @@ function specializations(){
 }
 function projectPage(p,manifest){
   const id=slug(p.title);
+  const nextProject=projects[projects.indexOf(p)+1];
   const images=assetsFor(p,manifest);
   const stages=V20_FLOWS[id]||[];
   const first=images[0]?.[1];
@@ -110,17 +111,18 @@ function projectPage(p,manifest){
   </div>`:picture(p);
   const flow=stages.length?`<ol class="v208Flow">${stages.map(([name,detail],i)=>`<li id="architecture-step-${i}"><small>STEP ${String(i+1).padStart(2,'0')}</small><h3>${e(name)}</h3><p>${e(detail)}</p></li>`).join('')}</ol>`:'<p>See the project source for its architecture documentation.</p>';
   return `<section class="v208Container v208PageIntro v208CaseIntro" id="overview">
-    <nav class="v208Breadcrumb" aria-label="Breadcrumb"><a href="/work/">Work</a><span aria-hidden="true">/</span><span aria-current="page">${e(p.title)}</span></nav>
+    <nav class="v208Breadcrumb" aria-label="Breadcrumb"><a href="/work/">← All projects</a><span aria-hidden="true">/</span><span aria-current="page">${e(p.title)}</span></nav>
     <div class="v208CaseHero">
       <div>
         <span class="v208Status">${e(p.status)}</span>
         <h1>${e(p.title)}</h1>
         <p>${e(p.summary)}</p>
         <div class="v208TagRow">${p.stack.map(t=>`<span>${e(t)}</span>`).join('')}</div>
-        <div class="v208ActionLinks">
-          <a class="v208Primary" href="#captures">View project evidence</a>
-          <a href="/work/?view=${roleForProject(id)}&amp;project=${id}&amp;panel=media#v20-workspace">Open interactive explorer ↗</a>
-        </div>
+        <nav class="v208ActionLinks v208CaseJump" aria-label="Jump to project evidence">
+          <a class="v208Primary" href="#captures">Screens</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#verification">Verification</a>
+        </nav>
       </div>
       ${p.evidenceImage?picture(p):''}
     </div>
@@ -131,7 +133,7 @@ function projectPage(p,manifest){
     </dl>
   </section>
   <div class="v208Container v208SectionNav" role="navigation" aria-label="Project sections">
-    <a href="#overview">Overview</a><a href="#captures">Screens</a><a href="#v211-evidence-trail">Evidence trail</a><a href="#architecture">Architecture</a><a href="#verification">Verification</a>
+    <a href="#overview">Overview</a><a href="#captures">Screens</a><a href="#architecture">Architecture</a><a href="#verification">Verification</a>
   </div>
   <section class="v208Container v208Section" id="captures">
     <h2>Project screens</h2>
@@ -148,8 +150,15 @@ function projectPage(p,manifest){
     <h2>Verification and limits</h2>
     <div class="v208TwoCol"><div><h3>Documented evidence</h3><p>${e(study.verification)}</p></div><div><h3>Limits</h3><p>${e(study.caveat)}</p></div></div>
     ${actionLinks(p)}
-    <a class="v208ReadMore" href="/evidence/#project-${id}">See evidence index ↗</a>
-  </section>`;
+    <div class="v208ActionLinks">
+      <a href="/evidence/#project-${id}">See evidence index ↗</a>
+      <a href="/work/?view=${roleForProject(id)}&amp;project=${id}&amp;panel=media#v20-workspace">Open interactive explorer ↗</a>
+    </div>
+  </section>
+  <nav class="v208Container v208ProjectNav" aria-label="Project navigation">
+    <a href="/work/">← All projects</a>
+    ${nextProject?`<a class="v208NextProject" href="${projectLink(slug(nextProject.title))}"><span>Next project</span><strong>${e(nextProject.title)} ↗</strong></a>`:''}
+  </nav>`;
 }
 export function buildV208(out,root){
   const original=readFileSync(join(out,'index.html'),'utf8');
@@ -162,20 +171,20 @@ export function buildV208(out,root){
   const workMarkup=`<section class="v208Container v208WorkGallery" id="work-gallery">
     <div class="v208WorkHeading">
       <div>
-        <h1>Selected work</h1>
-        <p>Software, data systems, and applied machine learning.</p>
+        <h1>Projects</h1>
+        <p>Six projects across software, data systems, and applied ML.</p>
       </div>
     </div>
     <div class="v208GalleryToolbar" hidden>
       <div class="v208GalleryFilters" role="group" aria-label="Filter projects">
         ${galleryFilters.map(([key,label])=>`<button type="button" data-v208-gallery-filter="${key}" aria-pressed="${key==='all'}">${e(label)}</button>`).join('')}
       </div>
-      <a class="v208ExplorerLink" href="${explorerLink}">Project explorer <span aria-hidden="true">↗</span></a>
       <p class="v208GalleryCount srOnly" role="status">${projects.length} projects</p>
     </div>
     ${projectGrid}
+    <div class="v208GalleryMore"><a class="v208ExplorerLink" href="${explorerLink}">Open interactive explorer <span aria-hidden="true">↗</span></a></div>
   </section>`;
-  writeAt(out,'work',page('WorkPage','Selected Work | Inside the Builder\'s Mind','Six software, data systems and applied machine learning projects with screenshots and case studies.',workMarkup,'v208-work.js','https://inside-the-builders-mind.vercel.app/work/'));
+  writeAt(out,'work',page('WorkPage','Projects | Inside the Builder\'s Mind','Six software, data systems and applied machine learning projects with screenshots and case studies.',workMarkup,'v208-work.js','https://inside-the-builders-mind.vercel.app/work/'));
   const spotlightAssets=new Map(assetsFor(routes.mulyankan,manifest));
   const featuredCaptures=spotlightScreens.filter(([id])=>spotlightAssets.has(id)).map(([id,label])=>({
     ...spotlightAssets.get(id),id,label,href:evidenceLink(projectLink('mulyankan'),id)
@@ -195,7 +204,7 @@ export function buildV208(out,root){
   const index=`<section class="v208Container v208PageIntro"><h1>Technical evidence</h1><p>Project sources, documented results, and known limits. Screenshots show the interface at the time of capture.</p></section><section class="v208Container v208Section" id="captures">${projects.map(p=>{const id=slug(p.title);return `<article class="v208EvidenceRecord" id="project-${id}"><div>${picture(p)}</div><div><span class="v208Status">${e(p.status)}</span><h2>${e(p.title)}</h2><h3>Documented verification</h3><p>${e(p.caseStudy.verification)}</p><h3>Known limitations</h3><p>${e(p.caseStudy.caveat)}</p>${actionLinks(p)}<a class="v208ReadMore" href="${projectLink(id)}#verification">Read full technical record ↗</a></div></article>`}).join('')}</section>`;
   writeAt(out,'evidence',page('Evidence','Technical Evidence | Inside the Builder\'s Mind','Verification and limitations for six documented project records.',index,null,'https://inside-the-builders-mind.vercel.app/evidence/'));
   const lab=`<section class="v208Container v208PageIntro">
-    <h1>Interactive lab</h1>
+    <h1>Interactive demos</h1>
     <p>Try three browser-based demos using fictional records and synthetic vectors.</p>
     <nav class="v208LabJump" aria-label="Lab demonstrations">
       <a class="v208TextAction" href="#review">Evidence review</a>
@@ -222,7 +231,7 @@ export function buildV208(out,root){
     <h2>Demo archive</h2>
     <a class="v208TextAction" href="/legacy/#interactive-lab">Open original interactive demonstrations ↗</a>
   </section>`;
-  writeAt(out,'lab',page('Lab','Interactive Lab | Inside the Builder\'s Mind','Functional local evidence review, fictional ingestion and toy retrieval demonstrations.',lab,'v208-lab.js','https://inside-the-builders-mind.vercel.app/lab/'));
+  writeAt(out,'lab',page('Lab','Interactive Demos | Inside the Builder\'s Mind','Functional local evidence review, fictional ingestion and toy retrieval demonstrations.',lab,'v208-lab.js','https://inside-the-builders-mind.vercel.app/lab/'));
   for(const p of projects){const id=slug(p.title);writeAt(out,`projects/${id}`,page('Project',`${p.title} — Technical Case Study | Inside the Builder\'s Mind`,p.description,projectPage(p,manifest),'v208-project.js',`https://inside-the-builders-mind.vercel.app/projects/${id}/`));}
   const sitemap=[
     'https://inside-the-builders-mind.vercel.app/',

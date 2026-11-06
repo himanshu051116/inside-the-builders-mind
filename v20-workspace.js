@@ -242,7 +242,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   function chooseProject(next,update=true,keepFocus=false){
     if(!ids.includes(next))return;
     if(id===next){
-      if(update)emit("replaceState");
+      if(update)commitSelection("pushState");
       if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
       return;
     }
@@ -254,19 +254,19 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     render();updateSearchNotice();
     if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
     announce(`${get().title} selected`);
-    if(update)emit("pushState");
+    if(update)commitSelection("pushState");
     if(update&&win.matchMedia?.("(max-width:730px)").matches)inspector.scrollIntoView({behavior:"auto",block:"start"});
   }
   function chooseTab(next,update=true,focus=true){
     if(!["overview","media","architecture","evidence"].includes(next))return;
     if(next!==tab){tab=next;tabByProject.set(id,tab);render();}
-    if(update)emit("replaceState");
+    if(update)commitSelection("pushState");
     if(focus)inspector.querySelector(`[data-v20-tab="${tab}"]`)?.focus();
   }
   function chooseRole(next,invokeLegacy=true,update=true){
     next=validRole(next);
     if(next===role&&update){
-      emit("replaceState");
+      commitSelection("pushState");
       return;
     }
     role=next;workspace.dataset.role=role;
@@ -286,12 +286,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       finally{if(prior===undefined)delete doc.documentElement.dataset.v20Syncing;else doc.documentElement.dataset.v20Syncing=prior}
     }
     render();updateSearchNotice();announce(`${first().label} workspace selected`);
-    if(update)emit("pushState");
+    if(update)commitSelection("pushState");
   }
   function openLegacy(hash){return revealArchive(hash)}
   workspace.addEventListener("click",ev=>{
-    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech]");
+    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v25-commit]");
     if(!b)return;
+    if(b.hasAttribute("data-v25-commit")){commitSelection("pushState");return}
     if(b.dataset.v20Project){chooseProject(b.dataset.v20Project,true,true);return}
     if(b.dataset.v20Tech){
       search.value=b.dataset.v20Tech;renderList();updateSearchNotice();search.focus();
@@ -299,8 +300,17 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }
     if(b.dataset.v20Tab){chooseTab(b.dataset.v20Tab);return}
     if(b.dataset.v20Role){chooseRole(b.dataset.v20Role);return}
-    if(b.hasAttribute("data-v20-stage")){stage=Number(b.dataset.v20Stage);stageByProject.set(id,stage);render();inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
-    if(b.hasAttribute("data-v20-capture")){capture=Number(b.dataset.v20Capture);captureByProject.set(id,capture);render();inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return}
+    if(b.hasAttribute("data-v20-stage")){
+      stage=Number(b.dataset.v20Stage);stageByProject.set(id,stage);
+      stageTokenByProject.set(id,b.dataset.v20StageId||slugStep((V20_FLOWS[id]||[])[stage]?.[0]||"implementation"));
+      render();commitSelection("pushState");inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return
+    }
+    if(b.hasAttribute("data-v20-capture")){
+      capture=Number(b.dataset.v20Capture);captureByProject.set(id,capture);
+      const token=b.dataset.v20CaptureId;
+      if(token)captureTokenByProject.set(id,token);
+      render();commitSelection("pushState");inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return
+    }
     if(b.hasAttribute("data-v20-video")){const original=doc.querySelector("#home .v19MilestoneOpen");if(original)original.click();else announce("Original video unavailable");return}
     if(b.hasAttribute("data-v20-retry"))loadManifest(true);
   });
@@ -315,6 +325,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   };
   const preview=(button)=>{
     if(!button?.isConnected||!workspace.contains(button))return;
+    previewActive=true;
     if(button.hasAttribute("data-v20-project")){
       if(id===button.dataset.v20Project)return;
       chooseProject(button.dataset.v20Project,false,false);
@@ -327,15 +338,18 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }else if(button.hasAttribute("data-v20-stage")){
       const next=Number(button.dataset.v20Stage);
       if(stage===next)return;
-      stage=next;stageByProject.set(id,stage);render();
+      stage=next;stageByProject.set(id,stage);
+      stageTokenByProject.set(id,button.dataset.v20StageId||slugStep((V20_FLOWS[id]||[])[stage]?.[0]||"implementation"));
+      render();
     }else if(button.hasAttribute("data-v20-capture")){
       const next=Number(button.dataset.v20Capture);
       if(capture===next)return;
-      capture=next;captureByProject.set(id,capture);render();
+      capture=next;captureByProject.set(id,capture);
+      if(button.dataset.v20CaptureId)captureTokenByProject.set(id,button.dataset.v20CaptureId);
+      render();
     }else return;
-    // Hover previews replace the current history entry, not add dozens of
-    // back-button steps. Clicking still records deliberate navigations.
-    emit("replaceState");
+    renderPreviewBar();
+    // Hover only changes the visible preview. Browser history remains committed.
   };
   workspace.addEventListener("pointerover",ev=>{
     if(!canHover()||ev.pointerType==="touch")return;

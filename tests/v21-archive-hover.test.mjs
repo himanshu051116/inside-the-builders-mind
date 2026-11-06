@@ -28,6 +28,8 @@ test('archive sections are independently accessible and preserve real source sec
   assert.match(workspace,/const showArchiveGroup=/)
   assert.match(workspace,/revealArchive\(hash,\{scroll:false\}\)/)
   assert.match(workspace,/target\.closest\("\.v21ArchiveGroup"\)/)
+  assert.match(workspace,/case-\(ohs\|news\|mulyankan\|earthbridge\)/)
+  assert.doesNotMatch(workspace,/targetId\.startsWith\("case-"\)/)
   assert.match(workspace,/gridNode\.hidden=false/)
   assert.doesNotMatch(workspace,/const archive=doc\.createElement\("details"\)/)
 })

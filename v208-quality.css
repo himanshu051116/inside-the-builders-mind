@@ -75,8 +75,8 @@
   .v20Workspace{padding:31px 0 32px}
   .v20Workspace .v20Head h2{font-size:33px}
   .v20Workspace .v20Head p{font-size:12px}
-  .v20Workspace .v20RoleBar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-  .v20Workspace .v20RoleBar button{min-width:0;padding:9px 5px;font-size:11px}
+  .v20Workspace .v20RoleBar{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+  .v20Workspace .v20RoleBar button{grid-column:span 2;min-width:0;padding:9px 5px;font-size:11px}
   .v20Workspace .v20RoleBar a{min-width:0;grid-column:span 3;margin:0;padding:8px 10px;font-size:11px;min-height:40px}
   .v20Workspace .v20Explorer{grid-template-columns:minmax(0,1fr)}
   .v20Workspace .v20Sidebar{padding:13px 12px}

@@ -27,8 +27,9 @@ export function setupCareerModes(){
   const roleColors = { fullstack:'#f3f0e7', software:'#090c12', ml:'#141226' }
   const fromQuery = () => new URL(window.location.href).searchParams.get('view')
   let mode = 'fullstack'
-  function selectRole(value, writeUrl=true){
+  function selectRole(value, writeUrl=true, preview=false){
     if(!Object.hasOwn(MODE_ORDER,value)) return
+    if(preview&&mode===value)return
     mode=value
     document.body.dataset.role=value
     document.documentElement.dataset.role=value
@@ -64,7 +65,7 @@ export function setupCareerModes(){
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',roleDescriptions[value])
     if(writeUrl&&document.getElementById('v20-workspace')){
       if(document.documentElement.dataset.v20Syncing!=='true'){
-        document.dispatchEvent(new CustomEvent('portfolio:legacy-role-request',{detail:{role:value}}))
+        document.dispatchEvent(new CustomEvent('portfolio:legacy-role-request',{detail:{role:value,preview}}))
       }
       return
     }
@@ -77,12 +78,30 @@ export function setupCareerModes(){
       const next=url.href
       const current=location.href
       if(next!==current){
-        try { history.pushState({ portfolioRole:value },'',next) }
+        try { history[preview?'replaceState':'pushState']({ portfolioRole:value },'',next) }
         catch { /* isolated offline browser harness: writable origin unavailable */ }
       }
     }
   }
   buttons.forEach(button => button.addEventListener('click',()=>selectRole(button.dataset.switchRole)))
+  // Desktop pointer previews use a short dwell, not click. Keyboard activation
+  // and touch taps remain first-class, with no automatic navigation on focus.
+  if(window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches){
+    buttons.forEach(button=>{
+      let hoverTimer=0
+      button.addEventListener('pointerenter',event=>{
+        if(event.pointerType==='touch')return
+        window.clearTimeout(hoverTimer)
+        hoverTimer=window.setTimeout(()=>selectRole(button.dataset.switchRole,true,true),145)
+      })
+      button.addEventListener('pointerleave',()=>{
+        window.clearTimeout(hoverTimer);hoverTimer=0
+      })
+      button.addEventListener('pointerdown',()=>{
+        window.clearTimeout(hoverTimer);hoverTimer=0
+      })
+    })
+  }
   // When V20 exists, its controller owns URL changes and delegates visual mode updates.
   window.addEventListener('popstate',()=>{
     if(!document.getElementById('v20-workspace'))selectRole(fromQuery()||'fullstack',false)

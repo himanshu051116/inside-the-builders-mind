@@ -24,7 +24,16 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const firstDetail=readV25DetailRoute(win.location.href);
   if(firstDetail.capture)captureTokenByProject.set(id,firstDetail.capture);
   if(firstDetail.stage)stageTokenByProject.set(id,firstDetail.stage);
-  let previewActive=false;
+  let previewActive=false,previewSnapshot=null,previewRestoreTimer=0;
+  const projectStateMaps=[captureByProject,stageByProject,tabByProject,captureTokenByProject,stageTokenByProject];
+  const rememberPreview=()=>{
+    if(previewSnapshot)return;
+    previewSnapshot={
+      role,id,tab,capture,stage,
+      maps:projectStateMaps.map(m=>new Map(m))
+    };
+  };
+  const clearPreviewCheckpoint=()=>{previewSnapshot=null;win.clearTimeout(previewRestoreTimer);previewRestoreTimer=0};
   const caseSlugToId=Object.freeze({ohs:"our-hidden-universe",news:"newssources",mulyankan:"mulyankan",earthbridge:"earthbridge"});
   const projectToCase=Object.freeze({"our-hidden-universe":"ohs",newssources:"news",mulyankan:"mulyankan",earthbridge:"earthbridge"});
   const workspace=doc.createElement("section");
@@ -122,7 +131,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     },{method});
     if(!result.committed)announce("The selection is active locally, but this browser did not update the shareable URL.");
     else{
-      previewActive=false;renderPreviewBar();
+      previewActive=false;clearPreviewCheckpoint();renderPreviewBar();
       doc.dispatchEvent(new win.CustomEvent("portfolio:navigation-committed",{detail:{role,project:id,panel:tab,hash}}));
     }
     return result;
@@ -134,9 +143,12 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const intro=inspector.querySelector(".v20ProjectIntro");
     if(!intro)return;
     const bar=doc.createElement("div");bar.className="v25PreviewBar";bar.setAttribute("role","status");
-    const note=doc.createElement("span");note.textContent="Preview only — not yet in your shareable link";
+    const note=doc.createElement("span");note.textContent="Preview only — your shared link has not changed";
+    const actions=doc.createElement("span");actions.className="v251PreviewActions";
+    const back=doc.createElement("button");back.type="button";back.dataset.v251Cancel="true";back.textContent="Return ↶";
+    back.setAttribute("aria-label","Return to your last selected project and view");
     const pin=doc.createElement("button");pin.type="button";pin.dataset.v25Commit="true";pin.textContent="Keep this view ↗";
-    bar.append(note,pin);intro.append(bar);
+    actions.append(back,pin);bar.append(note,actions);intro.append(bar);
   };
   const commitSelection=(method="pushState",hash="#v20-workspace")=>emit(method,hash);
   const slugStep=x=>slug(x);
@@ -186,6 +198,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       <div class="v25RecordBody"><section><h5>Key decision</h5><p>${e(record.decision)}</p></section>
         <section><h5>Trade-off</h5><p>${e(record.tradeoff)}</p></section>
         <section><h5>How to verify</h5><p>${e(record.reproducible)}</p></section>
+        <section><h5>Expected behavior</h5><p>${e(record.expected)}</p></section>
+        <section><h5>Validation boundary</h5><p>${e(record.state)}</p></section>
+        <div class="v251RelatedViews" aria-label="Related project inspection views">
+          <button type="button" data-v251-jump="architecture">Architecture ↗</button>
+          <button type="button" data-v251-jump="media">Saved screenshots ↗</button>
+          <button type="button" data-v251-jump="evidence">Verification & limitations ↗</button>
+        </div>
         <div class="v25RecordLinks">${record.evidence.filter(x=>safe(x[1])).map(([label,url])=>`<a href="${safe(url)}" target="_blank" rel="noopener noreferrer">${e(label)} ↗</a>`).join("")}</div>
         <a class="v25CaseLink" href="#case-${key}" data-v20-case>Open complete engineering case ↗</a>
       </div></details>`;

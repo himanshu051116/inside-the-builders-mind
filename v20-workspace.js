@@ -1,4 +1,5 @@
-import {readV207Route,commitV207Route} from './v207-route.js'
+import {readV207Route,commitV207Route,readV25DetailRoute} from './v207-route.js'
+import {caseDossiers} from './case-dossiers.js'
 // V20.7 retains the V20.6 rendered surfaces while consolidating URL semantics.
 const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Interfaces, source, and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Architecture, data flow, and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Methods, reported results, and limitations.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","our-hidden-universe","schoolbuddies"]}};
 const V20_FLOWS={"mulyankan":[["Document intake","Inspect submitted files, format and extraction readiness."],["Evidence extraction","Link supporting material to rubric criteria."],["Rubric review","Flag insufficient evidence instead of forcing a complete score."],["Human decision","A reviewer retains final authority and an audit trail."]],"earthbridge":[["Paired scenes","Prepare Sentinel-1 and Sentinel-2 paired observations."],["Descriptors","Map modalities to a shared retrieval space."],["FAISS lookup","Compare encoded descriptors; this view performs no inference."],["Evaluation","Inspect reported metrics and holdout-split limitations."]],"our-hidden-universe":[["Access","Firebase authentication controls private room access."],["Room state","Coordinate presence, messages and shared session state."],["Messaging","Inspect the source-backed messaging implementation."],["Watch Together","Review captured playback and call controls; no live sync test here."]],"newssources":[["Discovery","Collect candidates from RSS and sitemaps."],["Normalize","Extract and deduplicate article identities."],["Persistence","Preserve records, versions and provenance in PostgreSQL."],["Analyst review","Inspect captured source, event and claims screens."]],"schoolbuddies":[["School outreach","Coordinate engagement with schools."],["Curriculum","Prepare programming and AI-literacy workshops."],["Learning","Run hands-on technology demonstrations."],["Website","Accept enquiries through the public project site."]]};
@@ -19,6 +20,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   let capture=0,stage=0,manifest=null,manifestPromise=null,manifestError=false;
   // Local per-project inspection state; never persists private user data.
   const captureByProject=new Map(),stageByProject=new Map(),tabByProject=new Map();
+  const captureTokenByProject=new Map(),stageTokenByProject=new Map();
+  const firstDetail=readV25DetailRoute(win.location.href);
+  if(firstDetail.capture)captureTokenByProject.set(id,firstDetail.capture);
+  if(firstDetail.stage)stageTokenByProject.set(id,firstDetail.stage);
+  let previewActive=false;
+  const caseSlugToId=Object.freeze({ohs:"our-hidden-universe",news:"newssources",mulyankan:"mulyankan",earthbridge:"earthbridge"});
+  const projectToCase=Object.freeze({"our-hidden-universe":"ohs",newssources:"news",mulyankan:"mulyankan",earthbridge:"earthbridge"});
   const workspace=doc.createElement("section");
   workspace.id="v20-workspace";workspace.className="v20Workspace";workspace.setAttribute("aria-labelledby","v20Title");
   workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Selected work.</h2><p id="v20Subtitle">Explore by project or specialization.</p></div></div>
@@ -106,10 +114,35 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const inspector=doc.getElementById("v20Inspector"),list=doc.getElementById("v20ProjectList"),search=doc.getElementById("v20Search");
   const get=()=>entry.find(p=>p.id===id)||entry[0];
   const first=()=>V20_SETTINGS[role];
-  const emit=(method="replaceState")=>{
-    const result=commitV207Route(win,{role,project:id,panel:tab},{method});
+  const emit=(method="replaceState",hash="#v20-workspace")=>{
+    const result=commitV207Route(win,{
+      role,project:id,panel:tab,hash,
+      stage:stageTokenByProject.get(id)??null,
+      capture:captureTokenByProject.get(id)??null
+    },{method});
     if(!result.committed)announce("The selection is active locally, but this browser did not update the shareable URL.");
+    else{previewActive=false;renderPreviewBar();}
     return result;
+  };
+  const renderPreviewBar=()=>{
+    inspector.querySelector(".v25PreviewBar")?.remove();
+    workspace.dataset.previewing=String(previewActive);
+    if(!previewActive)return;
+    const intro=inspector.querySelector(".v20ProjectIntro");
+    if(!intro)return;
+    const bar=doc.createElement("div");bar.className="v25PreviewBar";bar.setAttribute("role","status");
+    const note=doc.createElement("span");note.textContent="Preview only — not yet in your shareable link";
+    const pin=doc.createElement("button");pin.type="button";pin.dataset.v25Commit="true";pin.textContent="Keep this view ↗";
+    bar.append(note,pin);intro.append(bar);
+  };
+  const commitSelection=(method="pushState",hash="#v20-workspace")=>emit(method,hash);
+  const slugStep=x=>slug(x);
+  const getShots=p=>{
+    const prefixes={mulyankan:"mulyankan-",earthbridge:"earthbridge-",newssources:"news-","our-hidden-universe":"ohs-",schoolbuddies:"schoolbuddies-"};
+    const prefix=prefixes[p.id];
+    const shots=manifest&&prefix?Object.entries(manifest).filter(([k,v])=>k.startsWith(prefix)&&v&&/^\\/evidence\\/[a-z-]+\\.webp$/.test(v.path)):[];
+    if(!shots.length&&p.evidenceImage)shots.push([p.id,{path:p.evidenceImage,caption:p.evidenceImageCaption||p.title}]);
+    return shots;
   };
   const relevant=()=>{
     const q=search.value.trim().toLowerCase(),rank=first().order;

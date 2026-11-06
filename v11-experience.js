@@ -55,6 +55,11 @@ export function setupV11Experience(){
    }
  }
  window.addEventListener('hashchange',activateHash)
+ // Workspace/URL navigation owns the route. This source-record view listens
+ // without creating a second browser-history entry.
+ document.addEventListener('portfolio:case-route',ev=>{
+   if(Object.hasOwn(names,ev.detail?.caseId))selectCase(ev.detail.caseId)
+ })
  activateHash()
  // The screenshot can fail on private, offline, or restricted browser networks.
  // Never substitute a synthetic image for a missing real project image.

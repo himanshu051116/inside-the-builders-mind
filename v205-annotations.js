@@ -102,7 +102,8 @@ export function setupV205Annotations(doc=document,win=window){
   }
   function markAnnotatedThumbnails(){
     inspector.querySelectorAll(".v20Media [data-v20-capture]").forEach(b=>{
-      const src=b.querySelector("img")?.getAttribute("src")||"";
+      const img=b.querySelector("img");
+      const src=img?.getAttribute("src")||img?.getAttribute("data-src")||"";
       const match=src.match(/^\/evidence\/([a-z0-9-]+)\.webp$/);
       if(!match||!V205_ANNOTATIONS[match[1]])return;
       b.classList.add("v205AnnotatedThumb");

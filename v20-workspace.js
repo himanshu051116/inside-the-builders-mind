@@ -1,11 +1,13 @@
 import {readV207Route,commitV207Route} from './v207-route.js'
+import {setupMilestoneVideo} from './v19-milestone-video.js'
 // V20.7 retains the V20.6 rendered surfaces while consolidating URL semantics.
 const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Explore the actual interfaces, then inspect the architecture and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge","sentinel"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Trace real project architecture, source records and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","sentinel","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Review model designs, documented results and the boundaries of each prototype.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","sentinel","our-hidden-universe","schoolbuddies"]}};
 export const V20_FLOWS={"mulyankan":[["Document intake","Inspect submitted files, format and extraction readiness."],["Evidence extraction","Link supporting material to rubric criteria."],["Rubric review","Flag insufficient evidence instead of forcing a complete score."],["Human decision","A reviewer retains final authority and an audit trail."]],"earthbridge":[["Paired scenes","Prepare Sentinel-1 and Sentinel-2 paired observations."],["Descriptors","Map modalities to a shared retrieval space."],["FAISS lookup","Compare encoded descriptors; this view performs no inference."],["Evaluation","Inspect reported metrics and holdout-split limitations."]],"our-hidden-universe":[["Access","Firebase authentication controls private room access."],["Room state","Coordinate presence, messages and shared session state."],["Messaging","Inspect the source-backed messaging implementation."],["Watch Together","Review captured playback and call controls; no live sync test here."]],"newssources":[["Discovery","Collect candidates from RSS and sitemaps."],["Normalize","Extract and deduplicate article identities."],["Persistence","Preserve records, versions and provenance in PostgreSQL."],["Analyst review","Inspect captured source, event and claims screens."]],"sentinel":[["Traffic","Inspect local network flow information."],["Signals","Review early anomalies, not certified detection."],["Forward proxy","Inspect locally validated domain blocking."],["Boundaries","No production-grade WAF performance claimed."]],"schoolbuddies":[["School outreach","Coordinate engagement with schools."],["Curriculum","Prepare programming and AI-literacy workshops."],["Learning","Run hands-on technology demonstrations."],["Website","Accept enquiries through the public project site."]]};
-export const setupV20Workspace=function initV20(projects,doc=document,win=window){
+export const setupV20Workspace=function initV20(projects,doc=document,win=window,config={}){
   if(doc.getElementById("v20-workspace")||!Array.isArray(projects))return;
   const main=doc.getElementById("main"),hero=doc.getElementById("home"),legacy=doc.getElementById("top");
-  if(!main||!hero||!legacy)return;
+  const standalone=config.standalone===true;
+  if(!main||(!standalone&&(!hero||!legacy)))return;
   const slug=x=>String(x||"").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
   const e=x=>String(x??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
   const safe=x=>/^(https:\/\/[^\s"<>]+|\/[^/][^\s"<>]*)$/.test(String(x||""))?e(x):"";
@@ -22,22 +24,28 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Explore the projects.</h2><p id="v20Subtitle">Choose a project to examine its interface, architecture, sources and limitations.</p></div><span class="v20Hint">Use Ctrl / ⌘ + K to search anywhere</span></div>
     <div class="v20RoleBar" role="group" aria-label="Choose a résumé-specific portfolio experience">
       ${Object.entries(V20_SETTINGS).map(([k,v])=>`<button type="button" data-v20-role="${k}" aria-pressed="false">${e(v.label)}</button>`).join("")}
-      <a href="#top" id="v20FullShowcase">Full showcase ↗</a>
+      <a href="${standalone?'/legacy/?view='+role+'#top':'#top'}" id="v20FullShowcase">Full showcase ↗</a>
       <a href="${V20_SETTINGS.fullstack.resume}" id="v20Resume" download>Download matching résumé ↓</a>
     </div>
     <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
-    <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="#v20Archive" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
-  legacy.insertAdjacentElement("afterend",workspace);
-  const archive=doc.createElement("details");archive.className="v20Archive";archive.id="v20Archive";
-  archive.innerHTML='<summary><span><strong>Complete portfolio archive</strong><small>Original three résumé showcases, all projects, case studies, captures, tools and interactive labs</small></span><span aria-hidden="true">+</span></summary><div class="v20ArchiveBody"></div>';
-  main.append(archive);
-  const body=archive.querySelector(".v20ArchiveBody");
-  body.append(legacy);
-  for(const sectionId of ["work","case-files","field-proof","archive","interactive-lab","about","toolkit","lab"]){
-    const target=doc.getElementById(sectionId);
-    if(!target)continue;
-    const direct=[...main.children].find(ch=>ch===target||ch.contains(target));
-    if(direct&&!body.contains(direct)&&direct!==hero&&direct!==archive&&direct!==workspace)body.append(direct);
+    <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="${standalone?'/legacy/':'#v20Archive'}" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
+  // New Work route mounts only the explorer. The entire original site is
+  // preserved separately at /legacy/, with its original app initialization.
+  if(standalone)main.append(workspace);
+  else legacy.insertAdjacentElement("afterend",workspace);
+  let archive=null,body=null;
+  if(!standalone){
+    archive=doc.createElement("details");archive.className="v20Archive";archive.id="v20Archive";
+    archive.innerHTML='<summary><span><strong>Complete portfolio archive</strong><small>Original three résumé showcases, all projects, case studies, captures, tools and interactive labs</small></span><span aria-hidden="true">+</span></summary><div class="v20ArchiveBody"></div>';
+    main.append(archive);
+    body=archive.querySelector(".v20ArchiveBody");
+    body.append(legacy);
+    for(const sectionId of ["work","case-files","field-proof","archive","interactive-lab","about","toolkit","lab"]){
+      const target=doc.getElementById(sectionId);
+      if(!target)continue;
+      const direct=[...main.children].find(ch=>ch===target||ch.contains(target));
+      if(direct&&!body.contains(direct)&&direct!==hero&&direct!==archive&&direct!==workspace)body.append(direct);
+    }
   }
   const inspector=doc.getElementById("v20Inspector"),list=doc.getElementById("v20ProjectList"),search=doc.getElementById("v20Search");
   const get=()=>entry.find(p=>p.id===id)||entry[0];
@@ -83,7 +91,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   }
   function evidence(p){
     const cases={mulyankan:"mulyankan",earthbridge:"earthbridge",newssources:"news","our-hidden-universe":"ohs"};
-    return `<div class="v20Evidence"><section><h4>Documented verification</h4><p>${e(p.caseStudy.verification)}</p></section><section><h4>Limitations</h4><p>${e(p.caseStudy.caveat)}</p></section><div class="v20Links">${links(p)}${cases[p.id]?`<a href="#case-${cases[p.id]}" data-v20-case>Full technical case study ↗</a>`:""}</div></div>`;
+    const detailed=standalone?`/projects/${p.id}/#verification`:`#case-${cases[p.id]}`;
+    return `<div class="v20Evidence"><section><h4>Documented verification</h4><p>${e(p.caseStudy.verification)}</p></section><section><h4>Limitations</h4><p>${e(p.caseStudy.caveat)}</p></section><div class="v20Links">${links(p)}${(standalone||cases[p.id])?`<a href="${detailed}" data-v20-case>Full technical case study ↗</a>`:""}</div></div>`;
   }
   function render(){
     const p=get();if(!p)return;
@@ -146,9 +155,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     doc.getElementById("v20Resume").href=first().resume;
     doc.getElementById("v20Resume").setAttribute("aria-label",`Download ${first().label} résumé PDF`);
     doc.getElementById("v20FullShowcase").textContent=`Open ${first().label} full showcase ↗`;
+    if(standalone)doc.getElementById("v20FullShowcase").href=`/legacy/?view=${role}#top`;
     tab=first().tab;id=ids.includes(first().project)?first().project:entry[0].id;
     capture=0;stage=0;search.value="";
-    if(invokeLegacy){
+    if(invokeLegacy&&!standalone){
       const prior=doc.documentElement.dataset.v20Syncing;
       doc.documentElement.dataset.v20Syncing='true';
       try{doc.querySelector(`#top [data-switch-role="${role}"]`)?.click()}
@@ -158,6 +168,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(update)emit("pushState");
   }
   function openLegacy(hash){
+    if(standalone||!body||!archive||!hash)return false;
     const targetId=hash.startsWith("#proof/")?"field-proof":hash.replace(/^#/,"");
     const target=doc.getElementById(targetId);
     if(!target||!body.contains(target))return false;
@@ -182,7 +193,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(b.dataset.v20Role){chooseRole(b.dataset.v20Role);return}
     if(b.hasAttribute("data-v20-stage")){stage=Number(b.dataset.v20Stage);render();inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
     if(b.hasAttribute("data-v20-capture")){capture=Number(b.dataset.v20Capture);render();inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return}
-    if(b.hasAttribute("data-v20-video")){const original=doc.querySelector("#home .v19MilestoneOpen");if(original)original.click();else announce("Original video unavailable");return}
+    if(b.hasAttribute("data-v20-video")){
+      const player=setupMilestoneVideo(doc);
+      if(player)player.show();else announce("Original video unavailable");
+      return;
+    }
     if(b.hasAttribute("data-v20-retry"))loadManifest(true);
   });
   workspace.addEventListener("keydown",ev=>{
@@ -208,15 +223,15 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(quick&&ids.includes(quick.dataset.v20OpenProject)){
       ev.preventDefault();
       chooseProject(quick.dataset.v20OpenProject,true,false);
-      archive.open=false;
+      if(archive)archive.open=false;
       workspace.scrollIntoView({behavior:'auto',block:'start'});
       return;
     }
     const a=ev.target.closest('a[href^="#"]');
     if(!a)return;
-    const hash=a.getAttribute("href");if(hash==="#v20Archive"){archive.open=true;return}
-    if(hash==="#top"){archive.open=true;return}
-    if(hash==="#v20-workspace"){archive.open=false;return}
+    const hash=a.getAttribute("href");if(hash==="#v20Archive"&&archive){archive.open=true;return}
+    if(hash==="#top"&&archive){archive.open=true;return}
+    if(hash==="#v20-workspace"){if(archive)archive.open=false;return}
     if(openLegacy(hash)&&win.location.hash===hash)win.requestAnimationFrame?.(()=>doc.getElementById(hash.slice(1))?.scrollIntoView({behavior:"auto",block:"start"}));
   },true);
   win.addEventListener("hashchange",()=>openLegacy(win.location.hash));
@@ -238,5 +253,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     id=initialRoute.project;tab=initialRoute.panel;render();
   }
   if(initialRoute.hash)openLegacy(initialRoute.hash);
+  if(standalone && initialRoute.hash && /^#(?:v20-workspace$|case-|field-proof$|proof\/)/.test(initialRoute.hash)){
+    win.requestAnimationFrame?.(()=>workspace.scrollIntoView({behavior:'auto',block:'start'}));
+  }
   return {workspace,archive};
 };

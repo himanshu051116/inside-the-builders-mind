@@ -19,14 +19,15 @@ export const milestoneClips = Object.freeze([
 ]);
 
 const initialClip=milestoneClips[0];
+// One original recording player per document, regardless of hosting page.
+const mountedPlayers=new WeakMap();
 
 /** Called after the existing site.js appMarkup has rendered. */
 export function setupMilestoneVideo(doc=document){
+  const prior=mountedPlayers.get(doc);
+  if(prior) return prior;
   const card=doc.querySelector('#home .v17Proof');
   const meta=card?.querySelector('.v17ProofMeta');
-  if(!card||!meta||card.dataset.milestoneVideo==='ready') return null;
-  card.dataset.milestoneVideo='ready';
-  card.classList.add('v19ProofHasVideo');
   const region=doc.createElement('div');
   region.className='v19MilestoneVideo';
   region.innerHTML=`<button class="v19MilestoneOpen" type="button" aria-haspopup="dialog" aria-controls="v19MilestoneDialog" aria-label="Play Mulyankan 3D architecture demonstration, with presenter and original audio">
@@ -37,7 +38,13 @@ export function setupMilestoneVideo(doc=document){
     <span class="v19MilestoneDuration">${initialClip.duration}</span>
   </button>
   <p class="v19MilestoneFootnote">Spatial Lab walkthrough <span aria-hidden="true">·</span> Presenter webcam and original audio</p>`;
-  card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
+  // The player is independent of the optional homepage preview card.
+  // Work and dedicated Mulyankan project pages have no reason to render #home.
+  if(card && meta){
+    card.dataset.milestoneVideo='ready';
+    card.classList.add('v19ProofHasVideo');
+    card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
+  }
 
   const dialog=doc.createElement('dialog');
   dialog.id='v19MilestoneDialog';
@@ -134,6 +141,9 @@ export function setupMilestoneVideo(doc=document){
   source.addEventListener('error',()=>{state.textContent='Video unavailable; check that the clip was published';});
   doc.addEventListener('visibilitychange',()=>{if(doc.hidden && !video.paused)video.pause();});
   const caseLink=dialog.querySelector('.v19DialogCase');
+  caseLink.href=doc.getElementById('case-mulyankan')?'#case-mulyankan':'/projects/mulyankan/#verification';
   caseLink.addEventListener('click',()=>dismiss());
-  return {show,dismiss,switchChapter,get active(){return current.id},get dialog(){return dialog}};
+  const player={show,dismiss,switchChapter,get active(){return current.id},get dialog(){return dialog}};
+  mountedPlayers.set(doc,player);
+  return player;
 }

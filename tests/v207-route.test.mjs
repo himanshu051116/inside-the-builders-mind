@@ -84,7 +84,7 @@ test('V20 retains its data and legacy navigation but delegates URL semantics to 
   assert.match(ws,/win.addEventListener\("popstate"/)
   assert.match(ws,/initialRoute.hash/)
   assert.match(ws,/portfolio:v20-render/)
-  assert.match(ws,/v19MilestoneOpen/)
+  assert.match(ws,/setupMilestoneVideo\(doc\)/)
   assert.match(career,/if\(!document.getElementById\('v20-workspace'\)\)/)
   assert.match(build,/'v207-route.js'/)
 })

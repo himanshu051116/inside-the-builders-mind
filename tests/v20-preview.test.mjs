@@ -28,7 +28,7 @@ test('key highlights and original two presenter videos remain unchanged',()=>{
    assert.ok(video.includes(name),name)
    assert.ok(existsSync(new URL('../public/video/'+name,import.meta.url)),name)
  }
- assert.match(code,/\.v19MilestoneOpen/)
+ assert.match(code,/setupMilestoneVideo\(doc\)/)
 })
 test('legacy project records, original labs and case records are retained',()=>{
  for(const s of ['work','case-files','field-proof','archive','interactive-lab','about','toolkit','lab'])assert.ok(code.includes('"'+s+'"'),s)

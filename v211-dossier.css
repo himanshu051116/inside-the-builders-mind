@@ -1,0 +1,32 @@
+/* V21.1: restrained, accessible, evidence-connected dossier, not a simulated live test. */
+.v211EvidenceTrail{margin:clamp(20px,3vw,38px) 0 0;padding:clamp(20px,2.6vw,34px);background:#eaf1ed;border:1px solid #aabeb6;border-radius:13px;scroll-margin-top:130px;color:#193b3b}
+.v211EvidenceTrail h3{font:700 clamp(22px,2.8vw,34px)/1.18 'Space Grotesk',system-ui,sans-serif;letter-spacing:-.035em;margin:7px 0 9px}
+.v211EvidenceTrail h4{font:750 16px/1.35 'DM Sans',system-ui,sans-serif;margin:7px 0 10px;color:#193b3b}
+.v211Eyebrow,.v211CardLabel{font:800 10px/1.45 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#477e6b}
+.v211Explanation{color:#4c635b!important;max-width:82ch;font-size:14px;margin:0 0 22px}
+.v211CaptureStatus{font:750 12px/1.5 'DM Sans',system-ui,sans-serif;overflow-wrap:anywhere;margin:0 0 16px;color:#244943}
+.v211Trace{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.v211CaptureStatus{grid-column:1 / -1}
+.v211EvidenceCard{padding:19px;background:#fffefa;border:1px solid #ccdad1;border-radius:9px;min-width:0}
+.v211EvidenceCard p{font-size:13px;line-height:1.65;margin:0;color:#465c56;overflow-wrap:anywhere}
+.v211EvidenceCard p.v211Repro{margin-top:12px;padding-top:12px;border-top:1px solid #d4dfd7;color:#345c50}
+.v211StageLink,.v211VerificationLink{display:inline-flex;margin-top:13px;align-items:center;min-height:40px;font-weight:750;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.v211EvidenceCard p.v211ContextCaution{margin-top:9px;font-size:12px;color:#76604e}
+.v211SourceArea{margin-top:16px;padding:17px;background:#f3f7f3;border:1px solid #c5d5ca;border-radius:9px}
+.v211SourceArea h4{margin:0 0 7px}
+.v211SourceBoundary{font-size:12px!important;line-height:1.55;max-width:85ch;color:#556a62!important;margin:0 0 14px!important}
+.v211SourceList{padding:0;list-style:none;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.v211SourceList li{background:white;border:1px solid #d4dfd7;border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:5px;overflow-wrap:anywhere}
+.v211SourceList a{font-weight:760;font-size:13px;color:#205b4c;line-height:1.45}
+.v211SourceList small{font-size:11px;line-height:1.4;color:#6c796f}
+.v211VerificationLink{margin-top:15px;color:#205b4c}
+.v211EvidenceTrail a:focus-visible{outline:3px solid #aa5935;outline-offset:3px}
+.v208Hotspot:focus-visible{outline:3px solid #efab62!important;outline-offset:5px!important}
+@media(max-width:760px){.v211Trace,.v211SourceList{grid-template-columns:1fr}.v211EvidenceTrail{padding:17px}.v211EvidenceCard{padding:16px}.v211CaptureStatus{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.v211EvidenceTrail *{transition:none!important;animation:none!important}}
+
+/* Live announcements use one concise offscreen status, not the whole evidence narrative. */
+#v212Status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+.v212ShareWarning{margin:12px 0;padding:12px 16px;border:1px solid #b87554;border-radius:7px;color:#773d29;background:#fff0e4;font-size:13px;line-height:1.5;}
+.v212ShareWarning[hidden]{display:none;}

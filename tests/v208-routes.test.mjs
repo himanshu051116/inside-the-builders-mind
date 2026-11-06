@@ -12,7 +12,8 @@ test('real route-specific HTML exists for all five destinations and source legac
   for(const path of ['','work/','projects/','evidence/','lab/','legacy/'])assert.ok(existsSync(new URL('dist/'+path+'index.html',root)),path);
   assert.match(page(''),/src="\/v208-home.js"/);
   assert.doesNotMatch(page(''),/src="\/site.js"/);
-  assert.match(page('work/'),/src="\/site.js"/);
+  assert.doesNotMatch(page('work/'),/src="\/site.js"/);
+  assert.match(page('work/'),/class="v208Page v208WorkPage"/);
   assert.match(page('work/'),/src="\/v208-work.js"/);
   assert.match(page('legacy/'),/src="\/site.js"/);
 });
@@ -66,7 +67,7 @@ test('existing deep links migrate to Work without losing query, panel or hash',(
   const home=read('v208-home.js'),work=read('v208-work.js');
   assert.match(home,/\['view','project','panel'\]/);
   assert.match(home,/window.location.replace\('\/work\/'\+u.search\+u.hash\)/);
-  assert.match(work,/main-nav/);
+  assert.match(work,/setupV20Workspace\(projectRecords,document,window,\{standalone:true\}\)/);
   assert.match(read('scripts/build.mjs'),/buildV208\(out,root\)/);
 });
 
@@ -87,8 +88,8 @@ test('HTML includes real screenshot dimensions and fallback handler',()=>{
   assert.match(html,/data-v208-height="[0-9]+"/);
   assert.match(html,/v208-shared.js/);
   const project=read('v208-project.js'),shared=read('v208-shared.js');
-  assert.match(project,/img\.width=Number\(b\.dataset\.v208Width\)/);
-  assert.match(project,/img\.height=Number\(b\.dataset\.v208Height\)/);
+  assert.match(project,/img\.width=Number\(button\.dataset\.v208Width\)/);
+  assert.match(project,/img\.height=Number\(button\.dataset\.v208Height\)/);
   assert.match(shared,/v208MissingAsset/);
 });
 

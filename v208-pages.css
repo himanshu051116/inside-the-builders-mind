@@ -26,3 +26,20 @@ body.v208WorkPage #home{display:none!important}body.v208WorkPage .v20Workspace{s
 /* Honest fallback when a published screenshot cannot be loaded. */
 .v208MissingAsset{display:grid;place-items:center;min-height:145px;padding:22px;background:#e9efeb;color:#244d48;font-size:13px;text-align:center;line-height:1.5}
 .v208CardCover .v208MissingAsset{height:100%}
+/* V20.9: consistent four-link hierarchy and accessible original video CTA. */
+.v208Nav a[aria-current="page"],.v208Home [data-v208-nav="home"],.v208Lab [data-v208-nav="lab"]{border-bottom-color:#537c69}
+.v208Nav a[href="/work/"]:focus-visible,.v208Nav a[href="/work/"]:hover{border-bottom-color:#537c69}
+.v209VideoDossier{border:0;cursor:pointer;margin:8px 0 22px;font-family:inherit}
+.v209SecondaryNav{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.v209SecondaryNav a{font-weight:750;text-underline-offset:4px}
+body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-underline-offset:6px}
+@media(max-width:650px){.v208Nav{justify-content:flex-start}.v208Nav a{min-height:40px;display:inline-flex;align-items:center}}
+@media(prefers-reduced-motion:reduce){.v209VideoDossier{transition:none!important}}
+/* V21.0: standalone Work owns its page, with compact introduction and no hidden Home. */
+.v208WorkPage [data-v208-nav="work"]{border-bottom-color:#537c69}
+.v210WorkIntro{padding-block:clamp(26px,4vw,48px) 14px}
+.v210WorkIntro h1{font-size:clamp(34px,4.5vw,58px);margin-bottom:10px}
+.v210WorkIntro>p{font-size:15px;max-width:67ch;margin-bottom:6px}
+body.v208WorkPage .v20Workspace{padding-top:25px}
+body.v208WorkPage .v20Head{padding-top:10px}
+@media(max-width:650px){.v210WorkIntro{padding:28px 0 10px}.v210WorkIntro h1{font-size:37px}body.v208WorkPage .v20Workspace{padding-top:18px}}

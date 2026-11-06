@@ -1,7 +1,7 @@
 import {setupMilestoneVideo} from './v19-milestone-video.js';
 const u=new URL(window.location.href);
 const routeParams=['view','project','panel'].some(key=>u.searchParams.has(key));
-const legacyHash=/^#(?:case-|case-files|field-proof|proof\/|top$|work$|archive$)/.test(u.hash);
+const legacyHash=/^#(?:v20-workspace$|case-[a-z0-9-]+$|case-files$|field-proof$|proof\/|top$|work$|archive$)/.test(u.hash);
 if(routeParams||legacyHash){
   // Incoming V20.6 links continue to address the real interactive workspace.
   window.location.replace('/work/'+u.search+u.hash);

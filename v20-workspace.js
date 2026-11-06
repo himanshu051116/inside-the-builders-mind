@@ -497,6 +497,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     alignRouteDetail(win.location.href);
     render();
     openLegacy(next.hash);
+    doc.dispatchEvent(new win.CustomEvent("portfolio:navigation-committed",{detail:{role,project:id,panel:tab,hash:next.hash}}));
   });
   doc.addEventListener("portfolio:case-selection",ev=>{
     const target=caseSlugToId[ev.detail?.caseId];
@@ -521,6 +522,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   }
   alignRouteDetail(win.location.href);
   render();
+  doc.dispatchEvent(new win.CustomEvent("portfolio:navigation-committed",{detail:{role,project:id,panel:tab,hash:initialRoute.hash}}));
   if(initialRoute.hash){
     openLegacy(initialRoute.hash);
     if(initialRoute.hash.startsWith("#case-"))syncCaseHash(initialRoute.hash);

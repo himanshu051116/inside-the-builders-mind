@@ -5,6 +5,8 @@ import {setupV20Workspace} from './v20-workspace.js';
 import {setupV203Experience} from './v203-experience.js';
 import {setupV204Evidence} from './v204-evidence.js';
 import {setupV205Annotations} from './v205-annotations.js';
+import {setupV217MediaViewer} from './v217-media-viewer.js';
+import {setupV214WorkFeature} from './v214-work-feature.js';
 
 const locationUrl=new URL(window.location.href);
 const oldHash=locationUrl.hash;
@@ -30,6 +32,8 @@ if(oldDest){
   setupV203Experience({projects:projectRecords});
   setupV204Evidence({projects:projectRecords});
   setupV205Annotations();
+  setupV217MediaViewer(document);
+  setupV214WorkFeature(projectRecords,document,window);
   document.querySelector('[data-v208-nav="work"]')?.setAttribute('aria-current','page');
   const hint=document.querySelector('.v20Hint');
   if(hint)hint.textContent='Use the project search to filter by name or technology';

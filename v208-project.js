@@ -1,4 +1,5 @@
 import {V205_ANNOTATIONS} from './v205-annotations.js';
+import {setupV217MediaViewer} from './v217-media-viewer.js';
 import {setupMilestoneVideo} from './v19-milestone-video.js';
 import {mountV211EvidencePanel} from './v211-evidence-panel.js';
 import {readEvidenceSelection,evidenceLink,getPoints} from './v211-evidence-model.js';
@@ -7,6 +8,12 @@ const img=document.getElementById('v208ActiveImage');
 const markers=document.getElementById('v208Markers');
 const note=document.getElementById('v208AnnotationDetail');
 const gallery=document.querySelector('.v208ProjectGallery');
+const featureList=gallery && note ? document.createElement('div') : null;
+if(featureList){
+  featureList.className='v217AnnotationList';featureList.setAttribute('role','group');
+  featureList.setAttribute('aria-label','Annotated screenshot features');
+  note.insertAdjacentElement('beforebegin',featureList);
+}
 const slug=window.location.pathname.match(/^\/projects\/([a-z0-9-]+)\/?$/)?.[1]||null;
 const evidence=mountV211EvidencePanel(document,{projectId:slug});
 const buttons=[...(gallery?.querySelectorAll('[data-v208-capture]')||[])];
@@ -53,6 +60,7 @@ function updateAnnotation(point,index,{writeHistory=true}={}){
   }
   activeFeature=index;
   markers?.querySelectorAll('.v208Hotspot').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.v208Hotspot)===index)));
+  featureList?.querySelectorAll('[data-v217-feature]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.v217Feature)===index)));
   evidence?.selectFeature(index);
   if(writeHistory)syncUrl('replaceState');
 }
@@ -66,6 +74,7 @@ function showCapture(button,{method=null,feature=null,focus=false}={}){
   const epoch=++captureEpoch;
   // Reset both visual and evidence panels before requesting a new screenshot.
   markers.replaceChildren();markers.hidden=true;
+  featureList?.replaceChildren();
   note.replaceChildren(text('p','Loading saved capture. Annotations will appear when the image is ready.'));
   evidence?.selectCapture(id,{available:null});
   buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
@@ -85,6 +94,8 @@ function showCapture(button,{method=null,feature=null,focus=false}={}){
     }
     markers.hidden=false;
     note.replaceChildren(text('p','Choose a numbered hotspot to connect a visible feature with the project evidence.'));
+    if(featureList)featureList.append(text('p','Choose a documented interface feature below:'));
+    featureList?.firstElementChild?.classList.add('v217AnnotationListIntro');
     points.forEach((point,i)=>{
       const b=document.createElement('button');
       b.type='button';b.className='v208Hotspot';b.dataset.v208Hotspot=String(i);
@@ -93,6 +104,18 @@ function showCapture(button,{method=null,feature=null,focus=false}={}){
       b.setAttribute('aria-pressed','false');
       b.addEventListener('click',()=>updateAnnotation(point,i));
       markers.append(b);
+      if(featureList){
+        const item=document.createElement('button');item.type='button';
+        item.dataset.v217Feature=String(i);item.setAttribute('aria-pressed','false');
+        const number=text('span',String(i+1).padStart(2,'0'));number.setAttribute('aria-hidden','true');
+        item.append(number,text('strong',point.title));
+        item.setAttribute('aria-label','Inspect annotated feature '+(i+1)+': '+point.title);
+        item.addEventListener('click',()=>{
+          updateAnnotation(point,i);
+          note.scrollIntoView?.({behavior:'auto',block:'nearest'});
+        });
+        featureList.append(item);
+      }
     });
     if(Number.isInteger(feature)&&feature>=0&&feature<points.length){
       updateAnnotation(points[feature],feature,{writeHistory:false});
@@ -102,7 +125,7 @@ function showCapture(button,{method=null,feature=null,focus=false}={}){
   img.onerror=()=>{
     if(epoch!==captureEpoch)return;
     complete=false;activeFeature=null;
-    img.hidden=true;markers.replaceChildren();markers.hidden=true;
+    img.hidden=true;markers.replaceChildren();markers.hidden=true;featureList?.replaceChildren();
     note.replaceChildren(text('p','This saved image is unavailable. Open the project source or try another capture.'));
     evidence?.imageStatus(false);
   };
@@ -124,6 +147,7 @@ function restoreFromUrl(){
   }else{
     activeFeature=null;
     markers?.querySelectorAll('.v208Hotspot').forEach(b=>b.setAttribute('aria-pressed','false'));
+    featureList?.querySelectorAll('[data-v217-feature]').forEach(b=>b.setAttribute('aria-pressed','false'));
     note?.replaceChildren(text('p','Choose a numbered hotspot to inspect its evidence connections.'));
     evidence?.selectFeature(null);
   }
@@ -144,6 +168,7 @@ markers?.addEventListener('keydown',ev=>{
   selected?.click();selected?.focus({preventScroll:true});
 });
 if(gallery)restoreFromUrl();
+setupV217MediaViewer(document);
 window.addEventListener('popstate',restoreFromUrl);
 
 // Existing original presenter-visible footage is unchanged and never autoplayed.

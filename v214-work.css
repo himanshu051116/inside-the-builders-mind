@@ -1,0 +1,62 @@
+/* V21.4: progressive, mobile-first selected-project preview. Only Work is affected. */
+.v208WorkPage .v214Spotlight{
+  display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);
+  border:1px solid var(--v20-line);border-radius:0;
+  background:var(--v20-panel);color:var(--v20-ink);overflow:hidden;
+}
+.v208WorkPage .v214Visual{position:relative;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:205px;background:#e8eeea;border-right:1px solid var(--v20-line)}
+.v208WorkPage .v214PreviewImage{display:block;width:100%;height:clamp(190px,19vw,266px);object-fit:contain;background:#e8eeea}
+.v208WorkPage .v214PreviewImage[hidden],.v208WorkPage .v214NoImage[hidden],.v208WorkPage .v214Caption[hidden],.v208WorkPage .v214Actions[hidden],.v208WorkPage .v214Note[hidden]{display:none!important}
+.v208WorkPage .v214Caption{font:500 11px/1.45 system-ui,sans-serif;color:#45635b;padding:7px 13px 10px;margin:0;background:#ecf1ed}
+.v208WorkPage .v214NoImage{margin:0;text-align:center;padding:28px 20px;color:#45635b;font:650 13px/1.5 system-ui,sans-serif}
+.v208WorkPage .v214Info{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:9px;min-width:0;padding:clamp(17px,2.5vw,31px)}
+.v208WorkPage .v214Eyebrow{font:750 10px/1.4 system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--v20-accent);margin:0}
+.v208WorkPage .v214Title{font:750 clamp(23px,2.5vw,37px)/1.11 'Space Grotesk',system-ui,sans-serif;letter-spacing:-.035em;margin:0;color:var(--v20-ink)}
+.v208WorkPage .v214Status{display:inline-block;font:700 11px/1.5 system-ui,sans-serif;color:var(--v20-ink);border:1px solid var(--v20-line);border-radius:12px;padding:3px 9px}
+.v208WorkPage .v214Summary{font:450 13px/1.6 system-ui,sans-serif;color:var(--v20-soft);margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.v208WorkPage .v214Note{font:550 11px/1.45 system-ui,sans-serif;color:var(--v20-soft);margin:0}
+.v208WorkPage .v214Actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+.v208WorkPage .v214Actions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;border-radius:5px;font:750 12px/1.4 system-ui,sans-serif;text-decoration:none}
+.v208WorkPage .v214Primary{background:var(--v20-ink);color:var(--v20-paper)}
+.v208WorkPage .v214Secondary{background:var(--v20-paper);color:var(--v20-ink);border:1px solid var(--v20-line)}
+.v208WorkPage .v214Actions a:focus-visible{outline:3px solid var(--v20-accent);outline-offset:3px}
+.v208WorkPage .v214NoResult .v214Visual{min-height:130px}
+.v208WorkPage .v214NoResult .v214Caption{display:none}
+@media(max-width:730px){
+  .v208WorkPage .v210WorkIntro{padding:15px 0 3px}
+  .v208WorkPage .v210WorkIntro>.v208Overline{display:none}
+  .v208WorkPage .v210WorkIntro h1{font-size:30px;line-height:1.1;margin:0 0 4px}
+  .v208WorkPage .v210WorkIntro>p{font-size:12px;line-height:1.45;margin:0}
+  .v208WorkPage .v20Workspace{padding-top:4px}
+  .v208WorkPage .v20Head{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}
+  .v208WorkPage .v20RoleBar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:7px;border-radius:9px 9px 0 0}
+  .v208WorkPage .v20RoleBar button{min-width:0;min-height:44px;padding:8px 3px;font-size:11px;line-height:1.2;white-space:normal}
+  .v208WorkPage .v20RoleBar #v20Resume{grid-column:1/3;grid-row:2;display:inline-flex;align-items:center;justify-content:center;min-height:40px;font-size:11px;padding:7px 4px}
+  .v208WorkPage .v20RoleBar #v20FullShowcase{grid-column:3;grid-row:2;display:inline-flex;align-items:center;justify-content:center;min-height:40px;font-size:11px;padding:7px 4px}
+  .v208WorkPage .v213FocusHint{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .v208WorkPage .v214Spotlight{display:flex;flex-direction:column;gap:0}
+  .v208WorkPage .v214Visual{order:0;min-height:0;border-right:0;border-bottom:1px solid var(--v20-line)}
+  .v208WorkPage .v214PreviewImage{height:auto;aspect-ratio:1.75;object-fit:contain;max-height:210px}
+  .v208WorkPage .v214Caption{font-size:10px;padding:5px 10px}
+  .v208WorkPage .v214Info{order:1;gap:7px;padding:13px 14px 15px}
+  .v208WorkPage .v214Title{font-size:24px}
+  .v208WorkPage .v214Summary{font-size:13px;line-height:1.48;-webkit-line-clamp:2}
+  .v208WorkPage .v214Actions{width:100%;gap:7px}
+  .v208WorkPage .v214Actions a{flex:1 1 auto;font-size:12px;min-height:44px}
+  .v208WorkPage .v20Explorer{border-top:0}
+  .v208WorkPage .v20Sidebar{padding:13px}
+  .v208WorkPage .v20Sidebar label{font-size:12px;letter-spacing:0;text-transform:none}
+  .v208WorkPage .v20ProjectList{scroll-snap-type:x proximity;scroll-padding:12px}
+  .v208WorkPage .v20ProjectList>button{scroll-snap-align:start;min-height:66px}
+}
+@media(max-width:370px){
+  .v208WorkPage .v20RoleBar button{font-size:10px}
+  .v208WorkPage .v214Title{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  .v208WorkPage .v20ProjectList{scroll-behavior:auto}
+  .v208WorkPage .v214Spotlight *{animation:none!important;transition:none!important}
+}
+@media(forced-colors:active){
+  .v208WorkPage .v214Spotlight,.v208WorkPage .v214Status,.v208WorkPage .v214Actions a{border:1px solid CanvasText}
+}

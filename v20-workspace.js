@@ -1,4 +1,5 @@
 import {readV207Route,commitV207Route} from './v207-route.js'
+import {filterV213Projects,selectV213VisibleProject} from './v213-search-state.js'
 import {setupMilestoneVideo} from './v19-milestone-video.js'
 // V20.7 retains the V20.6 rendered surfaces while consolidating URL semantics.
 const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Explore the actual interfaces, then inspect the architecture and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge","sentinel"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Trace real project architecture, source records and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","sentinel","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Review model designs, documented results and the boundaries of each prototype.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","sentinel","our-hidden-universe","schoolbuddies"]}};
@@ -22,10 +23,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const workspace=doc.createElement("section");
   workspace.id="v20-workspace";workspace.className="v20Workspace";workspace.setAttribute("aria-labelledby","v20Title");
   workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Explore the projects.</h2><p id="v20Subtitle">Choose a project to examine its interface, architecture, sources and limitations.</p></div><span class="v20Hint">Use Ctrl / ⌘ + K to search anywhere</span></div>
-    <div class="v20RoleBar" role="group" aria-label="Choose a résumé-specific portfolio experience">
+    <div class="v20RoleBar" role="group" aria-label="Career focus: changes presentation order and résumé; all six projects remain available">
       ${Object.entries(V20_SETTINGS).map(([k,v])=>`<button type="button" data-v20-role="${k}" aria-pressed="false">${e(v.label)}</button>`).join("")}
       <a href="${standalone?'/legacy/?view='+role+'#top':'#top'}" id="v20FullShowcase">Full showcase ↗</a>
       <a href="${V20_SETTINGS.fullstack.resume}" id="v20Resume" download>Download matching résumé ↓</a>
+      <p class="v213FocusHint">Career focus changes project order, starting point and matching résumé. All six projects remain available.</p>
     </div>
     <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
     <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="${standalone?'/legacy/':'#v20Archive'}" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
@@ -48,22 +50,19 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }
   }
   const inspector=doc.getElementById("v20Inspector"),list=doc.getElementById("v20ProjectList"),search=doc.getElementById("v20Search");
-  const get=()=>entry.find(p=>p.id===id)||entry[0];
+  const get=()=>entry.find(p=>p.id===visibleId())||null;
   const first=()=>V20_SETTINGS[role];
   const emit=(method="replaceState")=>{
     const result=commitV207Route(win,{role,project:id,panel:tab},{method});
     if(!result.committed)announce("The selection is active locally, but this browser did not update the shareable URL.");
     return result;
   };
-  const relevant=()=>{
-    const q=search.value.trim().toLowerCase(),rank=first().order;
-    return entry.filter(p=>!q||[p.title,p.description,p.category,p.status,...p.stack].join(" ").toLowerCase().includes(q)).sort((a,b)=>{
-      const x=rank.indexOf(a.id),y=rank.indexOf(b.id);return (x<0?99:x)-(y<0?99:y);
-    });
-  };
+  const relevant=()=>filterV213Projects(entry,search.value,first().order);
+  const visibleId=()=>selectV213VisibleProject(relevant(),id);
+  let renderedProjectId=null;
   function renderList(){
     const shown=relevant();
-    list.innerHTML=shown.map(p=>`<button type="button" data-v20-project="${e(p.id)}" aria-pressed="${p.id===id}" class="${p.id===id?"v20Selected":""}"><span class="v20Num">${e(p.number)}</span><span><strong>${e(p.title)}</strong><small>${e(p.stack.slice(0,2).join(" · "))}</small></span><span aria-hidden="true">↗</span></button>`).join("")||'<p class="v20NoResults">No matches. Try another technology or project name.</p>';
+    list.innerHTML=shown.map(p=>`<button type="button" data-v20-project="${e(p.id)}" aria-pressed="${p.id===visibleId()}" class="${p.id===visibleId()?"v20Selected":""}"><span class="v20Num">${e(p.number)}</span><span><strong>${e(p.title)}</strong><small>${e(p.stack.slice(0,2).join(" · "))}</small></span><span aria-hidden="true">↗</span></button>`).join("")||'<p class="v20NoResults">No matches. Try another technology or project name.</p>';
     doc.getElementById("v20Count").textContent=`${shown.length} / ${entry.length} projects`;
   }
   function links(p){return p.links.filter(x=>safe(x.url)).map(x=>`<a href="${safe(x.url)}" target="_blank" rel="noopener noreferrer">${e(x.label)} ↗</a>`).join("")}
@@ -95,8 +94,17 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     return `<div class="v20Evidence"><section><h4>Documented verification</h4><p>${e(p.caseStudy.verification)}</p></section><section><h4>Limitations</h4><p>${e(p.caseStudy.caveat)}</p></section><div class="v20Links">${links(p)}${(standalone||cases[p.id])?`<a href="${detailed}" data-v20-case>Full technical case study ↗</a>`:""}</div></div>`;
   }
   function render(){
-    const p=get();if(!p)return;
-    inspector.innerHTML=`<div class="v20ProjectIntro"><div><span>${e(p.category)}</span><span class="v20Status">${e(p.status)}</span></div><h3>${e(p.title)}</h3><p>${e(p.description)}</p><div class="v20Tags">${p.stack.map(x=>`<button type="button" data-v20-tech="${e(x)}" aria-label="Filter projects using ${e(x)}">${e(x)}</button>`).join("")}</div></div>
+    const p=get();
+    renderedProjectId=p?.id??null;
+    inspector.dataset.projectId=p?.id??'';
+    if(!p){
+      inspector.innerHTML='<div class="v213EmptySearch" role="status"><h3>No matching projects</h3><p>No project matches this search. Clear the filter to restore your selected project and its evidence.</p><button type="button" data-v20-clear-search>Clear search</button></div>';
+      renderList();
+      doc.dispatchEvent(new win.CustomEvent("portfolio:v20-render",{detail:{projectId:null,role,tab}}));
+      return;
+    }
+    const isPreview=!!search.value.trim()&&p.id!==id;
+    inspector.innerHTML=`${isPreview?'<p class="v213PreviewNote">Search preview — select this project to update the shareable link.</p>':''}<div class="v20ProjectIntro"><div><span>${e(p.category)}</span><span class="v20Status">${e(p.status)}</span></div><h3>${e(p.title)}</h3><p>${e(p.description)}</p><div class="v20Tags">${p.stack.map(x=>`<button type="button" data-v20-tech="${e(x)}" aria-label="Filter projects using ${e(x)}">${e(x)}</button>`).join("")}</div></div>
     <div class="v20Tabs" role="tablist" aria-label="Project inspection views">${["overview","media","architecture","evidence"].map(t=>`<button type="button" id="v20-${t}" role="tab" data-v20-tab="${t}" tabindex="${t===tab?0:-1}" aria-selected="${t===tab}" aria-controls="v20Panel">${t==="media"?"Screens":t==="architecture"?"Architecture":t==="evidence"?"Evidence":"Overview"}</button>`).join("")}</div>
     <div id="v20Panel" role="tabpanel" tabindex="0" aria-labelledby="v20-${tab}">${tab==="overview"?overview(p):tab==="media"?media(p):tab==="architecture"?architecture(p):evidence(p)}</div>`;
     renderList();
@@ -121,6 +129,14 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     });
   }
   const announce=(msg)=>{let status=doc.getElementById("v20Announce");if(!status){status=doc.createElement("span");status.id="v20Announce";status.className="srOnly";status.setAttribute("role","status");workspace.append(status)}status.textContent=msg};
+  // Search previews never write browser history. Explicit interactions
+  // promote a visible preview to a shareable selection when appropriate.
+  function commitVisiblePreview(){
+    const next=visibleId();
+    if(!next||next===id)return false;
+    id=next;capture=0;stage=0;
+    return true;
+  }
   function chooseProject(next,update=true,keepFocus=false){
     if(!ids.includes(next))return;
     if(id===next){
@@ -138,6 +154,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   }
   function chooseTab(next,update=true){
     if(!["overview","media","architecture","evidence"].includes(next))return;
+    commitVisiblePreview();
     tab=next;render();
     if(update)emit("replaceState");
     inspector.querySelector(`[data-v20-tab="${tab}"]`)?.focus();
@@ -182,18 +199,20 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     return true;
   }
   workspace.addEventListener("click",ev=>{
-    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech]");
+    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v20-clear-search]");
     if(!b)return;
+    if(b.hasAttribute('data-v20-clear-search')){search.value='';refreshSearch();search.focus();return;}
     if(b.dataset.v20Project){chooseProject(b.dataset.v20Project,true,true);return}
     if(b.dataset.v20Tech){
-      search.value=b.dataset.v20Tech;renderList();updateSearchNotice();search.focus();
+      search.value=b.dataset.v20Tech;refreshSearch();search.focus();
       announce(`Showing projects using ${b.dataset.v20Tech}`);return
     }
     if(b.dataset.v20Tab){chooseTab(b.dataset.v20Tab);return}
     if(b.dataset.v20Role){chooseRole(b.dataset.v20Role);return}
-    if(b.hasAttribute("data-v20-stage")){stage=Number(b.dataset.v20Stage);render();inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
-    if(b.hasAttribute("data-v20-capture")){capture=Number(b.dataset.v20Capture);render();inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return}
+    if(b.hasAttribute("data-v20-stage")){const changed=commitVisiblePreview();stage=Number(b.dataset.v20Stage);render();if(changed)emit("replaceState");inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
+    if(b.hasAttribute("data-v20-capture")){const changed=commitVisiblePreview();capture=Number(b.dataset.v20Capture);render();if(changed)emit("replaceState");inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return}
     if(b.hasAttribute("data-v20-video")){
+      if(commitVisiblePreview()){render();emit("replaceState");}
       const player=setupMilestoneVideo(doc);
       if(player)player.show();else announce("Original video unavailable");
       return;
@@ -207,11 +226,18 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   });
   const searchNotice=doc.getElementById('v20SearchNotice');
   function updateSearchNotice(){
-    const q=search.value.trim(),shown=relevant(),selectedShown=shown.some(p=>p.id===id);
-    searchNotice.hidden=!q||selectedShown||!shown.length;
-    searchNotice.textContent=searchNotice.hidden?'':`${shown.length} matching project${shown.length===1?'':'s'}. Select a result to update the inspector.`;
+    const q=search.value.trim(),shown=relevant(),active=visibleId();
+    searchNotice.hidden=!q;
+    searchNotice.textContent=!q?'':!shown.length?'No matching projects. Clear the search to restore your selected project.':
+      `${shown.length} matching project${shown.length===1?'':'s'}. ${active!==id?'Showing a temporary preview; select a project to update your shareable URL.':'Your selected project remains visible.'}`;
   }
-  search.addEventListener('input',()=>{renderList();updateSearchNotice()});
+  function refreshSearch(){
+    const next=visibleId();
+    if(renderedProjectId!==next){capture=0;stage=0;render();}
+    else renderList();
+    updateSearchNotice();
+  }
+  search.addEventListener('input',refreshSearch);
   search.addEventListener('keydown',ev=>{
     if(ev.key!=='Enter')return;
     const match=relevant()[0];if(!match)return;
@@ -237,10 +263,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   win.addEventListener("hashchange",()=>openLegacy(win.location.hash));
   win.addEventListener("popstate",()=>{
     const next=readV207Route(win.location.href,ids);
+    const hadSearch=!!search.value;
+    search.value=''; // Browser navigation restores explicit URL state, not a stale local filter.
     if(next.role!==role)chooseRole(next.role,true,false);
     if(next.project!==id||next.panel!==tab){
       id=next.project;tab=next.panel;capture=0;stage=0;render();
-    }
+    }else if(hadSearch)render();
+    updateSearchNotice();
     openLegacy(next.hash);
   });
   doc.addEventListener('portfolio:legacy-role-request',ev=>{

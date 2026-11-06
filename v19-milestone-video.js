@@ -72,6 +72,19 @@ export function setupMilestoneVideo(doc=document){
     </div>
   </div>`;
   doc.body.append(dialog);
+  // Real media remains unchanged; descriptions are not falsely labeled as speech captions.
+  const guide=doc.createElement('details');guide.className='v217VideoGuide';
+  const guideTitle=doc.createElement('summary');guideTitle.textContent='Recording descriptions and caption status';
+  const guideList=doc.createElement('ol');
+  milestoneClips.forEach(clip=>{
+    const item=doc.createElement('li'),heading=doc.createElement('strong'),description=doc.createElement('p');
+    heading.textContent=clip.title+' · '+clip.duration;description.textContent=clip.description;
+    item.append(heading,description);guideList.append(item);
+  });
+  const guideNotice=doc.createElement('p');
+  guideNotice.textContent='These are recorded-scene descriptions, not a verbatim speech transcript. Timed captions require review against the original spoken audio and have not yet been published.';
+  guide.append(guideTitle,guideList,guideNotice);
+  dialog.querySelector('.v19DialogDetail')?.append(guide);
 
   const open=region.querySelector('.v19MilestoneOpen');
   const close=dialog.querySelector('.v19DialogClose');

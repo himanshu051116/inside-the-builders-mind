@@ -87,3 +87,13 @@
 @media(max-width:370px){.v20RoleBar button{font-size:10px;padding:9px 8px}.v20ProjectIntro>div:first-child{flex-direction:column;align-items:flex-start}.v20Tabs button{font-size:11px;padding:10px}.v20Head h2{font-size:31px}}
 @media(prefers-reduced-motion:reduce){.v20Workspace *,.v20Archive *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(forced-colors:active){.v20Workspace,.v20Archive,.v20ProjectList button{border-color:CanvasText}.v20RoleBar button[aria-pressed="true"],.v20ProjectList button.v20Selected,.v20Tabs button[aria-selected="true"]{outline:2px solid Highlight;outline-offset:1px}}
+
+/* V21.3: transient search previews, explicit commitment and informative empty results. */
+.v213FocusHint{font:500 11px/1.45 system-ui,sans-serif;color:var(--v20-soft);flex:1 1 100%;margin:0;padding:0 5px 3px}
+.v213PreviewNote{font:600 12px/1.5 system-ui,sans-serif;color:var(--v20-soft);margin:0 0 12px;padding:10px 12px;background:color-mix(in srgb,var(--v20-accent) 8%,var(--v20-panel));border:1px solid var(--v20-line);border-radius:6px}
+.v213EmptySearch{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;min-height:250px;max-width:540px;margin:auto;padding:24px 0}
+.v213EmptySearch h3{font:700 clamp(24px,3vw,32px)/1.2 "Space Grotesk",system-ui,sans-serif;margin:0;color:var(--v20-ink)}
+.v213EmptySearch p{font:400 15px/1.65 system-ui,sans-serif;color:var(--v20-soft);margin:0}
+.v213EmptySearch button{padding:11px 17px;min-height:44px;border:1px solid var(--v20-line);border-radius:7px;background:var(--v20-ink);color:var(--v20-paper);font:700 13px system-ui,sans-serif;cursor:pointer}
+.v213EmptySearch button:focus-visible{outline:3px solid var(--v20-accent);outline-offset:3px}
+@media(max-width:730px){.v213EmptySearch{min-height:170px;padding:16px 0}.v213FocusHint{font-size:12px}}

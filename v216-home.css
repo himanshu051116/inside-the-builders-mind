@@ -1,0 +1,43 @@
+/* V21.6 — a more compact, recruiter-first Home without losing its evidence. */
+#home .v17LeadStatement{max-width:55ch;font-size:15px;line-height:1.55}
+#home .v17Graduation{line-height:1.48}
+#home .v17MainCTA{min-height:46px;display:inline-flex;align-items:center;justify-content:center}
+#home .v17ResumeSelect summary{min-height:46px;display:inline-flex;align-items:center;cursor:pointer}
+#home .v216ProofCapture{
+  display:flex;align-items:center;gap:12px;min-height:77px;padding:9px 11px;
+  border:1px solid #718b88;background:#213e43;border-radius:8px;
+  color:#fff8ef;text-decoration:none;margin:4px 0 15px;
+}
+#home .v216ProofCapture img{display:block;width:105px;max-width:33%;height:auto;aspect-ratio:1277/899;object-fit:contain;border-radius:4px;background:#edf0ec}
+#home .v216CaptureBody{display:grid;gap:4px;min-width:0}
+#home .v216CaptureBody strong{font:720 13px/1.35 system-ui,sans-serif;color:#fff4e3}
+#home .v216CaptureBody small{font:500 11px/1.45 system-ui,sans-serif;color:#c9d8d4}
+#home .v216ProofCapture:hover{background:#2c5354;border-color:#afc4b9}
+#home .v216ProofCapture:focus-visible{outline:3px solid #fff0cf;outline-offset:3px}
+#home .v216CaptureNoImage{min-height:55px}
+@media(max-width:950px){
+  /* Restore the project rail that V19 hid on every stacked screen. */
+  #home .v17LeadCopy .v19ProjectRail{display:grid;order:1;margin:14px 0 0;padding-top:11px}
+  #home .v17LeadCopy .v17Socials{order:2;margin-top:12px}
+  #home .v19ProjectRail a{min-height:48px;padding:9px 4px}
+  #home .v17LeadGrid{gap:22px}
+}
+@media(max-width:630px){
+  #home .v17TopLine{padding:12px 0 10px}
+  #home .v17LeadGrid{padding-top:12px;gap:17px}
+  #home .v17Degree{font-size:14px}
+  #home .v17Graduation{font-size:12px;margin-bottom:12px}
+  #home .v17LeadStatement{font-size:14px;margin-bottom:15px}
+  #home .v17LeadCopy .v19ProjectRail{margin-top:10px}
+  #home .v19ProjectDetails strong{font-size:13px}
+  #home .v19ProjectDetails small{font-size:11px;line-height:1.38}
+  #home .v19ProjectRail a{grid-template-columns:22px minmax(0,1fr) 18px;min-height:49px}
+  #home .v216ProofCapture{gap:9px;padding:8px}
+  #home .v216ProofCapture img{width:90px}
+  #home .v17ProofBody{padding:17px}
+}
+@media(forced-colors:active){
+  #home .v216ProofCapture{background:Canvas;border-color:CanvasText;color:CanvasText}
+  #home .v216CaptureBody strong,#home .v216CaptureBody small{color:CanvasText}
+}
+@media(prefers-reduced-motion:reduce){#home .v216ProofCapture{transition:none!important}}

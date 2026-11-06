@@ -11,7 +11,8 @@
     "audit:local": "node scripts/audit-local.mjs",
     "audit:metadata": "node scripts/audit-metadata.mjs",
     "pretest": "npm run build",
-    "verify": "npm test && npm run audit:local && npm run audit:metadata"
+    "verify": "npm test && npm run audit:local && npm run audit:metadata && npm run audit:performance",
+    "audit:performance": "node scripts/audit-v218.mjs"
   },
   "type": "module"
 }

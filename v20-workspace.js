@@ -289,6 +289,24 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(update)commitSelection("pushState");
   }
   function openLegacy(hash){return revealArchive(hash)}
+  function alignRouteDetail(href){
+    const detail=readV25DetailRoute(href);
+    if(detail.stage)stageTokenByProject.set(id,detail.stage);
+    else{stageTokenByProject.delete(id);stage=0}
+    if(detail.capture)captureTokenByProject.set(id,detail.capture);
+    else{captureTokenByProject.delete(id);capture=0}
+  }
+  function syncCaseHash(hash){
+    const match=String(hash||"").match(/^#case-(ohs|news|mulyankan|earthbridge)$/);
+    if(!match)return;
+    const target=caseSlugToId[match[1]];
+    if(target&&id!==target)chooseProject(target,false,false);
+    if(tab!=="evidence")chooseTab("evidence",false,false);
+    previewActive=false;renderPreviewBar();
+    // Native anchor navigation already created a browser history entry.
+    // Replace that entry's query to match the visible case, retaining its hash.
+    emit("replaceState",hash);
+  }
   workspace.addEventListener("click",ev=>{
     const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v25-commit]");
     if(!b)return;
@@ -417,29 +435,39 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(hash==="#v20-workspace"){return}
     if(openLegacy(hash)&&win.location.hash===hash)win.requestAnimationFrame?.(()=>doc.getElementById(hash.slice(1))?.scrollIntoView({behavior:"auto",block:"start"}));
   },true);
-  win.addEventListener("hashchange",()=>openLegacy(win.location.hash));
+  win.addEventListener("hashchange",()=>{
+    openLegacy(win.location.hash);
+    syncCaseHash(win.location.hash);
+  });
   win.addEventListener("popstate",()=>{
+    clearHover();previewActive=false;
     const next=readV207Route(win.location.href,ids);
     if(next.role!==role)chooseRole(next.role,true,false);
-    if(next.project!==id||next.panel!==tab){
-      captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
-      id=next.project;tab=next.panel;capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;render();
-    }
+    captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
+    id=next.project;tab=next.panel;capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;
+    alignRouteDetail(win.location.href);
+    render();
     openLegacy(next.hash);
   });
   doc.addEventListener('portfolio:legacy-role-request',ev=>{
     const requested=validRole(ev.detail?.role);
+    const preview=ev.detail?.preview===true;
     if(requested!==role){
-      const preview=ev.detail?.preview===true;
+      previewActive=preview;
       chooseRole(requested,false,!preview);
-      if(preview)emit("replaceState");
-    }
+      if(preview)renderPreviewBar();
+    }else if(!preview)commitSelection("pushState");
   });
   chooseRole(role,false,false);
-  // An incoming shared link may select another project, panel or legacy case anchor.
+  // Restore the exact shared stage/capture after the legacy role initializes.
   if(initialRoute.project!==id||initialRoute.panel!==tab){
-    id=initialRoute.project;tab=initialRoute.panel;render();
+    id=initialRoute.project;tab=initialRoute.panel;
   }
-  if(initialRoute.hash)openLegacy(initialRoute.hash);
+  alignRouteDetail(win.location.href);
+  render();
+  if(initialRoute.hash){
+    openLegacy(initialRoute.hash);
+    if(initialRoute.hash.startsWith("#case-"))syncCaseHash(initialRoute.hash);
+  }
   return {workspace,archive};
 };

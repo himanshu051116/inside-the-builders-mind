@@ -58,3 +58,14 @@ Clearly distinguish a deployed application, a demonstrated prototype, research r
 8. Keyboard and touch actions, screenshots, original video and three résumé PDFs remain usable.
 9. At 320, 390, 768, 850, 1065 and 1440 CSS pixels, no horizontal document overflow, navigation trap or browser JavaScript errors.
 10. Production promotion requires a separate explicit request and a final preview comparison with V24.
+
+## V25.1 — Preview rollback and linked engineering context
+
+- Preview changes are provisional. The first preview saves the committed role, project, panel, capture, architecture stage and all per-project selection maps. Subsequent hovers must **not** overwrite this checkpoint.
+- An explicit **Return** button or Escape restores the saved state and the legacy career presentation without changing the URL. Leaving the entire workspace restores the committed view after a 550 ms grace period; moving within the workspace does not.
+- Clicking **Keep this view**, a project, a role, a tab, a stage or a screenshot commits the visible selection and discards the snapshot.
+- Browser Back/Forward, external archive navigation and hash transitions restore a pending preview checkpoint before processing the new committed route.
+- The expanded engineering record uses the existing `caseDossiers` fields `decision`, `tradeoff`, `reproducible`, `expected`, `state` and `evidence`; it adds direct internal buttons for Architecture, Screens and Verification without duplicating source claims.
+- The default workspace remains compact: all additional explanation stays inside a native `details` element, and source screenshots remain original, not illustrative substitutes.
+
+Additional V25.1 browser gates: hover a role, restore with Escape, inspect role-specific stylesheet and résumé, hover multiple projects and return, cross the workspace boundary and verify automatic rollback, test modal Escape conflict avoidance, and verify detail-to-tab links work by click, keyboard and touch.

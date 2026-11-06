@@ -1,6 +1,6 @@
 import {readV207Route,commitV207Route} from './v207-route.js'
 // V20.7 retains the V20.6 rendered surfaces while consolidating URL semantics.
-const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Explore the actual interfaces, then inspect the architecture and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge","sentinel"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Trace real project architecture, source records and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","sentinel","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Review model designs, documented results and the boundaries of each prototype.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","sentinel","our-hidden-universe","schoolbuddies"]}};
+const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Interfaces, source, and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge","sentinel"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Architecture, data flow, and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","sentinel","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Methods, reported results, and limitations.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","sentinel","our-hidden-universe","schoolbuddies"]}};
 const V20_FLOWS={"mulyankan":[["Document intake","Inspect submitted files, format and extraction readiness."],["Evidence extraction","Link supporting material to rubric criteria."],["Rubric review","Flag insufficient evidence instead of forcing a complete score."],["Human decision","A reviewer retains final authority and an audit trail."]],"earthbridge":[["Paired scenes","Prepare Sentinel-1 and Sentinel-2 paired observations."],["Descriptors","Map modalities to a shared retrieval space."],["FAISS lookup","Compare encoded descriptors; this view performs no inference."],["Evaluation","Inspect reported metrics and holdout-split limitations."]],"our-hidden-universe":[["Access","Firebase authentication controls private room access."],["Room state","Coordinate presence, messages and shared session state."],["Messaging","Inspect the source-backed messaging implementation."],["Watch Together","Review captured playback and call controls; no live sync test here."]],"newssources":[["Discovery","Collect candidates from RSS and sitemaps."],["Normalize","Extract and deduplicate article identities."],["Persistence","Preserve records, versions and provenance in PostgreSQL."],["Analyst review","Inspect captured source, event and claims screens."]],"sentinel":[["Traffic","Inspect local network flow information."],["Signals","Review early anomalies, not certified detection."],["Forward proxy","Inspect locally validated domain blocking."],["Boundaries","No production-grade WAF performance claimed."]],"schoolbuddies":[["School outreach","Coordinate engagement with schools."],["Curriculum","Prepare programming and AI-literacy workshops."],["Learning","Run hands-on technology demonstrations."],["Website","Accept enquiries through the public project site."]]};
 export const setupV20Workspace=function initV20(projects,doc=document,win=window){
   if(doc.getElementById("v20-workspace")||!Array.isArray(projects))return;
@@ -19,13 +19,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   let capture=0,stage=0,manifest=null,manifestPromise=null,manifestError=false;
   const workspace=doc.createElement("section");
   workspace.id="v20-workspace";workspace.className="v20Workspace";workspace.setAttribute("aria-labelledby","v20Title");
-  workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Explore the projects.</h2><p id="v20Subtitle">Choose a project to examine its interface, architecture, sources and limitations.</p></div><span class="v20Hint">Use Ctrl / ⌘ + K to search anywhere</span></div>
+  workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Selected work.</h2><p id="v20Subtitle">Explore by project or specialization.</p></div></div>
     <div class="v20RoleBar" role="group" aria-label="Choose a résumé-specific portfolio experience">
       ${Object.entries(V20_SETTINGS).map(([k,v])=>`<button type="button" data-v20-role="${k}" aria-pressed="false">${e(v.label)}</button>`).join("")}
       <a href="#top" id="v20FullShowcase">Full showcase ↗</a>
       <a href="${V20_SETTINGS.fullstack.resume}" id="v20Resume" download>Download matching résumé ↓</a>
     </div>
-    <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
+    <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Projects <span class="v20InputHint">Hover to preview · Tap to open</span></label><input id="v20Search" type="search" autocomplete="off" placeholder="Search projects or tools"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
     <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="#v20Archive" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
   legacy.insertAdjacentElement("afterend",workspace);
   const archive=doc.createElement("details");archive.className="v20Archive";archive.id="v20Archive";
@@ -127,11 +127,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(update)emit("pushState");
     if(update&&win.matchMedia?.("(max-width:730px)").matches)inspector.scrollIntoView({behavior:"auto",block:"start"});
   }
-  function chooseTab(next,update=true){
+  function chooseTab(next,update=true,focus=true){
     if(!["overview","media","architecture","evidence"].includes(next))return;
-    tab=next;render();
+    if(next!==tab){tab=next;render();}
     if(update)emit("replaceState");
-    inspector.querySelector(`[data-v20-tab="${tab}"]`)?.focus();
+    if(focus)inspector.querySelector(`[data-v20-tab="${tab}"]`)?.focus();
   }
   function chooseRole(next,invokeLegacy=true,update=true){
     next=validRole(next);
@@ -185,6 +185,71 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(b.hasAttribute("data-v20-video")){const original=doc.querySelector("#home .v19MilestoneOpen");if(original)original.click();else announce("Original video unavailable");return}
     if(b.hasAttribute("data-v20-retry"))loadManifest(true);
   });
+  // Hover-preview contract: fine mouse/stylus input only. Touch and keyboard
+  // keep explicit activation. Dwell avoids unwanted previews when crossing rows.
+  // Never autoplay video or open outbound links on pointer movement.
+  const canHover=()=>!!win.matchMedia?.("(hover: hover) and (pointer: fine)")?.matches;
+  let hoverTimer=0,hoverTarget=null;
+  const clearHover=()=>{
+    win.clearTimeout(hoverTimer);
+    hoverTimer=0;hoverTarget=null;
+  };
+  const preview=(button)=>{
+    if(!button?.isConnected||!workspace.contains(button))return;
+    if(button.hasAttribute("data-v20-project")){
+      if(id===button.dataset.v20Project)return;
+      chooseProject(button.dataset.v20Project,false,false);
+    }else if(button.hasAttribute("data-v20-role")){
+      if(role===button.dataset.v20Role)return;
+      chooseRole(button.dataset.v20Role,true,false);
+    }else if(button.hasAttribute("data-v20-tab")){
+      if(tab===button.dataset.v20Tab)return;
+      chooseTab(button.dataset.v20Tab,false,false);
+    }else if(button.hasAttribute("data-v20-stage")){
+      const next=Number(button.dataset.v20Stage);
+      if(stage===next)return;
+      stage=next;render();
+    }else if(button.hasAttribute("data-v20-capture")){
+      const next=Number(button.dataset.v20Capture);
+      if(capture===next)return;
+      capture=next;render();
+    }else return;
+    // Hover previews replace the current history entry, not add dozens of
+    // back-button steps. Clicking still records deliberate navigations.
+    emit("replaceState");
+  };
+  workspace.addEventListener("pointerover",ev=>{
+    if(!canHover()||ev.pointerType==="touch")return;
+    const b=ev.target.closest?.("button[data-v20-project],button[data-v20-role],button[data-v20-tab],button[data-v20-stage],button[data-v20-capture]");
+    if(!b||!workspace.contains(b)||b.contains(ev.relatedTarget)||b===hoverTarget)return;
+    clearHover();hoverTarget=b;
+    hoverTimer=win.setTimeout(()=>{hoverTimer=0;hoverTarget=null;preview(b)},145);
+  });
+  workspace.addEventListener("pointerout",ev=>{
+    if(hoverTarget&&hoverTarget.contains(ev.target)&&!hoverTarget.contains(ev.relatedTarget))clearHover();
+  });
+  workspace.addEventListener("pointerdown",clearHover);
+  workspace.addEventListener("pointercancel",clearHover);
+  // Restrained pointer light, rAF-throttled and confined to one panel.
+  if(canHover()&&!win.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches){
+    let frame=0,px=0,py=0;
+    inspector.addEventListener("pointermove",ev=>{
+      if(ev.pointerType==="touch")return;
+      const rect=inspector.getBoundingClientRect();
+      px=ev.clientX-rect.left;py=ev.clientY-rect.top;
+      if(frame)return;
+      frame=win.requestAnimationFrame(()=>{
+        frame=0;
+        inspector.style.setProperty("--quality-pointer-x",px+"px");
+        inspector.style.setProperty("--quality-pointer-y",py+"px");
+        inspector.classList.add("qualityPointerActive");
+      });
+    },{passive:true});
+    inspector.addEventListener("pointerleave",()=>{
+      inspector.classList.remove("qualityPointerActive");
+      if(frame){win.cancelAnimationFrame(frame);frame=0;}
+    });
+  }
   workspace.addEventListener("keydown",ev=>{
     const b=ev.target.closest('[role="tab"][data-v20-tab]');if(!b||!["ArrowLeft","ArrowRight","Home","End"].includes(ev.key))return;
     ev.preventDefault();const all=["overview","media","architecture","evidence"];

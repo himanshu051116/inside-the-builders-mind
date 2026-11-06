@@ -45,6 +45,7 @@ test('hover navigation and both filters have desktop previews and tap or keyboar
   assert.match(hover,/focusin/)
   assert.match(hover,/\.v21ArchiveGroup > summary/)
   assert.match(css,/@media\(max-width:630px\)/)
+  assert.match(css,/\.header \.brandWord small\{display:none\}/)
   assert.match(css,/@media\(prefers-reduced-motion:reduce\)/)
 })
 

@@ -12,7 +12,9 @@ test('contact remains a single balanced grid with concise internship copy', () =
   assert.match(site,/Looking for a software intern\?/)
   assert.match(site,/Let’s talk\./)
   assert.doesNotMatch(site,/Seeking a software engineering intern\?/)
-  assert.match(site,/href="\$\{safeURL\('mailto:'\+profile.email\)\}"/)
+  assert.match(site,/v21EmailLink/)
+  assert.match(site,/Portfolio%20enquiry/)
+  assert.match(site,/data-copy-email/)
 })
 test('contact includes the original photo and a safe descriptive alt', () => {
   assert.match(site,/class="contactPortrait"/)

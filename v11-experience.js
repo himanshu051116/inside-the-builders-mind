@@ -12,7 +12,10 @@ export function setupV11Experience(){
    if(atlasStatus)atlasStatus.textContent=`${names[value]} engineering evidence selected.`
  }
  tabButtons.forEach((b,i)=>{
-   b.addEventListener('click',()=>selectCase(b.dataset.atlasTab))
+   b.addEventListener('click',()=>{
+     selectCase(b.dataset.atlasTab);
+     document.dispatchEvent(new CustomEvent('portfolio:case-selection',{detail:{caseId:b.dataset.atlasTab}}));
+   })
    b.addEventListener('keydown',event=>{
      if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return
      event.preventDefault()

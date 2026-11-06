@@ -138,7 +138,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     return `<div class="v20Media">${p.id==="earthbridge"?'<p class="v20Notice">Evaluation figures are repository-reported, not independently verified.</p>':""}
       ${p.id==="mulyankan"?'<button data-v20-video type="button" class="v20VideoButton">▶ Watch original presenter recordings (17s / 20s)</button>':""}
       ${manifestError?'<p class="v20Notice">Gallery unavailable. <button data-v20-retry type="button">Retry</button></p>':""}
-      ${selected?`<figure><img loading="lazy" src="${safe(selected[1].path)}" alt="${e(selected[1].caption)}"><figcaption>${e(selected[1].caption)}</figcaption></figure><div class="v20Thumbs" role="group" aria-label="Select a project capture">${shots.map(([k,s],n)=>`<button type="button" data-v20-capture="${n}" aria-pressed="${n===capture}" title="${e(s.caption)}"><img src="${safe(s.path)}" loading="lazy" alt=""><span>${n+1}</span></button>`).join("")}</div>`:"<p>No verified project capture. Open the project source instead.</p>"}</div>`;
+      ${selected?`<figure><img loading="lazy" src="${safe(selected[1].path)}" alt="${e(selected[1].caption)}"><figcaption>${e(selected[1].caption)}</figcaption></figure><div class="v20Thumbs" role="group" aria-label="Select a project capture">${shots.map(([k,s],n)=>`<button type="button" data-v20-capture="${n}" aria-pressed="${n===capture}" title="${e(s.caption)}"><img data-src="${safe(s.path)}" loading="lazy" decoding="async" alt=""><span>${n+1}</span></button>`).join("")}</div>`:"<p>No verified project capture. Open the project source instead.</p>"}</div>`;
   }
   function architecture(p){
     const stages=V20_FLOWS[p.id]||[["Implementation",p.caseStudy.approach]];

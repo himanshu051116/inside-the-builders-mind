@@ -26,7 +26,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       <a href="${V20_SETTINGS.fullstack.resume}" id="v20Resume" download>Download matching résumé ↓</a>
     </div>
     <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Projects <span class="v20InputHint">Hover to preview · Tap to open</span></label><input id="v20Search" type="search" autocomplete="off" placeholder="Search projects or tools"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
-    <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="#v20Archive" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
+    <div class="v20Foot"><a href="#v20Archive" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
   legacy.insertAdjacentElement("afterend",workspace);
   // Public archive: one independent disclosure per actual content section.
   // A single closed parent previously concealed the entire portfolio.

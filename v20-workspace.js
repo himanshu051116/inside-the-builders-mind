@@ -316,6 +316,26 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     render();updateSearchNotice();announce(`${first().label} workspace selected`);
     if(update)commitSelection("pushState");
   }
+  function restorePreview({announceRestore=true}={}){
+    if(!previewSnapshot){
+      previewActive=false;renderPreviewBar();return false;
+    }
+    const snapshot=previewSnapshot;
+    clearHover();clearPreviewCheckpoint();
+    previewActive=false;
+    // Reapply the original role's legacy visual mode, then restore exact
+    // project, tab and evidence states. Preview mutations never become history.
+    if(role!==snapshot.role)chooseRole(snapshot.role,true,false);
+    role=snapshot.role;workspace.dataset.role=role;
+    id=snapshot.id;tab=snapshot.tab;capture=snapshot.capture;stage=snapshot.stage;
+    projectStateMaps.forEach((m,index)=>{
+      m.clear();
+      for(const [key,value] of snapshot.maps[index])m.set(key,value);
+    });
+    render();updateSearchNotice();
+    if(announceRestore)announce("Returned to your selected project and view.");
+    return true;
+  }
   function openLegacy(hash){return revealArchive(hash)}
   function alignRouteDetail(href){
     const detail=readV25DetailRoute(href);
@@ -337,8 +357,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     emit("replaceState",hash);
   }
   workspace.addEventListener("click",ev=>{
-    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v25-commit],button[data-v25-copy]");
+    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v25-commit],button[data-v25-copy],button[data-v251-cancel],button[data-v251-jump]");
     if(!b)return;
+    if(b.hasAttribute("data-v251-cancel")){restorePreview();return}
+    if(b.hasAttribute("data-v251-jump")){
+      chooseTab(b.dataset.v251Jump,true,true);
+      return;
+    }
     if(b.hasAttribute("data-v25-commit")){commitSelection("pushState");return}
     if(b.hasAttribute("data-v25-copy")){
       const result=commitSelection("pushState");
@@ -381,6 +406,14 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   };
   const preview=(button)=>{
     if(!button?.isConnected||!workspace.contains(button))return;
+    if(
+      (button.hasAttribute("data-v20-project")&&id===button.dataset.v20Project)||
+      (button.hasAttribute("data-v20-role")&&role===button.dataset.v20Role)||
+      (button.hasAttribute("data-v20-tab")&&tab===button.dataset.v20Tab)||
+      (button.hasAttribute("data-v20-stage")&&stage===Number(button.dataset.v20Stage))||
+      (button.hasAttribute("data-v20-capture")&&capture===Number(button.dataset.v20Capture))
+    )return;
+    rememberPreview();
     previewActive=true;
     if(button.hasAttribute("data-v20-project")){
       if(id===button.dataset.v20Project)return;
@@ -419,6 +452,20 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   });
   workspace.addEventListener("pointerdown",clearHover);
   workspace.addEventListener("pointercancel",clearHover);
+  // Leaving the whole explorer (not a row) reverts an uncommitted preview.
+  // The delay allows people to move into the inspector without flicker.
+  workspace.addEventListener("pointerenter",()=>{
+    win.clearTimeout(previewRestoreTimer);previewRestoreTimer=0;
+  });
+  workspace.addEventListener("pointerleave",()=>{
+    clearHover();
+    win.clearTimeout(previewRestoreTimer);
+    if(previewActive)previewRestoreTimer=win.setTimeout(()=>restorePreview({announceRestore:false}),550);
+  });
+  doc.addEventListener("keydown",ev=>{
+    if(ev.key!=="Escape"||!previewActive||doc.querySelector("#commandDialog")?.open)return;
+    ev.preventDefault();restorePreview();
+  });
   // Restrained pointer light, rAF-throttled and confined to one panel.
   if(canHover()&&!win.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches){
     let frame=0,px=0,py=0;
@@ -474,14 +521,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     // Native anchor scrolling can use the pre-expansion geometry of a <details>
     // section. Own this explicit navigation so the actual target reaches view.
     ev.preventDefault();
-    if(previewActive){
-      previewActive=false;
-      const committed=readV207Route(win.location.href,ids);
-      if(committed.role!==role)chooseRole(committed.role,true,false);
-      id=committed.project;tab=committed.panel;
-      capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;
-      alignRouteDetail(win.location.href);render();
-    }
+    if(previewActive)restorePreview({announceRestore:false});
     const directCase=hash.match(/^#case-(ohs|news|mulyankan|earthbridge)$/);
     if(directCase){
       const target=caseSlugToId[directCase[1]];
@@ -496,19 +536,14 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }));
   },true);
   win.addEventListener("hashchange",()=>{
-    if(previewActive){
-      clearHover();previewActive=false;
-      const committed=readV207Route(win.location.href,ids);
-      if(committed.role!==role)chooseRole(committed.role,true,false);
-      id=committed.project;tab=committed.panel;
-      capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;
-      alignRouteDetail(win.location.href);render();
-    }
+    if(previewActive)restorePreview({announceRestore:false});
     openLegacy(win.location.hash);
     syncCaseHash(win.location.hash);
   });
   win.addEventListener("popstate",()=>{
-    clearHover();previewActive=false;
+    clearHover();
+    if(previewActive)restorePreview({announceRestore:false});
+    previewActive=false;
     const next=readV207Route(win.location.href,ids);
     if(next.role!==role)chooseRole(next.role,true,false);
     captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
@@ -529,6 +564,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const requested=validRole(ev.detail?.role);
     const preview=ev.detail?.preview===true;
     if(requested!==role){
+      if(preview)rememberPreview();
       previewActive=preview;
       chooseRole(requested,false,!preview);
       if(preview)renderPreviewBar();

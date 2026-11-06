@@ -105,7 +105,7 @@ export function setupV203Experience({projects=[]}={},doc=document,win=window){
     const thumbs=[...panel.querySelectorAll('[data-v20-capture]')];if(!thumbs.length)return;
     const i=Math.max(0,thumbs.findIndex(b=>b.getAttribute('aria-pressed')==='true'));
     const row=el('div','v203MediaControls');
-    const description=el('div','');description.append(el('strong','','Saved screenshots'),el('span','',String(i+1)+' / '+thumbs.length));
+    const description=el('div','');description.append(el('strong','','Saved capture'),el('span','',String(i+1)+' of '+thumbs.length+' · static screenshot'));
     const controls=el('div','v203MediaButtons');
     const prev=button('v203Action','data-v203-media','prev','←');prev.setAttribute('aria-label','Previous screenshot');prev.disabled=i===0;
     const next=button('v203Action','data-v203-media','next','→');next.setAttribute('aria-label','Next screenshot');next.disabled=i===thumbs.length-1;

@@ -40,7 +40,10 @@ function spotlightMarkup(captures){
     ${choices}
     ${choices?'<p class="v208SpotlightStatus" role="status"></p>':''}
     ${captures.map(({id,path,caption,width,height,href},i)=>`<figure id="spotlight-${escapeText(id)}"${i?' hidden':''}>
-      <img src="${escapeText(path)}" alt="${escapeText(caption)}" width="${Number(width)||720}" height="${Number(height)||460}" loading="${i?'lazy':'eager'}" decoding="async">
+      <div class="v208ScreenFrame">
+        <div class="v208ScreenBar"><span aria-hidden="true"></span>Saved capture</div>
+        <img src="${escapeText(path)}" alt="${escapeText(caption)}" width="${Number(width)||720}" height="${Number(height)||460}" loading="${i?'lazy':'eager'}" decoding="async">
+      </div>
       <figcaption><span>${escapeText(caption)}</span><a href="${escapeText(href)}">Inspect screen ↗</a></figcaption>
     </figure>`).join('')}
   </div>`;
@@ -63,7 +66,7 @@ export function recruiterIntroMarkup(profile={}, {featuredCaptures=[]}={}) {
           <h1 id="v17Name">${name}<span class="v17Period" aria-hidden="true">.</span></h1>
           ${featuredProject?`${statement}
             <p class="v17Degree">${escapeText(profile.education)}</p>
-            <p class="v17Graduation">Open to software engineering, data systems, and applied ML internships.</p>`:
+            <p class="v17Graduation v208Availability">Open to internships</p>`:
             `<p class="v17Degree">${escapeText(f.education.degree)} <span class="v17Dot" aria-hidden="true">·</span> ${escapeText(f.education.institution)}</p>
             <p class="v17Graduation">${escapeText(f.education.year)} <span aria-hidden="true">/</span> Expected graduation ${escapeText(f.education.graduation)} <span aria-hidden="true">/</span> Gwalior, India</p>
             ${statement}`}

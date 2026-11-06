@@ -47,6 +47,52 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   gap: 12px 28px;
   margin-bottom: 24px;
 }
+.v208WorkKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 8px;
+  color: #37675e;
+  font-size: 13px;
+  font-weight: 750;
+}
+.v208WorkKicker::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+}
+#work-gallery .v208WorkHeading h1 {
+  font-size: clamp(40px, 5.8vw, 78px);
+}
+.v208ExplorerLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: fit-content;
+  min-height: 44px;
+  padding: 5px 6px 5px 14px;
+  border: 1px solid #aebeb5;
+  border-radius: 999px;
+  background: var(--v208-card);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.v208ExplorerLink span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #193b3b;
+  color: #fffaf3;
+}
+.v208ExplorerLink:hover {
+  background: #e4ede3;
+  border-color: #5d8779;
+}
 .v208GalleryToolbar {
   display: flex;
   align-items: center;
@@ -82,6 +128,9 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 }
 .v208GalleryFilters button:hover {
   border-color: #527c70;
+}
+.v208GalleryFilters button {
+  border-radius: 999px;
 }
 .v208GalleryFilters button[aria-pressed="true"] {
   border-color: #225e59;
@@ -164,6 +213,59 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   font-weight: 800;
   margin-top: auto;
   padding-top: 8px;
+}
+#work-gallery .v208ProjectCard {
+  border-radius: 16px;
+  box-shadow: 0 12px 24px #193b3b0a;
+}
+#work-gallery [data-v208-featured] {
+  border-color: #355653;
+  background: radial-gradient(ellipse at bottom right, #30514a, #152f33 65%);
+  color: #f9f6eb;
+}
+#work-gallery [data-v208-featured] .v208CardBody {
+  padding: clamp(17px, 2vw, 26px);
+}
+#work-gallery [data-v208-featured] .v208CardBody h2 {
+  font-size: clamp(25px, 2.8vw, 42px);
+}
+#work-gallery [data-v208-featured] .v208CardBody p {
+  color: #dce7dc;
+}
+#work-gallery [data-v208-featured] :is(.v208Status, .v208TagRow span) {
+  border-color: #54766c;
+  background: #254540;
+  color: #f1f4e8;
+}
+#work-gallery [data-v208-featured] .v208CardAction {
+  color: #d9ecc3;
+}
+#work-gallery [data-v208-featured] .v208CardLink:focus-visible {
+  outline-color: #d9ecc3;
+}
+.v208ImageEmpty {
+  background:
+    repeating-linear-gradient(90deg, #27534411 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(0deg, #27534411 0 1px, transparent 1px 28px),
+    radial-gradient(ellipse at top right, #c2d9c8, #e3ece2);
+}
+@media (min-width: 951px) {
+  #work-gallery[data-v208-gallery-selection="all"] .v208CardGrid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  #work-gallery[data-v208-gallery-selection="all"] .v208ProjectCard {
+    grid-column: span 4;
+  }
+  #work-gallery[data-v208-gallery-selection="all"] .v208ProjectCard:nth-child(-n+3) {
+    grid-column: span 3;
+  }
+  #work-gallery[data-v208-gallery-selection="all"] .v208ProjectCard[data-v208-featured] {
+    grid-column: span 6;
+  }
+  #work-gallery[data-v208-gallery-selection="all"] .v208ProjectCard:nth-child(-n+3) .v208CardCover {
+    height: clamp(155px, 16.5vw, 218px);
+    aspect-ratio: auto;
+  }
 }
 .v208PageIntro, .v208Section {
   padding-block: clamp(28px, 4vw, 52px);
@@ -273,8 +375,19 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 }
 
 /* The standalone Home keeps the original portfolio's visual identity. */
+.v208Home #home.v17Recruiter {
+  background:
+    radial-gradient(ellipse at 91% 9%, #d5e6d8 0, transparent 52%),
+    radial-gradient(ellipse at 8% 30%, #fcf7ed 0, transparent 65%),
+    var(--v208-paper);
+}
 .v208Home #home .v17LeadGrid {
   padding-block: clamp(28px, 4.5vw, 62px) 26px;
+}
+.v208Home #home h1 {
+  font-size: clamp(44px, 5.7vw, 87px);
+  line-height: .98;
+  white-space: normal;
 }
 .v208Home #home .v17LeadStatement {
   font-size: clamp(16px, 1.5vw, 19px);
@@ -289,12 +402,37 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   font-weight: 450;
   margin-bottom: 18px;
 }
+.v208Home #home .v208Availability {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: 5px;
+  padding: 5px 10px;
+  border: 1px solid #b8cbb9;
+  border-radius: 999px;
+  background: #e4eee1;
+  color: #305348;
+  font-size: 12px;
+  font-weight: 700;
+}
+.v208Availability::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #387664;
+}
 .v208Home #home .v19ProjectRail {
   display: block;
   margin-top: 16px;
 }
 .v208Home #home .v19ProjectRail a {
   min-height: 48px;
+  border-radius: 7px;
+}
+.v208Home #home .v19ProjectRail a:is(:hover, :focus-visible) {
+  background: #e2eade;
 }
 .v208Home #home .v19ProjectRailLabel {
   font: 700 12px/1.4 system-ui, sans-serif;
@@ -305,6 +443,15 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 .v208Home #home .v17ProofHeader, .v208Home #home .v17ProofProject {
   font: 700 12px/1.35 system-ui, sans-serif;
   letter-spacing: 0;
+}
+.v208Home #home .v17Proof {
+  border: 1px solid #40665e;
+  border-radius: 17px;
+  background: radial-gradient(ellipse at top right, #2d524c, #152e34 68%);
+  box-shadow: 0 20px 38px #193b3b24;
+}
+.v208Home #home .v17Proof h2 {
+  font-size: clamp(28px, 2.65vw, 38px);
 }
 .v208SpotlightCapture {
   margin: 0 0 7px;
@@ -343,16 +490,37 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
 .v208SpotlightStatus:not(:empty) {
   margin-bottom: 8px;
 }
+.v208ScreenFrame {
+  overflow: hidden;
+  border: 1px solid #57736c;
+  border-radius: 10px;
+  background: #0c1f24;
+}
+.v208ScreenBar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #47625c;
+  background: #213e3f;
+  color: #d6e5d9;
+  font-size: 11px;
+  font-weight: 650;
+}
+.v208ScreenBar span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b9d7a0;
+}
 .v208SpotlightCapture img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 210px;
+  max-height: 195px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center top;
-  border: 1px solid #57706f;
-  border-radius: 8px;
 }
 .v208SpotlightCapture figcaption {
   display: flex;
@@ -445,6 +613,9 @@ body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-unde
   .v208WorkHeading, .v208WorkPage .v20Head {
     display: block;
     margin-bottom: 12px;
+  }
+  .v208ExplorerLink {
+    margin-top: 12px;
   }
   .v208CardBody {
     padding: 16px;

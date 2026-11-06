@@ -38,7 +38,7 @@ function projectCard(p){
   const cover=p.evidenceImage
     ? `<img src="${safe(p.evidenceImage)}" loading="lazy" alt="${e(p.evidenceImageCaption)}" width="720" height="460">`
     : '<span class="v208ImageEmpty">Technical record</span>';
-  return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}">
+  return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}"${id==='mulyankan'?' data-v208-featured':''}>
     <a class="v208CardLink" href="${projectLink(id)}" aria-labelledby="card-${id} action-${id}">
       <div class="v208CardCover">${cover}</div>
       <div class="v208CardBody">
@@ -126,10 +126,14 @@ export function buildV208(out,root){
   writeAt(out,'legacy',replaceRobots(original,'noindex,follow'));
   const projectGrid=`<div class="v208CardGrid">${projects.map(projectCard).join('')}</div>`;
   const explorerLink='/work/?view=fullstack#v20-workspace';
-  const workMarkup=`<section class="v208Container v208WorkGallery" id="work-gallery">
+  const workMarkup=`<section class="v208Container v208WorkGallery" id="work-gallery" data-v208-gallery-selection="all">
     <div class="v208WorkHeading">
-      <div><h1>Selected work</h1><p>Software, data systems, and applied machine learning.</p></div>
-      <a class="v208TextAction" href="${explorerLink}">Open interactive explorer ↗</a>
+      <div>
+        <span class="v208WorkKicker">Engineering portfolio</span>
+        <h1>Selected work</h1>
+        <p>Software, data systems, and applied machine learning.</p>
+      </div>
+      <a class="v208ExplorerLink" href="${explorerLink}">Open interactive explorer <span aria-hidden="true">↗</span></a>
     </div>
     <div class="v208GalleryToolbar" hidden>
       <div class="v208GalleryFilters" role="group" aria-label="Filter projects">

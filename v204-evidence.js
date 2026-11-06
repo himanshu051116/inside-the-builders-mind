@@ -142,14 +142,14 @@ export function setupV204Evidence({projects=[]}={},doc=document,win=window){
 
   function selectedCaptureId(){
     const active=inspector.querySelector('.v20Media [data-v20-capture][aria-pressed="true"] img');
-    const src=active?.getAttribute("src")||"";
+    const src=active?.getAttribute("src")||active?.getAttribute("data-src")||"";
     const match=src.match(/\/evidence\/([a-z0-9-]+)\.webp$/);
     return match?.[1]||"";
   }
   function resolvePending(){
     if(!pending||pending.project!==projectId())return;
     const caps=[...inspector.querySelectorAll(".v20Media [data-v20-capture]")];
-    const target=caps.find(b=>b.querySelector('img')?.getAttribute("src")===captureSrc(pending.id));
+    const target=caps.find(b=>{const img=b.querySelector('img');return (img?.getAttribute("src")||img?.getAttribute("data-src"))===captureSrc(pending.id)});
     if(target){
       pending=null;
       if(target.getAttribute("aria-pressed")!=="true")target.click();

@@ -214,6 +214,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const p=get();if(!p)return;
     inspector.dataset.activeTab=tab;
     inspector.innerHTML=`<div class="v20ProjectIntro"><div><span>${e(p.category)}</span><span class="v20Status">${e(p.status)}</span></div><h3>${e(p.title)}</h3><p>${e(p.description)}</p><div class="v20Tags">${p.stack.map(x=>`<button type="button" data-v20-tech="${e(x)}" aria-label="Filter projects using ${e(x)}">${e(x)}</button>`).join("")}</div></div>
+    <nav class="v25ContextPath" aria-label="Project context"><span>Selected work</span><span aria-hidden="true">/</span><strong>${e(p.title)}</strong><span aria-hidden="true">/</span><span>${e(tab==="media"?"Screens":tab==="architecture"?"Architecture":tab==="evidence"?"Evidence":"Overview")}</span><button type="button" data-v25-copy aria-label="Copy link to this project and exact inspection state">Copy link ↗</button></nav>
     <div class="v20Tabs" role="tablist" aria-label="Project inspection views">${["overview","media","architecture","evidence"].map(t=>`<button type="button" id="v20-${t}" role="tab" data-v20-tab="${t}" tabindex="${t===tab?0:-1}" aria-selected="${t===tab}" aria-controls="v20Panel">${t==="media"?"Screens":t==="architecture"?"Architecture":t==="evidence"?"Evidence":"Overview"}</button>`).join("")}</div>
     <div id="v20Panel" role="tabpanel" tabindex="0" aria-labelledby="v20-${tab}">${tab==="overview"?overview(p):tab==="media"?media(p):tab==="architecture"?architecture(p):evidence(p)}</div>`;
     renderList();
@@ -308,9 +309,18 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     emit("replaceState",hash);
   }
   workspace.addEventListener("click",ev=>{
-    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v25-commit]");
+    const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech],button[data-v25-commit],button[data-v25-copy]");
     if(!b)return;
     if(b.hasAttribute("data-v25-commit")){commitSelection("pushState");return}
+    if(b.hasAttribute("data-v25-copy")){
+      const result=commitSelection("pushState");
+      if(!result.committed)return;
+      const url=win.location.href;
+      const copy=win.navigator?.clipboard?.writeText;
+      if(typeof copy!=="function"){announce("Copy unavailable. Use the browser address bar.");return}
+      Promise.resolve(copy.call(win.navigator.clipboard,url)).then(()=>announce("Shareable project link copied")).catch(()=>announce("Copy unavailable. Use the browser address bar."));
+      return;
+    }
     if(b.dataset.v20Project){chooseProject(b.dataset.v20Project,true,true);return}
     if(b.dataset.v20Tech){
       search.value=b.dataset.v20Tech;renderList();updateSearchNotice();search.focus();
@@ -436,6 +446,14 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(openLegacy(hash)&&win.location.hash===hash)win.requestAnimationFrame?.(()=>doc.getElementById(hash.slice(1))?.scrollIntoView({behavior:"auto",block:"start"}));
   },true);
   win.addEventListener("hashchange",()=>{
+    if(previewActive){
+      clearHover();previewActive=false;
+      const committed=readV207Route(win.location.href,ids);
+      if(committed.role!==role)chooseRole(committed.role,true,false);
+      id=committed.project;tab=committed.panel;
+      capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;
+      alignRouteDetail(win.location.href);render();
+    }
     openLegacy(win.location.hash);
     syncCaseHash(win.location.hash);
   });
@@ -448,6 +466,13 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     alignRouteDetail(win.location.href);
     render();
     openLegacy(next.hash);
+  });
+  doc.addEventListener("portfolio:case-selection",ev=>{
+    const target=caseSlugToId[ev.detail?.caseId];
+    if(!target||!ids.includes(target))return;
+    chooseProject(target,false,false);
+    chooseTab("evidence",false,false);
+    commitSelection("pushState","#case-files");
   });
   doc.addEventListener('portfolio:legacy-role-request',ev=>{
     const requested=validRole(ev.detail?.role);

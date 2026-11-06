@@ -144,7 +144,12 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const prefixes={mulyankan:"mulyankan-",earthbridge:"earthbridge-",newssources:"news-","our-hidden-universe":"ohs-",schoolbuddies:"schoolbuddies-"};
     const prefix=prefixes[p.id];
     const shots=manifest&&prefix?Object.entries(manifest).filter(([k,v])=>k.startsWith(prefix)&&v&&/^\/evidence\/[a-z-]+\.webp$/.test(v.path)):[];
-    if(!shots.length&&p.evidenceImage)shots.push([p.id,{path:p.evidenceImage,caption:p.evidenceImageCaption||p.title}]);
+    if(!shots.length&&p.evidenceImage){
+      // The screenshot file name is a stable capture ID even before the full
+      // manifest is loaded. Never put a generic project slug in a capture link.
+      const fallbackId=p.evidenceImage.split("/").at(-1)?.replace(/\.webp$/,"")||p.id;
+      shots.push([fallbackId,{path:p.evidenceImage,caption:p.evidenceImageCaption||p.title}]);
+    }
     return shots;
   };
   const relevant=()=>{

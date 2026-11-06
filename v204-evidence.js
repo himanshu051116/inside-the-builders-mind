@@ -93,10 +93,10 @@ export function setupV204Evidence({projects=[]}={},doc=document,win=window){
     const detail=panel.querySelector(".v20StageDetail");
     if(!detail)return;
 
-    const bridge=el("section","v204Bridge");
+    const bridge=el("details","v204Bridge");
     bridge.setAttribute("aria-label","Related project evidence and sources");
-    const head=el("div","v204BridgeHeader");
-    head.append(el("strong","v204Eyebrow","RELATED RECORDS"),el("span","v204Context",getRole()));
+    const head=el("summary","v204BridgeHeader");
+    head.append(el("strong","v204Eyebrow","Related project evidence"));
     bridge.append(head);
 
     const area=el("div","v204BridgeArea");

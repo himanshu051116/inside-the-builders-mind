@@ -28,17 +28,79 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Projects <span class="v20InputHint">Hover to preview · Tap to open</span></label><input id="v20Search" type="search" autocomplete="off" placeholder="Search projects or tools"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
     <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="#v20Archive" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
   legacy.insertAdjacentElement("afterend",workspace);
-  const archive=doc.createElement("details");archive.className="v20Archive";archive.id="v20Archive";
-  archive.innerHTML='<summary><span><strong>Complete portfolio archive</strong><small>Original three résumé showcases, all projects, case studies, captures, tools and interactive labs</small></span><span aria-hidden="true">+</span></summary><div class="v20ArchiveBody"></div>';
+  // Public archive: one independent disclosure per actual content section.
+  // A single closed parent previously concealed the entire portfolio.
+  const archive=doc.createElement("section");archive.className="v20Archive v21Archive";archive.id="v20Archive";
+  archive.setAttribute("aria-labelledby","v21ArchiveTitle");
+  archive.innerHTML='<div class="v21ArchiveHeading"><span>MORE TO EXPLORE</span><h2 id="v21ArchiveTitle">Complete portfolio archive</h2><p>Open the sections that interest you. Everything is available separately.</p></div><div class="v20ArchiveBody"></div>';
   main.append(archive);
   const body=archive.querySelector(".v20ArchiveBody");
-  body.append(legacy);
-  for(const sectionId of ["work","case-files","field-proof","archive","interactive-lab","about","toolkit","lab"]){
+  const groupMap=new Map();
+  const sections=[
+    ["top","Work by focus","Three career perspectives and tailored résumés"],
+    ["work","Selected projects","All documented builds and source links"],
+    ["case-files","Architecture and trade-offs","Case-study routes and engineering decisions"],
+    ["project-notes","Project notes","Design, tests and limitations"],
+    ["field-proof","Captured interfaces","Original screenshots with context"],
+    ["archive","Additional projects","Other builds and their current stage"],
+    ["interactive-lab","Interactive demos","Local demonstrations, clearly identified"],
+    ["about","About","Background and interests"],
+    ["toolkit","Tools and skills","Frameworks and development tools"],
+    ["lab","Evidence review","Try the local rubric exercise"]
+  ];
+  for(const [sectionId,title,subtitle] of sections){
+    const disclosure=doc.createElement("details");
+    disclosure.className="v21ArchiveGroup";
+    disclosure.dataset.archiveSection=sectionId;
+    disclosure.id="v21-archive-"+sectionId;
+    const summary=doc.createElement("summary");
+    const heading=doc.createElement("span");heading.className="v21ArchiveLabel";
+    const strong=doc.createElement("strong");strong.textContent=title;
+    const small=doc.createElement("small");small.textContent=subtitle;
+    heading.append(strong,small);
+    const arrow=doc.createElement("span");arrow.className="v21ArchiveArrow";arrow.setAttribute("aria-hidden","true");arrow.textContent="+";
+    summary.append(heading,arrow);
+    const inner=doc.createElement("div");inner.className="v21ArchiveContent";
+    disclosure.append(summary,inner);body.append(disclosure);groupMap.set(sectionId,disclosure);
+    if(sectionId==="project-notes"){
+      const headingNode=doc.querySelector("#case-files .caseNotesHead");
+      const gridNode=doc.getElementById("caseFilesGrid");
+      if(headingNode&&gridNode){
+        const section=doc.createElement("section");section.className="v21ProjectNotes";section.id="project-notes";
+        section.append(headingNode,gridNode);inner.append(section);
+        disclosure.addEventListener("toggle",()=>{
+          if(!disclosure.open)return;
+          gridNode.hidden=false;
+          const button=doc.getElementById("caseNotesToggle");
+          if(button){button.setAttribute("aria-expanded","true");button.innerHTML='Collapse case notes <span aria-hidden="true">↗</span>';}
+        });
+      }
+      continue;
+    }
     const target=doc.getElementById(sectionId);
     if(!target)continue;
     const direct=[...main.children].find(ch=>ch===target||ch.contains(target));
-    if(direct&&!body.contains(direct)&&direct!==hero&&direct!==archive&&direct!==workspace)body.append(direct);
+    if(direct&&!body.contains(direct)&&direct!==hero&&direct!==archive&&direct!==workspace)inner.append(direct);
   }
+  const showArchiveGroup=(id)=>{const group=groupMap.get(id);if(group)group.open=true;return group};
+  const revealArchive=(hash,{scroll=true}={})=>{
+    const targetId=hash?.startsWith("#proof/")?"field-proof":String(hash||"").replace(/^#/,"");
+    const target=doc.getElementById(targetId);
+    if(!target||!body.contains(target))return false;
+    const group=target.closest(".v21ArchiveGroup");if(group)group.open=true;
+    if(targetId.startsWith("case-")){
+      showArchiveGroup("project-notes");
+      const grid=doc.getElementById("caseFilesGrid");if(grid)grid.hidden=false;
+      const toggle=doc.getElementById("caseNotesToggle");
+      if(toggle){toggle.setAttribute("aria-expanded","true");toggle.innerHTML='Collapse case notes <span aria-hidden="true">↗</span>';}
+      target.querySelector("details.caseFileDetails")?.setAttribute("open","");
+    }
+    if(scroll)win.requestAnimationFrame?.(()=>target.scrollIntoView({behavior:"auto",block:"start"}));
+    return true;
+  };
+  doc.addEventListener("portfolio:archive-preview",ev=>{
+    const hash=ev.detail?.hash;if(typeof hash==="string")revealArchive(hash,{scroll:false});
+  });
   const inspector=doc.getElementById("v20Inspector"),list=doc.getElementById("v20ProjectList"),search=doc.getElementById("v20Search");
   const get=()=>entry.find(p=>p.id===id)||entry[0];
   const first=()=>V20_SETTINGS[role];
@@ -157,19 +219,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     render();updateSearchNotice();announce(`${first().label} workspace selected`);
     if(update)emit("pushState");
   }
-  function openLegacy(hash){
-    const targetId=hash.startsWith("#proof/")?"field-proof":hash.replace(/^#/,"");
-    const target=doc.getElementById(targetId);
-    if(!target||!body.contains(target))return false;
-    archive.open=true;
-    if(targetId.startsWith("case-")){
-      const grid=doc.getElementById("caseFilesGrid");if(grid)grid.hidden=false;
-      const toggle=doc.getElementById("caseNotesToggle");if(toggle)toggle.setAttribute("aria-expanded","true");
-      target.querySelector("details.caseFileDetails")?.setAttribute("open","");
-    }
-    win.requestAnimationFrame?.(()=>target.scrollIntoView({behavior:"auto",block:"start"}));
-    return true;
-  }
+  function openLegacy(hash){return revealArchive(hash)}
   workspace.addEventListener("click",ev=>{
     const b=ev.target.closest("button[data-v20-project],button[data-v20-tab],button[data-v20-role],button[data-v20-stage],button[data-v20-capture],button[data-v20-video],button[data-v20-retry],button[data-v20-tech]");
     if(!b)return;
@@ -273,15 +323,15 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(quick&&ids.includes(quick.dataset.v20OpenProject)){
       ev.preventDefault();
       chooseProject(quick.dataset.v20OpenProject,true,false);
-      archive.open=false;
+      
       workspace.scrollIntoView({behavior:'auto',block:'start'});
       return;
     }
     const a=ev.target.closest('a[href^="#"]');
     if(!a)return;
-    const hash=a.getAttribute("href");if(hash==="#v20Archive"){archive.open=true;return}
-    if(hash==="#top"){archive.open=true;return}
-    if(hash==="#v20-workspace"){archive.open=false;return}
+    const hash=a.getAttribute("href");if(hash==="#v20Archive"){return}
+    if(hash==="#top"){showArchiveGroup("top");return}
+    if(hash==="#v20-workspace"){return}
     if(openLegacy(hash)&&win.location.hash===hash)win.requestAnimationFrame?.(()=>doc.getElementById(hash.slice(1))?.scrollIntoView({behavior:"auto",block:"start"}));
   },true);
   win.addEventListener("hashchange",()=>openLegacy(win.location.hash));

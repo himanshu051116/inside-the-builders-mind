@@ -42,19 +42,13 @@ export function recruiterIntroMarkup(profile={}) {
       <div class="v17TopLine"><span class="v17Index">PROFILE</span><span class="v17Availability"><i aria-hidden="true"></i> ${escapeText(f.stage)}</span></div>
       <div class="v17LeadGrid">
         <div class="v17LeadCopy">
-          <p class="v17Overline">SOFTWARE <span aria-hidden="true">/</span> DATA SYSTEMS <span aria-hidden="true">/</span> MACHINE LEARNING</p>
+          <p class="v17Overline">SOFTWARE · DATA SYSTEMS · APPLIED ML</p>
           <h1 id="v17Name">${name}<span class="v17Period" aria-hidden="true">.</span></h1>
           <p class="v17Degree">${escapeText(f.education.degree)} <span class="v17Dot" aria-hidden="true">·</span> ${escapeText(f.education.institution)}</p>
-          <p class="v17Graduation">${escapeText(f.education.year)} <span aria-hidden="true">/</span> Expected graduation ${escapeText(f.education.graduation)} <span aria-hidden="true">/</span> Gwalior, India</p>
-          <p class="v17LeadStatement">I build React interfaces, Python data services, and PyTorch retrieval prototypes.</p>
+          <p class="v17Graduation">${escapeText(f.education.year)} <span aria-hidden="true">/</span> Graduating ${escapeText(f.education.graduation)} <span aria-hidden="true">/</span> Gwalior</p>
+          <p class="v17LeadStatement">Building React products, Python data systems, and PyTorch retrieval tools.</p>
           <div class="v17PrimaryLinks"><a class="v17MainCTA" href="#v20-workspace">Explore my projects <span aria-hidden="true">↗</span></a><details class="v17ResumeSelect"><summary>Download résumé <span aria-hidden="true">↓</span></summary><div class="v17ResumeChoices"><a href="/resumes/Himanshu_Shukla_fullstack_Public.pdf" download>Full-Stack</a><a href="/resumes/Himanshu_Shukla_software_Public.pdf" download>Software Systems</a><a href="/resumes/Himanshu_Shukla_ml_Public.pdf" download>Applied ML</a></div></details></div>
           <nav class="v17Socials" aria-label="Professional profile links"><a href="${git}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${email}">Email ↗</a></nav>
-          <nav class="v19ProjectRail" aria-label="Jump to documented engineering projects">
-            <span class="v19ProjectRailLabel">SELECTED PROJECTS</span>
-            <a href="#case-ohs" data-v20-open-project="our-hidden-universe"><span class="v19ProjectIndex">01</span><span class="v19ProjectDetails"><strong>Our Hidden Universe</strong><small>Product interface · React / Firebase</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
-            <a href="#case-news" data-v20-open-project="newssources"><span class="v19ProjectIndex">02</span><span class="v19ProjectDetails"><strong>NewsSources</strong><small>Data pipeline · Python / PostgreSQL</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
-            <a href="#case-earthbridge" data-v20-open-project="earthbridge"><span class="v19ProjectIndex">03</span><span class="v19ProjectDetails"><strong>EarthBridge</strong><small>Research prototype · PyTorch / FAISS</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
-          </nav>
         </div>
         <aside class="v17Proof" aria-labelledby="v17ProofTitle">
           <div class="v17ProofHeader"><span>PROJECT DEMO</span><span>2026</span></div>
@@ -68,7 +62,7 @@ export function recruiterIntroMarkup(profile={}) {
         <section class="v17Essential"><div class="v17EssentialHeading"><span>AWARDS</span></div><ul class="v17FactList">${f.recognitions.map(x=>`<li>${escapeText(x)}</li>`).join('')}</ul></section>
         <section class="v17Essential v17EssentialStack"><div class="v17EssentialHeading"><span>TOOLS</span></div><div class="v17SkillTokens" aria-label="Technologies">${f.skills.map(x=>`<span>${escapeText(x)}</span>`).join('')}</div></section>
       </div>
-      <div class="v17GoDeeper"><a href="#v20-workspace">Browse work by focus <span aria-hidden="true">↓</span></a></div>
+      
     </div>
   </section>`;
 }

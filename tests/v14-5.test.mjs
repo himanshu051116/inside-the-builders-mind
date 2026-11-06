@@ -35,8 +35,8 @@ test('V14.5 source ownership cleanup is documented and source styles stay editab
 test('V14.5 actually shrinks the compiled CSS without removing existing themes',()=>{
  // Compare against the actual ordered source bundle, not the stale tracked legacy CSS.
  const cssModules=['01-base.css','02-workbench.css','03-atelier.css','04-experience.css','05-career.css','06-interactions.css','07-scenes.css','08-case-index.css','09-evidence-desk.css','10-screen-gallery.css','11-image-reader.css']
- const layers=read('scripts/build.mjs').match(/const modernLayers=\\[([^\\]]+)\\]/)?.[1]||''
- const cssLayers=[...layers.matchAll(/'([^']+\\.css)'/g)].map(x=>x[1])
+ const layers=read('scripts/build.mjs').split('const modernLayers=')[1]?.split(']')[0]||''
+ const cssLayers=layers.split("'").filter(x=>x.endsWith('.css'))
  assert.ok(cssLayers.includes('v21-quality.css'))
  const source=Buffer.from([...cssModules.map(n=>read(`styles/${n}`)),...cssLayers.map(read)].join('\n'))
  const dist=readFileSync(resolve(root,'dist/portfolio.css'))

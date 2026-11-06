@@ -295,7 +295,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   });
   doc.addEventListener('portfolio:legacy-role-request',ev=>{
     const requested=validRole(ev.detail?.role);
-    if(requested!==role)chooseRole(requested,false,true);
+    if(requested!==role){
+      const preview=ev.detail?.preview===true;
+      chooseRole(requested,false,!preview);
+      if(preview)emit("replaceState");
+    }
   });
   chooseRole(role,false,false);
   // An incoming shared link may select another project, panel or legacy case anchor.

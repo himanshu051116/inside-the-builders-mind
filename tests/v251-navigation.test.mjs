@@ -28,6 +28,8 @@ test('cancel restores role, project, inspection panel, screenshots, stage and th
  assert.match(ws,/if\(ev\.key!=="Escape"\|\|!previewActive/)
  assert.match(ws,/data-v251-cancel/)
  assert.match(css,/v251PreviewActions/)
+ assert.match(css,/data-previewing="true"/)
+ assert.match(css,/\.v203TourShortcut\{display:none!important\}/)
 })
 
 test('committing always discards the preview checkpoint',()=>{

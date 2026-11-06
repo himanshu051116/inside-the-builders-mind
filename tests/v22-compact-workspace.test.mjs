@@ -32,6 +32,7 @@ test('screenshot notes default closed; markers are opt-in and data stays inspect
  assert.match(notes,/el\("details","v205AnnotationPanel"\)/)
  assert.match(notes,/el\("summary","v205Head"\)/)
  assert.match(notes,/show=panel\.open/)
+ assert.match(notes,/expandedCapture=show\?id:/)
  assert.match(notes,/thumbnails\|\|figure/)
  assert.match(notes,/V205_ANNOTATIONS\[currentCapture\]/)
  assert.match(css,/v205AnnotationPanel>summary/)
@@ -40,6 +41,8 @@ test('screenshot notes default closed; markers are opt-in and data stays inspect
 
 test('architecture labels are not injected into the Screens tab',()=>{
  assert.match(evidence,/enhanceArchitecture\(\)/)
+ assert.match(evidence,/el\("details","v204Bridge"\)/)
+ assert.match(css,/\.v20Architecture \.v203StageRail\{display:none\}/)
  assert.doesNotMatch(evidence,/^    enhanceMedia\(\);/m)
  assert.match(main,/data-v20-tab/)
  assert.match(main,/tab==="architecture"/)

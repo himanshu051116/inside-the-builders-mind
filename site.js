@@ -5,6 +5,7 @@ import { setupV203Experience } from './v203-experience.js'
 import { setupV204Evidence } from './v204-evidence.js'
 import { setupV205Annotations } from './v205-annotations.js'
 import { setupV21Interactions } from './v21-interactions.js'
+import { setupV23Quality } from './v23-quality.js'
 import { setupMilestoneVideo } from './v19-milestone-video.js'
 import { setupEvidenceWorkbench } from './workbench-ui.js'
 import { setupPortfolioExperience } from './experience-v6.js'
@@ -235,6 +236,7 @@ setupV203Experience({projects})
 setupV204Evidence({projects})
 setupV205Annotations()
 setupV21Interactions()
+setupV23Quality()
 // Pause decorative, perpetual motion when its lab/workspace is offscreen.
 // Real controls, timers, data and interaction state are intentionally untouched.
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {

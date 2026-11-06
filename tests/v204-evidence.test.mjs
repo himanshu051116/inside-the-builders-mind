@@ -7,7 +7,7 @@ const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8')
 const manifest=JSON.parse(read('public/evidence/manifest.json'))
 const slug=t=>String(t).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
 
-test('six project maps retain the four existing architecture stages',()=>{
+test('five project maps retain the four existing architecture stages',()=>{
  const actual=projects.map(p=>slug(p.title)).sort()
  assert.deepEqual(Object.keys(V204_STAGE_CAPTURES).sort(),actual)
  for(const [id,items] of Object.entries(V204_STAGE_CAPTURES)){
@@ -20,7 +20,7 @@ test('six project maps retain the four existing architecture stages',()=>{
  }
 })
 test('prototype gaps remain visible; unsupported projects never get fake captures',()=>{
- assert.equal(V204_STAGE_CAPTURES.sentinel.every(x=>x===null),true)
+ assert.ok(!Object.hasOwn(V204_STAGE_CAPTURES,'sentinel'))
  assert.equal(V204_STAGE_CAPTURES.newssources[1],null)
  assert.equal(V204_STAGE_CAPTURES.newssources[2],null)
 })

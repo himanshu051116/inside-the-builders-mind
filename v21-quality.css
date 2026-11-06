@@ -190,6 +190,9 @@
   .v21Archive .v21ArchiveContent>.section{padding-inline:0}
 }
 @media(max-width:630px){
+  /* Keep the brand/name and both mobile actions inside the 320–390px viewport. */
+  .header .brandWord small{display:none}
+
   .v21Archive{padding-block:29px 45px}
   .v21Archive .v21ArchiveHeading,.v21Archive .v20ArchiveBody{width:calc(100% - 24px)}
   .v21Archive .v21ArchiveHeading h2{font-size:29px}

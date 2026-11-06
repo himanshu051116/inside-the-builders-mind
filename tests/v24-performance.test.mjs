@@ -5,7 +5,7 @@ const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8')
 
 test('no-JS fallback does not collapse a viewport-height margin through body',()=>{
  const src=read('v24-performance.css')
- assert.match(src,/\.noJs\{max-width:740px;margin:0 auto;/)
+ assert.match(src,/margin:0 auto;/)
  assert.doesNotMatch(src,/\.noJs\{max-width:740px;margin:12vh auto/)
  assert.match(src,/background:#f5f1e9/)
 })

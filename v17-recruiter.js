@@ -49,13 +49,13 @@ function spotlightMarkup(captures){
   </div>`;
 }
 
-export function recruiterIntroMarkup(profile={}, {featuredCaptures=[]}={}) {
+export function recruiterIntroMarkup(profile={}, {featuredCaptures=[],focusMarkup=''}={}) {
   const f=recruiterFacts;
   const name=escapeText(profile.name || 'Himanshu Shukla');
   const git=safeHref(profile.github || 'https://github.com/himanshu051116');
   const linkedin=safeHref(profile.linkedin || 'https://www.linkedin.com/in/himanshu-shukla-88175637a');
   const email=safeHref(profile.email ? 'mailto:'+profile.email : 'mailto:himanshusubh1510@gmail.com');
-  const featuredProject=featuredCaptures.length>0;
+  const featuredProject=Boolean(focusMarkup)||featuredCaptures.length>0;
   const statement='<p class="v17LeadStatement">I build React interfaces, Python data services, and PyTorch retrieval prototypes.</p>';
   const caseLink=`<a class="v17ProofLink" href="#case-mulyankan" aria-label="Mulyankan case study">${featuredProject?'Case study':'Mulyankan case study'} <span aria-hidden="true">↗</span></a>`;
   const essentials=`<div class="v17Essentials" aria-label="Leadership, recognition and technical skills">
@@ -78,22 +78,30 @@ export function recruiterIntroMarkup(profile={}, {featuredCaptures=[]}={}) {
             ${statement}`}
           <div class="v17PrimaryLinks"><a class="v17MainCTA" href="#v20-workspace">${featuredProject?'View selected work':'Explore my projects'} <span aria-hidden="true">↗</span></a><details class="v17ResumeSelect"><summary>${featuredProject?'Résumé':'Download résumé'} <span aria-hidden="true">${featuredProject?'▾':'↓'}</span></summary><div class="v17ResumeChoices"><a href="/resumes/Himanshu_Shukla_fullstack_Public.pdf" download>Full-Stack</a><a href="/resumes/Himanshu_Shukla_software_Public.pdf" download>Software Systems</a><a href="/resumes/Himanshu_Shukla_ml_Public.pdf" download>Applied ML</a></div></details></div>
           <nav class="v17Socials" aria-label="Professional profile links"><a href="${git}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${email}">Email ↗</a></nav>
-          <nav class="v19ProjectRail" aria-label="Jump to documented engineering projects">
+          ${focusMarkup?'':`<nav class="v19ProjectRail" aria-label="Jump to documented engineering projects">
             <span class="v19ProjectRailLabel">SELECTED PROJECTS</span>
             <a href="#case-ohs" data-v20-open-project="our-hidden-universe"><span class="v19ProjectIndex">01</span><span class="v19ProjectDetails"><strong>Our Hidden Universe</strong><small>${featuredProject?'Private rooms for chat, calls, and shared playback':'Product interface · React / Firebase'}</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
             <a href="#case-news" data-v20-open-project="newssources"><span class="v19ProjectIndex">02</span><span class="v19ProjectDetails"><strong>NewsSources</strong><small>${featuredProject?'Trace articles back to their sources':'Data pipeline · Python / PostgreSQL'}</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
             <a href="#case-earthbridge" data-v20-open-project="earthbridge"><span class="v19ProjectIndex">03</span><span class="v19ProjectDetails"><strong>EarthBridge</strong><small>${featuredProject?'Search satellite imagery across sensors':'Research prototype · PyTorch / FAISS'}</small></span><span class="v19ProjectArrow" aria-hidden="true">↗</span></a>
-          </nav>
+          </nav>`}
         </div>
-        <aside class="v17Proof" aria-labelledby="v17ProofTitle"${featuredProject?' data-v208-pointer':''}>
-          <div class="v17ProofHeader"><span>${featuredProject?escapeText(f.spotlight.project):'PROJECT DEMO'}</span><span>${featuredProject?'Demonstrated prototype':'2026'}</span></div>
-          <div class="v17ProofBody">${featuredProject?'':`<span class="v17ProofProject">${escapeText(f.spotlight.project)}</span>`}<h2 id="v17ProofTitle">${featuredProject?'Evidence-linked proposal review':'Document review<br>with cited evidence.'}</h2><p>${escapeText(f.spotlight.detail)}</p>
-          ${spotlightMarkup(featuredCaptures)}
-          ${featuredProject
-            ? `<div class="v17ProofMeta v208ProofMeta">Demonstrated at ${escapeText(f.spotlight.institution)} · ${escapeText(f.spotlight.date)}</div><div class="v208ProofActions">${caseLink}</div>`
-            : `<div class="v17ProofMeta"><div><span>DEMONSTRATED AT</span><strong>${escapeText(f.spotlight.institution)}</strong></div><div><span>DATE</span><strong>${escapeText(f.spotlight.date)}</strong></div></div>${caseLink}`}
+        ${focusMarkup}
+        ${featuredProject?`<aside class="v17Proof v208CompactProof" aria-labelledby="v17ProofTitle" data-v208-pointer>
+          <div class="v17ProofBody">
+            <div class="v208ProofHeading"><h2 id="v17ProofTitle">${escapeText(f.spotlight.project)}</h2><span>Demonstrated prototype</span></div>
+            <p>Evidence-linked proposal review with human oversight.</p>
+            <div class="v17ProofMeta v208ProofMeta">Demonstrated at ${escapeText(f.spotlight.institution)} · ${escapeText(f.spotlight.date)}</div>
+            <div class="v208ProofActions">${caseLink}</div>
+            ${featuredCaptures.length?`<details class="v208ProofScreens">
+              <summary>Browse saved screens</summary>
+              ${spotlightMarkup(featuredCaptures)}
+            </details>`:''}
           </div>
-        </aside>
+        </aside>`:`<aside class="v17Proof" aria-labelledby="v17ProofTitle">
+          <div class="v17ProofHeader"><span>PROJECT DEMO</span><span>2026</span></div>
+          <div class="v17ProofBody"><span class="v17ProofProject">${escapeText(f.spotlight.project)}</span><h2 id="v17ProofTitle">Document review<br>with cited evidence.</h2><p>${escapeText(f.spotlight.detail)}</p>
+          <div class="v17ProofMeta"><div><span>DEMONSTRATED AT</span><strong>${escapeText(f.spotlight.institution)}</strong></div><div><span>DATE</span><strong>${escapeText(f.spotlight.date)}</strong></div></div>${caseLink}</div>
+        </aside>`}
       </div>
       ${featuredProject?`<details class="v208Background"><summary>Background, leadership &amp; tools</summary>${essentials}</details>`:essentials}
       ${featuredProject?'':`<div class="v17GoDeeper"><a href="#v20-workspace">Browse work by focus <span aria-hidden="true">↓</span></a></div>`}

@@ -5,7 +5,7 @@ function setupGalleryFilters(gallery){
   const toolbar=gallery.querySelector('.v208GalleryToolbar');
   const cards=[...gallery.querySelectorAll('[data-v208-project-filters]')];
   const count=toolbar.querySelector('.v208GalleryCount');
-  const motion=window.matchMedia('(prefers-reduced-motion: no-preference)');
+  const motion=window.matchMedia('(min-width: 651px) and (prefers-reduced-motion: no-preference)');
   const animations=new Map();
   let active=toolbar.querySelector('[aria-pressed="true"]');
   toolbar.hidden=false;
@@ -24,7 +24,6 @@ function setupGalleryFilters(gallery){
     active=button;
 
     const filter=button.dataset.v208GalleryFilter;
-    gallery.dataset.v208GallerySelection=filter;
     let visible=0;
     for(const card of cards){
       const matches=filter==='all'||card.dataset.v208ProjectFilters.split(' ').includes(filter);
@@ -41,7 +40,7 @@ function setupGalleryFilters(gallery){
       if(Math.abs(x)+Math.abs(y)<1)continue;
       const animation=card.animate(
         [{translate:`${x}px ${y}px`},{translate:'0px 0px'}],
-        {duration:280,easing:'cubic-bezier(.2,.7,.2,1)'}
+        {duration:190,easing:'cubic-bezier(.2,.7,.2,1)'}
       );
       animations.set(card,animation);
     }

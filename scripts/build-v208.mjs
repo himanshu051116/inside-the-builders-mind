@@ -42,7 +42,7 @@ function projectCard(p){
   const cover=p.evidenceImage
     ? `<img src="${safe(p.evidenceImage)}" loading="lazy" alt="${e(p.evidenceImageCaption)}" width="720" height="460">`
     : '<span class="v208ImageEmpty">Technical record</span>';
-  return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}"${id==='mulyankan'?' data-v208-featured':''}>
+  return `<article class="v208ProjectCard" data-v208-project-filters="${e(p.filters.join(' '))}" data-v208-accent="${e(p.accent)}"${id==='mulyankan'?' data-v208-featured':''}>
     <a class="v208CardLink" href="${projectLink(id)}" aria-labelledby="card-${id} action-${id}" data-v208-pointer>
       <div class="v208CardCover">${cover}</div>
       <div class="v208CardBody">
@@ -58,7 +58,7 @@ function projectCard(p){
 const actionLinks=p=>`<div class="v208ActionLinks">${p.links.filter(x=>safe(x.url)!=='#').map(x=>`<a href="${safe(x.url)}" rel="noopener noreferrer" target="_blank">${e(x.label)} ↗</a>`).join('')}</div>`;
 function picture(p){return p.evidenceImage?`<figure class="v208EvidencePhoto"><img loading="lazy" width="800" height="480" src="${safe(p.evidenceImage)}" alt="${e(p.evidenceImageCaption||'Saved project interface')}"><figcaption>${e(p.evidenceImageCaption||'Recorded project screenshot')}</figcaption></figure>`:'<div class="v208EmptyEvidence">No documented public screenshot for this project.</div>'}
 function specializations(){
-  return `<section class="v208Container v208Section" id="focus" aria-labelledby="focus-heading">
+  return `<section class="v208TrackShowcase" id="focus" aria-labelledby="focus-heading">
     <h2 id="focus-heading">Explore by specialization</h2>
     <div class="v208TrackTabs" role="tablist" aria-label="Specializations" hidden>
       ${roles.map((role,index)=>`<button type="button" role="tab" id="track-tab-${role.id}" aria-controls="track-${role.id}" aria-selected="${index===0}" tabindex="${index===0?0:-1}">${e(role.name)}</button>`).join('')}
@@ -159,7 +159,7 @@ export function buildV208(out,root){
   writeAt(out,'legacy',replaceRobots(original,'noindex,follow'));
   const projectGrid=`<div class="v208CardGrid">${projects.map(projectCard).join('')}</div>`;
   const explorerLink='/work/?view=fullstack#v20-workspace';
-  const workMarkup=`<section class="v208Container v208WorkGallery" id="work-gallery" data-v208-gallery-selection="all">
+  const workMarkup=`<section class="v208Container v208WorkGallery" id="work-gallery">
     <div class="v208WorkHeading">
       <div>
         <h1>Selected work</h1>
@@ -180,13 +180,10 @@ export function buildV208(out,root){
   const featuredCaptures=spotlightScreens.filter(([id])=>spotlightAssets.has(id)).map(([id,label])=>({
     ...spotlightAssets.get(id),id,label,href:evidenceLink(projectLink('mulyankan'),id)
   }));
-  const homeHero=recruiterIntroMarkup(profile,{featuredCaptures})
+  const homeHero=recruiterIntroMarkup(profile,{featuredCaptures,focusMarkup:specializations()})
     .replaceAll('href="#v20-workspace"','href="/work/"')
-    .replaceAll('href="#case-ohs"','href="/projects/our-hidden-universe/"')
-    .replaceAll('href="#case-news"','href="/projects/newssources/"')
-    .replaceAll('href="#case-earthbridge"','href="/projects/earthbridge/"')
     .replaceAll('href="#case-mulyankan"','href="/projects/mulyankan/"');
-  const home=`${homeHero}${specializations()}<section class="v208Container v208Section" id="about"><h2>How I work</h2><p>${e(profile.philosophy)}</p><a class="v208TextAction" href="/lab/">Try the interactive demonstrations ↗</a></section>`;
+  const home=`${homeHero}<section class="v208Container v208Section" id="about"><h2>How I work</h2><p>${e(profile.philosophy)}</p><a class="v208TextAction" href="/lab/">Try the interactive demonstrations ↗</a></section>`;
   const homeHtml=page('Home',`${profile.name} | Software, Systems & Applied ML`,profile.intro,home,'v208-home.js','https://inside-the-builders-mind.vercel.app/');
   const personSchema=JSON.stringify({'@context':'https://schema.org','@type':'Person',name:profile.name,description:profile.intro,url:'https://inside-the-builders-mind.vercel.app/',sameAs:[profile.github,profile.linkedin]});
   writeAt(out,'',homeHtml.replace('</head>',`<script type="application/ld+json">${personSchema}</script></head>`));

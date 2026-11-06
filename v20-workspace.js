@@ -19,15 +19,19 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   let id=initialRoute.project;
   let tab=initialRoute.panel;
   let capture=0,stage=0,manifest=null,manifestPromise=null,manifestError=false;
+  let searchOrigin=null;
   const workspace=doc.createElement("section");
   workspace.id="v20-workspace";workspace.className="v20Workspace";workspace.setAttribute("aria-labelledby","v20Title");
-  workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Explore the projects.</h2><p id="v20Subtitle">Choose a project to examine its interface, architecture, sources and limitations.</p></div><span class="v20Hint">Use Ctrl / ⌘ + K to search anywhere</span></div>
-    <div class="v20RoleBar" role="group" aria-label="Choose a résumé-specific portfolio experience">
+  const heading=standalone?"h1":"h2";
+  workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">${standalone?"Project explorer":"SELECTED WORK"}</span><${heading} id="v20Title">Explore the projects.</${heading}><p id="v20Subtitle">Choose a project to examine its interface, architecture, sources and limitations.</p></div>
+      ${standalone?'<a class="v208TextAction" href="/work/">← Selected work</a>':'<span class="v20Hint">Use Ctrl / ⌘ + K to search anywhere</span>'}</div>
+    <div class="v20RoleBar" role="group" aria-label="Rank projects by specialization">
+      ${standalone?'<span class="v20RankLabel">Rank by</span>':''}
       ${Object.entries(V20_SETTINGS).map(([k,v])=>`<button type="button" data-v20-role="${k}" aria-pressed="false">${e(v.label)}</button>`).join("")}
       <a href="${standalone?'/legacy/?view='+role+'#top':'#top'}" id="v20FullShowcase">Full showcase ↗</a>
       <a href="${V20_SETTINGS.fullstack.resume}" id="v20Resume" download>Download matching résumé ↓</a>
     </div>
-    <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span><p id="v20SearchNotice" class="v20SearchNotice" hidden></p></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
+    <div class="v20Explorer"><aside class="v20Sidebar"><label for="v20Search">Find projects or technologies</label><input id="v20Search" type="search" autocomplete="off" placeholder="Search: Python, React, PyTorch…"/><div id="v20ProjectList" class="v20ProjectList" aria-label="Select a project"></div><span id="v20Count" class="v20Count"></span></aside><section class="v20Inspector" id="v20Inspector" aria-live="off" aria-label="Selected project details"></section></div>
     <div class="v20Foot"><span>Authentic screenshots and source links · simulations clearly identified</span><a href="${standalone?'/legacy/':'#v20Archive'}" id="v20ArchiveLink">Complete portfolio archive ↗</a></div></div>`;
   // New Work route mounts only the explorer. The entire original site is
   // preserved separately at /legacy/, with its original app initialization.
@@ -52,6 +56,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const first=()=>V20_SETTINGS[role];
   const emit=(method="replaceState")=>{
     const result=commitV207Route(win,{role,project:id,panel:tab},{method});
+    // A deliberate selection becomes the project to keep after clearing search.
+    if(search.value.trim())searchOrigin=id;
     if(!result.committed)announce("The selection is active locally, but this browser did not update the shareable URL.");
     return result;
   };
@@ -61,8 +67,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       const x=rank.indexOf(a.id),y=rank.indexOf(b.id);return (x<0?99:x)-(y<0?99:y);
     });
   };
-  function renderList(){
-    const shown=relevant();
+  function renderList(shown){
     list.innerHTML=shown.map(p=>`<button type="button" data-v20-project="${e(p.id)}" aria-pressed="${p.id===id}" class="${p.id===id?"v20Selected":""}"><span class="v20Num">${e(p.number)}</span><span><strong>${e(p.title)}</strong><small>${e(p.stack.slice(0,2).join(" · "))}</small></span><span aria-hidden="true">↗</span></button>`).join("")||'<p class="v20NoResults">No matches. Try another technology or project name.</p>';
     doc.getElementById("v20Count").textContent=`${shown.length} / ${entry.length} projects`;
   }
@@ -82,7 +87,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     return `<div class="v20Media"><p class="v20Notice">Saved project captures, not a live application.${p.id==="earthbridge"?" The evaluation screen contains repository-reported figures, not live model output.":""}</p>
       ${p.id==="mulyankan"?'<button data-v20-video type="button" class="v20VideoButton">▶ Watch original presenter recordings (17s / 20s)</button>':""}
       ${manifestError?'<p class="v20Notice">Gallery unavailable. <button data-v20-retry type="button">Retry</button></p>':""}
-      ${selected?`<figure><img loading="lazy" src="${safe(selected[1].path)}" alt="${e(selected[1].caption)}"><figcaption>${e(selected[1].caption)}</figcaption></figure><div class="v20Thumbs" role="group" aria-label="Select a project capture">${shots.map(([k,s],n)=>`<button type="button" data-v20-capture="${n}" aria-pressed="${n===capture}" title="${e(s.caption)}"><img src="${safe(s.path)}" loading="lazy" alt=""><span>${n+1}</span></button>`).join("")}</div>`:"<p>No verified project capture. Open the project source instead.</p>"}</div>`;
+      ${selected?`<figure><img loading="lazy" src="${safe(selected[1].path)}" alt="${e(selected[1].caption)}"><figcaption>${e(selected[1].caption)} <a class="v20FullCapture" href="${safe(selected[1].path)}" target="_blank" rel="noopener noreferrer">View full-size screenshot ↗</a></figcaption></figure><div class="v20Thumbs" role="group" aria-label="Select a project capture">${shots.map(([k,s],n)=>`<button type="button" data-v20-capture="${n}" aria-pressed="${n===capture}" title="${e(s.caption)}"><img src="${safe(s.path)}" loading="lazy" alt=""><span>${n+1}</span></button>`).join("")}</div>`:"<p>No verified project capture. Open the project source instead.</p>"}</div>`;
   }
   function architecture(p){
     const stages=V20_FLOWS[p.id]||[["Implementation",p.caseStudy.approach]];
@@ -94,16 +99,21 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const detailed=standalone?`/projects/${p.id}/#verification`:`#case-${cases[p.id]}`;
     return `<div class="v20Evidence"><section><h4>Documented verification</h4><p>${e(p.caseStudy.verification)}</p></section><section><h4>Limitations</h4><p>${e(p.caseStudy.caveat)}</p></section><div class="v20Links">${links(p)}${(standalone||cases[p.id])?`<a href="${detailed}" data-v20-case>Full technical case study ↗</a>`:""}</div></div>`;
   }
-  function render(){
-    const p=get();if(!p)return;
+  function render(shown=relevant()){
+    renderList(shown);
+    const p=shown.find(project=>project.id===id);
+    if(!p){
+      inspector.innerHTML='<p class="v20NoResults">Project details appear here when a project matches your search.</p>';
+      return;
+    }
     inspector.innerHTML=`<div class="v20ProjectIntro"><div><span>${e(p.category)}</span><span class="v20Status">${e(p.status)}</span></div><h3>${e(p.title)}</h3><p>${e(p.description)}</p><div class="v20Tags">${p.stack.map(x=>`<button type="button" data-v20-tech="${e(x)}" aria-label="Filter projects using ${e(x)}">${e(x)}</button>`).join("")}</div></div>
     <div class="v20Tabs" role="tablist" aria-label="Project inspection views">${["overview","media","architecture","evidence"].map(t=>`<button type="button" id="v20-${t}" role="tab" data-v20-tab="${t}" tabindex="${t===tab?0:-1}" aria-selected="${t===tab}" aria-controls="v20Panel">${t==="media"?"Screens":t==="architecture"?"Architecture":t==="evidence"?"Evidence":"Overview"}</button>`).join("")}</div>
     <div id="v20Panel" role="tabpanel" tabindex="0" aria-labelledby="v20-${tab}">${tab==="overview"?overview(p):tab==="media"?media(p):tab==="architecture"?architecture(p):evidence(p)}</div>`;
-    renderList();
     doc.dispatchEvent(new win.CustomEvent("portfolio:v20-render",{detail:{projectId:p.id,role,tab}}));
     inspector.querySelectorAll("img").forEach(img=>img.addEventListener("error",()=>{
       if(!img.isConnected)return;
       if(img.closest(".v20Thumbs")){img.hidden=true;return}
+      img.closest('figure')?.querySelector('.v20FullCapture')?.remove();
       const fallback=doc.createElement("p");fallback.className="v20Unavailable";fallback.textContent="Saved image unavailable. Try the original gallery or source link.";img.replaceWith(fallback);
     },{once:true}));
     if(tab==="media"&&!manifest&&!manifestPromise&&!manifestError)loadManifest();
@@ -123,17 +133,16 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const announce=(msg)=>{let status=doc.getElementById("v20Announce");if(!status){status=doc.createElement("span");status.id="v20Announce";status.className="srOnly";status.setAttribute("role","status");workspace.append(status)}status.textContent=msg};
   function chooseProject(next,update=true,keepFocus=false){
     if(!ids.includes(next))return;
-    if(id===next){
-      if(update)emit("replaceState");
-      if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
-      return;
+    const changed=id!==next;
+    const clearFilter=search.value&&!relevant().some(p=>p.id===next);
+    if(clearFilter){search.value="";searchOrigin=null}
+    if(changed||clearFilter){
+      id=next;capture=0;stage=0;
+      render();
+      announce(`${get().title} selected`);
     }
-    id=next;capture=0;stage=0;
-    if(search.value&&!relevant().some(p=>p.id===next))search.value="";
-    render();updateSearchNotice();
     if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
-    announce(`${get().title} selected`);
-    if(update)emit("pushState");
+    if(update)emit(changed||search.value?"pushState":"replaceState");
     if(update&&win.matchMedia?.("(max-width:730px)").matches)inspector.scrollIntoView({behavior:"auto",block:"start"});
   }
   function chooseTab(next,update=true){
@@ -157,14 +166,14 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     doc.getElementById("v20FullShowcase").textContent=`Open ${first().label} full showcase ↗`;
     if(standalone)doc.getElementById("v20FullShowcase").href=`/legacy/?view=${role}#top`;
     tab=first().tab;id=ids.includes(first().project)?first().project:entry[0].id;
-    capture=0;stage=0;search.value="";
+    capture=0;stage=0;search.value="";searchOrigin=null;
     if(invokeLegacy&&!standalone){
       const prior=doc.documentElement.dataset.v20Syncing;
       doc.documentElement.dataset.v20Syncing='true';
       try{doc.querySelector(`#top [data-switch-role="${role}"]`)?.click()}
       finally{if(prior===undefined)delete doc.documentElement.dataset.v20Syncing;else doc.documentElement.dataset.v20Syncing=prior}
     }
-    render();updateSearchNotice();announce(`${first().label} workspace selected`);
+    render();announce(`${first().label} workspace selected`);
     if(update)emit("pushState");
   }
   function openLegacy(hash){
@@ -186,8 +195,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(!b)return;
     if(b.dataset.v20Project){chooseProject(b.dataset.v20Project,true,true);return}
     if(b.dataset.v20Tech){
-      search.value=b.dataset.v20Tech;renderList();updateSearchNotice();search.focus();
-      announce(`Showing projects using ${b.dataset.v20Tech}`);return
+      search.value=b.dataset.v20Tech;filterProjects();search.focus();return
     }
     if(b.dataset.v20Tab){chooseTab(b.dataset.v20Tab);return}
     if(b.dataset.v20Role){chooseRole(b.dataset.v20Role);return}
@@ -205,18 +213,24 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     ev.preventDefault();const all=["overview","media","architecture","evidence"];
     const n=ev.key==="Home"?0:ev.key==="End"?3:(all.indexOf(tab)+(ev.key==="ArrowRight"?1:3))%4;chooseTab(all[n]);
   });
-  const searchNotice=doc.getElementById('v20SearchNotice');
-  function updateSearchNotice(){
-    const q=search.value.trim(),shown=relevant(),selectedShown=shown.some(p=>p.id===id);
-    searchNotice.hidden=!q||selectedShown||!shown.length;
-    searchNotice.textContent=searchNotice.hidden?'':`${shown.length} matching project${shown.length===1?'':'s'}. Select a result to update the inspector.`;
+  function filterProjects(){
+    const filtering=Boolean(search.value.trim());
+    const preferred=filtering?id:searchOrigin??id;
+    searchOrigin=filtering?(searchOrigin??id):null;
+    const shown=relevant();
+    const next=shown.find(p=>p.id===preferred)||shown[0];
+    const changed=next&&next.id!==id;
+    if(changed){id=next.id;capture=0;stage=0}
+    if(changed||Boolean(next)!==Boolean(inspector.querySelector('#v20Panel')))render(shown);
+    else renderList(shown);
+    announce(next?`${shown.length} matching project${shown.length===1?'':'s'}. Showing ${next.title}.`:'No projects match your search.');
   }
-  search.addEventListener('input',()=>{renderList();updateSearchNotice()});
+  search.addEventListener('input',filterProjects);
   search.addEventListener('keydown',ev=>{
     if(ev.key!=='Enter')return;
     const match=relevant()[0];if(!match)return;
     ev.preventDefault();chooseProject(match.id,true,false);
-    updateSearchNotice();inspector.querySelector('[role="tab"][aria-selected="true"]')?.focus();
+    inspector.querySelector('[role="tab"][aria-selected="true"]')?.focus();
   });
   doc.addEventListener("click",ev=>{
     const quick=ev.target.closest('a[data-v20-open-project]');
@@ -237,8 +251,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   win.addEventListener("hashchange",()=>openLegacy(win.location.hash));
   win.addEventListener("popstate",()=>{
     const next=readV207Route(win.location.href,ids);
+    const wasFiltering=Boolean(search.value);
+    search.value="";searchOrigin=null;
     if(next.role!==role)chooseRole(next.role,true,false);
-    if(next.project!==id||next.panel!==tab){
+    if(wasFiltering||next.project!==id||next.panel!==tab){
       id=next.project;tab=next.panel;capture=0;stage=0;render();
     }
     openLegacy(next.hash);

@@ -17,6 +17,14 @@ test('real route-specific HTML exists for all five destinations and source legac
   assert.match(page('work/'),/src="\/v208-work.js"/);
   assert.match(page('legacy/'),/src="\/site.js"/);
 });
+test('Work renders all case-study links as HTML and offers a separate explorer entry',()=>{
+  const html=page('work/');
+  assert.match(html,/<h1>Selected work<\/h1>/);
+  assert.equal((html.match(/class="v208ProjectCard"/g)||[]).length,projects.length);
+  for(const project of projects)assert.ok(html.includes(`href="/projects/${slug(project.title)}/" aria-labelledby`),project.title);
+  assert.match(html,/href="\/work\/\?view=fullstack#v20-workspace"/);
+  assert.doesNotMatch(html,/id="v20-workspace"/);
+});
 test('home retains original recruiter text, three resumes and actual video integration',()=>{
   const html=page(''),script=read('v208-home.js');
   for(const part of ['id="home"','v17Proof','LEADERSHIP','AWARDS','/work/','/projects/our-hidden-universe/'])assert.ok(html.includes(part),part);
@@ -36,7 +44,7 @@ test('six canonical project dossiers are generated from the same content records
     }
     assert.match(html,/v208-project.js/);
     const role=id==='earthbridge'?'ml':(['newssources','mulyankan','sentinel'].includes(id)?'software':'fullstack');
-    assert.ok(html.includes('/work/?view='+role+'&project='+id+'&panel=media'),id+' role route');
+    assert.ok(html.includes('/work/?view='+role+'&amp;project='+id+'&amp;panel=media'),id+' role route');
     assert.ok(html.includes('https://inside-the-builders-mind.vercel.app/projects/'+id+'/'));
     assert.ok(html.includes(p.caseStudy.caveat.replaceAll('&','&amp;').replaceAll('<','&lt;')));
   }
@@ -44,7 +52,7 @@ test('six canonical project dossiers are generated from the same content records
 test('technical evidence lists all six projects with their limits',()=>{
   const html=page('evidence/');
   for(const p of projects)for(const token of [p.title,p.status,p.caseStudy.verification.slice(0,18)])assert.ok(html.includes(token),p.title+' '+token);
-  assert.match(html,/Captured interfaces are not live executions/);
+  assert.match(html,/Screenshots show the interface at the time of capture/);
 });
 test('the separate Lab retains genuine local workbench and explicit toy boundaries',()=>{
   const html=page('lab/'),js=read('v208-lab.js');

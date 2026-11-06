@@ -35,11 +35,345 @@ body.v208WorkPage #home{display:none!important}body.v208WorkPage .v20Workspace{s
 body.v208WorkPage #main-nav a[href="/work/"]{text-decoration:underline;text-underline-offset:6px}
 @media(max-width:650px){.v208Nav{justify-content:flex-start}.v208Nav a{min-height:40px;display:inline-flex;align-items:center}}
 @media(prefers-reduced-motion:reduce){.v209VideoDossier{transition:none!important}}
-/* V21.0: standalone Work owns its page, with compact introduction and no hidden Home. */
+/* Standalone gallery, case summaries, and explorer. */
 .v208WorkPage [data-v208-nav="work"]{border-bottom-color:#537c69}
-.v210WorkIntro{padding-block:clamp(26px,4vw,48px) 14px}
-.v210WorkIntro h1{font-size:clamp(34px,4.5vw,58px);margin-bottom:10px}
-.v210WorkIntro>p{font-size:15px;max-width:67ch;margin-bottom:6px}
-body.v208WorkPage .v20Workspace{padding-top:25px}
-body.v208WorkPage .v20Head{padding-top:10px}
-@media(max-width:650px){.v210WorkIntro{padding:28px 0 10px}.v210WorkIntro h1{font-size:37px}body.v208WorkPage .v20Workspace{padding-top:18px}}
+.v208WorkGallery {
+  padding-block: clamp(28px, 4vw, 50px) clamp(44px, 6vw, 80px);
+}
+.v208WorkHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 28px;
+  margin-bottom: 24px;
+}
+.v208WorkHeading h1, .v208PageIntro h1, .v208WorkPage .v20Head h1 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: clamp(36px, 4.8vw, 62px);
+  font-weight: 700;
+  letter-spacing: -.05em;
+  line-height: 1.06;
+  margin: 0 0 8px;
+}
+.v208WorkHeading p, .v208CaseHero > div > p, .v208PageIntro > p {
+  color: var(--v208-muted);
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0;
+}
+.v208TextAction, .v208Page #v208FullCapture, .v20FullCapture {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.v208TextAction:hover, .v208CardLink:hover .v208CardAction {
+  color: #93462d;
+}
+.v208Page :is(a, button, summary):focus-visible {
+  outline: 2px solid #93462d;
+  outline-offset: 3px;
+}
+.v208CardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+}
+.v208ProjectCard .v208CardLink:focus-visible {
+  outline-offset: -3px;
+}
+.v208CardCover {
+  aspect-ratio: 16 / 9;
+}
+.v208CardCover img {
+  object-fit: cover;
+  object-position: center top;
+}
+.v208CardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+.v208CardBody h2 {
+  font-size: clamp(21px, 2vw, 26px);
+  letter-spacing: -.035em;
+  line-height: 1.15;
+  margin: 0;
+}
+.v208ProjectCard .v208CardBody p {
+  color: var(--v208-muted);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 4px;
+}
+.v208Status {
+  background: #eef1e9;
+  color: var(--v208-ink);
+  font-size: 12px;
+}
+.v208CardAction {
+  color: #225e59;
+  font-size: 14px;
+  font-weight: 800;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.v208PageIntro, .v208Section {
+  padding-block: clamp(28px, 4vw, 52px);
+}
+.v208Section h2 {
+  margin-top: 0;
+}
+.v208CaseIntro, .v208Project .v208Section, .v211EvidenceTrail {
+  scroll-margin-top: 155px;
+}
+.v208CaseIntro .v208Breadcrumb {
+  margin: 0 0 18px;
+}
+.v208CaseHero {
+  display: grid;
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+}
+.v208CaseHero:has(.v208EvidencePhoto) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, .94fr);
+}
+.v208CaseHero h1 {
+  margin: 12px 0;
+}
+.v208CaseHero .v208TagRow {
+  margin-top: 15px;
+}
+.v208CaseHero .v208ActionLinks {
+  margin-bottom: 0;
+}
+.v208CaseHero .v208EvidencePhoto img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center top;
+}
+.v208CaseFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0 0;
+}
+.v208CaseFacts > div {
+  border: 1px solid var(--v208-rule);
+  border-radius: 8px;
+  background: var(--v208-card);
+  padding: 16px;
+}
+.v208CaseFacts dt {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.v208CaseFacts dd {
+  color: var(--v208-muted);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+.v208CaseFacts a {
+  display: inline-block;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.v208EvidencePhoto figcaption, .v208ProjectFigure figcaption, .v208Boundary {
+  font-size: 14px;
+}
+.v208Page #v208FullCapture[hidden] {
+  display: none;
+}
+.v208ProjectFigure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 12px;
+}
+.v208LabJump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+  margin-top: 12px;
+}
+.v208WorkPage .v20Workspace {
+  padding-block: 22px 52px;
+  scroll-margin-top: 72px;
+}
+.v208WorkPage .v20Head {
+  padding-top: 0;
+  gap: 10px 20px;
+}
+.v208WorkPage .v20Head h1 {
+  font-size: clamp(32px, 4.2vw, 54px);
+}
+.v208WorkPage .v20Eyebrow, .v20RankLabel {
+  color: var(--v20-soft);
+  font: 750 13px/1.4 system-ui, sans-serif;
+}
+.v20RankLabel {
+  padding: 0 6px;
+}
+.v208WorkPage .v20RoleBar :is(a, button), .v208WorkPage .v20Tabs button {
+  min-height: 44px;
+}
+.v20FullCapture {
+  margin-left: 4px;
+}
+
+/* The standalone Home keeps the original portfolio's visual identity. */
+.v208Home #home .v17LeadGrid {
+  padding-block: clamp(28px, 4.5vw, 62px) 26px;
+}
+.v208Home #home .v17LeadStatement {
+  font-size: clamp(16px, 1.5vw, 19px);
+  margin-bottom: 14px;
+}
+.v208Home #home .v17Degree, .v208Home #home .v17Graduation {
+  color: var(--v208-muted);
+  font: 600 14px/1.5 system-ui, sans-serif;
+  margin-bottom: 4px;
+}
+.v208Home #home .v17Graduation {
+  font-weight: 450;
+  margin-bottom: 18px;
+}
+.v208Home #home .v19ProjectRail {
+  display: block;
+  margin-top: 16px;
+}
+.v208Home #home .v19ProjectRail a {
+  min-height: 48px;
+}
+.v208Home #home .v19ProjectRailLabel {
+  font: 700 12px/1.4 system-ui, sans-serif;
+}
+.v208Home #home .v19ProjectDetails small {
+  font-size: 12px;
+}
+.v208Home #home .v17ProofHeader, .v208Home #home .v17ProofProject {
+  font: 700 12px/1.35 system-ui, sans-serif;
+  letter-spacing: 0;
+}
+.v208SpotlightCapture {
+  margin: 0 0 7px;
+}
+.v208SpotlightCapture img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 230px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid #57706f;
+  border-radius: 8px;
+}
+.v208SpotlightCapture figcaption {
+  color: #c9dad4;
+  font-size: 12px;
+  margin-top: 7px;
+}
+.v208RecordingButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #789892;
+  border-radius: 7px;
+  background: #233f43;
+  color: #faf7ed;
+  cursor: pointer;
+  font: 700 13px/1.4 system-ui, sans-serif;
+  text-align: left;
+}
+.v208RecordingButton:hover {
+  background: #31545a;
+}
+.v208Home #home .v17Proof :focus-visible {
+  outline-color: #f4bc99;
+}
+
+@media (max-width: 950px) {
+  .v208CaseIntro, .v208Project .v208Section, .v211EvidenceTrail {
+    scroll-margin-top: 125px;
+  }
+}
+@media (max-width: 650px) {
+  .v208HeaderInner {
+    min-height: 58px;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 12px;
+    padding-block: 4px;
+  }
+  .v208Nav {
+    width: auto;
+    flex-wrap: nowrap;
+    gap: clamp(2px, 1.2vw, 8px);
+  }
+  .v208Nav a {
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .v208WorkHeading, .v208WorkPage .v20Head {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .v208CardBody {
+    padding: 16px;
+  }
+  .v208CaseHero:has(.v208EvidencePhoto), .v208CaseFacts {
+    grid-template-columns: 1fr;
+  }
+  .v208CaseIntro, .v208Project .v208Section, .v211EvidenceTrail {
+    scroll-margin-top: 14px;
+  }
+  .v208Project .v208SectionNav {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .v208Project .v208SectionNav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .v208WorkPage .v20ProjectList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+  .v208WorkPage .v20ProjectList button {
+    width: 100%;
+    min-width: 0;
+  }
+  .v208WorkPage .v20Tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+  .v208WorkPage .v205FeatureList {
+    display: grid;
+    overflow: visible;
+  }
+  .v208WorkPage .v205Feature {
+    max-width: none;
+    min-height: 44px;
+    font-size: 13px;
+  }
+  .v208Home #home .v17LeadGrid {
+    padding-top: 24px;
+  }
+}

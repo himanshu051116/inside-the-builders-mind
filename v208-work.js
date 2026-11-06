@@ -1,10 +1,5 @@
-// V21.0 standalone Work entry. The V20 explorer is the only project renderer;
-// legacy site.js and all its hidden UI are exclusively available at /legacy/.
-import {projects as projectRecords} from './content.js';
-import {setupV20Workspace} from './v20-workspace.js';
-import {setupV203Experience} from './v203-experience.js';
-import {setupV204Evidence} from './v204-evidence.js';
-import {setupV205Annotations} from './v205-annotations.js';
+// The Work gallery is built as HTML. Load the explorer for explicit entry links
+// and existing share URLs only.
 
 const locationUrl=new URL(window.location.href);
 const oldHash=locationUrl.hash;
@@ -24,15 +19,26 @@ const oldDest=!hasSelection ?
   : null;
 if(oldDest){
   window.location.replace(oldDest);
-}else{
+}else if(hasSelection||oldHash==='#v20-workspace'||oldHash==='#work'){
+  const [
+    {projects:projectRecords},
+    {setupV20Workspace},
+    {setupV203Experience},
+    {setupV204Evidence},
+    {setupV205Annotations}
+  ]=await Promise.all([
+    import('./content.js'),
+    import('./v20-workspace.js'),
+    import('./v203-experience.js'),
+    import('./v204-evidence.js'),
+    import('./v205-annotations.js')
+  ]);
   const mounted=setupV20Workspace(projectRecords,document,window,{standalone:true});
   if(!mounted)throw new Error('The dedicated Work explorer could not be mounted');
+  document.getElementById('work-gallery').hidden=true;
   setupV203Experience({projects:projectRecords});
   setupV204Evidence({projects:projectRecords});
   setupV205Annotations();
-  document.querySelector('[data-v208-nav="work"]')?.setAttribute('aria-current','page');
-  const hint=document.querySelector('.v20Hint');
-  if(hint)hint.textContent='Use the project search to filter by name or technology';
   const footer=document.querySelector('.v20Foot');
   if(footer&&!footer.querySelector('[data-v209-secondary]')){
     const related=document.createElement('nav');

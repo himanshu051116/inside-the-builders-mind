@@ -1,12 +1,11 @@
-> **Current local checkpoint: V14.8 (49/73 tasks verified).** See `V14_7_RELEASE_NOTES.md` and `V14_PROGRESS.md`. The public Vercel site remains on V13.
+# Inside the Builder's Mind
 
-# V14.1 development checkpoint (local only)
+Himanshu Shukla’s portfolio of software, data systems, and applied ML work. The site uses static HTML, CSS, and browser-native JavaScript.
 
-See [V14.3 release notes](V14_3_RELEASE_NOTES.md) and [73-task progress tracker](V14_PROGRESS.md). The **currently deployed Vercel production site remains V13**.
-
-# Inside the Builder's Mind — V13
-
-Three specialization-aware portfolio experiences for Himanshu Shukla (B.Tech Mathematics & Computing, MITS Gwalior): **Full-Stack Studio**, **Systems Console**, and **ML Research Lab**. Built with browser-native JavaScript, HTML and CSS, with an interactive Evidence Workbench.
+- The Work gallery (`/work/`) presents six project case studies and opens the ranked explorer on demand.
+- The Lab (`/lab/`) contains local demonstrations for evidence review, article ingestion, and vector retrieval.
+- The evidence index (`/evidence/`) links each project to its documented results, sources, and limits.
+- The three original specialization showcases are available at `/legacy/`.
 
 ## Run
 
@@ -22,7 +21,7 @@ npm run preview
 
 The production build is in `dist/`. Deploy the root source repository on Vercel using **build command `npm run build`** and **output directory `dist`**. AWS Amplify configuration is in `amplify.yml`; use the same source repository and do not treat Vercel as AWS challenge submission hosting.
 
-## Engineering evidence and search (V11 foundation)
+## Legacy showcase and evidence desk
 
 The **case-study records** are the primary source-backed project tour. The optional Evidence Desk: four tabs let a recruiter inspect the engineering question, architecture decision, directly linked files and constraints for each flagship project. It follows the selected résumé track. Long-form case notes are opt-in, rather than a wall of text. Use **Ctrl+K / Cmd+K** to search projects, switch modes, jump to a section or open the correct public résumé. The Command Palette is local-only.
 
@@ -55,9 +54,9 @@ Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact form
 - `tests/` — 76 automated source and logic checks
 - `public/sitemap.xml`, `robots.txt`, JSON-LD, and canonical metadata for discovery
 
-## Live deployment limitations
+## Historical deployment notes
 
-V13 is the currently deployed production baseline. The V14.1 development build has not been pushed or deployed to Vercel or AWS. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
+The V10–V14 release notes below describe historical checkpoints. Use the Vercel deployment details to confirm which commit the production domain serves.
 
 After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.
 

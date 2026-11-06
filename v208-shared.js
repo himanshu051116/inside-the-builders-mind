@@ -3,7 +3,7 @@
 document.addEventListener('error',event=>{
   const img=event.target;
   if(!(img instanceof HTMLImageElement))return;
-  if(img.closest('.v208CardCover,.v208EvidencePhoto')){
+  if(img.closest('.v208CardCover,.v208EvidencePhoto,.v208SpotlightCapture')){
     const box=img.parentElement;
     if(!box||box.querySelector('.v208MissingAsset'))return;
     img.hidden=true;

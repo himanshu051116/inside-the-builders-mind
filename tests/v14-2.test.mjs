@@ -25,7 +25,8 @@ test('V14.2 mobile one-click case-study and other-work shortcuts resolve',()=>{
 })
 test('V14.2 CSS source-owner modules reconstruct legacy stylesheet exactly',()=>{
  const modules=['01-base','02-workbench','03-atelier','04-experience','05-career','06-interactions','07-scenes','08-case-index','09-evidence-desk','10-screen-gallery','11-image-reader']
- assert.equal([modules.map(n=>read(`styles/${n}.css`)),['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css'].map(read)].flat().join('\n'),read('portfolio.css'))
+ const source=[modules.map(n=>read(`styles/${n}.css`)),['v14.css','v14-polish.css','v14-4.css','v14-5.css','v14-8.css'].map(read)].flat().join('\n')
+ assert.equal(source.replaceAll('\r\n','\n'),read('portfolio.css').replaceAll('\r\n','\n'))
  assert.match(build,/const cssModules =/)
  assert.match(build,/writeFileSync\(join\(out,'portfolio\.css'\),combinedCss\)/)
 })

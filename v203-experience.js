@@ -50,14 +50,20 @@ export function setupV203Experience({projects=[]}={},doc=document,win=window){
   }
   function drawGuide(){
     inspector.querySelector('.v203Guide')?.remove();
+    inspector.querySelector('.v203TourShortcut')?.remove();
     const tabs=inspector.querySelector('.v20Tabs');if(!tabs)return;
-    const g=el('section','v203Guide');g.setAttribute('aria-label',guide().title);
+    // The guided tour is optional; never push a large banner ahead of the real screenshot.
     if(!open){
-      const summary=el('div','v203Compact');
-      const copy=el('div','');copy.append(el('strong','',guide().title),el('p','',guide().intro));
-      summary.append(copy,button('v203Action','data-v203-start','true','Start guided walkthrough →'));
-      g.append(summary);
-    }else{
+      const intro=inspector.querySelector('.v20ProjectIntro');
+      if(intro){
+        const launch=button('v203TourShortcut','data-v203-start','true','Guided tour ↗');
+        launch.setAttribute('aria-label','Start optional guided '+guide().title.toLowerCase());
+        intro.append(launch);
+      }
+      return;
+    }
+    const g=el('section','v203Guide');g.setAttribute('aria-label',guide().title);
+    {
       const top=el('div','v203Header');
       const copy=el('div','');copy.append(el('small','v203Eyebrow','GUIDED INSPECTION'),el('h4','',guide().title),el('p','',guide().intro));
       top.append(copy,button('v203Action','data-v203-close','true','Close ×'));
@@ -104,13 +110,13 @@ export function setupV203Experience({projects=[]}={},doc=document,win=window){
     const prev=button('v203Action','data-v203-media','prev','←');prev.setAttribute('aria-label','Previous screenshot');prev.disabled=i===0;
     const next=button('v203Action','data-v203-media','next','→');next.setAttribute('aria-label','Next screenshot');next.disabled=i===thumbs.length-1;
     controls.append(prev,next);row.append(description,controls);panel.prepend(row);
-    panel.append(el('p','v203Boundary','These are saved project captures, not a live application session.'));
+    // The screenshot panel itself carries the source boundary once; do not duplicate it.
   }
   function addEvidence(){
     const panel=inspector.querySelector('.v20Evidence');
     if(!panel||panel.querySelector('.v203EvidenceLabel'))return;
     const p=known.get(selectedProject());
-    if(p)panel.prepend(el('p','v203EvidenceLabel','Project status: '+p.status+'. Source links and documented limitations are retained below.'));
+    // Project status already appears in the header. Keep evidence concise and source-backed.
   }
   function enhance(event){
     if(event?.detail?.projectId)renderProject=event.detail.projectId;

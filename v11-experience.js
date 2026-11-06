@@ -20,7 +20,9 @@ export function setupV11Experience(){
      if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return
      event.preventDefault()
      const next=event.key==='Home'?0:event.key==='End'?tabButtons.length-1:(i+(event.key==='ArrowRight'?1:-1)+tabButtons.length)%tabButtons.length
-     selectCase(tabButtons[next].dataset.atlasTab,{focus:true})
+     const targetCase=tabButtons[next].dataset.atlasTab;
+     selectCase(targetCase,{focus:true});
+     document.dispatchEvent(new CustomEvent('portfolio:case-selection',{detail:{caseId:targetCase}}));
    })
  })
  const caseGrid=document.getElementById('caseFilesGrid')

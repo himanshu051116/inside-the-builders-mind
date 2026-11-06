@@ -49,6 +49,24 @@ export function recruiterIntroMarkup(profile={}) {
           <p class="v17LeadStatement">Building React products, Python data systems, and PyTorch retrieval tools.</p>
           <div class="v17PrimaryLinks"><a class="v17MainCTA" href="#v20-workspace">Explore my projects <span aria-hidden="true">↗</span></a><details class="v17ResumeSelect"><summary>Download résumé <span aria-hidden="true">↓</span></summary><div class="v17ResumeChoices"><a href="/resumes/Himanshu_Shukla_fullstack_Public.pdf" download>Full-Stack</a><a href="/resumes/Himanshu_Shukla_software_Public.pdf" download>Software Systems</a><a href="/resumes/Himanshu_Shukla_ml_Public.pdf" download>Applied ML</a></div></details></div>
           <nav class="v17Socials" aria-label="Professional profile links"><a href="${git}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${email}">Email ↗</a></nav>
+          <nav class="v208SelectedProjects" aria-label="Selected projects">
+            <div class="v208SelectedHeader"><span>SELECTED PROJECTS</span><span class="v208SelectedCount">01—03</span></div>
+            <a class="v208SelectedProject" href="#case-ohs" data-v20-open-project="our-hidden-universe" aria-label="Explore Our Hidden Universe project">
+              <span class="v208SelectedIndex" aria-hidden="true">01</span>
+              <span class="v208SelectedContent"><strong>Our Hidden Universe</strong><small>Product interface <span aria-hidden="true">·</span> React / Firebase</small></span>
+              <span class="v208SelectedArrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="v208SelectedProject" href="#case-news" data-v20-open-project="newssources" aria-label="Explore NewsSources project">
+              <span class="v208SelectedIndex" aria-hidden="true">02</span>
+              <span class="v208SelectedContent"><strong>NewsSources</strong><small>Data systems <span aria-hidden="true">·</span> Python / PostgreSQL</small></span>
+              <span class="v208SelectedArrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="v208SelectedProject" href="#case-earthbridge" data-v20-open-project="earthbridge" aria-label="Explore EarthBridge project">
+              <span class="v208SelectedIndex" aria-hidden="true">03</span>
+              <span class="v208SelectedContent"><strong>EarthBridge</strong><small>Satellite retrieval <span aria-hidden="true">·</span> PyTorch / FAISS</small></span>
+              <span class="v208SelectedArrow" aria-hidden="true">↗</span>
+            </a>
+          </nav>
         </div>
         <aside class="v17Proof" aria-labelledby="v17ProofTitle">
           <div class="v17ProofHeader"><span>PROJECT DEMO</span><span>2026</span></div>

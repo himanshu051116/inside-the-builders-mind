@@ -33,9 +33,23 @@ test('home retains original recruiter text, three resumes and actual video integ
   for(const part of ['id="home"','v17Proof','LEADERSHIP','AWARDS','/work/','/projects/our-hidden-universe/'])assert.ok(html.includes(part),part);
   for(const role of ['fullstack','software','ml'])assert.ok(html.includes('Himanshu_Shukla_'+role+'_Public.pdf'));
   assert.match(script,/setupMilestoneVideo/);
-  assert.match(html,/v208RoleGrid/);
+  assert.match(html,/class="v208TrackTabs" role="tablist"/);
   assert.doesNotMatch(html,/id="selected-work"/); // No duplicate of the original hero's project rail.
   for(const asset of ['mulyankan-system-walkthrough-presenter.mp4','mulyankan-docx-workflow-presenter.mp4'])assert.ok(existsSync(new URL('public/video/'+asset,root)));
+});
+test('specialization panels use the matching project captures and evidence links',()=>{
+  const html=page('');
+  const expected=[
+    ['fullstack','ohs-together','/projects/our-hidden-universe/?capture=ohs-together#captures'],
+    ['software','news-overview','/projects/newssources/#architecture'],
+    ['ml','earthbridge-evaluation','/projects/earthbridge/#verification']
+  ];
+  for(const [id,capture,evidence] of expected){
+    assert.ok(html.includes(`aria-controls="track-${id}" aria-selected="${id==='fullstack'}"`),id);
+    const panel=html.split(`id="track-${id}" role="tabpanel"`)[1].split('</article>')[0];
+    assert.ok(panel.includes(`src="/evidence/${capture}.webp"`),id);
+    assert.ok(panel.includes(`href="${evidence}"`),id);
+  }
 });
 test('Home uses saved spotlight captures with stable case-study links',()=>{
   const html=page('');

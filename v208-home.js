@@ -1,5 +1,41 @@
 import {setupMilestoneVideo} from './v19-milestone-video.js';
 
+function setupSpecializations(doc){
+  const tablist=doc.querySelector('.v208TrackTabs');
+  if(!tablist)return;
+  const tabs=[...tablist.querySelectorAll('[role="tab"]')];
+
+  function select(selected){
+    for(const tab of tabs){
+      const active=tab===selected;
+      tab.setAttribute('aria-selected',String(active));
+      tab.tabIndex=active?0:-1;
+      doc.getElementById(tab.getAttribute('aria-controls')).hidden=!active;
+    }
+  }
+
+  tablist.addEventListener('click',event=>{
+    const tab=event.target.closest('[role="tab"]');
+    if(tab)select(tab);
+  });
+  tablist.addEventListener('keydown',event=>{
+    const index=tabs.indexOf(event.target);
+    if(index<0)return;
+    let next;
+    switch(event.key){
+      case 'ArrowRight': next=(index+1)%tabs.length; break;
+      case 'ArrowLeft': next=(index+tabs.length-1)%tabs.length; break;
+      case 'Home': next=0; break;
+      case 'End': next=tabs.length-1; break;
+      default: return;
+    }
+    event.preventDefault();
+    select(tabs[next]);
+    tabs[next].focus();
+  });
+  tablist.hidden=false;
+}
+
 function setupSpotlight(doc){
   const controls=doc.querySelector('.v208SpotlightChoices');
   if(!controls)return;
@@ -61,6 +97,7 @@ if(routeParams||legacyHash){
   });
   redirectLinks();
   setupSpotlight(document);
+  setupSpecializations(document);
   setupMilestoneVideo(document);
   redirectLinks();
 }

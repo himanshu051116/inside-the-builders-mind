@@ -9,7 +9,11 @@ const safe=x=>/^(https:\/\/[^\s"<>]+|mailto:[^\s"<>]+|\/[a-zA-Z0-9][^\s"<>]*)$/.
 const slug=x=>String(x).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const imagePrefix={mulyankan:'mulyankan-',earthbridge:'earthbridge-',newssources:'news-','our-hidden-universe':'ohs-',schoolbuddies:'schoolbuddies-'};
 const routes=Object.fromEntries(projects.map(p=>[slug(p.title),p]));
-const roles=[{id:'fullstack',name:'Full-Stack',first:'our-hidden-universe',panel:'media',description:'Product interfaces and real application captures'},{id:'software',name:'Software Systems',first:'newssources',panel:'architecture',description:'Backend systems, provenance and engineering decisions'},{id:'ml',name:'Applied ML',first:'earthbridge',panel:'evidence',description:'Research prototypes, methods and evaluation boundaries'}];
+const roles=[
+  {id:'fullstack',name:'Full-Stack',first:'our-hidden-universe',panel:'media',capture:'ohs-together',evidenceLabel:'Inspect the shared playback screen'},
+  {id:'software',name:'Software Systems',first:'newssources',panel:'architecture',evidenceAnchor:'#architecture',evidenceLabel:'See the ingestion architecture'},
+  {id:'ml',name:'Applied ML',first:'earthbridge',panel:'evidence',evidenceAnchor:'#verification',evidenceLabel:'Read evaluation and limits'}
+];
 const galleryFilters=[['all','All'],['software','Software'],['systems','Systems'],['ai','AI & ML']];
 const spotlightScreens=[
   ['mulyankan-overview','Review queue'],
@@ -53,6 +57,35 @@ function projectCard(p){
 }
 const actionLinks=p=>`<div class="v208ActionLinks">${p.links.filter(x=>safe(x.url)!=='#').map(x=>`<a href="${safe(x.url)}" rel="noopener noreferrer" target="_blank">${e(x.label)} ↗</a>`).join('')}</div>`;
 function picture(p){return p.evidenceImage?`<figure class="v208EvidencePhoto"><img loading="lazy" width="800" height="480" src="${safe(p.evidenceImage)}" alt="${e(p.evidenceImageCaption||'Saved project interface')}"><figcaption>${e(p.evidenceImageCaption||'Recorded project screenshot')}</figcaption></figure>`:'<div class="v208EmptyEvidence">No documented public screenshot for this project.</div>'}
+function specializations(){
+  return `<section class="v208Container v208Section" id="focus" aria-labelledby="focus-heading">
+    <h2 id="focus-heading">Explore by specialization</h2>
+    <div class="v208TrackTabs" role="tablist" aria-label="Specializations" hidden>
+      ${roles.map((role,index)=>`<button type="button" role="tab" id="track-tab-${role.id}" aria-controls="track-${role.id}" aria-selected="${index===0}" tabindex="${index===0?0:-1}">${e(role.name)}</button>`).join('')}
+    </div>
+    ${roles.map((role,index)=>{
+      const project=routes[role.first];
+      const caseHref=projectLink(role.first);
+      const evidenceHref=role.capture?evidenceLink(caseHref,role.capture):caseHref+role.evidenceAnchor;
+      const explorerHref=`/work/?view=${role.id}&project=${role.first}&panel=${role.panel}#v20-workspace`;
+      return `<article class="v208TrackPanel" id="track-${role.id}" role="tabpanel" aria-labelledby="track-tab-${role.id}" tabindex="0"${index?' hidden':''}>
+        <div class="v208TrackCopy">
+          <span class="v208Status">${e(project.status)}</span>
+          <h3><a href="${caseHref}">${e(project.title)}</a></h3>
+          <p>${e(project.summary)}</p>
+          <div class="v208TrackActions">
+            <a class="v208Primary" href="${e(evidenceHref)}">${e(role.evidenceLabel)} <span aria-hidden="true">↗</span></a>
+            <a class="v208TextAction" href="${e(explorerHref)}">Explore ${e(role.name)} work <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        ${picture(project)}
+      </article>`;
+    }).join('')}
+    <noscript>
+      <ul>${roles.map(role=>`<li><a href="${projectLink(role.first)}">${e(role.name)} · ${e(routes[role.first].title)}</a></li>`).join('')}</ul>
+    </noscript>
+  </section>`;
+}
 function projectPage(p,manifest){
   const id=slug(p.title);
   const images=assetsFor(p,manifest);
@@ -154,7 +187,7 @@ export function buildV208(out,root){
     .replaceAll('href="#case-news"','href="/projects/newssources/"')
     .replaceAll('href="#case-earthbridge"','href="/projects/earthbridge/"')
     .replaceAll('href="#case-mulyankan"','href="/projects/mulyankan/"');
-  const home=`${homeHero}<section class="v208Container v208Section" id="focus"><h2>Explore by specialization</h2><div class="v208RoleGrid">${roles.map(x=>`<a href="/work/?view=${x.id}&amp;project=${x.first}&amp;panel=${x.panel}#v20-workspace"><strong>${e(x.name)}</strong><span>${e(x.description)}</span><small>Explore ${e(x.name)} work ↗</small></a>`).join('')}</div></section><section class="v208Container v208Section" id="about"><h2>How I work</h2><p>${e(profile.philosophy)}</p><a class="v208TextAction" href="/lab/">Try the interactive demonstrations ↗</a></section>`;
+  const home=`${homeHero}${specializations()}<section class="v208Container v208Section" id="about"><h2>How I work</h2><p>${e(profile.philosophy)}</p><a class="v208TextAction" href="/lab/">Try the interactive demonstrations ↗</a></section>`;
   const homeHtml=page('Home',`${profile.name} | Software, Systems & Applied ML`,profile.intro,home,'v208-home.js','https://inside-the-builders-mind.vercel.app/');
   const personSchema=JSON.stringify({'@context':'https://schema.org','@type':'Person',name:profile.name,description:profile.intro,url:'https://inside-the-builders-mind.vercel.app/',sameAs:[profile.github,profile.linkedin]});
   writeAt(out,'',homeHtml.replace('</head>',`<script type="application/ld+json">${personSchema}</script></head>`));

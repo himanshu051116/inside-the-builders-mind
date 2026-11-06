@@ -140,6 +140,10 @@
 .v20Workspace .v20Evidence>section{padding:12px}
 .v20Workspace .v20Evidence p{margin-bottom:5px;line-height:1.5}
 .v20Workspace .v20Links{margin-top:9px}
+/* Remove the redundant brand subtitle before it forces desktop navigation wider than the viewport. */
+@media(max-width:1160px){
+  .header .brandWord small{display:none}
+}
 @media(max-width:850px){
   .v20Workspace .v20Wrap{width:calc(100% - 20px)}
   .v20Workspace .v20Explorer{grid-template-columns:minmax(0,1fr)}

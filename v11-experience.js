@@ -60,6 +60,11 @@ export function setupV11Experience(){
  document.addEventListener('portfolio:case-route',ev=>{
    if(Object.hasOwn(names,ev.detail?.caseId))selectCase(ev.detail.caseId)
  })
+ const selectedCaseByProject={'our-hidden-universe':'ohs',newssources:'news',mulyankan:'mulyankan',earthbridge:'earthbridge'}
+ document.addEventListener('portfolio:navigation-committed',ev=>{
+   const selected=selectedCaseByProject[ev.detail?.project]
+   if(selected)selectCase(selected)
+ })
  activateHash()
  // The screenshot can fail on private, offline, or restricted browser networks.
  // Never substitute a synthetic image for a missing real project image.

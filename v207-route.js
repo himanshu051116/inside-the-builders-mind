@@ -7,6 +7,16 @@ export const V207_ROLE_DEFAULTS=Object.freeze({
 })
 export const V207_PANELS=Object.freeze(['overview','media','architecture','evidence'])
 const validProjectIds=ids=>new Set((Array.isArray(ids)?ids:[]).filter(x=>typeof x==='string'&&/^[a-z0-9-]+$/.test(x)))
+const validDetail=x=>typeof x==='string'&&/^[a-z0-9-]{1,90}$/.test(x)
+export function readV25DetailRoute(href){
+  const url=new URL(href,'https://portfolio.invalid/')
+  const rawStage=url.searchParams.get('stage'),rawCapture=url.searchParams.get('capture')
+  return Object.freeze({
+    stage:validDetail(rawStage)?rawStage:null,
+    capture:validDetail(rawCapture)?rawCapture:null
+  })
+}
+
 
 export function readV207Route(href,projectIds){
   const url=new URL(href,'https://portfolio.invalid/')
@@ -32,7 +42,17 @@ export function commitV207Route(win,selection,{method='pushState'}={}){
   url.searchParams.set('view',role)
   url.searchParams.set('project',project)
   url.searchParams.set('panel',panel)
-  url.hash='#v20-workspace'
+  // V25: one atomic URL write for the selected project, panel, stage and capture.
+  // Omitted detail dimensions are left unchanged for older callers; the workspace
+  // explicitly passes null to clear stale identifiers when switching views.
+  for(const key of ['stage','capture']){
+    if(!Object.hasOwn(selection,key))continue
+    const detail=selection[key]
+    if(validDetail(detail))url.searchParams.set(key,detail)
+    else url.searchParams.delete(key)
+  }
+  const requestedHash=selection.hash
+  url.hash=typeof requestedHash==='string'&&/^#[a-z0-9/-]{1,90}$/.test(requestedHash)?requestedHash:'#v20-workspace'
   const next=url.pathname+url.search+url.hash
   const before=new URL(win.location.href)
   if(next===before.pathname+before.search+before.hash)return Object.freeze({committed:true,changed:false,url:next})

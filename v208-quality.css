@@ -1,0 +1,108 @@
+/* V20.8 quality layer — deliberately restrained. No new visual framework.
+   Original screenshots, recordings, role-specific resumes and archive retained. */
+#home.v17Recruiter{--v17-paper:#f5f1e9}
+#home .v17LeadGrid{gap:clamp(24px,3.2vw,45px);padding-block:clamp(21px,2.4vw,35px) 17px}
+#home .v17LeadCopy{padding-top:clamp(0px,.9vw,12px)}
+#home .v17TopLine{padding-block:14px 12px}
+#home .v17Overline{font-size:10px;letter-spacing:.075em;margin-bottom:9px}
+#home h1{font-size:clamp(45px,5vw,78px);line-height:1.03;margin-bottom:11px;letter-spacing:-.065em}
+#home .v17Degree{font-size:clamp(15px,1.3vw,19px);line-height:1.37;margin-bottom:5px}
+#home .v17Graduation{margin-bottom:12px}
+#home .v17LeadStatement{font-size:14px;line-height:1.55;max-width:49ch;margin-bottom:15px}
+#home .v17Socials a{min-height:32px}
+#home .v17Proof{box-shadow:0 12px 30px #1c30341c}
+#home .v17Essentials{margin-top:4px}
+#home .v17Essential{padding:14px 17px}
+#home .v17EssentialHeading{margin-bottom:7px}
+#home .v17FactList{gap:5px}
+#home .v17FactList li{line-height:1.35}
+#home .v17SkillTokens{gap:5px}
+#home .v17SkillTokens span{padding:5px 7px}
+.v20Workspace{padding:clamp(38px,4.6vw,60px) 0 38px}
+.v20Workspace .v20Head{margin-bottom:17px;align-items:center}
+.v20Workspace .v20Head h2{font-size:clamp(34px,3.6vw,47px);letter-spacing:-.045em;line-height:1.1;margin:6px 0 5px}
+.v20Workspace .v20Head p{font-size:13px;line-height:1.5;max-width:54ch}
+.v20Workspace .v20RoleBar{gap:5px;padding:8px;border-radius:10px 10px 0 0}
+.v20Workspace .v20RoleBar button,
+.v20Workspace .v20RoleBar a{min-height:42px;padding:10px 12px;border-radius:6px;transition:background-color .18s ease,color .18s ease,border-color .18s ease}
+.v20Workspace .v20RoleBar button[aria-pressed="true"]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--v20-accent) 50%,transparent)}
+.v20Workspace .v20Explorer{grid-template-columns:minmax(230px,.27fr) minmax(0,.73fr);min-height:500px}
+.v20Workspace .v20Sidebar{padding:18px 14px}
+.v20Workspace .v20Sidebar label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.v20InputHint{font:500 10px/1.3 system-ui,sans-serif;letter-spacing:0;text-transform:none;color:var(--v20-soft)}
+.v20Workspace .v20ProjectList{gap:4px}
+.v20Workspace .v20ProjectList>button{
+  min-height:65px;border-radius:7px;padding:10px;
+  transition:background-color .16s ease,border-color .16s ease,transform .16s ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .v20Workspace .v20ProjectList>button:hover{transform:translateX(2px)}
+  .v20Workspace .v20RoleBar button:hover{border-color:var(--v20-accent)}
+}
+.v20Workspace .v20Inspector{position:relative;isolation:isolate;padding:clamp(18px,2.5vw,30px);overflow:hidden}
+.v20Workspace .v20Inspector::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;
+  background:radial-gradient(440px circle at var(--quality-pointer-x,50%) var(--quality-pointer-y,30%),
+    color-mix(in srgb,var(--v20-accent) 7%,transparent),transparent 76%);
+  transition:opacity .25s ease;
+}
+.v20Workspace .v20Inspector.qualityPointerActive::before{opacity:1}
+.v20Workspace .v20Inspector>*{position:relative;z-index:1}
+.v20Workspace .v20ProjectIntro h3{font-size:clamp(29px,3vw,41px);margin:9px 0 7px}
+.v20Workspace .v20ProjectIntro>p{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+  overflow:hidden;max-width:62ch;line-height:1.48;margin-bottom:11px;
+}
+.v20Workspace .v20Tags{margin-bottom:12px}
+.v20Workspace .v20Tabs{margin-bottom:13px}
+.v20Workspace .v20Tabs button{min-height:42px;padding:11px}
+.v20Workspace .v20HeroImage img,.v20Workspace .v20Media figure img{max-height:390px}
+.v20Workspace .v20Fields p,.v20Workspace .v20Evidence p,.v20Workspace .v20StageDetail p{line-height:1.55}
+.v20Workspace .v20Fields h4,.v20Workspace .v20Evidence h4{margin-bottom:4px}
+.v20Workspace .v20Foot{margin-top:13px}
+.v20Archive>summary{min-height:80px;padding-block:15px}
+.v20Archive>summary small{max-width:65ch}
+@media(max-width:1050px){
+  .v20Workspace .v20Explorer{grid-template-columns:minmax(210px,.32fr) minmax(0,.68fr)}
+  #home .v17LeadGrid{gap:23px}
+}
+@media(max-width:950px){
+  #home .v17LeadGrid{padding-top:23px}
+  #home h1{font-size:clamp(42px,7.8vw,70px);white-space:normal;text-wrap:balance}
+  #home .v17LeadCopy{padding-top:0}
+}
+@media(max-width:730px){
+  .v20Workspace{padding:31px 0 32px}
+  .v20Workspace .v20Head h2{font-size:33px}
+  .v20Workspace .v20Head p{font-size:12px}
+  .v20Workspace .v20RoleBar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .v20Workspace .v20RoleBar button{min-width:0;padding:9px 5px;font-size:11px}
+  .v20Workspace .v20RoleBar a{min-width:0;grid-column:span 3;margin:0;padding:8px 10px;font-size:11px;min-height:40px}
+  .v20Workspace .v20Explorer{grid-template-columns:minmax(0,1fr)}
+  .v20Workspace .v20Sidebar{padding:13px 12px}
+  .v20Workspace .v20Sidebar label{font-size:10px}
+  .v20InputHint{display:none}
+  .v20Workspace .v20ProjectList{overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding:2px 1px 8px}
+  .v20Workspace .v20ProjectList>button{scroll-snap-align:start;min-height:68px;width:156px;min-width:156px;transform:none}
+  .v20Workspace .v20Inspector{padding:19px 13px}
+  .v20Workspace .v20ProjectIntro h3{font-size:30px}
+  .v20Workspace .v20ProjectIntro>p{font-size:13px}
+  .v20Workspace .v20HeroImage img,.v20Workspace .v20Media figure img{max-height:340px}
+  #home .v17Essentials{grid-template-columns:minmax(0,1fr)}
+  #home .v17Essential{border-right:0;border-bottom:1px solid var(--v17-rule);padding:13px 16px}
+  #home .v17Essential:last-child{border-bottom:0}
+}
+@media(max-width:390px){
+  #home h1{font-size:clamp(37px,10vw,44px)}
+  #home .v17Overline{font-size:9px;letter-spacing:.03em}
+  .v20Workspace .v20RoleBar button{font-size:10px}
+  .v20Workspace .v20Tabs button{padding-inline:9px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  .v20Workspace .v20Inspector::before{display:none}
+  .v20Workspace .v20ProjectList>button,.v20Workspace .v20RoleBar button{transform:none!important;transition:none!important}
+}
+@media(forced-colors:active){
+  .v20Workspace .v20Inspector::before{display:none}
+  .v20Workspace .v20ProjectList>button.v20Selected{outline:2px solid Highlight;outline-offset:-2px}
+}

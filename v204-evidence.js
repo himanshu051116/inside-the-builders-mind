@@ -177,7 +177,8 @@ export function setupV204Evidence({projects=[]}={},doc=document,win=window){
     if(id!==lastProject){pending=null;lastProject=id;}
     enhanceArchitecture();
     resolvePending();
-    enhanceMedia();
+    // Architecture and verification remain available in dedicated tabs.
+    // Do not place an extra "related context" box above each screenshot.
   }
 
   root.addEventListener("click",ev=>{

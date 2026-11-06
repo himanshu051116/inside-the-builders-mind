@@ -68,3 +68,12 @@ test('V25.1 ships only additive CSS and preserves archive, video and role-specif
  assert.match(css,/prefers-reduced-motion:reduce/)
  assert.match(css,/forced-colors:active/)
 })
+
+test('keyboard-driven evidence drawer selection commits the same project as pointer selection',()=>{
+ const atlas=read('v11-experience.js')
+ assert.match(atlas,/const targetCase=tabButtons\[next\]\.dataset\.atlasTab/)
+ assert.match(atlas,/selectCase\(targetCase,\{focus:true\}\)/)
+ assert.match(atlas,/portfolio:case-selection/)
+ assert.match(atlas,/detail:\{caseId:targetCase\}/)
+ assert.match(ws,/doc\.addEventListener\("portfolio:case-selection"/)
+})

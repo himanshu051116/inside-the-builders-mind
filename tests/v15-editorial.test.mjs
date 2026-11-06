@@ -33,7 +33,8 @@ test('V15 project cards retain verification boundaries and interactive filters',
   assert.match(site, /data-filter/)
   assert.match(site, /data-project/)
   assert.match(data, /Reported evaluation figures are attributed to the source repository/)
-  assert.match(data, /No public demo link provided|Locally tested prototype/)
+  assert.match(site, /No public demo link provided/)
+  assert.doesNotMatch(data, /title:'Sentinel'/)
 })
 
 test('V15 styles are compiled after accessibility layers and preserve keyboard/reduced motion rules', () => {

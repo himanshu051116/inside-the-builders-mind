@@ -39,60 +39,66 @@ export const projects = [
   {
     number:'01', category:'DOCUMENT REVIEW / RUBRICS', title:'Mulyankan',
     status:'Demonstrated prototype',
+    summary:'Review proposals against a rubric with traceable citations and human override.',
     description:'Evidence-linked document evaluation: rubric-level review, insufficient-evidence flags, evaluator workflows and human override controls. Presented at CMPDI headquarters in July 2026.',
     stack:['React','TypeScript','Supabase'],
     links:[{label:'Source & case study',url:'https://github.com/himanshu051116/Algonauts-Mulyankan'},{label:'Browser preview',url:'https://mulyankan-seven.vercel.app/'},{label:'Watch prototype walkthrough',url:'https://www.youtube.com/watch?v=sQjZfEwkTu4'}],
     accent:'lime', shape:'orbit', filters:['ai','software'],
     evidenceImage:'/evidence/mulyankan-overview.webp',
     evidenceImageCaption:'Actual Mulyankan scrutiny dashboard · provided project capture',
-    caseStudy:{problem:'How can a reviewer justify a criterion-level evaluation without trusting an opaque total?',approach:'Document intake, rubric-level evidence references, insufficient-evidence flags and human reviewer controls.',verification:'Demonstrated prototype at CMPDI headquarters, Ranchi, on 11 July 2026. Public code and a recorded walkthrough are linked.',caveat:'The browser preview is not a guarantee that the full backend and evaluation workflow are running.'}
+    caseStudy:{problem:'Reviewers need to justify each rubric decision with evidence from the submission.',contribution:'I built the proposal submission, rubric review and tracking interfaces, including evidence references and flags for missing evidence.',approach:'Document intake, rubric-level evidence references, insufficient-evidence flags and human reviewer controls.',verification:'Demonstrated prototype at CMPDI headquarters, Ranchi, on 11 July 2026. Public code and a recorded walkthrough are linked.',caveat:'The browser preview is not a guarantee that the full backend and evaluation workflow are running.'}
   },
   {
     number:'02', category:'ML / REMOTE SENSING', title:'EarthBridge',
     status:'Research prototype',
+    summary:'Retrieve matching satellite imagery across radar and multispectral sensors.',
     description:'Cross-modal satellite retrieval across Sentinel-1 SAR and Sentinel-2 multispectral imagery, using contrastive embeddings and FAISS. Reported evaluation figures are attributed to the source repository; no independent benchmark is claimed.',
     stack:['PyTorch','FAISS','FastAPI'],
     links:[{label:'EarthBridge source',url:'https://github.com/himanshu051116/earthbridge'},{label:'Reported evaluation details',url:'https://github.com/himanshu051116/earthbridge/blob/main/SUBMISSION_README.md'}], accent:'violet', shape:'grid', filters:['ai'],
     evidenceImage:'/evidence/earthbridge-evaluation.webp', evidenceImageCaption:'Actual EarthBridge evaluation UI · static repo-reported results, not live model inference',
-    caseStudy:{problem:'How can images from optical, SAR and multispectral sensors be searched through a shared retrieval space?',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verification:'The repo SUBMISSION_README.md reports cross-modal F1@5 19.53%, F1@10 11.59% and validation recall@1 53.03%, recall@10 70.08%, alongside 3,248 paired test observations and 6,496 gallery vectors. These numbers were not rerun here.',caveat:'Research prototype. Supplied workbench screenshot shows API offline; no live ranked result is shown. Repository-reported metrics have not been independently verified or re-evaluated.'}
+    caseStudy:{problem:'Optical, radar and multispectral views need a shared representation for image retrieval.',contribution:'I developed the retrieval prototype using contrastive representations and built its FastAPI interface.',approach:'Contrastive embeddings, FAISS similarity search, a FastAPI demo and image-retrieval evaluation.',verificationSummary:'The repository reports results for 3,248 paired test observations and a gallery of 6,496 vectors.',verification:'The repo SUBMISSION_README.md reports cross-modal F1@5 19.53%, F1@10 11.59% and validation recall@1 53.03%, recall@10 70.08%, alongside 3,248 paired test observations and 6,496 gallery vectors. These numbers were not rerun here.',caveat:'Research prototype. Supplied workbench screenshot shows API offline; no live ranked result is shown. Repository-reported metrics have not been independently verified or re-evaluated.'}
   },
   {
     number:'03', category:'FULL-STACK / REAL-TIME', title:'Our Hidden Universe',
     status:'Deployed application',
+    summary:'Share a private room for chat, calls, and synchronized playback.',
     description:'Private rooms with Firebase authentication, real-time chat, video-call controls, shared memories and Watch Together coordination.',
     stack:['React','Firebase','Vercel'],
     links:[{label:'Live website',url:'https://ohs.vercel.app/'},{label:'Source code',url:'https://github.com/himanshu051116/our-hidden-universe'}],
     accent:'orange',shape:'waves', filters:['software'],
     evidenceImage:'/evidence/ohs-together.webp', evidenceImageCaption:'OHS Watch Together · provided project capture',
-    caseStudy:{problem:'How can people share a private digital space with synchronized experiences?',approach:'Firebase-backed private rooms, real-time messaging, media sharing, video calling and Watch Together synchronization.',verification:'Public repository and a Vercel-hosted application are linked; private account features are not independently demonstrated by this portfolio.',caveat:'Live application. Some areas may require valid access and should not be treated as a public demo account.'}
+    caseStudy:{problem:'How can people share a private digital space with synchronized experiences?',contribution:'I built the React interfaces and Firebase-backed flows for authenticated rooms, messaging, calls, and Watch Together playback.',approach:'Firebase-backed private rooms, real-time messaging, media sharing, video calling and Watch Together synchronization.',verification:'Public repository and a Vercel-hosted application are linked; private account features are not independently demonstrated by this portfolio.',caveat:'Live application. Some areas may require valid access and should not be treated as a public demo account.'}
   },
   {
     number:'04', category:'DATA / BACKEND', title:'NewsSources',
     status:'In development',
+    summary:'Trace articles and PDFs from discovery to storage in PostgreSQL.',
     description:'A news and document-ingestion system using RSS and sitemap discovery, URL deduplication, source tracking, PostgreSQL migrations and containerized services.',
     stack:['Python','PostgreSQL','Docker'],
     links:[{label:'GitHub repository',url:'https://github.com/himanshu051116/NewsSources'},{label:'Static showcase · demo data',url:'https://himanshu051116.github.io/NewsSources/'}],
     accent:'violet',shape:'grid', filters:['systems','software'],
     evidenceImage:'/evidence/news-overview.webp', evidenceImageCaption:'NewsSources command centre · provided project capture',
-    caseStudy:{problem:'How can a crawler retain article provenance while avoiding duplicate ingestion?',approach:'RSS and sitemap discovery, URL deduplication, article/PDF ingestion workflows and Alembic-managed PostgreSQL schema changes.',verification:'Repository documents the development work; a separate GitHub Pages showcase illustrates the experience with simulated data.',caveat:'In development. The static showcase is not a live backend or production news ingestion service.'}
+    caseStudy:{problem:'How can a crawler retain article provenance while avoiding duplicate ingestion?',contribution:'I implemented RSS and sitemap discovery with source registration, stable URL identities, and article version tracking.',approach:'RSS and sitemap discovery, URL deduplication, article/PDF ingestion workflows and Alembic-managed PostgreSQL schema changes.',verification:'Repository documents the development work; a separate GitHub Pages showcase illustrates the experience with simulated data.',caveat:'In development. The static showcase is not a live backend or production news ingestion service.'}
   },
   {
     number:'05', category:'SECURITY / NETWORKS', title:'Sentinel',
     status:'Locally tested prototype',
+    summary:'Inspect network flows and test domain blocking through a local proxy.',
     description:'Network monitoring and filtering prototype with packet/flow views, early anomaly analysis and locally validated forward-proxy domain blocking.',
     stack:['Python','Scapy','FastAPI'],
     links:[], accent:'orange',shape:'orbit', filters:['systems'],
-    caseStudy:{problem:'How can suspicious local network activity be made inspectable without overstating detection?',approach:'Python packet/flow inspection, initial anomaly-analysis views and a forward proxy with controlled domain blocking.',verification:'Local HTTP proxy blocking was tested in a development environment.',caveat:'Locally tested prototype, not a certified intrusion-prevention or production WAF service.'}
+    caseStudy:{problem:'How can suspicious local network activity be made inspectable without overstating detection?',contribution:'I built packet and flow views, prototyped an anomaly-analysis interface, and tested forward-proxy domain blocking with controlled HTTP checks.',approach:'Python packet/flow inspection, initial anomaly-analysis views and a forward proxy with controlled domain blocking.',verification:'Local HTTP proxy blocking was tested in a development environment.',caveat:'Locally tested prototype, not a certified intrusion-prevention or production WAF service.'}
   },
   {
     number:'06', category:'EDUCATION / OUTREACH', title:'SchoolBuddies',
     status:'Co-founder · Live website',
+    summary:'Help schools discover hands-on technology workshops and send enquiries.',
     description:'Student-led technology outreach connecting schools with practical workshops in AI literacy, computational thinking and web development, supported by an interactive enquiry site.',
     stack:['React','JavaScript','Education'],
     links:[{label:'Public source',url:'https://github.com/himanshu051116/SCHOOLBUDDIES'},{label:'Project website · verify availability',url:'https://schoolbuddiesindia.vercel.app/'}],
     accent:'lime',shape:'waves', filters:['community','software'],
     evidenceImage:'/evidence/schoolbuddies-workshop.webp', evidenceImageCaption:'SchoolBuddies programme poster · provided project material',
-    caseStudy:{problem:'How can school students experience hands-on technology rather than only hear about it?',approach:'Student-led workshop planning, AI and programming activities, school outreach and a responsive website with enquiry flow.',verification:'Co-founded the initiative and developed the web experience according to the supplied résumé.',caveat:'Outreach initiative; workshop outcomes and reach are not quantified here without supporting records.'}
+    caseStudy:{problem:'How can school students experience hands-on technology rather than only hear about it?',contribution:'I co-founded SchoolBuddies and developed its workshop and enquiry site.',approach:'Student-led workshop planning, AI and programming activities, school outreach and a responsive website with enquiry flow.',verification:'Co-founded the initiative and developed the web experience according to the supplied résumé.',caveat:'Outreach initiative; workshop outcomes and reach are not quantified here without supporting records.'}
   }
 ]
 

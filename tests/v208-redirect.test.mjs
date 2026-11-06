@@ -6,7 +6,7 @@ const code=readFileSync(new URL('../v208-home.js',import.meta.url),'utf8').repla
 function run(href,linkPaths=[]){
   let redirected=null,videos=0;
   const links=linkPaths.map(path=>({href:path,getAttribute(){return this.href},setAttribute(name,value){if(name==='href')this.href=value}}));
-  const doc={querySelectorAll(){return links}};
+  const doc={querySelector(){return null},querySelectorAll(){return links}};
   const win={location:{href,replace(to){redirected=to}}};
   runInNewContext(code,{window:win,document:doc,URL,setupMilestoneVideo(){videos++;links.push({href:'#case-mulyankan',getAttribute(){return this.href},setAttribute(name,value){if(name==='href')this.href=value}})}});
   return {redirected,videos,links};

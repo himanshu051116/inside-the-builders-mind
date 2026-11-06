@@ -4,6 +4,7 @@ import {mountV211EvidencePanel} from './v211-evidence-panel.js';
 import {readEvidenceSelection,evidenceLink,getPoints} from './v211-evidence-model.js';
 
 const img=document.getElementById('v208ActiveImage');
+const fullCapture=document.getElementById('v208FullCapture');
 const markers=document.getElementById('v208Markers');
 const note=document.getElementById('v208AnnotationDetail');
 const gallery=document.querySelector('.v208ProjectGallery');
@@ -74,6 +75,8 @@ function showCapture(button,{method=null,feature=null,focus=false}={}){
   img.height=Number(button.dataset.v208Height)||760;
   img.alt=button.dataset.v208Caption;
   document.getElementById('v208Caption').textContent=button.dataset.v208Caption;
+  fullCapture.href=button.dataset.v208Src;
+  fullCapture.hidden=false;
   const renderHotspots=()=>{
     if(complete)return;
     if(epoch!==captureEpoch||!img.complete||img.naturalWidth===0||img.hidden)return;
@@ -103,6 +106,7 @@ function showCapture(button,{method=null,feature=null,focus=false}={}){
     if(epoch!==captureEpoch)return;
     complete=false;activeFeature=null;
     img.hidden=true;markers.replaceChildren();markers.hidden=true;
+    fullCapture.hidden=true;
     note.replaceChildren(text('p','This saved image is unavailable. Open the project source or try another capture.'));
     evidence?.imageStatus(false);
   };

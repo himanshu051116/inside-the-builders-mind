@@ -15,28 +15,67 @@ test('real route-specific HTML exists for all five destinations and source legac
   assert.doesNotMatch(page('work/'),/src="\/site.js"/);
   assert.match(page('work/'),/class="v208Page v208WorkPage"/);
   assert.match(page('work/'),/src="\/v208-work.js"/);
+  assert.match(page(''),/href="\/work\/" data-v208-nav="work">Projects<\/a>/);
+  assert.match(page(''),/href="\/lab\/" data-v208-nav="lab">Demos<\/a>/);
   assert.match(page('legacy/'),/src="\/site.js"/);
+});
+test('Work renders all case-study links as HTML and offers a separate explorer entry',()=>{
+  const html=page('work/');
+  assert.match(html,/<h1>Projects<\/h1>/);
+  assert.equal((html.match(/class="v208ProjectCard"/g)||[]).length,projects.length);
+  for(const project of projects)assert.ok(html.includes(`href="/projects/${slug(project.title)}/" aria-labelledby`),project.title);
+  assert.match(html,/href="\/work\/\?view=fullstack#v20-workspace"/);
+  assert.doesNotMatch(html,/id="v20-workspace"/);
+  assert.match(html,/class="v208GalleryToolbar" hidden/);
+  assert.match(html,/data-v208-gallery-filter="all" aria-pressed="true"/);
+  assert.equal((html.match(/data-v208-project-filters=/g)||[]).length,projects.length);
 });
 test('home retains original recruiter text, three resumes and actual video integration',()=>{
   const html=page(''),script=read('v208-home.js');
   for(const part of ['id="home"','v17Proof','LEADERSHIP','AWARDS','/work/','/projects/our-hidden-universe/'])assert.ok(html.includes(part),part);
   for(const role of ['fullstack','software','ml'])assert.ok(html.includes('Himanshu_Shukla_'+role+'_Public.pdf'));
   assert.match(script,/setupMilestoneVideo/);
-  assert.match(html,/v208RoleGrid/);
+  assert.match(html,/class="v208TrackTabs" role="tablist"/);
   assert.doesNotMatch(html,/id="selected-work"/); // No duplicate of the original hero's project rail.
   for(const asset of ['mulyankan-system-walkthrough-presenter.mp4','mulyankan-docx-workflow-presenter.mp4'])assert.ok(existsSync(new URL('public/video/'+asset,root)));
 });
+test('specialization panels use the matching project captures and evidence links',()=>{
+  const html=page('');
+  const expected=[
+    ['fullstack','ohs-together','/projects/our-hidden-universe/?capture=ohs-together#captures'],
+    ['software','news-overview','/projects/newssources/#architecture'],
+    ['ml','earthbridge-evaluation','/projects/earthbridge/#verification']
+  ];
+  for(const [id,capture,evidence] of expected){
+    assert.ok(html.includes(`aria-controls="track-${id}" aria-selected="${id==='fullstack'}"`),id);
+    const panel=html.split(`id="track-${id}" role="tabpanel"`)[1].split('</article>')[0];
+    assert.ok(panel.includes(`src="/evidence/${capture}.webp"`),id);
+    assert.ok(panel.includes(`href="${evidence}"`),id);
+  }
+});
+test('Home uses saved spotlight captures with stable case-study links',()=>{
+  const html=page('');
+  assert.match(html,/id="spotlight-mulyankan-overview">/);
+  for(const id of ['mulyankan-overview','mulyankan-submission','mulyankan-history']){
+    assert.ok(html.includes(`aria-controls="spotlight-${id}"`),id);
+    assert.ok(html.includes(`href="/projects/mulyankan/?capture=${id}#captures"`),id);
+  }
+  assert.match(html,/id="spotlight-mulyankan-history" hidden/);
+});
 test('six canonical project dossiers are generated from the same content records',()=>{
   assert.equal(projects.length,6);
-  for(const p of projects){
+  for(const [index,p] of projects.entries()){
     const id=slug(p.title),html=page('projects/'+id+'/');
     for(const token of [p.title,p.status,'id="architecture"','id="verification"','id="captures"','data-page']){
       if(token==='data-page')continue;
       assert.ok(html.includes(token),id+' missing '+token);
     }
     assert.match(html,/v208-project.js/);
+    assert.match(html,/aria-label="Project navigation">\s*<a href="\/work\/">← All projects<\/a>/);
+    const nextProject=projects[index+1];
+    if(nextProject)assert.ok(html.includes(`class="v208NextProject" href="/projects/${slug(nextProject.title)}/"`),id+' next project');
     const role=id==='earthbridge'?'ml':(['newssources','mulyankan','sentinel'].includes(id)?'software':'fullstack');
-    assert.ok(html.includes('/work/?view='+role+'&project='+id+'&panel=media'),id+' role route');
+    assert.ok(html.includes('/work/?view='+role+'&amp;project='+id+'&amp;panel=media'),id+' role route');
     assert.ok(html.includes('https://inside-the-builders-mind.vercel.app/projects/'+id+'/'));
     assert.ok(html.includes(p.caseStudy.caveat.replaceAll('&','&amp;').replaceAll('<','&lt;')));
   }
@@ -44,7 +83,7 @@ test('six canonical project dossiers are generated from the same content records
 test('technical evidence lists all six projects with their limits',()=>{
   const html=page('evidence/');
   for(const p of projects)for(const token of [p.title,p.status,p.caseStudy.verification.slice(0,18)])assert.ok(html.includes(token),p.title+' '+token);
-  assert.match(html,/Captured interfaces are not live executions/);
+  assert.match(html,/Screenshots show the interface at the time of capture/);
 });
 test('the separate Lab retains genuine local workbench and explicit toy boundaries',()=>{
   const html=page('lab/'),js=read('v208-lab.js');

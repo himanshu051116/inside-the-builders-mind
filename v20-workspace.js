@@ -121,7 +121,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       capture:captureTokenByProject.get(id)??null
     },{method});
     if(!result.committed)announce("The selection is active locally, but this browser did not update the shareable URL.");
-    else{previewActive=false;renderPreviewBar();}
+    else{
+      previewActive=false;renderPreviewBar();
+      doc.dispatchEvent(new win.CustomEvent("portfolio:navigation-committed",{detail:{role,project:id,panel:tab,hash}}));
+    }
     return result;
   };
   const renderPreviewBar=()=>{

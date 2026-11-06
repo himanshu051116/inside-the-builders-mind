@@ -19,7 +19,7 @@ test('project switching retains distinct screenshot, stage and tab context',()=>
   assert.match(workspace,/chooseRole\(next,invokeLegacy=true,update=true\)/)
   assert.match(workspace,/hoverTimer=win\.setTimeout/)
   assert.match(workspace,/pointerType==="touch"/)
-  assert.match(workspace,/emit\("replaceState"\)/)
+  assert.match(workspace,/commitSelection\("pushState"\)/)
 })
 
 test('source image is linked at native resolution, not replaced by mock visuals',()=>{

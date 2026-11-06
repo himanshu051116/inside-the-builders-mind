@@ -135,6 +135,20 @@
 .v20Workspace .v203StageRail{margin:7px 10px}
 .v20Workspace .v203StageActions{margin-top:9px}
 .v20Workspace .v204Bridge{margin-top:9px}
+.v20Workspace .v20Architecture .v203StageRail{display:none}
+.v20Workspace .v204Bridge>summary{
+  list-style:none;min-height:36px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;cursor:pointer;
+  font-size:11px;padding:7px 11px;
+}
+.v20Workspace .v204Bridge>summary::-webkit-details-marker{display:none}
+.v20Workspace .v204Bridge>summary::after{
+  content:"+";font:500 20px/1 system-ui,sans-serif;
+  color:var(--v20-accent);
+}
+.v20Workspace .v204Bridge[open]>summary::after{content:"−"}
+.v20Workspace .v204Bridge>summary:focus-visible{outline:3px solid var(--v20-accent);outline-offset:-3px}
+
 .v20Workspace .v204BridgeHeader{padding:7px 11px}
 .v20Workspace .v204BridgeArea{padding:10px;gap:11px}
 .v20Workspace .v20Evidence>section{padding:12px}

@@ -17,6 +17,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   let id=initialRoute.project;
   let tab=initialRoute.panel;
   let capture=0,stage=0,manifest=null,manifestPromise=null,manifestError=false;
+  // Local per-project inspection state; never persists private user data.
+  const captureByProject=new Map(),stageByProject=new Map(),tabByProject=new Map();
   const workspace=doc.createElement("section");
   workspace.id="v20-workspace";workspace.className="v20Workspace";workspace.setAttribute("aria-labelledby","v20Title");
   workspace.innerHTML=`<div class="v20Wrap"><div class="v20Head"><div><span class="v20Eyebrow">SELECTED WORK</span><h2 id="v20Title">Selected work.</h2><p id="v20Subtitle">Explore by project or specialization.</p></div></div>
@@ -182,7 +184,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
       return;
     }
-    id=next;capture=0;stage=0;
+    // Preserve the visitor's inspection context while navigating between projects.
+    captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
+    id=next;capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;
+    tab=tabByProject.get(id)??tab;
     if(search.value&&!relevant().some(p=>p.id===next))search.value="";
     render();updateSearchNotice();
     if(keepFocus)list.querySelector(`[data-v20-project="${id}"]`)?.focus();
@@ -192,7 +197,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   }
   function chooseTab(next,update=true,focus=true){
     if(!["overview","media","architecture","evidence"].includes(next))return;
-    if(next!==tab){tab=next;render();}
+    if(next!==tab){tab=next;tabByProject.set(id,tab);render();}
     if(update)emit("replaceState");
     if(focus)inspector.querySelector(`[data-v20-tab="${tab}"]`)?.focus();
   }
@@ -209,8 +214,9 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     doc.getElementById("v20Resume").href=first().resume;
     doc.getElementById("v20Resume").setAttribute("aria-label",`Download ${first().label} résumé PDF`);
     doc.getElementById("v20FullShowcase").textContent=`Open ${first().label} full showcase ↗`;
+    captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
     tab=first().tab;id=ids.includes(first().project)?first().project:entry[0].id;
-    capture=0;stage=0;search.value="";
+    capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;search.value="";
     if(invokeLegacy){
       const prior=doc.documentElement.dataset.v20Syncing;
       doc.documentElement.dataset.v20Syncing='true';
@@ -231,8 +237,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }
     if(b.dataset.v20Tab){chooseTab(b.dataset.v20Tab);return}
     if(b.dataset.v20Role){chooseRole(b.dataset.v20Role);return}
-    if(b.hasAttribute("data-v20-stage")){stage=Number(b.dataset.v20Stage);render();inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
-    if(b.hasAttribute("data-v20-capture")){capture=Number(b.dataset.v20Capture);render();inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return}
+    if(b.hasAttribute("data-v20-stage")){stage=Number(b.dataset.v20Stage);stageByProject.set(id,stage);render();inspector.querySelector(`[data-v20-stage="${stage}"]`)?.focus();return}
+    if(b.hasAttribute("data-v20-capture")){capture=Number(b.dataset.v20Capture);captureByProject.set(id,capture);render();inspector.querySelector(`[data-v20-capture="${capture}"]`)?.focus();return}
     if(b.hasAttribute("data-v20-video")){const original=doc.querySelector("#home .v19MilestoneOpen");if(original)original.click();else announce("Original video unavailable");return}
     if(b.hasAttribute("data-v20-retry"))loadManifest(true);
   });
@@ -259,11 +265,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     }else if(button.hasAttribute("data-v20-stage")){
       const next=Number(button.dataset.v20Stage);
       if(stage===next)return;
-      stage=next;render();
+      stage=next;stageByProject.set(id,stage);render();
     }else if(button.hasAttribute("data-v20-capture")){
       const next=Number(button.dataset.v20Capture);
       if(capture===next)return;
-      capture=next;render();
+      capture=next;captureByProject.set(id,capture);render();
     }else return;
     // Hover previews replace the current history entry, not add dozens of
     // back-button steps. Clicking still records deliberate navigations.
@@ -274,7 +280,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const b=ev.target.closest?.("button[data-v20-project],button[data-v20-role],button[data-v20-tab],button[data-v20-stage],button[data-v20-capture]");
     if(!b||!workspace.contains(b)||b.contains(ev.relatedTarget)||b===hoverTarget)return;
     clearHover();hoverTarget=b;
-    hoverTimer=win.setTimeout(()=>{hoverTimer=0;hoverTarget=null;preview(b)},145);
+    hoverTimer=win.setTimeout(()=>{hoverTimer=0;hoverTarget=null;preview(b)},180);
   });
   workspace.addEventListener("pointerout",ev=>{
     if(hoverTarget&&hoverTarget.contains(ev.target)&&!hoverTarget.contains(ev.relatedTarget))clearHover();
@@ -340,7 +346,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const next=readV207Route(win.location.href,ids);
     if(next.role!==role)chooseRole(next.role,true,false);
     if(next.project!==id||next.panel!==tab){
-      id=next.project;tab=next.panel;capture=0;stage=0;render();
+      captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
+      id=next.project;tab=next.panel;capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;render();
     }
     openLegacy(next.hash);
   });

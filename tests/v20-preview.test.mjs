@@ -47,7 +47,7 @@ test('archive deep links, no fabricated inference, and keyboard tabs remain',()=
  assert.match(code,/\.open=true/)
  assert.match(code,/ArrowRight/)
  assert.match(code,/not a live trace/)
- assert.match(code,/not live model output/)
+ assert.match(code,/repository-reported, not independently verified/)
  assert.match(css,/prefers-reduced-motion/)
  assert.match(css,/forced-colors/)
  assert.match(css,/:focus-visible/)

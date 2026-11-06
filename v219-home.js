@@ -1,8 +1,8 @@
 // V21.9 Home focus: hover previews, touch click and keyboard roving tabs.
 export const V219_FOCUS=Object.freeze({
- fullstack:Object.freeze({description:'Private rooms, shared media and React/Firebase interfaces.',project:'our-hidden-universe',panel:'media'}),
- software:Object.freeze({description:'News ingestion, PostgreSQL and source tracing.',project:'newssources',panel:'architecture'}),
- ml:Object.freeze({description:'Sentinel-1/2 image retrieval and evaluation limits.',project:'earthbridge',panel:'evidence'})
+ fullstack:Object.freeze({description:'Private rooms, shared media and React/Firebase interfaces.',project:'our-hidden-universe',panel:'media',title:'Our Hidden Universe'}),
+ software:Object.freeze({description:'News ingestion, PostgreSQL and source tracing.',project:'newssources',panel:'architecture',title:'NewsSources'}),
+ ml:Object.freeze({description:'Sentinel-1/2 image retrieval and evaluation limits.',project:'earthbridge',panel:'evidence',title:'EarthBridge'})
 });
 export function setupV219Home(doc=document,win=window){
  const home=doc.getElementById('home');if(!home||home.dataset.v219Ready==='true')return false;
@@ -12,13 +12,27 @@ export function setupV219Home(doc=document,win=window){
  home.dataset.v219Ready='true';
  const roles=Object.keys(V219_FOCUS);
  const resumes=[...home.querySelectorAll('.v17ResumeChoices a')];
+ // One compact, actionable focus summary replaces the generic sentence.
+ // The persistent original Mulyankan demo is intentionally unaffected.
+ const projectName=doc.createElement('strong');
+ projectName.className='v220FocusProject';
+ const projectDetail=doc.createElement('span');
+ projectDetail.className='v220FocusDetail';
+ const projectLink=doc.createElement('a');
+ projectLink.className='v220FocusCase';
+ projectLink.textContent='Case study ↗';
+ panel.replaceChildren(projectName,projectDetail,projectLink);
  const rail=[...home.querySelectorAll('.v19ProjectRail a[data-v20-open-project]')];
  const mouse=win.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches===true;
  const reduced=win.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches===true;
  let selected='fullstack';
  function select(role){
   if(!Object.hasOwn(V219_FOCUS,role))return;
-  selected=role;const data=V219_FOCUS[role];home.dataset.v219Selected=role;panel.textContent=data.description;
+  selected=role;const data=V219_FOCUS[role];home.dataset.v219Selected=role;
+  projectName.textContent=data.title;
+  projectDetail.textContent=data.description;
+  projectLink.href='/projects/'+data.project+'/';
+  projectLink.setAttribute('aria-label','Read '+data.title+' case study');
   for(const tab of tabs){const on=tab.dataset.v219Role===role;tab.setAttribute('aria-selected',String(on));tab.tabIndex=on?0:-1;if(on)panel.setAttribute('aria-labelledby',tab.id)}
   cta.href='/work/?view='+role+'&project='+data.project+'&panel='+data.panel+'#v20-workspace';
   cta.setAttribute('aria-label','View '+tabs.find(t=>t.dataset.v219Role===role).textContent.trim()+' projects in Work');
@@ -29,11 +43,15 @@ export function setupV219Home(doc=document,win=window){
  tablist.addEventListener('focusin',ev=>{const t=ev.target.closest('[data-v219-role]');if(t&&tablist.contains(t))select(t.dataset.v219Role)});
  tablist.addEventListener('keydown',ev=>{
   if(!['ArrowLeft','ArrowRight','Home','End'].includes(ev.key)||!ev.target.closest('[data-v219-role]'))return;
-  ev.preventDefault();const at=roles.indexOf(selected);
+  ev.preventDefault();const at=roles.indexOf(ev.target.dataset.v219Role);
   const index=ev.key==='Home'?0:ev.key==='End'?roles.length-1:(at+(ev.key==='ArrowRight'?1:roles.length-1))%roles.length;
   select(roles[index]);tabs.find(tab=>tab.dataset.v219Role===roles[index])?.focus();
  });
- if(mouse)for(const t of tabs)t.addEventListener('pointerenter',ev=>{if(ev.pointerType==='mouse')select(t.dataset.v219Role)});
+ // Event-type checks work on hybrid laptops too: mouse hover requires no click;
+ // finger touches never activate a tab before a real tap.
+ for(const t of tabs)t.addEventListener('pointerenter',ev=>{
+  if(ev.pointerType==='mouse'||(ev.pointerType==='pen'&&ev.buttons===0))select(t.dataset.v219Role);
+ });
  if(mouse&&!reduced&&typeof win.requestAnimationFrame==='function'){
   let queued=false,last=null;const proof=home.querySelector('.v17Proof');const clamp=x=>Math.min(100,Math.max(0,x));
   home.addEventListener('pointermove',ev=>{

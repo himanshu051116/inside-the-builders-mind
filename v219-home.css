@@ -52,3 +52,26 @@
 @media(prefers-reduced-motion:reduce){#home .v219FocusTabs button,#home .v19ProjectRail a{transition:none!important}#home.v17Recruiter::after,#home .v17Proof::after{display:none}}
 @media(forced-colors:active){#home .v219FocusTabs button[aria-selected="true"],#home .v19ProjectRail a[data-v219-active="true"]{outline:2px solid Highlight;outline-offset:-2px}#home.v17Recruiter::after,#home .v17Proof::after{display:none}}
 
+
+/* V21.10 — the hovered tab now exposes a real project destination, not a generic sentence. */
+#home #v219FocusPanel{
+  display:flex;align-items:center;flex-wrap:wrap;gap:5px 11px;
+  padding:7px 0 7px 13px;min-height:44px;
+  font:550 12px/1.45 system-ui,sans-serif;
+}
+#home .v220FocusProject{color:#183b3c;font:800 13px/1.3 system-ui,sans-serif;white-space:nowrap}
+#home .v220FocusDetail{flex:1 1 175px;color:#3d5a57}
+#home .v220FocusCase{
+  color:#84371f;font:800 12px/1.3 system-ui,sans-serif;text-decoration:underline;
+  text-underline-offset:3px;white-space:nowrap;
+  padding:5px 2px;min-height:33px;display:inline-flex;align-items:center;
+}
+#home .v220FocusCase:hover{color:#aa4727}
+#home .v220FocusCase:focus-visible{outline:3px solid #286456;outline-offset:2px;border-radius:3px}
+@media(max-width:630px){
+ #home #v219FocusPanel{gap:4px 9px;min-height:51px;padding-top:6px;padding-bottom:6px}
+ #home .v220FocusProject{font-size:12px}
+ #home .v220FocusDetail{flex-basis:125px;font-size:11px}
+ #home .v220FocusCase{font-size:11px}
+}
+@media(forced-colors:active){#home .v220FocusCase{color:LinkText}}

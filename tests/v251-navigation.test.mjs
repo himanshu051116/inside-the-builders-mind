@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs'
 import {caseDossiers} from '../case-dossiers.js'
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8')
 const ws=read('v20-workspace.js')
+const roleConfig=read('v26-project-data.js')
 const css=read('v251-navigation.css')
 const build=read('scripts/build.mjs')
 
@@ -62,9 +63,9 @@ test('V25.1 ships only additive CSS and preserves archive, video and role-specif
  assert.match(ws,/v21ArchiveGroup/)
  assert.match(ws,/data-v20-role/)
  assert.match(ws,/data-v20-capture/)
- assert.match(ws,/Himanshu_Shukla_fullstack_Public\.pdf/)
- assert.match(ws,/Himanshu_Shukla_software_Public\.pdf/)
- assert.match(ws,/Himanshu_Shukla_ml_Public\.pdf/)
+ assert.match(roleConfig,/Himanshu_Shukla_fullstack_Public\.pdf/)
+ assert.match(roleConfig,/Himanshu_Shukla_software_Public\.pdf/)
+ assert.match(roleConfig,/Himanshu_Shukla_ml_Public\.pdf/)
  assert.match(css,/prefers-reduced-motion:reduce/)
  assert.match(css,/forced-colors:active/)
 })

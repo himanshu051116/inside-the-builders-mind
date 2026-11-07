@@ -41,7 +41,7 @@ export function setupMilestoneVideo(doc=document){
     <span class="v19MilestoneDuration">${initialClip.duration}</span>
   </button>
   <button class="v252PreviewToggle" type="button" hidden aria-label="Pause muted preview">Pause preview</button>
-  <p class="v19MilestoneFootnote">Muted visual preview <span aria-hidden="true">·</span> Full recording has presenter webcam and original audio</p>`;
+  <p class="v19MilestoneFootnote">Muted visual preview <span aria-hidden="true">·</span> Presenter webcam and original audio in the full recording</p>`;
   card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
 
   const dialog=doc.createElement('dialog');

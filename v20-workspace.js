@@ -71,8 +71,6 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const disclosure=doc.createElement("details");
     disclosure.className="v21ArchiveGroup";
     disclosure.dataset.archiveSection=sectionId;
-    disclosure.setAttribute("name",""); // prevent fallback grouping by browser; JS owns one-open policy
-    disclosure.removeAttribute("name");
     disclosure.id="v21-archive-"+sectionId;
     const summary=doc.createElement("summary");
     const heading=doc.createElement("span");heading.className="v21ArchiveLabel";

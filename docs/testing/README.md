@@ -14,6 +14,11 @@ npm run test        # build + Node test suite
 npm run audit:local
 npm run audit:metadata
 npm run preview     # serve the built dist/ directory
+
+# Optional Chromium smoke test (needs the pinned dev dependency + browser)
+npm ci
+npx playwright install chromium
+npm run smoke:browser
 ```
 
 ## What is verified and what is not

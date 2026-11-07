@@ -13,7 +13,7 @@ test('V20 preview is integrated after all V19 lifecycle hooks',()=>{
   assert.match(build,/'v20-workspace\.js'/)
 })
 test('all three role-specific visual identities and matching PDF routes remain intact',()=>{
- for(const mode of ['fullstack','software','ml'])assert.match(code,new RegExp('('+mode+')'))
+ for(const mode of ['fullstack','software','ml'])assert.match(roleConfig,new RegExp('('+mode+')'))
  for(const pdf of ['fullstack','software','ml']) {
    const name='public/resumes/Himanshu_Shukla_'+pdf+'_Public.pdf'
    assert.ok(existsSync(new URL('../'+name,import.meta.url)),name)

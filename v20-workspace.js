@@ -83,7 +83,9 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     affordance.append(verb,arrow);
     summary.append(heading,affordance);
     const inner=doc.createElement("div");inner.className="v21ArchiveContent";
-    inner.tabIndex=0;inner.setAttribute("role","region");inner.setAttribute("aria-label",title+" — scrollable section content");
+    // Content follows normal document scrolling, so do not insert a second
+    // keyboard stop or describe it as a separately scrollable region.
+    inner.setAttribute("role","region");inner.setAttribute("aria-label",title+" — expanded archive section");
     disclosure.append(summary,inner);body.append(disclosure);groupMap.set(sectionId,disclosure);
     if(sectionId==="project-notes"){
       const headingNode=doc.querySelector("#case-files .caseNotesHead");
@@ -135,19 +137,44 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       syncArchiveState();
     });
   }
-  closeAll.addEventListener("click",()=>{
-    const old=activeArchive;
-    for(const group of archiveGroups)group.open=false;
+  // Keep the heading visible after a long section collapses. Without this
+  // correction the browser can retain a scroll offset below the removed
+  // content, leaving visitors far from the archive they were using.
+  const settleOnArchiveHeading=(group,{focus=false}={})=>{
+    const summary=group?.querySelector(":scope > summary");
+    if(!summary)return;
+    win.requestAnimationFrame?.(()=>win.requestAnimationFrame?.(()=>{
+      summary.scrollIntoView({behavior:"instant",block:"start"});
+      if(focus)summary.focus({preventScroll:true});
+    }));
+  };
+  const closeArchiveGroup=(group)=>{
+    if(!group?.open)return false;
+    group.open=false;
     syncArchiveState();
-    old?.querySelector("summary")?.focus({preventScroll:true});
-    // The heading remains in view when the tall content panel closes.
+    settleOnArchiveHeading(group,{focus:true});
+    return true;
+  };
+  closeAll.addEventListener("click",()=>closeArchiveGroup(activeArchive));
+  archive.addEventListener("click",event=>{
+    // Native details toggles are reliable for both click and Enter/Space.
+    // Intercept *closing* so page scroll is restored to this section header.
+    const summary=event.target.closest?.(".v21ArchiveGroup > summary");
+    const group=summary?.parentElement;
+    if(!group||!archiveGroups.includes(group))return;
+    if(group.open){
+      event.preventDefault();
+      closeArchiveGroup(group);
+    }else{
+      // Opening another group may collapse a tall group above the viewport.
+      // Reposition after native disclosure and exclusive-open layout settle.
+      settleOnArchiveHeading(group);
+    }
   });
   archive.addEventListener("keydown",event=>{
     if(event.key!=="Escape"||!activeArchive||!archive.contains(doc.activeElement))return;
     event.preventDefault();
-    const summary=activeArchive.querySelector("summary");
-    activeArchive.open=false;syncArchiveState();
-    summary?.focus({preventScroll:true});
+    closeArchiveGroup(activeArchive);
   });
   syncArchiveState();
   const revealArchive=(hash,{scroll=true}={})=>{

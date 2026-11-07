@@ -83,6 +83,12 @@ export function setupCareerModes(){
       }
     }
   }
+  // The workspace may request a visual mode directly. Apply presentation
+  // without emitting another route command or synthesizing a click.
+  document.addEventListener('portfolio:apply-role-view',event=>{
+    const requested=event.detail?.role
+    if(Object.hasOwn(MODE_ORDER,requested))selectRole(requested,false,false)
+  })
   buttons.forEach(button => button.addEventListener('click',()=>selectRole(button.dataset.switchRole)))
   // Desktop pointer previews use a short dwell, not click. Keyboard activation
   // and touch taps remain first-class, with no automatic navigation on focus.

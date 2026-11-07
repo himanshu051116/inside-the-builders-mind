@@ -1,8 +1,8 @@
 {
   "name": "inside-the-builders-mind",
   "private": true,
-  "version": "14.8.0",
-  "description": "Original interactive portfolio for AWS Student Builder Challenge",
+  "version": "25.5.0",
+  "description": "Evidence-first interactive portfolio for full-stack, software systems and applied ML projects",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
@@ -11,7 +11,15 @@
     "audit:local": "node scripts/audit-local.mjs",
     "audit:metadata": "node scripts/audit-metadata.mjs",
     "pretest": "npm run build",
-    "verify": "npm test && npm run audit:local && npm run audit:metadata"
+    "verify": "npm test && npm run audit:local && npm run audit:metadata",
+    "smoke:browser": "node scripts/ci-browser-smoke.mjs"
   },
-  "type": "module"
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0"
+  }
 }

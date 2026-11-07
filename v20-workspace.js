@@ -121,6 +121,15 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     for(const group of archiveGroups){
       const label=group.querySelector(".v253ArchiveVerb");
       if(label)label.textContent=group.open?"Close":"Open";
+      // Long section titles are visually shortened in the sticky chip, but
+      // the full name and close action remain available to screen readers.
+      const summary=group.querySelector(":scope > summary");
+      const title=group.querySelector(".v21ArchiveLabel strong")?.textContent||"archive section";
+      if(summary){
+        summary.setAttribute("aria-label",(group.open?"Close ":"Open ")+title+" section");
+        if(group.open)summary.title="Close "+title;
+        else summary.removeAttribute("title");
+      }
     }
   };
   const showArchiveGroup=id=>{

@@ -51,7 +51,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   // A single closed parent previously concealed the entire portfolio.
   const archive=doc.createElement("section");archive.className="v20Archive v21Archive";archive.id="v20Archive";
   archive.setAttribute("aria-labelledby","v21ArchiveTitle");
-  archive.innerHTML='<div class="v21ArchiveHeading"><span>MORE TO EXPLORE</span><h2 id="v21ArchiveTitle">Complete portfolio archive</h2><p>Open the sections that interest you. Everything is available separately.</p></div><div class="v20ArchiveBody"></div>';
+  archive.innerHTML='<div class="v21ArchiveHeading"><span>MORE TO EXPLORE</span><h2 id="v21ArchiveTitle">Complete portfolio archive</h2><p>Choose a section below. Only one section opens at a time.</p><div class="v253ArchiveToolbar"><span class="v253ArchiveCount" aria-live="polite">10 sections · All closed</span><button class="v253CloseAll" type="button" hidden>Close open section ×</button></div></div><div class="v20ArchiveBody"></div>';
   main.append(archive);
   const body=archive.querySelector(".v20ArchiveBody");
   const groupMap=new Map();
@@ -71,15 +71,21 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const disclosure=doc.createElement("details");
     disclosure.className="v21ArchiveGroup";
     disclosure.dataset.archiveSection=sectionId;
+    disclosure.setAttribute("name",""); // prevent fallback grouping by browser; JS owns one-open policy
+    disclosure.removeAttribute("name");
     disclosure.id="v21-archive-"+sectionId;
     const summary=doc.createElement("summary");
     const heading=doc.createElement("span");heading.className="v21ArchiveLabel";
     const strong=doc.createElement("strong");strong.textContent=title;
     const small=doc.createElement("small");small.textContent=subtitle;
     heading.append(strong,small);
+    const affordance=doc.createElement("span");affordance.className="v253ArchiveAffordance";affordance.setAttribute("aria-hidden","true");
+    const verb=doc.createElement("span");verb.className="v253ArchiveVerb";verb.textContent="Open";
     const arrow=doc.createElement("span");arrow.className="v21ArchiveArrow";arrow.setAttribute("aria-hidden","true");arrow.textContent="+";
-    summary.append(heading,arrow);
+    affordance.append(verb,arrow);
+    summary.append(heading,affordance);
     const inner=doc.createElement("div");inner.className="v21ArchiveContent";
+    inner.tabIndex=0;inner.setAttribute("role","region");inner.setAttribute("aria-label",title+" — scrollable section content");
     disclosure.append(summary,inner);body.append(disclosure);groupMap.set(sectionId,disclosure);
     if(sectionId==="project-notes"){
       const headingNode=doc.querySelector("#case-files .caseNotesHead");
@@ -101,12 +107,56 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const direct=[...main.children].find(ch=>ch===target||ch.contains(target));
     if(direct&&!body.contains(direct)&&direct!==hero&&direct!==archive&&direct!==workspace)inner.append(direct);
   }
-  const showArchiveGroup=(id)=>{const group=groupMap.get(id);if(group)group.open=true;return group};
+  // V25.3: strictly one expanded section; avoid a long stack of open panels.
+  // Deep links, keyboard activation and click all use the same model.
+  const archiveCount=archive.querySelector(".v253ArchiveCount");
+  const closeAll=archive.querySelector(".v253CloseAll");
+  const archiveGroups=[...groupMap.values()];
+  let activeArchive=null;
+  const syncArchiveState=()=>{
+    const open=archiveGroups.find(group=>group.open);
+    activeArchive=open||null;
+    closeAll.hidden=!open;
+    archiveCount.textContent=open?"1 of "+archiveGroups.length+" sections open":archiveGroups.length+" sections · All closed";
+    for(const group of archiveGroups){
+      const label=group.querySelector(".v253ArchiveVerb");
+      if(label)label.textContent=group.open?"Close":"Open";
+    }
+  };
+  const showArchiveGroup=id=>{
+    const selected=groupMap.get(id);
+    if(!selected)return null;
+    for(const group of archiveGroups)if(group!==selected&&group.open)group.open=false;
+    selected.open=true;
+    syncArchiveState();
+    return selected;
+  };
+  for(const group of archiveGroups){
+    group.addEventListener("toggle",()=>{
+      if(group.open)showArchiveGroup(group.dataset.archiveSection);
+      syncArchiveState();
+    });
+  }
+  closeAll.addEventListener("click",()=>{
+    const old=activeArchive;
+    for(const group of archiveGroups)group.open=false;
+    syncArchiveState();
+    old?.querySelector("summary")?.focus({preventScroll:true});
+    // The heading remains in view when the tall content panel closes.
+  });
+  archive.addEventListener("keydown",event=>{
+    if(event.key!=="Escape"||!activeArchive||!archive.contains(doc.activeElement))return;
+    event.preventDefault();
+    const summary=activeArchive.querySelector("summary");
+    activeArchive.open=false;syncArchiveState();
+    summary?.focus({preventScroll:true});
+  });
+  syncArchiveState();
   const revealArchive=(hash,{scroll=true}={})=>{
     const targetId=hash?.startsWith("#proof/")?"field-proof":String(hash||"").replace(/^#/,"");
     const target=doc.getElementById(targetId);
     if(!target||!body.contains(target))return false;
-    const group=target.closest(".v21ArchiveGroup");if(group)group.open=true;
+    const group=target.closest(".v21ArchiveGroup");if(group)showArchiveGroup(group.dataset.archiveSection);
     if(/^case-(ohs|news|mulyankan|earthbridge)$/.test(targetId)){
       showArchiveGroup("project-notes");
       const grid=doc.getElementById("caseFilesGrid");if(grid)grid.hidden=false;

@@ -97,7 +97,12 @@
   .v21Archive .v21ArchiveGroup[open] > summary{top:58px}
   .v21Archive .v21ArchiveContent{max-height:61dvh;scrollbar-gutter:auto}
   .v21Archive .v21ArchiveLabel strong{font-size:14px}
-  .v21Archive .v21ArchiveLabel small{font-size:10px}
+  /* Keep descriptions accessible to screen readers but avoid a second
+     visible line for all ten mobile archive entries. */
+  .v21Archive .v21ArchiveLabel small{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+  }
   .v21Archive .v253ArchiveVerb{font-size:10px}
   .v21Archive .v21ArchiveArrow{width:26px;height:26px}
 }
@@ -108,4 +113,9 @@
   .v21Archive .v253CloseAll,.v21Archive .v21ArchiveGroup{
     border-color:CanvasText;
   }
+}
+
+@media(max-width:370px){
+  .v21Archive .v21ArchiveLabel strong{font-size:13px}
+  .v21Archive .v21ArchiveGroup > summary{min-height:43px}
 }

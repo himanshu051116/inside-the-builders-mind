@@ -7,7 +7,7 @@ This repository is the maintainer's personal portfolio and a source of documenta
 1. Use Node.js 22 or later.
 2. Clone the repository and create a descriptive branch.
 3. Start development with `npm run dev`.
-4. Run `npm run verify` before submitting changes (build, Node tests, local audit, metadata audit).
+4. Run `npm ci && npm run verify` before submitting changes (build, Node tests, local audit, metadata audit). Run `npx playwright install chromium` and `npm run smoke:browser` for navigation, layout or media changes.
 5. Check the exact affected interaction in a real browser at desktop and mobile widths; for navigation changes also test keyboard, Back/Forward, and direct links.
 6. Describe actual evidence, remaining limitations and rollback risk in the PR.
 

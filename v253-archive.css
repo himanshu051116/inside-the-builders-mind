@@ -68,10 +68,11 @@
 .v21Archive .v21ArchiveArrow{width:27px;height:27px;font-size:20px}
 .v21Archive .v21ArchiveGroup[open] .v21ArchiveArrow{transform:rotate(45deg)}
 .v21Archive .v21ArchiveContent{
-  max-height:min(68dvh,700px);min-height:0;
-  overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;
-  scroll-padding-top:12px;scrollbar-gutter:stable;
-  scrollbar-width:thin;
+  /* Full section expansion: page scroll only, never a nested scrollbar. */
+  height:auto;max-height:none;min-height:0;
+  overflow:visible;overscroll-behavior:auto;
+  scroll-padding-top:0;scrollbar-gutter:auto;
+  scrollbar-width:auto;
   border-top:0;
   background:#fffefb;
 }
@@ -95,7 +96,7 @@
   .v21Archive .v21ArchiveGroup > summary{min-height:46px;padding:6px 11px}
   .v21Archive .v21ArchiveGroup[open]{grid-column:1}
   .v21Archive .v21ArchiveGroup[open] > summary{top:58px}
-  .v21Archive .v21ArchiveContent{max-height:61dvh;scrollbar-gutter:auto}
+  /* No mobile height cap: visitors scroll the page normally. */
   .v21Archive .v21ArchiveLabel strong{font-size:14px}
   /* Keep descriptions accessible to screen readers but avoid a second
      visible line for all ten mobile archive entries. */
@@ -136,17 +137,6 @@
   scroll-margin-top:var(--v254-sticky-top,72px);
   box-shadow:0 2px 9px #1a333215;
 }
-.v21Archive .v21ArchiveContent{
-  max-height:none;
-  height:auto;
-  min-height:0;
-  overflow:visible;
-  overscroll-behavior:auto;
-  scrollbar-gutter:auto;
-  scrollbar-width:auto;
-  scroll-padding-top:0;
-  contain:none;
-}
 .v21Archive .v21ArchiveContent :is(section[id],article[id],[id^="case-"],[id^="proof/"]){
   scroll-margin-top:calc(var(--v254-sticky-top,72px) + 16px);
 }
@@ -157,7 +147,6 @@
 @media(max-width:570px){
   .v21Archive{--v254-sticky-top:62px}
   .v21Archive .v21ArchiveGroup[open] > summary{top:var(--v254-sticky-top)}
-  .v21Archive .v21ArchiveContent{max-height:none;overflow:visible}
 }
 @media(forced-colors:active){
   .v21Archive .v21ArchiveGroup[open] > summary{border:1px solid CanvasText}

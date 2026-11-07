@@ -1,10 +1,7 @@
 // V20.7: URL state normalization and guarded history writes for the V20 explorer.
 // This module has no DOM ownership; the workspace remains the single route UI owner.
-export const V207_ROLE_DEFAULTS=Object.freeze({
-  fullstack:Object.freeze({project:'our-hidden-universe',panel:'media'}),
-  software:Object.freeze({project:'newssources',panel:'architecture'}),
-  ml:Object.freeze({project:'earthbridge',panel:'evidence'})
-})
+import {V26_ROLE_DEFAULTS} from './v26-project-data.js'
+export const V207_ROLE_DEFAULTS=V26_ROLE_DEFAULTS
 export const V207_PANELS=Object.freeze(['overview','media','architecture','evidence'])
 const validProjectIds=ids=>new Set((Array.isArray(ids)?ids:[]).filter(x=>typeof x==='string'&&/^[a-z0-9-]+$/.test(x)))
 const validDetail=x=>typeof x==='string'&&/^[a-z0-9-]{1,90}$/.test(x)

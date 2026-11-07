@@ -11,8 +11,9 @@
     "audit:local": "node scripts/audit-local.mjs",
     "audit:metadata": "node scripts/audit-metadata.mjs",
     "pretest": "npm run build",
-    "verify": "npm test && npm run audit:local && npm run audit:metadata",
-    "smoke:browser": "node scripts/ci-browser-smoke.mjs"
+    "verify": "npm test && npm run audit:local && npm run audit:metadata && npm run audit:docs",
+    "smoke:browser": "node scripts/ci-browser-smoke.mjs",
+    "audit:docs": "node scripts/audit-docs.mjs"
   },
   "type": "module",
   "license": "UNLICENSED",

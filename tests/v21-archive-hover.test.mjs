@@ -44,7 +44,7 @@ test('hover navigation and both filters have desktop previews and tap or keyboar
   assert.match(hover,/pointerleave/)
   assert.match(hover,/fineHover/)
   assert.match(hover,/focusin/)
-  assert.match(hover,/\.v21ArchiveGroup > summary/)
+  assert.doesNotMatch(hover,/summary\.addEventListener\("pointerenter"/)\n  assert.match(workspace,/v253ArchiveToolbar/)
   assert.match(css,/@media\(max-width:630px\)/)
   assert.match(css,/\.header \.brandWord small\{display:none\}/)
   assert.match(css,/@media\(prefers-reduced-motion:reduce\)/)

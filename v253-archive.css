@@ -119,3 +119,46 @@
   .v21Archive .v21ArchiveLabel strong{font-size:13px}
   .v21Archive .v21ArchiveGroup > summary{min-height:43px}
 }
+
+/* V25.4: no nested scrolling. Opening a directory card reveals ALL of its
+   real content in normal document flow; scrolling is owned by the page.
+   The disclosure heading is sticky so the Close action stays reachable. */
+.v21Archive .v21ArchiveGroup,
+.v21Archive .v21ArchiveGroup[open]{
+  overflow:visible;
+  height:auto;
+  max-height:none;
+}
+.v21Archive .v21ArchiveGroup[open] > summary{
+  position:sticky;
+  top:var(--v254-sticky-top,72px);
+  z-index:5;
+  scroll-margin-top:var(--v254-sticky-top,72px);
+  box-shadow:0 2px 9px #1a333215;
+}
+.v21Archive .v21ArchiveContent{
+  max-height:none;
+  height:auto;
+  min-height:0;
+  overflow:visible;
+  overscroll-behavior:auto;
+  scrollbar-gutter:auto;
+  scrollbar-width:auto;
+  scroll-padding-top:0;
+  contain:none;
+}
+.v21Archive .v21ArchiveContent :is(section[id],article[id],[id^="case-"],[id^="proof/"]){
+  scroll-margin-top:calc(var(--v254-sticky-top,72px) + 16px);
+}
+.v21Archive .v21ArchiveGroup[open] .v253ArchiveVerb{
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+@media(max-width:570px){
+  .v21Archive{--v254-sticky-top:62px}
+  .v21Archive .v21ArchiveGroup[open] > summary{top:var(--v254-sticky-top)}
+  .v21Archive .v21ArchiveContent{max-height:none;overflow:visible}
+}
+@media(forced-colors:active){
+  .v21Archive .v21ArchiveGroup[open] > summary{border:1px solid CanvasText}
+}

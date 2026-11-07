@@ -71,3 +71,24 @@ test('route state remains controlled by workspace, not career presentation',()=>
  assert.match(build,/v26-navigation-session\.js/)
  assert.match(workspace,/search\.value=snapshot\.searchValue/)
 })
+
+test('workspace and router use one canonical role and project-stage definition',async()=>{
+ const data=await import('../v26-project-data.js')
+ const route=await import('../v207-route.js')
+ assert.equal(route.V207_ROLE_DEFAULTS,data.V26_ROLE_DEFAULTS)
+ for(const [role,settings] of Object.entries(data.V26_ROLE_SETTINGS)){
+   assert.equal(data.V26_ROLE_DEFAULTS[role].project,settings.project)
+   assert.equal(data.V26_ROLE_DEFAULTS[role].panel,settings.tab)
+   assert.match(settings.resume,/^\/resumes\/Himanshu_Shukla_[a-z]+_Public\.pdf$/)
+   assert.ok(settings.order.length>=5)
+ }
+ for(const project of ids) {
+   assert.ok(Array.isArray(data.V26_STAGE_FLOWS[project]))
+   assert.ok(data.V26_STAGE_FLOWS[project].length>=4)
+ }
+ const ws=read('v20-workspace.js')
+ const build=read('scripts/build.mjs')
+ assert.match(ws,/V26_ROLE_SETTINGS as V20_SETTINGS/)
+ assert.match(ws,/V26_STAGE_FLOWS as V20_FLOWS/)
+ assert.match(build,/v26-project-data\.js/)
+})

@@ -5,7 +5,7 @@ const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8')
 const workspace=read('v20-workspace.js')
 const css=read('v253-archive.css')
 const hover=read('v21-interactions.js')
-const finalCss=css.slice(css.indexOf('/* V25.4:'))
+const finalCss=css
 
 test('expanded archive reveals the complete original content on the main page',()=>{
  assert.ok(finalCss.length>500)
@@ -14,7 +14,8 @@ test('expanded archive reveals the complete original content on the main page',(
  assert.match(finalCss,/overflow:visible/)
  assert.match(finalCss,/overscroll-behavior:auto/)
  assert.match(finalCss,/scrollbar-gutter:auto/)
- assert.match(finalCss,/contain:none/)
+ assert.doesNotMatch(finalCss,/max-height:min\\(68dvh/)
+ assert.doesNotMatch(finalCss,/max-height:61dvh/)
  assert.match(finalCss,/@media\(max-width:570px\)/)
  assert.match(finalCss,/scroll-margin-top/)
  assert.doesNotMatch(workspace,/inner\.tabIndex=0/)

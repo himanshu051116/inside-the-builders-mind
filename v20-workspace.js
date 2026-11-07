@@ -317,8 +317,10 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     const savedRole=roleSessions.select(role);
     id=ids.includes(savedRole.project)?savedRole.project:entry[0].id;
     tab=savedRole.panel;
-    capture=captureByProject.get(id)??savedRole.capture;
-    stage=stageByProject.get(id)??savedRole.stage;
+    // The role session wins over the project-wide cache: the same project
+    // can have different selected captures or architecture stages by role.
+    capture=savedRole.capture;
+    stage=savedRole.stage;
     search.value="";
     if(invokeLegacy){
       // The legacy header is a presentation adapter, never a navigation owner.

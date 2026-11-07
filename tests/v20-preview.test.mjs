@@ -4,6 +4,7 @@ import {readFileSync,existsSync,statSync} from 'node:fs'
 import {setupV20Workspace} from '../v20-workspace.js'
 const read=x=>readFileSync(new URL('../'+x,import.meta.url),'utf8')
 const code=read('v20-workspace.js'),site=read('site.js'),css=read('v20-workspace.css'),build=read('scripts/build.mjs')
+const roleConfig=read('v26-project-data.js')
 test('V20 preview is integrated after all V19 lifecycle hooks',()=>{
   assert.equal(typeof setupV20Workspace,'function')
   assert.match(site,/import \{ setupV20Workspace \} from '\.\/v20-workspace\.js'/)
@@ -17,7 +18,7 @@ test('all three role-specific visual identities and matching PDF routes remain i
    const name='public/resumes/Himanshu_Shukla_'+pdf+'_Public.pdf'
    assert.ok(existsSync(new URL('../'+name,import.meta.url)),name)
    assert.ok(statSync(new URL('../'+name,import.meta.url)).size>4000)
-   assert.ok(code.includes('/resumes/Himanshu_Shukla_'+pdf+'_Public.pdf'))
+   assert.ok(roleConfig.includes('/resumes/Himanshu_Shukla_'+pdf+'_Public.pdf'))
  }
  for(const x of ['data-v20-role','data-v20-project','data-v20-tab','data-v20-stage']) assert.ok(code.includes(x),x)
 })

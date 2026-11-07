@@ -61,6 +61,7 @@ The real implementation retains versioned styling and interaction modules for ba
 ```bash
 git clone https://github.com/himanshu051116/inside-the-builders-mind.git
 cd inside-the-builders-mind
+npm ci           # installs pinned development tooling; no server runtime dependency
 
 npm run dev      # local development server
 npm run verify   # build + automated tests + local/metadata audits

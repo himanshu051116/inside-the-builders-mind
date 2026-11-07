@@ -81,10 +81,10 @@ try{
     assert.equal(geometry.overflow,'visible')
     assert.ok(geometry.pillWidth<(width<=570?240:300),`Archive close chip too wide at ${width}px`)
     await page.locator('[data-archive-section="work"] > summary').click()
-    assert.equal(await page.locator('.v21ArchiveGroup[open]').count(),1)
+    await page.waitForFunction(()=>document.querySelectorAll('.v21ArchiveGroup[open]').length===1)
     await page.locator('[data-archive-section="work"] > summary').focus()
     await page.keyboard.press('Escape')
-    assert.equal(await page.locator('.v21ArchiveGroup[open]').count(),0)
+    await page.waitForFunction(()=>document.querySelectorAll('.v21ArchiveGroup[open]').length===0)
     scenarios++
 
     // Deliberate project changes must work with browser history.

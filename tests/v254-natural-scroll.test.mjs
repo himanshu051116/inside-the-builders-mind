@@ -14,7 +14,7 @@ test('expanded archive reveals the complete original content on the main page',(
  assert.match(finalCss,/overflow:visible/)
  assert.match(finalCss,/overscroll-behavior:auto/)
  assert.match(finalCss,/scrollbar-gutter:auto/)
- assert.doesNotMatch(finalCss,/max-height:min\\(68dvh/)
+ assert.equal(finalCss.includes("max-height:min(68dvh"),false)
  assert.doesNotMatch(finalCss,/max-height:61dvh/)
  assert.match(finalCss,/@media\(max-width:570px\)/)
  assert.match(finalCss,/scroll-margin-top/)

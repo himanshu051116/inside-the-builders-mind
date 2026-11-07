@@ -87,20 +87,10 @@ export function setupV21Interactions(doc=document,win=window){
   }
   hoverActivate(".projectFilter");
   hoverActivate(".archiveFilter");
-  // Each archive section can also be opened on mouse hover, independently.
-  for(const summary of doc.querySelectorAll(".v21ArchiveGroup > summary")){
-    let timer=0;
-    summary.addEventListener("pointerenter",event=>{
-      if(!fineHover()||event.pointerType==="touch")return;
-      win.clearTimeout(timer);
-      timer=win.setTimeout(()=>{
-        if(summary.isConnected&&summary.parentElement)summary.parentElement.open=true;
-      },175);
-    });
-    for(const name of ["pointerleave","pointerdown","pointercancel"]){
-      summary.addEventListener(name,()=>{win.clearTimeout(timer);timer=0});
-    }
-  }
+  // V25.3: archive summaries intentionally DO NOT auto-open on hover.
+  // Scrolling with a stationary pointer used to trigger a chain of disclosures.
+  // Hover remains a visual highlight; click/Enter/Space are the only
+  // intentional opening mechanisms. Project/nav/filter hover remains intact.
   doc.addEventListener("click",async event=>{
     const button=event.target.closest?.("button[data-copy-email]");
     if(!button)return;

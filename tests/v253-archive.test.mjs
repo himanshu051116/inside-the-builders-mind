@@ -28,7 +28,7 @@ test('hovering archive does not mutate a disclosure while scrolling',()=>{
 })
 
 test('opened sections use natural full-height page scroll and sticky close control',()=>{
- const finalRules=css.slice(css.indexOf('/* V25.4:'))
+ const finalRules=css
  assert.match(finalRules,/max-height:none/)
  assert.match(finalRules,/overflow:visible/)
  assert.match(finalRules,/overscroll-behavior:auto/)

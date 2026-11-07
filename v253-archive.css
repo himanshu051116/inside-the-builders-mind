@@ -162,3 +162,8 @@
 @media(forced-colors:active){
   .v21Archive .v21ArchiveGroup[open] > summary{border:1px solid CanvasText}
 }
+
+/* Both closed and expanded headings use the same comfortable anchor offset. */
+.v21Archive .v21ArchiveGroup > summary{
+  scroll-margin-top:var(--v254-sticky-top,72px);
+}

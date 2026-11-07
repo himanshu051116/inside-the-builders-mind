@@ -1,0 +1,49 @@
+/* V25.2 — genuine six-second muted excerpt, only while the project card is visible.
+   The original full demonstration remains an explicit, audible dialog action. */
+#home .v19MilestoneVideo{position:relative;isolation:isolate}
+#home .v19MilestoneOpen .v252SilentPreview{
+  position:absolute;inset:0;display:block;width:100%;height:100%;
+  object-fit:contain;object-position:center center;
+  background:#080e17;opacity:0;pointer-events:none;
+  transition:opacity 180ms ease;
+}
+#home .v19MilestoneOpen.v252PreviewPlaying .v252SilentPreview{opacity:1}
+#home .v19MilestoneOpen.v252PreviewPlaying >img{opacity:0}
+#home .v19MilestoneOpen.v252PreviewPlaying .v19MilestonePlay{
+  opacity:0;transform:translate(-50%,-50%) scale(.94);
+}
+#home .v19MilestoneOpen .v252FullCTA{
+  position:absolute;z-index:2;top:12px;left:12px;
+  max-width:calc(100% - 165px);
+  font:750 10px/1.35 system-ui,sans-serif;
+  padding:6px 9px;border-radius:5px;color:#f9f5eb;
+  background:#0b2028de;border:1px solid #ffffff66;
+  text-align:left;letter-spacing:.01em;
+  pointer-events:none;
+}
+#home .v252PreviewToggle{
+  position:absolute;z-index:3;top:11px;right:11px;
+  min-height:33px;padding:7px 10px;
+  border:1px solid #e6f2ef99;border-radius:5px;
+  background:#0b2028e8;color:#fff;
+  font:720 10px/1.25 system-ui,sans-serif;
+  cursor:pointer;box-shadow:0 3px 15px #0005;
+}
+#home .v252PreviewToggle[hidden]{display:none!important}
+#home .v252PreviewToggle:hover{background:#214a51;border-color:#fff}
+#home .v252PreviewToggle:focus-visible{outline:3px solid #ffb98e;outline-offset:3px}
+#home .v19MilestoneOpen.v252PreviewPlaying:hover .v252SilentPreview{filter:brightness(.88)}
+@media(max-width:530px){
+  #home .v19MilestoneOpen .v252FullCTA{
+    top:9px;left:9px;max-width:calc(100% - 140px);
+    padding:5px 7px;font-size:9px;
+  }
+  #home .v252PreviewToggle{top:8px;right:8px;padding:6px 8px;min-height:31px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  #home .v19MilestoneOpen .v252SilentPreview,
+  #home .v19MilestoneOpen.v252PreviewPlaying .v19MilestonePlay{transition:none!important}
+}
+@media(forced-colors:active){
+  #home .v252PreviewToggle,#home .v19MilestoneOpen .v252FullCTA{border:1px solid CanvasText}
+}

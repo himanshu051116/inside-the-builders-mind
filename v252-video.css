@@ -47,3 +47,14 @@
 @media(forced-colors:active){
   #home .v252PreviewToggle,#home .v19MilestoneOpen .v252FullCTA{border:1px solid CanvasText}
 }
+
+.v19MilestoneDialog .v252PlayerActions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:end}
+.v19MilestoneDialog .v252ReplayChapter{
+  min-height:32px;padding:6px 10px;border:1px solid #d5aa8a;
+  border-radius:5px;background:#213e47;color:#f9e5d5;
+  font:750 10px/1.25 system-ui,sans-serif;cursor:pointer;
+}
+.v19MilestoneDialog .v252ReplayChapter[hidden]{display:none!important}
+.v19MilestoneDialog .v252ReplayChapter:hover{background:#2a525d;color:#fff}
+.v19MilestoneDialog .v252ReplayChapter:focus-visible{outline:3px solid #ffb98e;outline-offset:2px}
+@media(max-width:530px){.v19MilestoneDialog .v252PlayerActions{justify-content:start}}

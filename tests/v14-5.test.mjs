@@ -25,7 +25,7 @@ test('V14.5 ships one CSS request while retaining organized source modules',()=>
  assert(existsSync(resolve(root,'dist/portfolio.css')))
 })
 test('V14.5 source ownership cleanup is documented and source styles stay editable',()=>{
- const audit=JSON.parse(read('CSS_REMOVAL_AUDIT.json'))
+ const audit=JSON.parse(read('docs/history/CSS_REMOVAL_AUDIT.json'))
  assert(audit.count>=300)
  assert(audit.removable_bytes>20000)
  assert(!read('portfolio.css').includes('.careerCTA{'))

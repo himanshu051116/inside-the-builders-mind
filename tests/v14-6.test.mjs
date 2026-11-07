@@ -46,5 +46,5 @@ test('no EarthBridge offline workbench screenshot is described as real retrieval
  const m=read('evidence-media.js');
  assert.match(m,/No query-and-ranked-results screenshot was supplied/);
  assert.match(m,/not independently reproduced/i);
- assert.match(read('V14_STATUS.json'),/V14-016/);
+ assert.match(read('docs/history/V14_STATUS.json'),/V14-016/);
 });

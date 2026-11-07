@@ -1,91 +1,107 @@
-> **Current local checkpoint: V14.8 (49/73 tasks verified).** See `V14_7_RELEASE_NOTES.md` and `V14_PROGRESS.md`. The public Vercel site remains on V13.
+# Inside the Builder's Mind
 
-# V14.1 development checkpoint (local only)
+**An interactive, evidence-first engineering portfolio**
 
-See [V14.3 release notes](V14_3_RELEASE_NOTES.md) and [73-task progress tracker](V14_PROGRESS.md). The **currently deployed Vercel production site remains V13**.
+A single website presenting three professional perspectives—**Full-Stack**, **Software Systems**, and **Applied ML**—through genuine project captures, inspectable architecture, design decisions, source references, and clearly stated validation limits.
 
-# Inside the Builder's Mind — V13
+[**Explore the latest verified preview**](https://inside-the-builders-mind-fvahtlv7c.vercel.app/) · [Architecture](docs/architecture/README.md) · [Run locally](#run-locally) · [AWS deployment status](AWS_DEPLOYMENT.md) · [CI checks](https://github.com/himanshu051116/inside-the-builders-mind/actions/workflows/ci.yml)
 
-Three specialization-aware portfolio experiences for Himanshu Shukla (B.Tech Mathematics & Computing, MITS Gwalior): **Full-Stack Studio**, **Systems Console**, and **ML Research Lab**. Built with browser-native JavaScript, HTML and CSS, with an interactive Evidence Workbench.
+![Inside the Builder's Mind — original Full-Stack social preview](public/social-fullstack.png)
 
-## Run
+> **Release note:** The link above is a tested **V25.5 preview**, not proof of an AWS deployment. The default `main` branch and the portfolio's production deployment may follow different release schedules. This repository is maintained with feature branches and a separate AWS deployment candidate.
 
-Requires Node.js 22+ for the scripts. No npm runtime dependencies.
+## What makes it different
 
-```bash
-npm test
-npm run audit:local
-npm run dev
-npm run build
-npm run preview
+- **Role-specific exploration:** Three career views, each with a corresponding public résumé and relevant project ordering.
+- **Real interfaces and traceable evidence:** Original screenshots, source links, engineering case records, and recorded demonstrations—with uncertainty made explicit.
+- **Interactive technical inspection:** Project-specific Overview, Screens, Architecture, and Evidence tabs; deep links to stages and captures; a local evidence-review workbench.
+- **Intentional interaction:** Hover previews can be cancelled or committed. The ten-section archive opens by click/keyboard, never accidental scrolling; a compact Close control stays reachable.
+- **Preserved original media:** The Mulyankan recording offers an optional muted in-view excerpt and an explicitly started full recording with its original audio.
+- **Static and inspectable:** Plain JavaScript, HTML, CSS and Node.js build scripts, without a production API or server runtime required to serve this portfolio.
+
+## Featured work
+
+| Project | Engineering focus | Current status | Evidence |
+| --- | --- | --- | --- |
+| [Mulyankan](https://github.com/himanshu051116/Algonauts-Mulyankan) | Document review, scoring transparency, rubric/evidence traceability | **Demonstrated prototype** | [Original interface capture](public/evidence/mulyankan-overview.webp) |
+| [NewsSources](https://github.com/himanshu051116/NewsSources) | Article ingestion, PostgreSQL frontier coordination and failure handling | **In development** | [Original interface capture](public/evidence/news-overview.webp) |
+| [Our Hidden Universe](https://github.com/himanshu051116/our-hidden-universe) | React/Firebase private collaboration and shared-session interfaces | **Deployed application** | [Original interface capture](public/evidence/ohs-home.webp) |
+| [EarthBridge](https://github.com/himanshu051116/earthbridge) | PyTorch/FAISS cross-sensor satellite-retrieval experiments | **Research prototype** | [Original interface capture](public/evidence/earthbridge-workbench.webp) |
+| [SchoolBuddies](https://github.com/himanshu051116/SCHOOLBUDDIES) | Student-led school technology outreach | **Live website / community initiative** | [Workshop capture](public/evidence/schoolbuddies-workshop.webp) |
+
+### Screenshots from the actual projects
+
+| Mulyankan — spatial inspection | NewsSources — investigation interface |
+|:---:|:---:|
+| ![Original Mulyankan Spatial Lab inspection screenshot](public/evidence/mulyankan-spatial-inspect.webp) | ![Original NewsSources investigation screenshot](public/evidence/news-investigations.webp) |
+
+These are preserved source captures, **not generated mockups**. Screenshots document visible interface states; they do not independently prove uptime, model accuracy, production load capacity or security.
+
+## Engineering architecture
+
+```mermaid
+flowchart LR
+    A["Project records<br/>content.js"] --> B["Three career modes"]
+    C["Engineering decisions<br/>case-dossiers.js"] --> D["Project workspace"]
+    E["Screenshot manifest<br/>public/evidence/"] --> D
+    B --> D
+    F["Validated URL state<br/>v207-route.js"] <--> D
+    D --> G["Overview / Screens / Architecture / Evidence"]
+    H["Original recordings<br/>public/video/"] --> I["Optional silent preview<br/>and full-video dialog"]
+    J["HTML + CSS + JS"] --> K["Node build"]
+    K --> L["dist/ — static hosting"]
 ```
 
-The production build is in `dist/`. Deploy the root source repository on Vercel using **build command `npm run build`** and **output directory `dist`**. AWS Amplify configuration is in `amplify.yml`; use the same source repository and do not treat Vercel as AWS challenge submission hosting.
+The real implementation retains versioned styling and interaction modules for backwards compatibility. The build combines ordered source styles into one production stylesheet and copies the static assets into `dist/`. See the [architecture notes](docs/architecture/README.md) for ownership and limitations.
 
-## Engineering evidence and search (V11 foundation)
+## Run locally
 
-The **case-study records** are the primary source-backed project tour. The optional Evidence Desk: four tabs let a recruiter inspect the engineering question, architecture decision, directly linked files and constraints for each flagship project. It follows the selected résumé track. Long-form case notes are opt-in, rather than a wall of text. Use **Ctrl+K / Cmd+K** to search projects, switch modes, jump to a section or open the correct public résumé. The Command Palette is local-only.
+**Requirements:** Node.js **22+**, npm and Git. No third-party application runtime packages or credentials are required to run the portfolio.
 
-See `V11_RELEASE_NOTES.md` for the implementation and test details.
+```bash
+git clone https://github.com/himanshu051116/inside-the-builders-mind.git
+cd inside-the-builders-mind
+npm ci           # installs pinned development tooling; no server runtime dependency
 
-## Genuine evidence versus demonstration
+npm run dev      # local development server
+npm run verify   # build + automated tests + local/metadata audits
+npm run preview  # inspect the generated dist/ build
+```
 
-- The Mulyankan project card and case study reference **genuine published screenshots** in `himanshu051116/Algonauts-Mulyankan/docs/assets/screenshots/`. Those images are optional external requests to public GitHub; a source link is shown when the browser cannot load the remote image. No project screenshots have been invented.
-- The OHS proof panel links to the **deployed product**, public UI and chat source code. The simulated room/playback interaction is **local only** and is not a live Firebase/WebRTC session.
-- The NewsSources case file links to published architecture and a PostgreSQL integration test. The interactive trace uses fictional sample input; it is not a live crawler or a production log.
-- EarthBridge proof links point to its metric-evaluation and 128-pair overfit-gate scripts. The displayed nearest-neighbor rankings are calculated from **toy synthetic vectors**, not trained EarthBridge inference. A previously reported internal accuracy percentage is intentionally not featured without a verified metric protocol.
-- IrisTrack, Coal Governance and Mulyankan Spatial Lab appear in the secondary project archive, explicitly labeled by stage. Coal Governance and Spatial Lab have no public-demo link in this release.
+Use `npm run build` to rebuild `dist/` without running all checks. Generated files are ignored by Git. The source branch containing this README may not yet have been merged into `main`; use the branch selector to obtain the current candidate.
 
-## Résumés
+## Quality and evidence boundaries
 
-Three rebuilt A4 one-page public PDFs under `public/resumes/`, with contact formatting corrected, the telephone number omitted and claims aligned to the portfolio. Preserve a phone-inclusive private version only for channels you personally approve.
+`npm run verify` runs the Node test suite, the static build, the local content audit, and the metadata audit. GitHub Actions executes the same checks; [testing documentation](docs/testing/README.md) explains what those tests do **and do not** establish.
 
-## Architecture
+The optional evidence-review workbench and selected interactive project tours use **local, deterministic sample data**. The EarthBridge demonstration includes illustrative/synthetic retrieval examples; it is **not** live trained-model inference. OHS screenshots and sample conversations are not evidence of real private user communications. Source-linked evaluation claims are not independently reproduced by this portfolio.
 
-- `site.js` — portfolio content, views and case-study markup
-- `case-dossiers.js` — source-grounded engineering decisions, exact test references, trade-offs and limits
-- `content.js` — person, primary projects and transparent archive
-- `career-modes.js` — three specialization modes, project ordering, header metadata, Studio/Systems navigation
-- `v8-interactions.js` — sole owner of toy ML ranking renderer, plus simulated chat/playback and fictional ingestion trace
-- `v10-experience.js` — project grid switch, case-study ordering and source-image fallback
-- `v11-experience.js` — evidence tabs, track-linked proof routes, keyboard search, expanded notes, and source-image fallback
-- `workbench-*` — local deterministic review exercise and audit export
-- `portfolio.css` — consolidated production stylesheet (replaces seven V9 stylesheets)
-- `public/social-*.png` and `public/share/*/index.html` — individual social-preview share routes
-- `tests/` — 76 automated source and logic checks
-- `public/sitemap.xml`, `robots.txt`, JSON-LD, and canonical metadata for discovery
+No visitor authentication, backend database service, or live AI inference is required to operate this portfolio.
 
-## Live deployment limitations
+## Hosting
 
-V13 is the currently deployed production baseline. The V14.1 development build has not been pushed or deployed to Vercel or AWS. In this execution environment, direct Chromium requests to localhost and the external Vercel pages are blocked; V10 screenshots and interaction tests use the **same code in a controlled inline-browser environment**. They do not substitute for live end-to-end tests.
+| Environment | Status |
+| --- | --- |
+| [Verified V25.5 Vercel preview](https://inside-the-builders-mind-fvahtlv7c.vercel.app/) | Preview available; not the same as production |
+| AWS Amplify | **Not deployed.** Connected AWS account currently blocks Amplify and S3 bucket creation via organization policy |
+| Custom AWS domain | Not configured |
 
-After deployment, test all three routes, the public PDFs, source images, share redirects, external links, and screen-reader/keyboard flows on the actual domain. Confirm canonical project URLs before submitting to AWS. A production performance or WCAG score has not been measured.
+For deployment instructions and account-policy constraints, consult [AWS_DEPLOYMENT.md](AWS_DEPLOYMENT.md). Canonical URLs, social preview links, and the sitemap currently reference the Vercel host and must be reviewed **after** an AWS domain is verified—never changed in anticipation of a deployment.
 
+## Repository guide
 
-## V12 — Authentic interface evidence
+| Resource | Purpose |
+| --- | --- |
+| [Architecture](docs/architecture/README.md) | Module boundaries, state ownership and data provenance |
+| [Testing](docs/testing/README.md) | Test commands, coverage limits and release checklist |
+| [Deployment](docs/deployment/README.md) | Build artifact and hosting options |
+| [Changelog](CHANGELOG.md) | Current release progression and verification boundaries |
+| [Historical reports](docs/history/README.md) | Archived development notes and audits |
+| [Contributing](CONTRIBUTING.md) | Development and review expectations |
+| [Licensing guidance](docs/LICENSING.md) | Current reuse and third-party asset status |
 
-The portfolio now embeds 16 author-provided captures across Our Hidden Universe, NewsSources, Mulyankan and SchoolBuddies. Full-Stack and Software hero panels default to a genuine screenshot, with a separate opt-in local interactive simulation. A keyboard-accessible image gallery links to original project repositories; public OHS invite codes are redacted. EarthBridge is deliberately pending real experiment imagery; no performance metric has been invented. See `public/evidence/manifest.json`.
+## Maintainer and attribution
 
+Built and maintained by [Himanshu Shukla](https://github.com/himanshu051116), Mathematics & Computing undergraduate at MITS Gwalior. This repository documents the **portfolio website**; linked applications and research projects remain separate codebases with their own boundaries and licenses.
 
-## V13 — Inspectable screenshot records and deep links
-
-Each of the 16 actual author-supplied screenshots now has two explicit, image-specific annotations:
-
-- **What is visible:** factual properties of the screenshot itself.
-- **Validation boundary:** what cannot be concluded from the screenshot alone.
-
-The gallery provides image-by-image previous/next controls outside the modal, keyboard navigation for thumbnails, a direct full-image link and a copyable site deep link. A shared link such as `?view=software#proof/news/news-claims` opens the chosen screenshot and section. Each WebP is recorded in `public/evidence/manifest.json` with its byte size, dimensions, source filename and a SHA-256 **of the optimized public WebP** (not of the original uploaded image).
-
-The Full-Stack and Software leads reserve image dimensions and prioritize loading of their actual screenshot. No fabricated EarthBridge imagery or evaluation numbers are added. The original synthetic ML playground stays separate from the source-backed evidence.
-
-Run `npm test && npm run build && npm run audit:local` before deployment. Local Chromium testing in the restricted sandbox uses an inline-script/browser harness because direct HTTP navigation to localhost is blocked; **it does not prove the published website is working**. See `V13_LOCAL_QA.md`.
-
-
-## V14.5 local release
-
-`V14_4_RELEASE_NOTES.md` documents the mobile evidence-first layout, unclipped jump shortcuts, role history, full-screen image viewer, corrected ML research methodology, and validation. This source is not deployed on GitHub or Vercel.
-
-
-## V14.5 CSS maintenance checkpoint
-
-The editable source is organized in `styles/*.css` and `v14*.css` correction modules; `npm run build` compiles these in a stable order into **one minified** `dist/portfolio.css` file. The build is dependency-free. `CSS_REMOVAL_AUDIT.json` documents 347 pruned rules that appeared unreferenced in the current JavaScript/HTML source. `V14_5_RELEASE_NOTES.md` records size and QA evidence; production and external audits are still pending.
+**License:** No open-source license has been selected for this repository. See [licensing guidance](docs/LICENSING.md) before copying or redistributing any code, personal material, screenshot or video.

@@ -35,13 +35,19 @@ export function setupV11Experience(){
  })
  // The selected source audit follows the selected résumé track.
  const focusByMode={fullstack:'ohs',software:'news',ml:'earthbridge'}
+ function syncProofRoutes(){
+   const role=document.body.dataset.role||'fullstack'
+   for(const el of document.querySelectorAll('[data-proof-route]'))el.hidden=el.dataset.proofRoute!==role
+ }
  function syncRole(){
    const role=document.body.dataset.role||'fullstack'
    selectCase(focusByMode[role]||'ohs')
-   for(const el of document.querySelectorAll('[data-proof-route]'))el.hidden=el.dataset.proofRoute!==role
+   syncProofRoutes()
  }
- document.querySelectorAll('[data-switch-role]').forEach(b=>b.addEventListener('click',syncRole))
- window.addEventListener('popstate',syncRole)
+ // Role styling and role-specific evidence visibility follow a single
+ // presentation event. Do not infer a new case from a legacy button click.
+ document.addEventListener('portfolio:apply-role-view',syncProofRoutes)
+ window.addEventListener('popstate',syncProofRoutes)
  syncRole()
  // Handle #case links by revealing the corresponding source record. The related
  // engineering note stays available to expand independently.
@@ -64,6 +70,7 @@ export function setupV11Experience(){
  })
  const selectedCaseByProject={'our-hidden-universe':'ohs',newssources:'news',mulyankan:'mulyankan',earthbridge:'earthbridge'}
  document.addEventListener('portfolio:navigation-committed',ev=>{
+   syncProofRoutes()
    const selected=selectedCaseByProject[ev.detail?.project]
    if(selected)selectCase(selected)
  })

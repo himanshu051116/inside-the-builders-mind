@@ -1,0 +1,40 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import {readFileSync} from 'node:fs'
+const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8')
+const css=read('v255-close-chip.css')
+const workspace=read('v20-workspace.js')
+const build=read('scripts/build.mjs')
+const older=read('v253-archive.css')
+const hover=read('v21-interactions.js')
+
+test('only expanded archive headings become narrow right-aligned close chips',()=>{
+ assert.match(css,/\.v21Archive \.v21ArchiveGroup\[open\] > summary/)
+ assert.match(css,/width:max-content/)
+ assert.match(css,/max-width:min\(268px,calc\(100% - 12px\)\)/)
+ assert.match(css,/min-height:36px/)
+ assert.match(css,/margin-inline-start:auto/)
+ assert.match(css,/border-radius:999px/)
+ assert.match(css,/position:sticky/)
+ assert.match(css,/\.v21ArchiveGroup\[open\] > summary \.v21ArchiveLabel small/)
+ assert.match(css,/text-overflow:ellipsis/)
+ assert.match(css,/@media\(max-width:570px\)/)
+ assert.match(css,/max-width:min\(216px,calc\(100% - 10px\)\)/)
+})
+test('full title remains accessible while chip visually truncates long names',()=>{
+ assert.match(workspace,/summary\.setAttribute\("aria-label"/)
+ assert.match(workspace,/summary\.title="Close "/)
+ assert.match(workspace,/summary\.removeAttribute\("title"\)/)
+ assert.match(css,/\.v21ArchiveGroup\[open\] > summary:focus-visible/)
+ assert.match(css,/@media\(forced-colors:active\)/)
+ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/)
+})
+test('archive preserves full natural scrolling, exclusive opening, close and no hover activation',()=>{
+ assert.match(older,/max-height:none/)
+ assert.match(older,/overflow:visible/)
+ assert.match(workspace,/closeArchiveGroup/)
+ assert.match(workspace,/settleOnArchiveHeading/)
+ assert.match(workspace,/if\(group!==selected&&group\.open\)group\.open=false/)
+ assert.doesNotMatch(hover,/summary\.addEventListener\("pointerenter"/)
+ assert.match(build,/v255-close-chip\.css/)
+})

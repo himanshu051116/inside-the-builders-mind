@@ -1,5 +1,6 @@
 import {readV207Route,commitV207Route,readV25DetailRoute} from './v207-route.js'
 import {caseDossiers} from './case-dossiers.js'
+import {createV26RoleSessions} from './v26-navigation-session.js'
 // V20.7 retains the V20.6 rendered surfaces while consolidating URL semantics.
 const V20_SETTINGS={"fullstack":{"label":"Full-Stack","project":"our-hidden-universe","tab":"media","title":"Products & interfaces","subtitle":"Interfaces, source, and implementation.","resume":"/resumes/Himanshu_Shukla_fullstack_Public.pdf","order":["our-hidden-universe","mulyankan","schoolbuddies","newssources","earthbridge"]},"software":{"label":"Software Systems","project":"newssources","tab":"architecture","title":"Systems & architecture","subtitle":"Architecture, data flow, and engineering trade-offs.","resume":"/resumes/Himanshu_Shukla_software_Public.pdf","order":["newssources","mulyankan","our-hidden-universe","earthbridge","schoolbuddies"]},"ml":{"label":"Applied ML","project":"earthbridge","tab":"evidence","title":"Research & evaluation","subtitle":"Methods, reported results, and limitations.","resume":"/resumes/Himanshu_Shukla_ml_Public.pdf","order":["earthbridge","mulyankan","newssources","our-hidden-universe","schoolbuddies"]}};
 const V20_FLOWS={"mulyankan":[["Document intake","Inspect submitted files, format and extraction readiness."],["Evidence extraction","Link supporting material to rubric criteria."],["Rubric review","Flag insufficient evidence instead of forcing a complete score."],["Human decision","A reviewer retains final authority and an audit trail."]],"earthbridge":[["Paired scenes","Prepare Sentinel-1 and Sentinel-2 paired observations."],["Descriptors","Map modalities to a shared retrieval space."],["FAISS lookup","Compare encoded descriptors; this view performs no inference."],["Evaluation","Inspect reported metrics and holdout-split limitations."]],"our-hidden-universe":[["Access","Firebase authentication controls private room access."],["Room state","Coordinate presence, messages and shared session state."],["Messaging","Inspect the source-backed messaging implementation."],["Watch Together","Review captured playback and call controls; no live sync test here."]],"newssources":[["Discovery","Collect candidates from RSS and sitemaps."],["Normalize","Extract and deduplicate article identities."],["Persistence","Preserve records, versions and provenance in PostgreSQL."],["Analyst review","Inspect captured source, event and claims screens."]],"schoolbuddies":[["School outreach","Coordinate engagement with schools."],["Curriculum","Prepare programming and AI-literacy workshops."],["Learning","Run hands-on technology demonstrations."],["Website","Accept enquiries through the public project site."]]};
@@ -21,6 +22,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   // Local per-project inspection state; never persists private user data.
   const captureByProject=new Map(),stageByProject=new Map(),tabByProject=new Map();
   const captureTokenByProject=new Map(),stageTokenByProject=new Map();
+  const roleSessions=createV26RoleSessions(V20_SETTINGS,ids,{...initialRoute,capture,stage});
   const firstDetail=readV25DetailRoute(win.location.href);
   if(firstDetail.capture)captureTokenByProject.set(id,firstDetail.capture);
   if(firstDetail.stage)stageTokenByProject.set(id,firstDetail.stage);
@@ -28,8 +30,11 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const projectStateMaps=[captureByProject,stageByProject,tabByProject,captureTokenByProject,stageTokenByProject];
   const rememberPreview=()=>{
     if(previewSnapshot)return;
+    roleSessions.remember({role,project:id,panel:tab,capture,stage});
     previewSnapshot={
       role,id,tab,capture,stage,
+      searchValue:search?.value??"",
+      roleContexts:roleSessions.snapshot(),
       maps:projectStateMaps.map(m=>new Map(m))
     };
   };
@@ -124,6 +129,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
   const get=()=>entry.find(p=>p.id===id)||entry[0];
   const first=()=>V20_SETTINGS[role];
   const emit=(method="replaceState",hash="#v20-workspace")=>{
+    roleSessions.remember({role,project:id,panel:tab,capture,stage});
     const result=commitV207Route(win,{
       role,project:id,panel:tab,hash,
       stage:stageTokenByProject.get(id)??null,
@@ -297,6 +303,7 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
       commitSelection("pushState");
       return;
     }
+    const previousRole=role;
     role=next;workspace.dataset.role=role;
     doc.querySelectorAll("[data-v20-role]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v20Role===role)));
     doc.getElementById("v20Title").textContent=first().title;
@@ -305,13 +312,18 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     doc.getElementById("v20Resume").setAttribute("aria-label",`Download ${first().label} résumé PDF`);
     doc.getElementById("v20FullShowcase").textContent=`Open ${first().label} full showcase ↗`;
     captureByProject.set(id,capture);stageByProject.set(id,stage);tabByProject.set(id,tab);
-    tab=first().tab;id=ids.includes(first().project)?first().project:entry[0].id;
-    capture=captureByProject.get(id)??0;stage=stageByProject.get(id)??0;search.value="";
+    // Persist each specialization's actual project and inspection context.
+    roleSessions.remember({role:previousRole,project:id,panel:tab,capture,stage});
+    const savedRole=roleSessions.select(role);
+    id=ids.includes(savedRole.project)?savedRole.project:entry[0].id;
+    tab=savedRole.panel;
+    capture=captureByProject.get(id)??savedRole.capture;
+    stage=stageByProject.get(id)??savedRole.stage;
+    search.value="";
     if(invokeLegacy){
-      const prior=doc.documentElement.dataset.v20Syncing;
-      doc.documentElement.dataset.v20Syncing='true';
-      try{doc.querySelector(`#top [data-switch-role="${role}"]`)?.click()}
-      finally{if(prior===undefined)delete doc.documentElement.dataset.v20Syncing;else doc.documentElement.dataset.v20Syncing=prior}
+      // The legacy header is a presentation adapter, never a navigation owner.
+      // No programmatic button clicks and no URL writes from this event.
+      doc.dispatchEvent(new win.CustomEvent("portfolio:apply-role-view",{detail:{role}}));
     }
     render();updateSearchNotice();announce(`${first().label} workspace selected`);
     if(update)commitSelection("pushState");
@@ -328,6 +340,8 @@ export const setupV20Workspace=function initV20(projects,doc=document,win=window
     if(role!==snapshot.role)chooseRole(snapshot.role,true,false);
     role=snapshot.role;workspace.dataset.role=role;
     id=snapshot.id;tab=snapshot.tab;capture=snapshot.capture;stage=snapshot.stage;
+    search.value=snapshot.searchValue;
+    roleSessions.restore(snapshot.roleContexts);
     projectStateMaps.forEach((m,index)=>{
       m.clear();
       for(const [key,value] of snapshot.maps[index])m.set(key,value);

@@ -1,6 +1,7 @@
 /**
  * V19 — presenter-visible evidence, integrated into the V17 Mulyankan milestone card.
- * No autoplay on page load. The saved source video/audio is never manipulated here.
+ * The preview may autoplay silently only when visible; the original recording
+ * remains unchanged and its dialog retains explicit, audible playback.
  * The chapter controls refer exclusively to the bundled real screen recordings.
  */
 export const milestoneClips = Object.freeze([
@@ -22,6 +23,7 @@ const initialClip=milestoneClips[0];
 
 /** Called after the existing site.js appMarkup has rendered. */
 export function setupMilestoneVideo(doc=document){
+  const win=doc.defaultView || window;
   const card=doc.querySelector('#home .v17Proof');
   const meta=card?.querySelector('.v17ProofMeta');
   if(!card||!meta||card.dataset.milestoneVideo==='ready') return null;
@@ -29,14 +31,17 @@ export function setupMilestoneVideo(doc=document){
   card.classList.add('v19ProofHasVideo');
   const region=doc.createElement('div');
   region.className='v19MilestoneVideo';
-  region.innerHTML=`<button class="v19MilestoneOpen" type="button" aria-haspopup="dialog" aria-controls="v19MilestoneDialog" aria-label="Play Mulyankan 3D architecture demonstration, with presenter and original audio">
+  region.innerHTML=`<button class="v19MilestoneOpen" type="button" aria-haspopup="dialog" aria-controls="v19MilestoneDialog" aria-label="Watch the full recorded Mulyankan demonstration with original sound">
     <img src="${initialClip.poster}" alt="Mulyankan 3D architecture screenshot with the presenter in the live-camera inset" width="1280" height="790" loading="eager" decoding="async">
+    <video class="v252SilentPreview" muted playsinline preload="none" tabindex="-1" aria-hidden="true" disablepictureinpicture></video>
     <span class="v19MilestoneShade" aria-hidden="true"></span>
+    <span class="v252FullCTA" aria-hidden="true">Watch full recording with sound ↗</span>
     <span class="v19MilestonePlay" aria-hidden="true">▶</span>
     <span class="v19MilestoneBadge">RECORDED DEMONSTRATION</span>
     <span class="v19MilestoneDuration">${initialClip.duration}</span>
   </button>
-  <p class="v19MilestoneFootnote">Spatial Lab walkthrough <span aria-hidden="true">·</span> Presenter webcam and original audio</p>`;
+  <button class="v252PreviewToggle" type="button" hidden aria-label="Pause muted preview">Pause preview</button>
+  <p class="v19MilestoneFootnote">Muted visual preview <span aria-hidden="true">·</span> Full recording has presenter webcam and original audio</p>`;
   card.querySelector('.v17ProofBody')?.insertBefore(region,meta);
 
   const dialog=doc.createElement('dialog');
@@ -67,6 +72,8 @@ export function setupMilestoneVideo(doc=document){
   doc.body.append(dialog);
 
   const open=region.querySelector('.v19MilestoneOpen');
+  const teaser=region.querySelector('.v252SilentPreview');
+  const previewToggle=region.querySelector('.v252PreviewToggle');
   const close=dialog.querySelector('.v19DialogClose');
   const video=dialog.querySelector('.v19DialogVideo');
   const source=video.querySelector('source');
@@ -77,6 +84,93 @@ export function setupMilestoneVideo(doc=document){
   let returnFocus=null;
   let scrollBefore='';
   let opened=false;
+
+  // Only a short, silent excerpt is repeated. No additional media file is
+  // generated, no full recording is looped, and no bytes load out of view.
+  const previewSeconds=6;
+  const motionQuery=win.matchMedia?.('(prefers-reduced-motion: reduce)');
+  const dataQuery=win.matchMedia?.('(prefers-reduced-data: reduce)');
+  const connection=win.navigator?.connection;
+  let inView=false,previewLoaded=false,userPaused=false;
+  let playbackAttempt=0;
+  const autoplayEligible=()=>!motionQuery?.matches&&!dataQuery?.matches&&!connection?.saveData;
+  const pausePreview=()=>{
+    teaser.pause();
+    open.classList.remove('v252PreviewPlaying');
+  };
+  const updateToggle=()=>{
+    const allowed=inView&&previewLoaded&&!dialog.open;
+    previewToggle.hidden=!allowed;
+    if(!allowed)return;
+    const stopped=teaser.paused;
+    previewToggle.textContent=stopped?'Play preview':'Pause preview';
+    previewToggle.setAttribute('aria-label',stopped?'Play muted visual preview':'Pause muted visual preview');
+    previewToggle.setAttribute('aria-pressed',String(!stopped));
+  };
+  async function startPreview({manual=false}={}){
+    if(!inView||dialog.open||doc.hidden||(!manual&&!autoplayEligible())||(!manual&&userPaused))return false;
+    // The video is assigned a source only when the real card enters view.
+    if(!previewLoaded){
+      teaser.src=initialClip.video;
+      teaser.defaultMuted=true;
+      teaser.muted=true;
+      previewLoaded=true;
+    }
+    teaser.muted=true;teaser.playsInline=true;
+    if(teaser.currentTime>=previewSeconds)teaser.currentTime=0;
+    const attempt=++playbackAttempt;
+    try{
+      await teaser.play();
+      if(attempt!==playbackAttempt||!inView||dialog.open||doc.hidden){
+        pausePreview();return false;
+      }
+      open.classList.add('v252PreviewPlaying');
+      updateToggle();
+      return true;
+    }catch{
+      pausePreview();updateToggle();
+      return false;
+    }
+  }
+  teaser.addEventListener('timeupdate',()=>{
+    if(teaser.currentTime>=previewSeconds&&!teaser.seeking){
+      teaser.currentTime=0; // repeat the excerpt, never the entire recording
+    }
+  });
+  teaser.addEventListener('play',updateToggle);
+  teaser.addEventListener('pause',updateToggle);
+  teaser.addEventListener('error',()=>{pausePreview();previewToggle.hidden=true});
+  previewToggle.addEventListener('click',()=>{
+    if(!teaser.paused){
+      userPaused=true;pausePreview();updateToggle();
+    }else{
+      userPaused=false;
+      void startPreview({manual:true});
+    }
+  });
+  const observeVideo=typeof win.IntersectionObserver==='function'
+    ?new win.IntersectionObserver(entries=>{
+      const visible=entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>=0.55);
+      if(visible===inView)return;
+      inView=visible;
+      if(!visible){
+        ++playbackAttempt;pausePreview();updateToggle();
+      }else{
+        if(autoplayEligible()&&!userPaused)void startPreview();
+        updateToggle();
+      }
+    },{threshold:[0,0.55,0.8]}):null;
+  observeVideo?.observe(region);
+  const refreshAutoplay=()=>{
+    if(!autoplayEligible()){
+      ++playbackAttempt;pausePreview();
+    }else if(inView&&!userPaused&&!dialog.open&&!doc.hidden){
+      void startPreview();
+    }
+    updateToggle();
+  };
+  motionQuery?.addEventListener?.('change',refreshAutoplay);
+  dataQuery?.addEventListener?.('change',refreshAutoplay);
 
   function switchChapter(id){
     const clip=milestoneClips.find(item=>item.id===id);
@@ -102,12 +196,17 @@ export function setupMilestoneVideo(doc=document){
   }
   function show(){
     if(dialog.open)return;
+    ++playbackAttempt;
+    pausePreview();
+    updateToggle();
     returnFocus=doc.activeElement;
     scrollBefore=doc.body.style.overflow;
     dialog.showModal();
     doc.body.style.overflow='hidden';
     opened=true;
     close.focus();
+    // Keep the full recording's original audio available on explicit user intent.
+    video.muted=false;
     // Explicit play intent: clicking this button opens the modal and starts video.
     // A denied play promise leaves native media controls available.
     const request=video.play();
@@ -125,6 +224,8 @@ export function setupMilestoneVideo(doc=document){
     doc.body.style.overflow=scrollBefore;
     if(opened && returnFocus?.isConnected) returnFocus.focus();
     opened=false;
+    if(inView&&!userPaused)void startPreview();
+    updateToggle();
   });
   chapters.forEach(button=>button.addEventListener('click',()=>switchChapter(button.dataset.v19Chapter)));
   video.addEventListener('play',()=>{state.textContent='Playing recorded demonstration';});
@@ -132,8 +233,23 @@ export function setupMilestoneVideo(doc=document){
   video.addEventListener('ended',()=>{state.textContent='Chapter finished';});
   video.addEventListener('error',()=>{state.textContent='Unable to load the recording';});
   source.addEventListener('error',()=>{state.textContent='Video unavailable; check that the clip was published';});
-  doc.addEventListener('visibilitychange',()=>{if(doc.hidden && !video.paused)video.pause();});
+  doc.addEventListener('visibilitychange',()=>{
+    if(doc.hidden){
+      ++playbackAttempt;
+      pausePreview();
+      if(!video.paused)video.pause();
+    }else if(inView&&!userPaused&&!dialog.open){
+      void startPreview();
+    }
+    updateToggle();
+  });
+  win.addEventListener('pagehide',()=>{++playbackAttempt;pausePreview();if(!video.paused)video.pause();});
   const caseLink=dialog.querySelector('.v19DialogCase');
   caseLink.addEventListener('click',()=>dismiss());
-  return {show,dismiss,switchChapter,get active(){return current.id},get dialog(){return dialog}};
+  return {show,dismiss,switchChapter,
+    get active(){return current.id},
+    get dialog(){return dialog},
+    get preview(){return teaser},
+    get previewVisible(){return inView}
+  };
 }

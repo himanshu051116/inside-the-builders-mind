@@ -59,7 +59,7 @@ export function setupMilestoneVideo(doc=document){
         <source src="${initialClip.video}" type="video/mp4">
         Your browser does not support MP4 video.
       </video>
-      <div class="v19DialogPlayerMeta"><span>SOURCE SNAPSHOT · OFFLINE ARCHITECTURE WALKTHROUGH</span><span class="v19DialogStatus" role="status" aria-live="polite">Ready to play</span></div>
+      <div class="v19DialogPlayerMeta"><span>SOURCE SNAPSHOT · OFFLINE ARCHITECTURE WALKTHROUGH</span><span class="v252PlayerActions"><span class="v19DialogStatus" role="status" aria-live="polite">Ready to play</span><button class="v252ReplayChapter" type="button" hidden>Replay chapter ↺</button></span></div>
     </div>
     <div class="v19DialogDetail">
       <div class="v19DialogChapters" aria-label="Select a recorded chapter">
@@ -79,6 +79,7 @@ export function setupMilestoneVideo(doc=document){
   const source=video.querySelector('source');
   const desc=dialog.querySelector('#v19MilestoneDescription');
   const state=dialog.querySelector('.v19DialogStatus');
+  const replay=dialog.querySelector('.v252ReplayChapter');
   const chapters=[...dialog.querySelectorAll('[data-v19-chapter]')];
   let current=milestoneClips[0];
   let returnFocus=null;
@@ -188,6 +189,7 @@ export function setupMilestoneVideo(doc=document){
     });
     desc.textContent=clip.description+' This footage documents the visual architecture and navigation; it is not proof of live OCR or model accuracy.';
     state.textContent='Ready to play';
+    replay.hidden=true;
     return true;
   }
   function dismiss(){
@@ -205,6 +207,7 @@ export function setupMilestoneVideo(doc=document){
     doc.body.style.overflow='hidden';
     opened=true;
     close.focus();
+    replay.hidden=true;
     // Keep the full recording's original audio available on explicit user intent.
     video.muted=false;
     // Explicit play intent: clicking this button opens the modal and starts video.
@@ -224,13 +227,20 @@ export function setupMilestoneVideo(doc=document){
     doc.body.style.overflow=scrollBefore;
     if(opened && returnFocus?.isConnected) returnFocus.focus();
     opened=false;
+    replay.hidden=true;
     if(inView&&!userPaused)void startPreview();
     updateToggle();
   });
   chapters.forEach(button=>button.addEventListener('click',()=>switchChapter(button.dataset.v19Chapter)));
-  video.addEventListener('play',()=>{state.textContent='Playing recorded demonstration';});
+  replay.addEventListener('click',()=>{
+    video.currentTime=0;
+    video.muted=false;
+    const request=video.play();
+    request?.catch(()=>{state.textContent='Press play to restart the recording';});
+  });
+  video.addEventListener('play',()=>{state.textContent='Playing recorded demonstration';replay.hidden=true;});
   video.addEventListener('pause',()=>{if(dialog.open && !video.ended)state.textContent='Paused';});
-  video.addEventListener('ended',()=>{state.textContent='Chapter finished';});
+  video.addEventListener('ended',()=>{state.textContent='Chapter finished';replay.hidden=false;});
   video.addEventListener('error',()=>{state.textContent='Unable to load the recording';});
   source.addEventListener('error',()=>{state.textContent='Video unavailable; check that the clip was published';});
   doc.addEventListener('visibilitychange',()=>{
